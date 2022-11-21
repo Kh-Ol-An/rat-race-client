@@ -1,9 +1,18 @@
+<template>
+    <div class="py-4 px-8">
+        <Title title="ГРА 'Щурячі перегони Ⅱ'"/>
+        <Blank />
+    </div>
+</template>
+
 <script setup>
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
 import Title from './components/Title.vue'
+import Blank from './components/Blank/Index.vue'
 </script>
 
-<template>
-  <Title title="ГРА 'Щурячі перегони Ⅱ'" />
-</template>
+<style>
+input:-webkit-autofill {
+    -webkit-box-shadow: inset 0 0 0 50px #fff !important; /* Цвет фона */
+    -webkit-text-fill-color: #000 !important; /* цвет текста */
+}
+</style>
