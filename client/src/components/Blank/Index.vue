@@ -8,27 +8,32 @@
             <Input v-model:value="profession" id="profession" type="text" placeholder="Професія" />
 
             <div class="flex flex-col gap-4">
-                <Input v-model:value="cash" id="cash" placeholder="Готівка" />
+                <InfoField label="Готівка:" :value="cash" />
                 <InfoField label="Активний дохід:" :value="salary" />
                 <InfoField label="Пасивний дохід:" :value="passiveIncome" />
+<!--                <InfoField label="Пасивний дохід:" :value="passiveIncome" />-->
+<!--                <InfoField label="Пасивний дохід:" :value="passiveIncome" />-->
+<!--                <InfoField label="Пасивний дохід:" :value="passiveIncome" />-->
 
-                <InputField label="Акції GC:">
+                <h2 class="px-4 text-xl font-bold text-primary text-center">Акції</h2>
+                <InputField label="GC:">
                     <Input v-model:value="gcSharePrice" id="gc-share-price" placeholder="Ціна" smallLabel />
                     <Input v-model:value="gcSharesCount" id="gc-share-count" placeholder="Кількість" smallLabel />
                 </InputField>
-                <InputField label="Акції ЩУН:">
+                <InputField label="ЩУН:">
                     <Input v-model:value="shchunSharePrice" id="shchun-share-price" placeholder="Ціна" smallLabel />
                     <Input v-model:value="shchunSharesCount" id="shchun-share-count" placeholder="Кількість" smallLabel />
                 </InputField>
-                <InputField label="Акції TO:">
+                <InputField label="TO:">
                     <Input v-model:value="toSharePrice" id="to-share-price" placeholder="Ціна" smallLabel />
                     <Input v-model:value="toSharesCount" id="to-share-count" placeholder="Кількість" smallLabel />
                 </InputField>
-                <InputField label="Акції CST:">
+                <InputField label="CST:">
                     <Input v-model:value="cstSharePrice" id="cst-share-price" placeholder="Ціна" smallLabel />
                     <Input v-model:value="cstSharesCount" id="cst-share-count" placeholder="Кількість" smallLabel />
                 </InputField>
 
+                <h2 class="px-4 text-xl font-bold text-primary text-center">Доходи</h2>
                 <Input v-model:value="salary" id="salary" placeholder="Зарплата" />
                 <InputField label="Малий бізнес:">
                     <Input v-model:value="smallBusinessValue" id="small-business-value" placeholder="Вартість" smallLabel />
@@ -45,11 +50,16 @@
                 <InputField label="Корупційний бізнес:">
                     <Input v-model:value="corruptBusinessValue" id="corrupt-business-value" placeholder="Вартість" smallLabel />
                     <Input v-model:value="corruptBusinessIncome" id="corrupt-business-income" placeholder="Доходи" smallLabel />
+                    <button type="button" @click="add">
+                        додати
+                    </button>
                 </InputField>
+
+                <h2 class="px-4 text-xl font-bold text-primary text-center">Активи</h2>
             </div>
 
             <div class="flex flex-col gap-4">
-                <Input v-model:value="debt" id="debt" placeholder="Борги" />
+                <InfoField label="Борги:" :value="debt" />
             </div>
         </div>
 
@@ -64,11 +74,40 @@ import Input from "./Input.vue";
 import InfoField from "./InfoField.vue";
 import InputField from "./InputField.vue";
 
+const user = ref({
+    name: '',
+    profession: '',
+    business: {
+        small: {
+            value: '',
+            income: '',
+        },
+        middle: {
+            value: '',
+            income: '',
+        },
+        big: {
+            value: '',
+            income: '',
+        },
+        corrupt: {
+            value: '',
+            income: '',
+        },
+    },
+});
 const name = ref('');
 const profession = ref('');
 
-const cash = ref(null);
-const debt = ref(null);
+const cash = computed(() => {
+    return '';
+});
+const debt = computed(() => {
+    return '';
+});
+const passiveIncome = computed(() => {
+    return '';
+});
 
 const gcSharePrice = ref(null);
 const gcSharesCount = ref(null);
@@ -88,9 +127,10 @@ const bigBusinessValue = ref(null);
 const bigBusinessIncome = ref(null);
 const corruptBusinessValue = ref(null);
 const corruptBusinessIncome = ref(null);
-const passiveIncome = computed(() => {
-    return '';
-});
+
+const add = () => {
+
+}
 
 const submit = () => {
     const player = {

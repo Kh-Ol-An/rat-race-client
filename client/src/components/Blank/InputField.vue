@@ -1,6 +1,6 @@
 <template>
     <div>
-        <span v-if="label.length > 0">{{ label }}</span>
+        <span v-if="label.length > 0" class="text-sm">{{ label }}</span>
         <div class="flex items-center space-x-3">
             <slot></slot>
         </div>

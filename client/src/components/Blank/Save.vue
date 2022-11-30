@@ -5,7 +5,7 @@
             w-full
             shadow hover:shadow-lg
             rounded-md
-            bg-secondary text-white
+            bg-secondary font-bold text-white
             transition-all duration-300
         "
         type="submit"

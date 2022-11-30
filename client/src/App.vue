@@ -1,12 +1,13 @@
 <template>
     <div class="py-4 px-8 flex flex-col items-center justify-center">
-        <Title title="ГРА 'Щурячі перегони Ⅱ'"/>
+        <h1 class="p-4 text-4xl font-bold text-slate-700 text-center">
+            ГРА 'Щурячі перегони Ⅱ'
+        </h1>
         <Blank />
     </div>
 </template>
 
 <script setup>
-import Title from './components/Title.vue'
 import Blank from './components/Blank/Index.vue'
 </script>
 

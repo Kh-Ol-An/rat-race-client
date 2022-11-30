@@ -1,9 +1,9 @@
 <template>
-    <div>
-        <span>
+    <div class="flex items-center gap-2">
+        <span class="text-additional">
             {{ label }}
         </span>
-        <span>
+        <span class="text-silver-800">
             {{ value }}
         </span>
     </div>

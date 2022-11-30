@@ -1,3 +1,5 @@
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     content: [
@@ -5,6 +7,9 @@ module.exports = {
         "./src/**/*.{vue,js,ts,jsx,tsx}",
     ],
     theme: {
+        fontFamily: {
+            "MacPawFixelText": ["MacPawFixelText", ...defaultTheme.fontFamily.sans],
+        },
         extend: {
             colors: {
                 primary: '#528D36',
