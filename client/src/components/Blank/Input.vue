@@ -13,10 +13,10 @@
                 transition-all duration-300
             "
             :id="id"
-            :type="type"
+            type="text"
             :placeholder="placeholder"
             :value="value"
-            @input="$emit('update:value', $event.target.value)"
+            @input="input"
         />
         <label
             :class="[
@@ -37,18 +37,17 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
+import { addingSpaces } from '../../helpers/formating-values.js';
+
 defineProps({
-    type: {
-        type: String,
-        default: 'number'
-    },
     value: {
         type: String,
-        default: ''
+        required: true,
     },
     id: {
         type: String,
-        default: ''
+        required: true,
     },
     placeholder: {
         type: String,
@@ -59,4 +58,18 @@ defineProps({
         default: false
     },
 });
+
+const emit = defineEmits(['input']);
+
+const entered = ref('');
+
+const input = ({ target }) => {
+    const regExp = /^[\d\s]*$/;
+    if (!regExp.test(target.value) || target.value.length > 19) {
+        return target.value = entered.value;
+    }
+    target.value = addingSpaces(target.value);
+    entered.value = target.value;
+    emit('update:value', entered.value);
+};
 </script>
