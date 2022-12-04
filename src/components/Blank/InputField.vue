@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-col gap-2">
         <span class="text-sm">{{ label }}</span>
-        <div class="flex items-center space-x-3">
+        <div class="flex items-center gap-3">
             <Input
                 :id="`${fieldSubType}-${fieldType}-value`"
                 :placeholder="placeholderWorth"
@@ -14,21 +14,15 @@
                 smallLabel
                 v-model:value="value"
             />
-            <button
-                :class="[disabled ? 'text-slate-300' : 'text-slate-800']"
-                type="button"
-                :disabled="disabled"
-                @click="add"
-            >
-                додати
-            </button>
+            <Add :value="worth" :secondValue="value" @add="add" />
         </div>
     </div>
 </template>
 
 <script setup>
-import {ref, computed} from 'vue';
+import { ref } from 'vue';
 import Input from './Input.vue';
+import Add from './Add.vue';
 
 const props = defineProps({
     label: {
@@ -57,7 +51,6 @@ const emit = defineEmits(['add']);
 
 const worth = ref('');
 const value = ref('');
-const disabled = computed(() => worth.value.length === 0 || value.value.length === 0);
 
 const add = () => {
     emit(

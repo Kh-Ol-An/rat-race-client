@@ -6,13 +6,13 @@
         <span class="text-additional">
             {{ label }}
         </span>
-        <span class="text-silver-800">
+        <span class="text-silver-800 whitespace-nowrap">
             {{ addingSpaces(worth) }}
         </span>
-        <span class="text-silver-800">
+        <span class="text-silver-800 whitespace-nowrap">
             {{ addingSpaces(value) }}
         </span>
-        <span v-if="cost" class="text-silver-800">
+        <span v-if="cost" class="text-silver-800 whitespace-nowrap">
             {{ addingSpaces(cost) }}
         </span>
     </li>

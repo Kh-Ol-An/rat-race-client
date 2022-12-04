@@ -40,7 +40,7 @@
 import { ref } from 'vue';
 import { addingSpaces } from '../../helpers/formating-values.js';
 
-defineProps({
+const props = defineProps({
     value: {
         type: String,
         required: true,
@@ -48,6 +48,10 @@ defineProps({
     id: {
         type: String,
         required: true,
+    },
+    typeText: {
+        type: Boolean,
+        default: false
     },
     placeholder: {
         type: String,
@@ -64,11 +68,13 @@ const emit = defineEmits(['input']);
 const entered = ref('');
 
 const input = ({ target }) => {
-    const regExp = /^[\d\s]*$/;
-    if (!regExp.test(target.value) || target.value.length > 19) {
-        return target.value = entered.value;
+    if (!props.typeText) {
+        const regExp = /^[\d\s]*$/;
+        if (!regExp.test(target.value) || target.value.length > 19) {
+            return target.value = entered.value;
+        }
+        target.value = addingSpaces(target.value);
     }
-    target.value = addingSpaces(target.value);
     entered.value = target.value;
     emit('update:value', entered.value);
 };
