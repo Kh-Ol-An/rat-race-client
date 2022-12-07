@@ -111,30 +111,38 @@
                     <List
                         v-for="{id, worth, value} in user.business.small"
                         :key="id"
+                        :id="id"
                         label="Малий"
                         :worth="worth"
                         :value="value"
+                        @edit="editBusinessSmall"
                     />
                     <List
                         v-for="{id, worth, value} in user.business.middle"
                         :key="id"
+                        :id="id"
                         label="Середній"
                         :worth="worth"
                         :value="value"
+                        @edit="editBusinessMiddle"
                     />
                     <List
                         v-for="{id, worth, value} in user.business.big"
                         :key="id"
+                        :id="id"
                         label="Великий"
                         :worth="worth"
                         :value="value"
+                        @edit="editBusinessBig"
                     />
                     <List
                         v-for="{id, worth, value} in user.business.corrupt"
                         :key="id"
+                        :id="id"
                         label="Корупційний"
                         :worth="worth"
                         :value="value"
+                        @edit="editBusinessCorrupt"
                     />
                 </ul>
 
@@ -217,7 +225,13 @@
                     <Input v-model:value="rent" id="rent" placeholder="Оренда житла" />
                     <Add :value="rent" @add="addRent" />
                 </div>
-                <InfoField v-if="user.rent.length > 0" label="Оренда житла:" :value="user.rent" />
+                <InfoField
+                    v-if="user.rent.length > 0"
+                    label="Оренда житла:"
+                    :value="user.rent"
+                    editable
+                    @edit="editRent"
+                />
 
                 <div v-if="user.food.length === 0" class="flex items-center gap-3">
                     <Input v-model:value="food" id="food" placeholder="Витрати на харчування" />
@@ -235,7 +249,13 @@
                     <Input v-model:value="fare" id="food" placeholder="Витрати на проїзд" />
                     <Add :value="fare" @add="addFare" />
                 </div>
-                <InfoField v-if="user.fare.length > 0" label="Витрати на проїзд:" :value="user.fare" />
+                <InfoField
+                    v-if="user.fare.length > 0"
+                    label="Витрати на проїзд:"
+                    :value="user.fare"
+                    editable
+                    @edit="editFare"
+                />
 
                 <div v-if="user.phone.length === 0" class="flex items-center gap-3">
                     <Input v-model:value="phone" id="food" placeholder="Витрати на телефонні розмови" />
@@ -315,9 +335,22 @@ const addSalary = () => user.value.salary = salary.value;
 
 const addBusiness = (fieldType, fieldSubType, id, worth, value) =>
     user.value[fieldType][fieldSubType].push({ id, worth: removingSpaces(worth), value: removingSpaces(value) });
+const editBusinessSmall = (id, editValue) => {
+    user.value.business.small.find(business => business.id === id && (business.value = editValue.value));
+}
+const editBusinessMiddle = (id, editValue) => {
+    user.value.business.middle.find(business => business.id === id && (business.value = editValue.value));
+}
+const editBusinessBig = (id, editValue) => {
+    user.value.business.big.find(business => business.id === id && (business.value = editValue.value));
+}
+const editBusinessCorrupt = (id, editValue) => {
+    user.value.business.corrupt.find(business => business.id === id && (business.value = editValue.value));
+}
 
 const rent = ref('');
 const addRent = () => user.value.rent = rent.value;
+const editRent = () => user.value.rent = '';
 
 const food = ref('');
 const addFood = () => user.value.food = food.value;
@@ -327,6 +360,7 @@ const addClothes = () => user.value.clothes = clothes.value;
 
 const fare = ref('');
 const addFare = () => user.value.fare = fare.value;
+const editFare = () => user.value.fare = '';
 
 const phone = ref('');
 const addPhone = () => user.value.phone = phone.value;
