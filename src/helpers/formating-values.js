@@ -1,6 +1,7 @@
 export const removingSpaces = value => value.split(' ').join('');
 
 export const addingSpaces = (value) => {
+    value = String(value);
     value = removingSpaces(value);
     let reversedValues = value.split('').reverse();
     reversedValues.length > 3 && reversedValues.splice(3, 0, ' ');

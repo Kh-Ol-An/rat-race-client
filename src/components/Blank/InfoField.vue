@@ -1,10 +1,10 @@
 <template>
     <div class="flex items-center gap-2">
-        <span class="text-additional">
+        <span :class="[opposite ? 'text-opposite' : 'text-additional']">
             {{ label }}
         </span>
         <span class="text-silver-800">
-            {{ value }}
+            {{ addingSpaces(value) }}
         </span>
         <button
             v-if="editable"
@@ -18,13 +18,19 @@
 </template>
 
 <script setup>
+import { addingSpaces } from '../../helpers/formating-values.js';
+
 defineProps({
+    opposite: {
+        type: Boolean,
+        default: false,
+    },
     label: {
         type: String,
         required: true,
     },
     value: {
-        type: String,
+        type: String || Number,
         required: true,
     },
     editable: {

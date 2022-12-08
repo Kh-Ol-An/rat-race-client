@@ -13,6 +13,10 @@
 import { computed } from 'vue';
 
 const props = defineProps({
+    name: {
+        type: String,
+        default: 'true',
+    },
     value: {
         type: String,
         required: true,
@@ -21,7 +25,16 @@ const props = defineProps({
         type: String,
         default: 'true',
     },
+    quantity: {
+        type: String,
+        default: 'true',
+    },
 });
 
-const disabled = computed(() => props.value.length === 0 || props.secondValue.length === 0);
+const disabled = computed(() =>
+    props.name.length === 0 ||
+    props.value.length === 0 ||
+    props.secondValue.length === 0 ||
+    props.quantity.length === 0
+);
 </script>

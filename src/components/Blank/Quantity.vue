@@ -1,6 +1,6 @@
 <template>
     <div class="flex items-center justify-between gap-2">
-        <span class="text-additional">
+        <span class="text-opposite">
             {{ label }}
         </span>
 

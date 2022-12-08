@@ -19,6 +19,9 @@
                 <InfoField label="Готівка:" :value="cash" />
                 <InfoField label="Активний дохід:" :value="user.salary" />
                 <InfoField label="Пасивний дохід:" :value="passiveIncome" />
+                <InfoField label="Загальний дохід:" :value="income" />
+                <InfoField opposite label="Загальні витрати:" :value="expenses" />
+                <InfoField label="Грошовий потік:" :value="cashFlow" />
 
                 <!-- Акції -->
                 <h2 class="px-4 text-xl font-bold text-primary text-center">Акції</h2>
@@ -197,10 +200,10 @@
             </div>
 
             <div class="flex flex-col gap-4">
-                <InfoField label="Борги:" :value="debt" />
+                <InfoField opposite label="Борги:" :value="debt" />
 
                 <!-- Багатство -->
-                <h2 class="px-4 text-xl font-bold text-primary text-center">Багатство</h2>
+                <h2 class="px-4 text-xl font-bold text-opposite text-center">Багатство</h2>
                 <Quantity label="Квартири:" v-model:count="user.apartments" />
                 <Quantity label="Автівки:" v-model:count="user.cars" />
                 <Quantity label="Будинки:" v-model:count="user.houses" />
@@ -208,25 +211,37 @@
                 <Quantity label="Літаки:" v-model:count="user.aircraft" />
 
                 <!-- Капризи та примхи -->
-                <h2 class="px-4 text-xl font-bold text-primary text-center">Капризи та примхи</h2>
+                <h2 class="px-4 text-xl font-bold text-opposite text-center">Капризи та примхи</h2>
                 <Quantity label="Капризи та примхи:" v-model:count="user.whimsAndFancies" />
 
                 <!-- Сімейний стан -->
-                <h2 class="px-4 text-xl font-bold text-primary text-center">Сімейний стан</h2>
+                <h2 class="px-4 text-xl font-bold text-opposite text-center">Сімейний стан</h2>
                 <Checkbox v-model:checked="user.marriage" id="marriage" label="Шлюб:" />
                 <Quantity label="Діти:" v-model:count="user.children" />
 
                 <!-- Виплати за кредитами -->
-                <h2 class="px-4 text-xl font-bold text-primary text-center">Виплати за кредитами</h2>
+                <h2 class="px-4 text-xl font-bold text-opposite text-center">Виплати за кредитами</h2>
+                <InputCredit @add="addCredit" />
+                <ul v-if="user.credit.length > 0">
+                    <InfoCredit
+                        v-for="{ id, name, body, payment, quantity } in user.credit"
+                        :key="id"
+                        :name="name"
+                        :body="body"
+                        :payment="payment"
+                        :quantity="quantity"
+                    />
+                </ul>
 
                 <!-- Витрати -->
-                <h2 class="px-4 text-xl font-bold text-primary text-center">Витрати</h2>
+                <h2 class="px-4 text-xl font-bold text-opposite text-center">Витрати</h2>
                 <div v-if="user.rent.length === 0" class="flex items-center gap-3">
                     <Input v-model:value="rent" id="rent" placeholder="Оренда житла" />
                     <Add :value="rent" @add="addRent" />
                 </div>
                 <InfoField
                     v-if="user.rent.length > 0"
+                    opposite
                     label="Оренда житла:"
                     :value="user.rent"
                     editable
@@ -237,13 +252,13 @@
                     <Input v-model:value="food" id="food" placeholder="Витрати на харчування" />
                     <Add :value="food" @add="addFood" />
                 </div>
-                <InfoField v-if="user.food.length > 0" label="Витрати на харчування:" :value="user.food" />
+                <InfoField v-if="user.food.length > 0" opposite label="Витрати на харчування:" :value="user.food" />
 
                 <div v-if="user.clothes.length === 0" class="flex items-center gap-3">
                     <Input v-model:value="clothes" id="food" placeholder="Витрати на одяг" />
                     <Add :value="clothes" @add="addClothes" />
                 </div>
-                <InfoField v-if="user.clothes.length > 0" label="Витрати на одяг:" :value="user.clothes" />
+                <InfoField v-if="user.clothes.length > 0" opposite label="Витрати на одяг:" :value="user.clothes" />
 
                 <div v-if="user.fare.length === 0" class="flex items-center gap-3">
                     <Input v-model:value="fare" id="food" placeholder="Витрати на проїзд" />
@@ -251,6 +266,7 @@
                 </div>
                 <InfoField
                     v-if="user.fare.length > 0"
+                    opposite
                     label="Витрати на проїзд:"
                     :value="user.fare"
                     editable
@@ -263,6 +279,7 @@
                 </div>
                 <InfoField
                     v-if="user.phone.length > 0"
+                    opposite
                     label="Витрати на телефонні розмови:"
                     :value="user.phone"
                 />
@@ -283,6 +300,8 @@ import InputField from './InputField.vue';
 import Add from './Add.vue';
 import Quantity from './Quantity.vue';
 import Checkbox from './Checkbox.vue';
+import InputCredit from './InputCredit.vue';
+import InfoCredit from './InfoCredit.vue';
 import { removingSpaces } from '../../helpers/formating-values.js';
 
 const user = ref({
@@ -309,6 +328,7 @@ const user = ref({
     whimsAndFancies: 0,
     marriage: false,
     children: 0,
+    credit: [],
     rent: '',
     food: '',
     clothes: '',
@@ -322,6 +342,7 @@ const addName = () => user.value.name = name.value;
 const profession = ref('');
 const addProfession = () => user.value.profession = profession.value;
 
+// active
 const addShares = (fieldType, fieldSubType, id, worth, value) =>
     user.value[fieldType][fieldSubType].push({
         id,
@@ -348,6 +369,27 @@ const editBusinessCorrupt = (id, editValue) => {
     user.value.business.corrupt.find(business => business.id === id && (business.value = editValue.value));
 }
 
+const cash = computed(() => {
+    return '';
+});
+const passiveIncome = computed(() => {
+    let sum = 0;
+    user.value.business.small.map(business => sum += Number(business.value));
+    user.value.business.middle.map(business => sum += Number(business.value));
+    user.value.business.big.map(business => sum += Number(business.value));
+    user.value.business.corrupt.map(business => sum += Number(business.value));
+    return sum;
+});
+const income = computed(() => {
+    return Number(user.value.salary) + Number(passiveIncome.value);
+});
+const cashFlow = computed(() => {
+    return '';
+});
+
+// passive
+const addCredit = (id, name, body, payment, quantity) => user.value.credit.push({ id, name, body, payment, quantity });
+
 const rent = ref('');
 const addRent = () => user.value.rent = rent.value;
 const editRent = () => user.value.rent = '';
@@ -365,13 +407,10 @@ const editFare = () => user.value.fare = '';
 const phone = ref('');
 const addPhone = () => user.value.phone = phone.value;
 
-const cash = computed(() => {
-    return '';
-});
 const debt = computed(() => {
     return '';
 });
-const passiveIncome = computed(() => {
+const expenses = computed(() => {
     return '';
 });
 

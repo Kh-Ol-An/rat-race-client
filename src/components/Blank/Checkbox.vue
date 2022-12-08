@@ -1,6 +1,6 @@
 <template>
     <div class="flex items-center justify-between gap-2">
-        <label class="text-additional cursor-pointer" :for="id">
+        <label class="text-opposite cursor-pointer" :for="id">
             {{ label }}
         </label>
 
