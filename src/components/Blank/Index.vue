@@ -388,7 +388,8 @@ const cashFlow = computed(() => {
 });
 
 // passive
-const addCredit = (id, name, body, payment, quantity) => user.value.credit.push({ id, name, body, payment, quantity });
+const addCredit = (id, name, payment, quantity) =>
+    user.value.credit.push({ id, name, body: Number(payment) * Number(quantity), payment, quantity });
 
 const rent = ref('');
 const addRent = () => user.value.rent = rent.value;

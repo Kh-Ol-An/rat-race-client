@@ -8,12 +8,6 @@
             v-model:value="name"
         />
         <Input
-            id="credit-body"
-            placeholder="Сума:"
-            smallLabel
-            v-model:value="body"
-        />
-        <Input
             id="credit-payment"
             placeholder="Платіж:"
             smallLabel
@@ -25,7 +19,7 @@
             smallLabel
             v-model:value="quantity"
         />
-        <Add :name="name" :value="body" :secondValue="payment" :quantity="quantity" @add="add" />
+        <Add :name="name" :value="payment" :secondValue="quantity" @add="add" />
     </div>
 </template>
 
@@ -37,14 +31,12 @@ import Add from './Add.vue';
 const emit = defineEmits(['add']);
 
 const name = ref('');
-const body = ref('');
 const payment = ref('');
 const quantity = ref('');
 
 const add = () => {
-    emit('add', new Date().valueOf(), name.value, body.value, payment.value, quantity.value);
+    emit('add', new Date().valueOf(), name.value, payment.value, quantity.value);
     name.value = '';
-    body.value = '';
     payment.value = '';
     quantity.value = '';
 };

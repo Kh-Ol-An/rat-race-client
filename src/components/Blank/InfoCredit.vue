@@ -4,18 +4,20 @@
             {{ name }}
         </span>
         <span class="text-opposite">
-            {{ body }}
+            {{ addingSpaces(body) }}
         </span>
         <span class="text-opposite">
-            {{ payment }}
+            {{ addingSpaces(payment) }}
         </span>
         <span class="text-opposite">
-            {{ quantity }}
+            {{ addingSpaces(quantity) }}
         </span>
     </li>
 </template>
 
 <script setup>
+import { addingSpaces } from '../../helpers/formating-values.js';
+
 defineProps({
     name: {
         type: String,
