@@ -1,11 +1,8 @@
 <template>
     <li :class="[
-        'grid grid-cols-3 items-center gap-2',
-        cost ? 'grid-cols-4' : 'grid-cols-3'
+        'grid items-center gap-2',
+        cost ? 'grid-cols-3' : 'grid-cols-2'
     ]">
-        <span class="text-additional">
-            {{ label }}
-        </span>
         <span class="text-silver-800 whitespace-nowrap">
             {{ addingSpaces(worth) }}
         </span>
@@ -54,10 +51,6 @@ const props = defineProps({
     id: {
         type: Number,
         default: null,
-    },
-    label: {
-        type: String,
-        required: true,
     },
     worth: {
         type: String,

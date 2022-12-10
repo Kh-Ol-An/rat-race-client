@@ -3,7 +3,7 @@
         <span :class="[opposite ? 'text-opposite' : 'text-additional']">
             {{ label }}
         </span>
-        <span class="text-silver-800">
+        <span class="text-slate-800">
             {{ addingSpaces(value) }}
         </span>
         <button

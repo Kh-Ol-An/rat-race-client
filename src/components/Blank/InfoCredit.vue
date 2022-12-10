@@ -1,15 +1,15 @@
 <template>
     <li class="grid grid-cols-4 items-center gap-2">
-        <span class="text-opposite">
+        <span class="text-slate-800">
             {{ name }}
         </span>
-        <span class="text-opposite">
+        <span class="text-slate-800">
             {{ addingSpaces(body) }}
         </span>
-        <span class="text-opposite">
+        <span class="text-slate-800">
             {{ addingSpaces(payment) }}
         </span>
-        <span class="text-opposite">
+        <span class="text-slate-800">
             {{ addingSpaces(quantity) }}
         </span>
     </li>
