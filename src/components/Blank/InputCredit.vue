@@ -19,7 +19,7 @@
             smallLabel
             v-model:value="quantity"
         />
-        <Add :name="name" :value="payment" :secondValue="quantity" @add="add" />
+        <Add :name="name" :value="payment" :secondValue="quantity" opposite @add="add" />
     </div>
 </template>
 

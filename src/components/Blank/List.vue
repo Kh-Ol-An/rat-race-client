@@ -20,19 +20,21 @@
             <div v-if="id">
                 <button
                     v-if="editable"
-                    class="text-slate-800"
+                    class="p-2 shadow hover:shadow-lg rounded-full bg-secondary transition-all duration-300"
                     type="button"
+                    title="Редагувати"
                     @click="editable = !editable"
                 >
-                    edit
+                    <EditIcon width="14px" height="14px" />
                 </button>
                 <button
                     v-else
-                    class="text-slate-800"
+                    class="p-2 shadow hover:shadow-lg rounded-full bg-secondary transition-all duration-300"
                     type="button"
+                    title="Зберегти"
                     @click="save"
                 >
-                    save
+                    <SaveIcon width="14px" height="14px" />
                 </button>
             </div>
         </div>
@@ -45,6 +47,8 @@
 <script setup>
 import { ref } from 'vue';
 import Input from './Input.vue';
+import EditIcon from '../icons/EditIcon.vue';
+import SaveIcon from '../icons/SaveIcon.vue';
 import { removingSpaces, addingSpaces } from '../../helpers/formating-values.js';
 
 const props = defineProps({

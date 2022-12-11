@@ -1,263 +1,260 @@
 <template>
-    <form class="py-4 px-8 w-full max-w-5xl flex flex-col gap-4 shadow rounded-md" @submit.prevent="submit">
-        <Save />
+    <form class="relative py-4 px-8 w-full max-w-5xl grid grid-cols-2 gap-4 shadow rounded-md" @submit.prevent="submit">
+        <div v-if="user.name.length === 0" class="flex items-center gap-3">
+            <Input v-model:value="name" id="name" typeText placeholder="Ім'я" />
+            <Add :value="name" @add="addName" />
+        </div>
+        <InfoField v-if="user.name.length > 0" label="Ім'я:" :value="user.name" />
 
-        <div class="w-full grid grid-cols-2 gap-4">
-            <div v-if="user.name.length === 0" class="flex items-center gap-3">
-                <Input v-model:value="name" id="name" typeText placeholder="Ім'я" />
-                <Add :value="name" @add="addName" />
+        <div v-if="user.profession.length === 0" class="flex items-center gap-3">
+            <Input v-model:value="profession" id="profession" typeText placeholder="Професія" />
+            <Add :value="profession" @add="addProfession" />
+        </div>
+        <InfoField v-if="user.profession.length > 0" label="Професія:" :value="user.profession" />
+
+        <div class="flex flex-col gap-4">
+            <InfoField label="Готівка:" :value="cash" />
+            <InfoField label="Активний дохід:" :value="user.salary" />
+            <InfoField label="Пасивний дохід:" :value="passiveIncome" />
+            <InfoField label="Загальний дохід:" :value="income" />
+            <InfoField opposite label="Загальні витрати:" :value="expenses" />
+            <InfoField label="Грошовий потік:" :value="cashFlow" />
+
+            <!-- Акції -->
+            <h2 class="px-4 text-xl font-bold text-primary text-center">Акції</h2>
+            <InputField
+                label="GC"
+                fieldType="shares"
+                fieldSubType="gc"
+                placeholderWorth="Вартість"
+                placeholderValue="Кількість"
+                @add="addShares"
+            />
+            <ul v-if="user.shares.gc.length > 0" class="flex flex-col gap-2">
+                <li class="grid grid-cols-3 gap-2 border-b-2 border-b-silver-900 text-secondary font-bold">
+                    <span>
+                        Ціна
+                    </span>
+                    <span>
+                        Кількість
+                    </span>
+                    <span>
+                        Вартість
+                    </span>
+                </li>
+                <List
+                    v-for="{id, worth, value, cost} in user.shares.gc"
+                    :key="id"
+                    :worth="worth"
+                    :value="value"
+                    :cost="cost"
+                />
+            </ul>
+            <InputField
+                label="ЩУН"
+                fieldType="shares"
+                fieldSubType="shchun"
+                placeholderWorth="Вартість"
+                placeholderValue="Кількість"
+                @add="addShares"
+            />
+            <ul v-if="user.shares.shchun.length > 0" class="flex flex-col gap-2">
+                <li class="grid grid-cols-3 gap-2 border-b-2 border-b-silver-900 text-secondary font-bold">
+                    <span>
+                        Ціна
+                    </span>
+                    <span>
+                        Кількість
+                    </span>
+                    <span>
+                        Вартість
+                    </span>
+                </li>
+                <List
+                    v-for="{id, worth, value, cost} in user.shares.shchun"
+                    :key="id"
+                    :worth="worth"
+                    :value="value"
+                    :cost="cost"
+                />
+            </ul>
+            <InputField
+                label="TO"
+                fieldType="shares"
+                fieldSubType="to"
+                placeholderWorth="Вартість"
+                placeholderValue="Кількість"
+                @add="addShares"
+            />
+            <ul v-if="user.shares.to.length > 0" class="flex flex-col gap-2">
+                <li class="grid grid-cols-3 gap-2 border-b-2 border-b-silver-900 text-secondary font-bold">
+                    <span>
+                        Ціна
+                    </span>
+                    <span>
+                        Кількість
+                    </span>
+                    <span>
+                        Вартість
+                    </span>
+                </li>
+                <List
+                    v-for="{id, worth, value, cost} in user.shares.to"
+                    :key="id"
+                    :worth="worth"
+                    :value="value"
+                    :cost="cost"
+                />
+            </ul>
+            <InputField
+                label="CST"
+                fieldType="shares"
+                fieldSubType="cst"
+                placeholderWorth="Вартість"
+                placeholderValue="Кількість"
+                @add="addShares"
+            />
+            <ul v-if="user.shares.cst.length > 0" class="flex flex-col gap-2">
+                <li class="grid grid-cols-3 gap-2 border-b-2 border-b-silver-900 text-secondary font-bold">
+                    <span>
+                        Ціна
+                    </span>
+                    <span>
+                        Кількість
+                    </span>
+                    <span>
+                        Вартість
+                    </span>
+                </li>
+                <List
+                    v-for="{id, worth, value, cost} in user.shares.cst"
+                    :key="id"
+                    :worth="worth"
+                    :value="value"
+                    :cost="cost"
+                />
+            </ul>
+
+            <!-- Доходи -->
+            <h2 class="px-4 text-xl font-bold text-primary text-center">Доходи</h2>
+            <div v-if="user.salary === 0" class="flex items-center gap-3">
+                <Input v-model:value="salary" id="salary" placeholder="Зарплата" />
+                <Add :value="salary" @add="addSalary" />
             </div>
-            <InfoField v-if="user.name.length > 0" label="Ім'я:" :value="user.name" />
+            <InfoField
+                v-if="user.salary > 0"
+                label="Зарплата:"
+                :value="user.salary"
+                editable
+                @edit="editSalary"
+            />
+            <InputField
+                label="Малий бізнес"
+                fieldType="business"
+                fieldSubType="small"
+                placeholderWorth="Вартість"
+                placeholderValue="Доходи"
+                @add="addBusiness"
+            />
+            <ul v-if="user.business.small.length > 0" class="flex flex-col gap-2">
+                <li class="grid grid-cols-2 gap-2 border-b-2 border-b-silver-900 text-secondary font-bold">
+                    <span>
+                        Вартість
+                    </span>
+                    <span>
+                        Доходи
+                    </span>
+                </li>
+                <List
+                    v-for="{id, worth, value} in user.business.small"
+                    :key="id"
+                    :id="id"
+                    :worth="worth"
+                    :value="value"
+                    @edit="editBusinessSmall"
+                />
+            </ul>
+            <InputField
+                label="Середній бізнес"
+                fieldType="business"
+                fieldSubType="middle"
+                placeholderWorth="Вартість"
+                placeholderValue="Доходи"
+                @add="addBusiness"
+            />
+            <ul v-if="user.business.middle.length > 0" class="flex flex-col gap-2">
+                <li class="grid grid-cols-2 gap-2 border-b-2 border-b-silver-900 text-secondary font-bold">
+                    <span>
+                        Вартість
+                    </span>
+                    <span>
+                        Доходи
+                    </span>
+                </li>
+                <List
+                    v-for="{id, worth, value} in user.business.middle"
+                    :key="id"
+                    :id="id"
+                    :worth="worth"
+                    :value="value"
+                    @edit="editBusinessMiddle"
+                />
+            </ul>
+            <InputField
+                label="Великий бізнес"
+                fieldType="business"
+                fieldSubType="big"
+                placeholderWorth="Вартість"
+                placeholderValue="Доходи"
+                @add="addBusiness"
+            />
+            <ul v-if="user.business.big.length > 0" class="flex flex-col gap-2">
+                <li class="grid grid-cols-2 gap-2 border-b-2 border-b-silver-900 text-secondary font-bold">
+                    <span>
+                        Вартість
+                    </span>
+                    <span>
+                        Доходи
+                    </span>
+                </li>
+                <List
+                    v-for="{id, worth, value} in user.business.big"
+                    :key="id"
+                    :id="id"
+                    :worth="worth"
+                    :value="value"
+                    @edit="editBusinessBig"
+                />
+            </ul>
+            <InputField
+                label="Корупційний бізнес"
+                fieldType="business"
+                fieldSubType="corrupt"
+                placeholderWorth="Вартість"
+                placeholderValue="Доходи"
+                @add="addBusiness"
+            />
+            <ul v-if="user.business.corrupt.length > 0" class="flex flex-col gap-2">
+                <li class="grid grid-cols-2 gap-2 border-b-2 border-b-silver-900 text-secondary font-bold">
+                    <span>
+                        Вартість
+                    </span>
+                    <span>
+                        Доходи
+                    </span>
+                </li>
+                <List
+                    v-for="{id, worth, value} in user.business.corrupt"
+                    :key="id"
+                    :id="id"
+                    :worth="worth"
+                    :value="value"
+                    @edit="editBusinessCorrupt"
+                />
+            </ul>
+        </div>
 
-            <div v-if="user.profession.length === 0" class="flex items-center gap-3">
-                <Input v-model:value="profession" id="profession" typeText placeholder="Професія" />
-                <Add :value="profession" @add="addProfession" />
-            </div>
-            <InfoField v-if="user.profession.length > 0" label="Професія:" :value="user.profession" />
-
-            <div class="flex flex-col gap-4">
-                <InfoField label="Готівка:" :value="cash" />
-                <InfoField label="Активний дохід:" :value="user.salary" />
-                <InfoField label="Пасивний дохід:" :value="passiveIncome" />
-                <InfoField label="Загальний дохід:" :value="income" />
-                <InfoField opposite label="Загальні витрати:" :value="expenses" />
-                <InfoField label="Грошовий потік:" :value="cashFlow" />
-
-                <!-- Акції -->
-                <h2 class="px-4 text-xl font-bold text-primary text-center">Акції</h2>
-                <InputField
-                    label="GC"
-                    fieldType="shares"
-                    fieldSubType="gc"
-                    placeholderWorth="Вартість"
-                    placeholderValue="Кількість"
-                    @add="addShares"
-                />
-                <ul v-if="user.shares.gc.length > 0" class="flex flex-col gap-2">
-                    <li class="grid grid-cols-3 gap-2 border-b-2 border-b-silver-900 text-secondary font-bold">
-                        <span>
-                            Ціна
-                        </span>
-                        <span>
-                            Кількість
-                        </span>
-                        <span>
-                            Вартість
-                        </span>
-                    </li>
-                    <List
-                        v-for="{id, worth, value, cost} in user.shares.gc"
-                        :key="id"
-                        :worth="worth"
-                        :value="value"
-                        :cost="cost"
-                    />
-                </ul>
-                <InputField
-                    label="ЩУН"
-                    fieldType="shares"
-                    fieldSubType="shchun"
-                    placeholderWorth="Вартість"
-                    placeholderValue="Кількість"
-                    @add="addShares"
-                />
-                <ul v-if="user.shares.shchun.length > 0" class="flex flex-col gap-2">
-                    <li class="grid grid-cols-3 gap-2 border-b-2 border-b-silver-900 text-secondary font-bold">
-                        <span>
-                            Ціна
-                        </span>
-                        <span>
-                            Кількість
-                        </span>
-                        <span>
-                            Вартість
-                        </span>
-                    </li>
-                    <List
-                        v-for="{id, worth, value, cost} in user.shares.shchun"
-                        :key="id"
-                        :worth="worth"
-                        :value="value"
-                        :cost="cost"
-                    />
-                </ul>
-                <InputField
-                    label="TO"
-                    fieldType="shares"
-                    fieldSubType="to"
-                    placeholderWorth="Вартість"
-                    placeholderValue="Кількість"
-                    @add="addShares"
-                />
-                <ul v-if="user.shares.to.length > 0" class="flex flex-col gap-2">
-                    <li class="grid grid-cols-3 gap-2 border-b-2 border-b-silver-900 text-secondary font-bold">
-                        <span>
-                            Ціна
-                        </span>
-                        <span>
-                            Кількість
-                        </span>
-                        <span>
-                            Вартість
-                        </span>
-                    </li>
-                    <List
-                        v-for="{id, worth, value, cost} in user.shares.to"
-                        :key="id"
-                        :worth="worth"
-                        :value="value"
-                        :cost="cost"
-                    />
-                </ul>
-                <InputField
-                    label="CST"
-                    fieldType="shares"
-                    fieldSubType="cst"
-                    placeholderWorth="Вартість"
-                    placeholderValue="Кількість"
-                    @add="addShares"
-                />
-                <ul v-if="user.shares.cst.length > 0" class="flex flex-col gap-2">
-                    <li class="grid grid-cols-3 gap-2 border-b-2 border-b-silver-900 text-secondary font-bold">
-                        <span>
-                            Ціна
-                        </span>
-                        <span>
-                            Кількість
-                        </span>
-                        <span>
-                            Вартість
-                        </span>
-                    </li>
-                    <List
-                        v-for="{id, worth, value, cost} in user.shares.cst"
-                        :key="id"
-                        :worth="worth"
-                        :value="value"
-                        :cost="cost"
-                    />
-                </ul>
-
-                <!-- Доходи -->
-                <h2 class="px-4 text-xl font-bold text-primary text-center">Доходи</h2>
-                <div v-if="user.salary === 0" class="flex items-center gap-3">
-                    <Input v-model:value="salary" id="salary" placeholder="Зарплата" />
-                    <Add :value="salary" @add="addSalary" />
-                </div>
-                <InfoField
-                    v-if="user.salary > 0"
-                    label="Зарплата:"
-                    :value="user.salary"
-                    editable
-                    @edit="editSalary"
-                />
-                <InputField
-                    label="Малий бізнес"
-                    fieldType="business"
-                    fieldSubType="small"
-                    placeholderWorth="Вартість"
-                    placeholderValue="Доходи"
-                    @add="addBusiness"
-                />
-                <ul v-if="user.business.small.length > 0" class="flex flex-col gap-2">
-                    <li class="grid grid-cols-2 gap-2 border-b-2 border-b-silver-900 text-secondary font-bold">
-                        <span>
-                            Вартість
-                        </span>
-                        <span>
-                            Доходи
-                        </span>
-                    </li>
-                    <List
-                        v-for="{id, worth, value} in user.business.small"
-                        :key="id"
-                        :id="id"
-                        :worth="worth"
-                        :value="value"
-                        @edit="editBusinessSmall"
-                    />
-                </ul>
-                <InputField
-                    label="Середній бізнес"
-                    fieldType="business"
-                    fieldSubType="middle"
-                    placeholderWorth="Вартість"
-                    placeholderValue="Доходи"
-                    @add="addBusiness"
-                />
-                <ul v-if="user.business.middle.length > 0" class="flex flex-col gap-2">
-                    <li class="grid grid-cols-2 gap-2 border-b-2 border-b-silver-900 text-secondary font-bold">
-                        <span>
-                            Вартість
-                        </span>
-                        <span>
-                            Доходи
-                        </span>
-                    </li>
-                    <List
-                        v-for="{id, worth, value} in user.business.middle"
-                        :key="id"
-                        :id="id"
-                        :worth="worth"
-                        :value="value"
-                        @edit="editBusinessMiddle"
-                    />
-                </ul>
-                <InputField
-                    label="Великий бізнес"
-                    fieldType="business"
-                    fieldSubType="big"
-                    placeholderWorth="Вартість"
-                    placeholderValue="Доходи"
-                    @add="addBusiness"
-                />
-                <ul v-if="user.business.big.length > 0" class="flex flex-col gap-2">
-                    <li class="grid grid-cols-2 gap-2 border-b-2 border-b-silver-900 text-secondary font-bold">
-                        <span>
-                            Вартість
-                        </span>
-                        <span>
-                            Доходи
-                        </span>
-                    </li>
-                    <List
-                        v-for="{id, worth, value} in user.business.big"
-                        :key="id"
-                        :id="id"
-                        :worth="worth"
-                        :value="value"
-                        @edit="editBusinessBig"
-                    />
-                </ul>
-                <InputField
-                    label="Корупційний бізнес"
-                    fieldType="business"
-                    fieldSubType="corrupt"
-                    placeholderWorth="Вартість"
-                    placeholderValue="Доходи"
-                    @add="addBusiness"
-                />
-                <ul v-if="user.business.corrupt.length > 0" class="flex flex-col gap-2">
-                    <li class="grid grid-cols-2 gap-2 border-b-2 border-b-silver-900 text-secondary font-bold">
-                        <span>
-                            Вартість
-                        </span>
-                        <span>
-                            Доходи
-                        </span>
-                    </li>
-                    <List
-                        v-for="{id, worth, value} in user.business.corrupt"
-                        :key="id"
-                        :id="id"
-                        :worth="worth"
-                        :value="value"
-                        @edit="editBusinessCorrupt"
-                    />
-                </ul>
-            </div>
-
-            <div class="flex flex-col gap-4">
+        <div class="flex flex-col gap-4">
                 <InfoField opposite label="Борги:" :value="debt" />
 
                 <!-- Багатство -->
@@ -309,7 +306,7 @@
                 <h2 class="px-4 text-xl font-bold text-opposite text-center">Витрати</h2>
                 <div v-if="user.rent === 0" class="flex items-center gap-3">
                     <Input v-model:value="rent" id="rent" placeholder="Оренда житла" />
-                    <Add :value="rent" @add="addRent" />
+                    <Add :value="rent" opposite @add="addRent" />
                 </div>
                 <InfoField
                     v-if="user.rent > 0"
@@ -322,19 +319,19 @@
 
                 <div v-if="user.food === 0" class="flex items-center gap-3">
                     <Input v-model:value="food" id="food" placeholder="Витрати на харчування" />
-                    <Add :value="food" @add="addFood" />
+                    <Add :value="food" opposite @add="addFood" />
                 </div>
                 <InfoField v-if="user.food > 0" opposite label="Витрати на харчування:" :value="user.food" />
 
                 <div v-if="user.clothes === 0" class="flex items-center gap-3">
                     <Input v-model:value="clothes" id="food" placeholder="Витрати на одяг" />
-                    <Add :value="clothes" @add="addClothes" />
+                    <Add :value="clothes" opposite @add="addClothes" />
                 </div>
                 <InfoField v-if="user.clothes > 0" opposite label="Витрати на одяг:" :value="user.clothes" />
 
                 <div v-if="user.fare === 0" class="flex items-center gap-3">
                     <Input v-model:value="fare" id="food" placeholder="Витрати на проїзд" />
-                    <Add :value="fare" @add="addFare" />
+                    <Add :value="fare" opposite @add="addFare" />
                 </div>
                 <InfoField
                     v-if="user.fare > 0"
@@ -347,7 +344,7 @@
 
                 <div v-if="user.phone === 0" class="flex items-center gap-3">
                     <Input v-model:value="phone" id="food" placeholder="Витрати на телефонні розмови" />
-                    <Add :value="phone" @add="addPhone" />
+                    <Add :value="phone" opposite @add="addPhone" />
                 </div>
                 <InfoField
                     v-if="user.phone > 0"
@@ -356,15 +353,45 @@
                     :value="user.phone"
                 />
             </div>
-        </div>
 
-        <Save />
+        <button
+            class="
+                fixed left-10 bottom-10
+                p-4
+                shadow hover:shadow-lg
+                rounded-full
+                bg-opposite
+                transition-all duration-300
+            "
+            type="button"
+            title="Почати спочатку"
+            @click="() => {
+                console.log('ffff');
+                localStorage.removeItem('myCat')
+            }"
+        >
+            <ResetIcon width="30px" height="30px" />
+        </button>
+
+        <button
+            class="
+                fixed right-10 bottom-10
+                p-4
+                shadow hover:shadow-lg
+                rounded-full
+                bg-secondary
+                transition-all duration-300
+            "
+            type="submit"
+            title="Зберегти"
+        >
+            <SaveIcon width="30px" height="30px" />
+        </button>
     </form>
 </template>
 
 <script setup>
 import { reactive, ref, computed, watch } from 'vue';
-import Save from './Save.vue';
 import Input from './Input.vue';
 import InfoField from './InfoField.vue';
 import List from './List.vue';
@@ -374,9 +401,12 @@ import Quantity from './Quantity.vue';
 import Checkbox from './Checkbox.vue';
 import InputCredit from './InputCredit.vue';
 import InfoCredit from './InfoCredit.vue';
+import ResetIcon from '../icons/ResetIcon.vue';
+import SaveIcon from '../icons/SaveIcon.vue';
 import { removingSpaces } from '../../helpers/formating-values.js';
 
-const user = reactive({
+const savedUser = localStorage.getItem('user');
+const user = savedUser ? reactive(JSON.parse(savedUser)) : reactive({
     name: '',
     profession: '',
     salary: 0,
@@ -511,7 +541,5 @@ const expenses = computed(() => {
     return sum;
 });
 
-const submit = () => {
-    console.log('user: ', user);
-}
+const submit = () => localStorage.setItem('user', JSON.stringify(user));
 </script>

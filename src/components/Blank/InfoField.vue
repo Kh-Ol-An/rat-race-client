@@ -8,16 +8,24 @@
         </span>
         <button
             v-if="editable"
-            class="text-slate-800"
+            :class="[
+                'p-1.5',
+                'shadow hover:shadow-lg',
+                'rounded-full',
+                'transition-all duration-300',
+                opposite ? 'bg-opposite' : 'bg-secondary',
+            ]"
             type="button"
+            title="Редагувати"
             @click="$emit('edit')"
         >
-            edit
+            <EditIcon width="14px" height="14px" />
         </button>
     </div>
 </template>
 
 <script setup>
+import EditIcon from '../icons/EditIcon.vue';
 import { addingSpaces } from '../../helpers/formating-values.js';
 
 defineProps({
