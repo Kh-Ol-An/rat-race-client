@@ -26,6 +26,7 @@
                 'px-1 peer-placeholder-shown:px-0',
                 'bg-white',
                 'text-xs text-secondary peer-placeholder-shown:text-slate-500',
+                'cursor-text',
                 'transition-all duration-300',
                  smallLabel ? 'peer-placeholder-shown:text-sm' : 'peer-placeholder-shown:text-base'
             ]"
@@ -70,7 +71,7 @@ const entered = ref('');
 const input = ({ target }) => {
     if (!props.typeText) {
         const regExp = /^[\d\s]*$/;
-        if (!regExp.test(target.value) || target.value.length > 19) {
+        if (!regExp.test(target.value) || target.value === '0' || target.value.length > 19) {
             return target.value = entered.value;
         }
         target.value = addingSpaces(target.value);

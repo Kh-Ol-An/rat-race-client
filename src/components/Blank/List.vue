@@ -45,7 +45,7 @@
 <script setup>
 import { ref } from 'vue';
 import Input from './Input.vue';
-import { addingSpaces } from '../../helpers/formating-values.js';
+import { removingSpaces, addingSpaces } from '../../helpers/formating-values.js';
 
 const props = defineProps({
     id: {
@@ -53,15 +53,15 @@ const props = defineProps({
         default: null,
     },
     worth: {
-        type: String,
+        type: Number,
         required: true,
     },
     value: {
-        type: String,
+        type: Number,
         required: true,
     },
     cost: {
-        type: String,
+        type: Number,
         default: '',
     },
 });
@@ -73,6 +73,6 @@ const editValue = ref(addingSpaces(props.value));
 
 const save = () => {
     editable.value = !editable.value;
-    emit('edit', props.id, editValue);
+    emit('edit', props.id, Number(removingSpaces(editValue.value)));
 };
 </script>

@@ -24,15 +24,15 @@ defineProps({
         required: true,
     },
     body: {
-        type: String,
+        type: Number,
         required: true,
     },
     payment: {
-        type: String,
+        type: Number,
         required: true,
     },
     quantity: {
-        type: String,
+        type: Number,
         required: true,
     },
 });

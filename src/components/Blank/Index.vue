@@ -140,12 +140,12 @@
 
                 <!-- Доходи -->
                 <h2 class="px-4 text-xl font-bold text-primary text-center">Доходи</h2>
-                <div v-if="user.salary.length === 0" class="flex items-center gap-3">
+                <div v-if="user.salary === 0" class="flex items-center gap-3">
                     <Input v-model:value="salary" id="salary" placeholder="Зарплата" />
                     <Add :value="salary" @add="addSalary" />
                 </div>
                 <InfoField
-                    v-if="user.salary.length > 0"
+                    v-if="user.salary > 0"
                     label="Зарплата:"
                     :value="user.salary"
                     editable
@@ -280,7 +280,7 @@
                 <!-- Виплати за кредитами -->
                 <h2 class="px-4 text-xl font-bold text-opposite text-center">Виплати за кредитами</h2>
                 <InputCredit @add="addCredit" />
-                <ul v-if="user.credit.length > 0">
+                <ul v-if="user.credits.length > 0">
                     <li class="grid grid-cols-4 gap-2 border-b-2 border-b-silver-900 text-opposite font-bold">
                         <span>
                             Назва
@@ -296,7 +296,7 @@
                         </span>
                     </li>
                     <InfoCredit
-                        v-for="{ id, name, body, payment, quantity } in user.credit"
+                        v-for="{ id, name, body, payment, quantity } in user.credits"
                         :key="id"
                         :name="name"
                         :body="body"
@@ -307,12 +307,12 @@
 
                 <!-- Витрати -->
                 <h2 class="px-4 text-xl font-bold text-opposite text-center">Витрати</h2>
-                <div v-if="user.rent.length === 0" class="flex items-center gap-3">
+                <div v-if="user.rent === 0" class="flex items-center gap-3">
                     <Input v-model:value="rent" id="rent" placeholder="Оренда житла" />
                     <Add :value="rent" @add="addRent" />
                 </div>
                 <InfoField
-                    v-if="user.rent.length > 0"
+                    v-if="user.rent > 0"
                     opposite
                     label="Оренда житла:"
                     :value="user.rent"
@@ -320,24 +320,24 @@
                     @edit="editRent"
                 />
 
-                <div v-if="user.food.length === 0" class="flex items-center gap-3">
+                <div v-if="user.food === 0" class="flex items-center gap-3">
                     <Input v-model:value="food" id="food" placeholder="Витрати на харчування" />
                     <Add :value="food" @add="addFood" />
                 </div>
-                <InfoField v-if="user.food.length > 0" opposite label="Витрати на харчування:" :value="user.food" />
+                <InfoField v-if="user.food > 0" opposite label="Витрати на харчування:" :value="user.food" />
 
-                <div v-if="user.clothes.length === 0" class="flex items-center gap-3">
+                <div v-if="user.clothes === 0" class="flex items-center gap-3">
                     <Input v-model:value="clothes" id="food" placeholder="Витрати на одяг" />
                     <Add :value="clothes" @add="addClothes" />
                 </div>
-                <InfoField v-if="user.clothes.length > 0" opposite label="Витрати на одяг:" :value="user.clothes" />
+                <InfoField v-if="user.clothes > 0" opposite label="Витрати на одяг:" :value="user.clothes" />
 
-                <div v-if="user.fare.length === 0" class="flex items-center gap-3">
+                <div v-if="user.fare === 0" class="flex items-center gap-3">
                     <Input v-model:value="fare" id="food" placeholder="Витрати на проїзд" />
                     <Add :value="fare" @add="addFare" />
                 </div>
                 <InfoField
-                    v-if="user.fare.length > 0"
+                    v-if="user.fare > 0"
                     opposite
                     label="Витрати на проїзд:"
                     :value="user.fare"
@@ -345,12 +345,12 @@
                     @edit="editFare"
                 />
 
-                <div v-if="user.phone.length === 0" class="flex items-center gap-3">
+                <div v-if="user.phone === 0" class="flex items-center gap-3">
                     <Input v-model:value="phone" id="food" placeholder="Витрати на телефонні розмови" />
                     <Add :value="phone" @add="addPhone" />
                 </div>
                 <InfoField
-                    v-if="user.phone.length > 0"
+                    v-if="user.phone > 0"
                     opposite
                     label="Витрати на телефонні розмови:"
                     :value="user.phone"
@@ -379,7 +379,7 @@ import { removingSpaces } from '../../helpers/formating-values.js';
 const user = reactive({
     name: '',
     profession: '',
-    salary: '',
+    salary: 0,
     shares: {
         gc: [],
         shchun: [],
@@ -400,64 +400,58 @@ const user = reactive({
     whimsAndFancies: 0,
     marriage: false,
     children: 0,
-    credit: [],
-    rent: '',
-    food: '',
-    clothes: '',
-    fare: '',
-    phone: '',
+    credits: [],
+    rent: 0,
+    food: 0,
+    clothes: 0,
+    fare: 0,
+    phone: 0,
 });
 
 const name = ref('');
 const addName = () => user.name = name.value;
-
 const profession = ref('');
 const addProfession = () => user.profession = profession.value;
 
 // ACTIVE
 const addShares = (fieldType, fieldSubType, id, worth, value) =>
-    user[fieldType][fieldSubType].push({
-        id,
-        worth: removingSpaces(worth),
-        value: removingSpaces(value),
-        cost: String(Number(removingSpaces(worth)) * Number(removingSpaces(value))),
-    });
+    user[fieldType][fieldSubType].push({ id, worth, value, cost: worth * value });
 
 const salary = ref('');
-const addSalary = () => user.salary = salary.value;
-const editSalary = () => user.salary = '';
+const addSalary = () => user.salary = Number(removingSpaces(salary.value));
+const editSalary = () => user.salary = 0;
 
 const addBusiness = (fieldType, fieldSubType, id, worth, value) =>
-    user[fieldType][fieldSubType].push({ id, worth: removingSpaces(worth), value: removingSpaces(value) });
+    user[fieldType][fieldSubType].push({ id, worth, value });
 const editBusinessSmall = (id, editValue) => {
-    user.business.small.find(business => business.id === id && (business.value = editValue.value));
+    user.business.small.find(business => business.id === id && (business.value = editValue));
 }
 const editBusinessMiddle = (id, editValue) => {
-    user.business.middle.find(business => business.id === id && (business.value = editValue.value));
+    user.business.middle.find(business => business.id === id && (business.value = editValue));
 }
 const editBusinessBig = (id, editValue) => {
-    user.business.big.find(business => business.id === id && (business.value = editValue.value));
+    user.business.big.find(business => business.id === id && (business.value = editValue));
 }
 const editBusinessCorrupt = (id, editValue) => {
-    user.business.corrupt.find(business => business.id === id && (business.value = editValue.value));
+    user.business.corrupt.find(business => business.id === id && (business.value = editValue));
 }
 
 const cash = computed(() => {
-    return '';
+    return 0;
 });
 const passiveIncome = computed(() => {
     let sum = 0;
-    user.business.small.map(business => sum += Number(business.value));
-    user.business.middle.map(business => sum += Number(business.value));
-    user.business.big.map(business => sum += Number(business.value));
-    user.business.corrupt.map(business => sum += Number(business.value));
+    user.business.small.map(business => sum += business.value);
+    user.business.middle.map(business => sum += business.value);
+    user.business.big.map(business => sum += business.value);
+    user.business.corrupt.map(business => sum += business.value);
     return sum;
 });
 const income = computed(() => {
-    return Number(user.salary) + Number(passiveIncome.value);
+    return user.salary + passiveIncome.value;
 });
 const cashFlow = computed(() => {
-    return '';
+    return income.value - expenses.value;
 });
 
 // PASSIVE
@@ -475,35 +469,31 @@ watch([apartments, cars, houses, yachts, aircraft, children], () => {
     user.aircraft = aircraft.value * 5000;
     user.children = children.value * 300;
 });
+
 const addCredit = (id, name, payment, quantity) =>
-    user.credit.push({
-        id,
-        name,
-        body: Number(removingSpaces(payment)) * Number(removingSpaces(quantity)),
-        payment: Number(payment),
-        quantity: Number(quantity),
-    });
+    user.credits.push({ id, name, body: payment * quantity, payment, quantity });
 
 const rent = ref('');
-const addRent = () => user.rent = rent.value;
-const editRent = () => user.rent = '';
+const addRent = () => user.rent = Number(removingSpaces(rent.value));
+const editRent = () => user.rent = 0;
 
 const food = ref('');
-const addFood = () => user.food = food.value;
+const addFood = () => user.food = Number(removingSpaces(food.value));
 
 const clothes = ref('');
-const addClothes = () => user.clothes = clothes.value;
+const addClothes = () => user.clothes = Number(removingSpaces(clothes.value));
 
 const fare = ref('');
-const addFare = () => user.fare = fare.value;
-const editFare = () => user.fare = '';
+const addFare = () => user.fare = Number(removingSpaces(fare.value));
+const editFare = () => user.fare = 0;
 
 const phone = ref('');
-const addPhone = () => user.phone = phone.value;
+const addPhone = () => user.phone = Number(removingSpaces(phone.value));
 
 const debt = computed(() => {
-    return '';
+    return 0;
 });
+
 const expenses = computed(() => {
     let sum = 0;
     sum += user.apartments;
@@ -512,10 +502,7 @@ const expenses = computed(() => {
     sum += user.yachts;
     sum += user.aircraft;
     sum += user.children;
-    user.credit.map(item => {
-        console.log(item)
-        sum += Number(item.payment)
-    });
+    user.credits.map(credit => sum += credit.payment);
     sum += user.rent;
     sum += user.food;
     sum += user.clothes;

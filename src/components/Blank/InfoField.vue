@@ -4,7 +4,7 @@
             {{ label }}
         </span>
         <span class="text-slate-800">
-            {{ addingSpaces(value) }}
+            {{ typeof value === 'number' ? addingSpaces(value) : value }}
         </span>
         <button
             v-if="editable"
@@ -30,7 +30,7 @@ defineProps({
         required: true,
     },
     value: {
-        type: String || Number,
+        type: [String, Number],
         required: true,
     },
     editable: {

@@ -4,7 +4,12 @@
             {{ label }}
         </label>
 
-        <input class="text-silver-800 cursor-pointer" :id="id" type="checkbox" @change="$emit('update:checked', !checked)">
+        <input
+            class="text-silver-800 cursor-pointer"
+            :id="id"
+            type="checkbox"
+            @change="$emit('update:checked', !checked)"
+        >
     </div>
 </template>
 
