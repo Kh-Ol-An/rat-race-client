@@ -6,7 +6,7 @@
         <span class="text-silver-800 whitespace-nowrap">
             {{ addingSpaces(worth) }}
         </span>
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-3">
             <span v-if="editable" class="text-silver-800 whitespace-nowrap">
                 {{ editValue }}
             </span>
@@ -17,24 +17,23 @@
                 smallLabel
                 v-model:value="editValue"
             />
-            <div v-if="id">
+            <div v-if="id" class="flex items-center justify-center">
                 <button
                     v-if="editable"
-                    class="p-2 shadow hover:shadow-lg rounded-full bg-secondary transition-all duration-300"
                     type="button"
                     title="Редагувати"
                     @click="editable = !editable"
                 >
-                    <EditIcon width="14px" height="14px" />
+                    <EditIcon width="16px" height="16px" />
                 </button>
                 <button
                     v-else
-                    class="p-2 shadow hover:shadow-lg rounded-full bg-secondary transition-all duration-300"
                     type="button"
                     title="Зберегти"
+                    :disabled="disabled"
                     @click="save"
                 >
-                    <SaveIcon width="14px" height="14px" />
+                    <SaveIcon width="16px" height="16px" :color="disabled ? 'fill-slate-300' : 'fill-secondary'" />
                 </button>
             </div>
         </div>
@@ -45,7 +44,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import {computed, ref} from 'vue';
 import Input from './Input.vue';
 import EditIcon from '../icons/EditIcon.vue';
 import SaveIcon from '../icons/SaveIcon.vue';
@@ -74,6 +73,8 @@ const emit = defineEmits(['edit']);
 
 const editable = ref(true);
 const editValue = ref(addingSpaces(props.value));
+
+const disabled = computed(() => editValue.value.length === 0);
 
 const save = () => {
     editable.value = !editable.value;

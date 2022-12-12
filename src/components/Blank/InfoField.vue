@@ -8,13 +8,6 @@
         </span>
         <button
             v-if="editable"
-            :class="[
-                'p-1.5',
-                'shadow hover:shadow-lg',
-                'rounded-full',
-                'transition-all duration-300',
-                opposite ? 'bg-opposite' : 'bg-secondary',
-            ]"
             type="button"
             title="Редагувати"
             @click="$emit('edit')"

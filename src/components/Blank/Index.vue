@@ -365,10 +365,7 @@
             "
             type="button"
             title="Почати спочатку"
-            @click="() => {
-                console.log('ffff');
-                localStorage.removeItem('myCat')
-            }"
+            @click="reset"
         >
             <ResetIcon width="30px" height="30px" />
         </button>
@@ -385,7 +382,7 @@
             type="submit"
             title="Зберегти"
         >
-            <SaveIcon width="30px" height="30px" />
+            <SaveIcon width="30px" height="30px" color="fill-white" />
         </button>
     </form>
 </template>
@@ -393,10 +390,10 @@
 <script setup>
 import { reactive, ref, computed, watch } from 'vue';
 import Input from './Input.vue';
-import InfoField from './InfoField.vue';
-import List from './List.vue';
-import InputField from './InputField.vue';
 import Add from './Add.vue';
+import InfoField from './InfoField.vue';
+import InputField from './InputField.vue';
+import List from './List.vue';
 import Quantity from './Quantity.vue';
 import Checkbox from './Checkbox.vue';
 import InputCredit from './InputCredit.vue';
@@ -542,4 +539,8 @@ const expenses = computed(() => {
 });
 
 const submit = () => localStorage.setItem('user', JSON.stringify(user));
+const reset = () => {
+    localStorage.removeItem('user');
+    location.reload();
+};
 </script>

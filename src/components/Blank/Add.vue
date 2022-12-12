@@ -1,18 +1,11 @@
 <template>
     <button
-        :class="[
-            'p-2',
-            'shadow hover:shadow-lg',
-            'rounded-full',
-            'transition-all duration-300',
-            disabled ? 'bg-slate-300' : opposite ? 'bg-opposite' : 'bg-secondary',
-        ]"
         type="button"
         title="Додати"
         :disabled="disabled"
         @click="$emit('add')"
     >
-        <AddIcon width="20px" height="20px" />
+        <AddIcon width="24px" height="24px" :color="disabled ? 'fill-slate-300' : 'fill-secondary'" />
     </button>
 </template>
 
