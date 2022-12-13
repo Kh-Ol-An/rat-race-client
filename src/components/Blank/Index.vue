@@ -10,23 +10,7 @@
         </div>
 
         <div class="flex items-center gap-4">
-            <button
-                class="py-2 px-24 shadow hover:shadow-lg rounded-md bg-opposite text-xl text-white font-bold leading-none transition-all duration-300"
-                type="button"
-                title="Заплатити"
-                @click="decrement"
-            >
-                &#8722;
-            </button>
-            <Input v-model:value="transaction" id="transaction" placeholder="Транзакція" />
-            <button
-                class="py-2 px-24 shadow hover:shadow-lg rounded-md bg-secondary  text-xl text-white font-bold leading-none transition-all duration-300"
-                type="button"
-                title="Отримати"
-                @click="increment"
-            >
-                &#43;
-            </button>
+            <Transaction @decrement="decrement" @increment="increment" />
         </div>
 
         <div class="grid grid-cols-2 gap-4">
@@ -411,6 +395,7 @@
 <script setup>
 import { reactive, ref, computed, watch } from 'vue';
 import UserIdentification from './UserIdentification.vue';
+import Transaction from './Transaction.vue';
 import Input from './Input.vue';
 import Add from './Add.vue';
 import InfoField from './InfoField.vue';
@@ -460,15 +445,8 @@ const user = savedUser ? reactive(JSON.parse(savedUser)) : reactive({
 const addName = (name) => user.name = name;
 const addProfession = (profession) => user.profession = profession;
 
-const decrement = () => {
-    balance.value -= Number(removingSpaces(transaction.value));
-    transaction.value = '';
-};
-const increment = () => {
-    balance.value += Number(removingSpaces(transaction.value));
-    transaction.value = '';
-};
-const transaction = ref('');
+const decrement = (transaction) => balance.value -= transaction;
+const increment = (transaction) => balance.value += transaction;
 const balance = ref(0);
 
 // PASSIVE
