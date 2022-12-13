@@ -15,7 +15,7 @@
                     :disabled="disabledDecrement"
                     @click="$emit('update:count', count - 1)"
                 >
-                    -
+                    &#8722;
                 </button>
                 <span class="w-5 flex items-center justify-center text-silver-800 cursor-default">
                     {{ count }}
@@ -29,7 +29,7 @@
                     :disabled="disabledIncrement"
                     @click="$emit('update:count', count + 1)"
                 >
-                    +
+                    &#43;
                 </button>
             </div>
         </div>

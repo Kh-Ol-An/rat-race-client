@@ -1,5 +1,6 @@
 <template>
     <button
+        class="outline-0"
         type="button"
         title="Додати"
         :disabled="disabled"

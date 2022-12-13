@@ -20,6 +20,7 @@
             <div v-if="id" class="flex items-center justify-center">
                 <button
                     v-if="editable"
+                    class="outline-0"
                     type="button"
                     title="Редагувати"
                     @click="editable = !editable"
@@ -28,6 +29,7 @@
                 </button>
                 <button
                     v-else
+                    class="outline-0"
                     type="button"
                     title="Зберегти"
                     :disabled="disabled"

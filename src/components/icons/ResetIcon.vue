@@ -1,12 +1,13 @@
 <template>
-    <svg xmlns="http://www.w3.org/2000/svg"
-         x="0px"
-         y="0px"
-         :class="color"
-         :width="width"
-         :height="height"
-         viewBox="0 0 207.868 207.868"
-         xml:space="preserve"
+    <svg
+        :class="color"
+        :width="width"
+        :height="height"
+        xmlns="http://www.w3.org/2000/svg"
+        x="0px"
+        y="0px"
+        viewBox="0 0 207.868 207.868"
+        xml:space="preserve"
     >
     <path
         d="M39.608,107.806c0,35.47,28.857,64.326,64.327,64.326c35.469,0,64.325-28.856,64.325-64.326

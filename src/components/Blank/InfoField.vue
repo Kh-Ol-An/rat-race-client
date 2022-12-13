@@ -8,17 +8,28 @@
         </span>
         <button
             v-if="editable"
+            class="outline-0"
             type="button"
             title="Редагувати"
             @click="$emit('edit')"
         >
             <EditIcon width="14px" height="14px" />
         </button>
+        <button
+            v-if="getting"
+            class="outline-0"
+            type="button"
+            title="Отримати"
+            @click="$emit('get')"
+        >
+            <MoneyIcon width="20px" height="20px" />
+        </button>
     </div>
 </template>
 
 <script setup>
 import EditIcon from '../icons/EditIcon.vue';
+import MoneyIcon from '../icons/MoneyIcon.vue';
 import { addingSpaces } from '../../helpers/formating-values.js';
 
 defineProps({
@@ -35,6 +46,10 @@ defineProps({
         required: true,
     },
     editable: {
+        type: Boolean,
+        default: false,
+    },
+    getting: {
         type: Boolean,
         default: false,
     },
