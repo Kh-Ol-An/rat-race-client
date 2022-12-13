@@ -1,17 +1,12 @@
 <template>
     <form class="relative py-6 px-8 w-full max-w-5xl flex flex-col gap-4 shadow rounded-md" @submit.prevent="submit">
         <div class="grid grid-cols-2 gap-4">
-            <div v-if="user.name.length === 0" class="flex items-center gap-3">
-                <Input v-model:value="name" id="name" typeText placeholder="Ім'я" />
-                <Add :value="name" @add="addName" />
-            </div>
-            <InfoField v-if="user.name.length > 0" label="Ім'я:" :value="user.name" />
-
-            <div v-if="user.profession.length === 0" class="flex items-center gap-3">
-                <Input v-model:value="profession" id="profession" typeText placeholder="Професія" />
-                <Add :value="profession" @add="addProfession" />
-            </div>
-            <InfoField v-if="user.profession.length > 0" label="Професія:" :value="user.profession" />
+            <UserIdentification
+                :userName="user.name"
+                :userProfession="user.profession"
+                @add:name="addName"
+                @add:profession="addProfession"
+            />
         </div>
 
         <div class="flex items-center gap-4">
@@ -415,6 +410,7 @@
 
 <script setup>
 import { reactive, ref, computed, watch } from 'vue';
+import UserIdentification from './UserIdentification.vue';
 import Input from './Input.vue';
 import Add from './Add.vue';
 import InfoField from './InfoField.vue';
@@ -461,10 +457,8 @@ const user = savedUser ? reactive(JSON.parse(savedUser)) : reactive({
     phone: 0,
 });
 
-const name = ref('');
-const addName = () => user.name = name.value;
-const profession = ref('');
-const addProfession = () => user.profession = profession.value;
+const addName = (name) => user.name = name;
+const addProfession = (profession) => user.profession = profession;
 
 const decrement = () => {
     balance.value -= Number(removingSpaces(transaction.value));
