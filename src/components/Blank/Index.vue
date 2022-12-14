@@ -59,32 +59,7 @@
                 />
 
                 <!-- Виплати за кредитами -->
-                <h2 class="px-4 text-xl font-bold text-opposite text-center">Виплати за кредитами</h2>
-                <InputCredit @add="addCredit" />
-                <ul v-if="user.credits.length > 0">
-                    <li class="grid grid-cols-4 gap-2 border-b-2 border-b-silver-900 text-opposite font-bold">
-                        <span>
-                            Назва
-                        </span>
-                        <span>
-                            Загалом
-                        </span>
-                        <span>
-                            Платіж
-                        </span>
-                        <span>
-                            Термін
-                        </span>
-                    </li>
-                    <InfoCredit
-                        v-for="{ id, name, body, payment, quantity } in user.credits"
-                        :key="id"
-                        :name="name"
-                        :body="body"
-                        :payment="payment"
-                        :quantity="quantity"
-                    />
-                </ul>
+                <Credits :userCredits="user.credits" @add="addCredit" />
             </div>
 
             <div class="flex flex-col gap-4">
@@ -373,13 +348,12 @@ import Costs from './Costs.vue';
 import Riches from './Riches.vue';
 import WhimsAndFancies from './WhimsAndFancies.vue';
 import FamilyStatus from './FamilyStatus.vue';
+import Credits from './Credits.vue';
 import Input from './Input.vue';
 import Add from './Add.vue';
 import InfoField from './InfoField.vue';
 import InputField from './InputField.vue';
 import List from './List.vue';
-import InputCredit from './InputCredit.vue';
-import InfoCredit from './InfoCredit.vue';
 import ResetIcon from '../icons/ResetIcon.vue';
 import SaveIcon from '../icons/SaveIcon.vue';
 import { removingSpaces } from '../../helpers/formating-values.js';
