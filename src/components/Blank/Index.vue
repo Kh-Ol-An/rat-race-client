@@ -18,63 +18,34 @@
                 <InfoField opposite label="Борги:" :value="debt" />
 
                 <!-- Витрати -->
-                <h2 class="px-4 text-xl font-bold text-opposite text-center">Витрати</h2>
-                <div v-if="user.rent === 0" class="flex items-center gap-3">
-                    <Input v-model:value="rent" id="rent" placeholder="Оренда житла" />
-                    <Add :value="rent" opposite @add="addRent" />
-                </div>
-                <InfoField
-                    v-if="user.rent > 0"
-                    opposite
-                    label="Оренда житла:"
-                    :value="user.rent"
-                    editable
-                    @edit="editRent"
-                />
-
-                <div v-if="user.food === 0" class="flex items-center gap-3">
-                    <Input v-model:value="food" id="food" placeholder="Витрати на харчування" />
-                    <Add :value="food" opposite @add="addFood" />
-                </div>
-                <InfoField v-if="user.food > 0" opposite label="Витрати на харчування:" :value="user.food" />
-
-                <div v-if="user.clothes === 0" class="flex items-center gap-3">
-                    <Input v-model:value="clothes" id="food" placeholder="Витрати на одяг" />
-                    <Add :value="clothes" opposite @add="addClothes" />
-                </div>
-                <InfoField v-if="user.clothes > 0" opposite label="Витрати на одяг:" :value="user.clothes" />
-
-                <div v-if="user.fare === 0" class="flex items-center gap-3">
-                    <Input v-model:value="fare" id="food" placeholder="Витрати на проїзд" />
-                    <Add :value="fare" opposite @add="addFare" />
-                </div>
-                <InfoField
-                    v-if="user.fare > 0"
-                    opposite
-                    label="Витрати на проїзд:"
-                    :value="user.fare"
-                    editable
-                    @edit="editFare"
-                />
-
-                <div v-if="user.phone === 0" class="flex items-center gap-3">
-                    <Input v-model:value="phone" id="food" placeholder="Витрати на телефонні розмови" />
-                    <Add :value="phone" opposite @add="addPhone" />
-                </div>
-                <InfoField
-                    v-if="user.phone > 0"
-                    opposite
-                    label="Витрати на телефонні розмови:"
-                    :value="user.phone"
+                <Costs
+                    :userRent="user.rent"
+                    :userFood="user.food"
+                    :userClothes="user.clothes"
+                    :userFare="user.fare"
+                    :userPhone="user.phone"
+                    @add:rent="addRent"
+                    @edit:rent="editRent"
+                    @add:food="addFood"
+                    @add:clothes="addClothes"
+                    @add:fare="addFare"
+                    @edit:fare="editFare"
+                    @add:phone="addPhone"
                 />
 
                 <!-- Багатство -->
-                <h2 class="px-4 text-xl font-bold text-opposite text-center">Багатство</h2>
-                <Quantity label="Квартири:" :expense="user.apartments" v-model:count="apartments" />
-                <Quantity label="Автівки:" :expense="user.cars" v-model:count="cars" />
-                <Quantity label="Будинки:" :expense="user.houses" v-model:count="houses" />
-                <Quantity label="Яхти:" :expense="user.yachts" v-model:count="yachts" />
-                <Quantity label="Літаки:" :expense="user.aircraft" v-model:count="aircraft" />
+                <Riches
+                    :userApartments="user.apartments"
+                    :userCars="user.cars"
+                    :userHouses="user.houses"
+                    :userYachts="user.yachts"
+                    :userAircraft="user.aircraft"
+                    @change:apartments="changeApartments"
+                    @change:cars="changeCars"
+                    @change:houses="changeHouses"
+                    @change:yachts="changeYachts"
+                    @change:aircraft="changeAircraft"
+                />
 
                 <!-- Капризи та примхи -->
                 <h2 class="px-4 text-xl font-bold text-opposite text-center">Капризи та примхи</h2>
@@ -396,6 +367,8 @@
 import { reactive, ref, computed, watch } from 'vue';
 import UserIdentification from './UserIdentification.vue';
 import Transaction from './Transaction.vue';
+import Costs from './Costs.vue';
+import Riches from './Riches.vue';
 import Input from './Input.vue';
 import Add from './Add.vue';
 import InfoField from './InfoField.vue';
@@ -469,37 +442,23 @@ const expenses = computed(() => {
     return sum;
 });
 
-const rent = ref('');
-const addRent = () => user.rent = Number(removingSpaces(rent.value));
+const addRent = (rent) => user.rent = rent;
 const editRent = () => user.rent = 0;
-
-const food = ref('');
-const addFood = () => user.food = Number(removingSpaces(food.value));
-
-const clothes = ref('');
-const addClothes = () => user.clothes = Number(removingSpaces(clothes.value));
-
-const fare = ref('');
-const addFare = () => user.fare = Number(removingSpaces(fare.value));
+const addFood = (food) => user.food = food;
+const addClothes = (clothes) => user.clothes = clothes;
+const addFare = (fare) => user.fare = fare;
 const editFare = () => user.fare = 0;
+const addPhone = (phone) => user.phone = phone;
 
-const phone = ref('');
-const addPhone = () => user.phone = Number(removingSpaces(phone.value));
-
-const apartments = ref(0);
-const cars = ref(0);
-const houses = ref(0);
-const yachts = ref(0);
-const aircraft = ref(0);
 const children = ref(0);
-watch([apartments, cars, houses, yachts, aircraft, children], () => {
-    user.apartments = apartments.value * 200;
-    user.cars = cars.value * 600;
-    user.houses = houses.value * 1000;
-    user.yachts = yachts.value * 1500;
-    user.aircraft = aircraft.value * 5000;
+watch([children], () => {
     user.children = children.value * 300;
 });
+const changeApartments = count => user.apartments = count * 200;
+const changeCars = count => user.cars = count * 600;
+const changeHouses = count => user.houses = count * 1000;
+const changeYachts = count => user.yachts = count * 1500;
+const changeAircraft = count => user.aircraft = count * 5000;
 
 const addCredit = (id, name, payment, quantity) =>
     user.credits.push({ id, name, body: payment * quantity, payment, quantity });

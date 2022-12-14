@@ -8,12 +8,12 @@
             <div class="flex items-center gap-2">
                 <button
                     :class="[
-                    'p-2 font-bold leading-none',
-                    disabledDecrement ? 'text-slate-300' : 'text-slate-800'
-                ]"
+                        'p-2 font-bold leading-none',
+                        disabledDecrement ? 'text-slate-300' : 'text-slate-800'
+                    ]"
                     type="button"
                     :disabled="disabledDecrement"
-                    @click="$emit('update:count', count - 1)"
+                    @click="$emit('change', count - 1)"
                 >
                     &#8722;
                 </button>
@@ -22,12 +22,12 @@
                 </span>
                 <button
                     :class="[
-                    'p-2 font-bold leading-none',
-                    disabledIncrement ? 'text-slate-300' : 'text-slate-800'
-                ]"
+                        'p-2 font-bold leading-none',
+                        disabledIncrement ? 'text-slate-300' : 'text-slate-800'
+                    ]"
                     type="button"
                     :disabled="disabledIncrement"
-                    @click="$emit('update:count', count + 1)"
+                    @click="$emit('change', count + 1)"
                 >
                     &#43;
                 </button>
