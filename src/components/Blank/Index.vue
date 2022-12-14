@@ -366,7 +366,7 @@
 </template>
 
 <script setup>
-import { reactive, ref, computed, watch } from 'vue';
+import { reactive, ref, computed } from 'vue';
 import UserIdentification from './UserIdentification.vue';
 import Transaction from './Transaction.vue';
 import Costs from './Costs.vue';
@@ -452,9 +452,6 @@ const addFare = (fare) => user.fare = fare;
 const editFare = () => user.fare = 0;
 const addPhone = (phone) => user.phone = phone;
 
-watch([children], () => {
-    user.children = children.value * 300;
-});
 const changeApartments = count => user.apartments = count * 200;
 const changeCars = count => user.cars = count * 600;
 const changeHouses = count => user.houses = count * 1000;
@@ -509,7 +506,10 @@ const editBusinessCorrupt = (id, editValue) => {
 const addShares = (fieldType, fieldSubType, id, worth, value) =>
     user[fieldType][fieldSubType].push({ id, worth, value, cost: worth * value });
 
-const submit = () => localStorage.setItem('user', JSON.stringify(user));
+const submit = () => {
+  console.log('user: ', user);
+  localStorage.setItem('user', JSON.stringify(user));
+};
 const reset = () => {
     localStorage.removeItem('user');
     location.reload();

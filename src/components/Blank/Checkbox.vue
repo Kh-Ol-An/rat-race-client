@@ -8,13 +8,14 @@
             class="text-silver-800 cursor-pointer"
             :id="id"
             type="checkbox"
-            @change="$emit('change', !checked)"
+            :checked="checked"
+            @change="change"
         >
     </div>
 </template>
 
 <script setup>
-defineProps({
+const props = defineProps({
     label: {
         type: String,
         required: true,
@@ -28,4 +29,8 @@ defineProps({
         required: true,
     },
 });
+
+const emit = defineEmits([ 'change' ]);
+
+const change = () => emit('change', !props.checked);
 </script>
