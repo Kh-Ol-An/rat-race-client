@@ -8,7 +8,7 @@
             class="text-silver-800 cursor-pointer"
             :id="id"
             type="checkbox"
-            @change="$emit('update:checked', !checked)"
+            @change="$emit('change', !checked)"
         >
     </div>
 </template>

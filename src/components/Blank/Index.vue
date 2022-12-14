@@ -48,13 +48,15 @@
                 />
 
                 <!-- Капризи та примхи -->
-                <h2 class="px-4 text-xl font-bold text-opposite text-center">Капризи та примхи</h2>
-                <Quantity label="Капризи та примхи:" v-model:count="user.whimsAndFancies" />
+                <WhimsAndFancies :userWhimsAndFancies="user.whimsAndFancies" @change="changeWhimsAndFancies" />
 
                 <!-- Сімейний стан -->
-                <h2 class="px-4 text-xl font-bold text-opposite text-center">Сімейний стан</h2>
-                <Checkbox v-model:checked="user.marriage" id="marriage" label="Шлюб:" />
-                <Quantity label="Діти:" :expense="user.children" v-model:count="children" />
+                <FamilyStatus
+                    :userMarriage="user.marriage"
+                    :userChildren="user.children"
+                    @change:marriage="changeMarriage"
+                    @change:children="changeChildren"
+                />
 
                 <!-- Виплати за кредитами -->
                 <h2 class="px-4 text-xl font-bold text-opposite text-center">Виплати за кредитами</h2>
@@ -369,13 +371,13 @@ import UserIdentification from './UserIdentification.vue';
 import Transaction from './Transaction.vue';
 import Costs from './Costs.vue';
 import Riches from './Riches.vue';
+import WhimsAndFancies from './WhimsAndFancies.vue';
+import FamilyStatus from './FamilyStatus.vue';
 import Input from './Input.vue';
 import Add from './Add.vue';
 import InfoField from './InfoField.vue';
 import InputField from './InputField.vue';
 import List from './List.vue';
-import Quantity from './Quantity.vue';
-import Checkbox from './Checkbox.vue';
 import InputCredit from './InputCredit.vue';
 import InfoCredit from './InfoCredit.vue';
 import ResetIcon from '../icons/ResetIcon.vue';
@@ -450,7 +452,6 @@ const addFare = (fare) => user.fare = fare;
 const editFare = () => user.fare = 0;
 const addPhone = (phone) => user.phone = phone;
 
-const children = ref(0);
 watch([children], () => {
     user.children = children.value * 300;
 });
@@ -459,6 +460,11 @@ const changeCars = count => user.cars = count * 600;
 const changeHouses = count => user.houses = count * 1000;
 const changeYachts = count => user.yachts = count * 1500;
 const changeAircraft = count => user.aircraft = count * 5000;
+
+const changeWhimsAndFancies = count => user.whimsAndFancies = count;
+
+const changeMarriage = checked => user.marriage = checked;
+const changeChildren = count => user.children = count;
 
 const addCredit = (id, name, payment, quantity) =>
     user.credits.push({ id, name, body: payment * quantity, payment, quantity });
