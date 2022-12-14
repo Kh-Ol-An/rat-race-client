@@ -84,119 +84,13 @@
                 />
 
                 <!-- Акції -->
-                <h2 class="px-4 text-xl font-bold text-primary text-center">Акції</h2>
-                <InputField
-                    label="GC"
-                    type="shares"
-                    subType="gc"
-                    placeholderWorth="Вартість"
-                    placeholderValue="Кількість"
+                <Shares
+                    :gc="user.shares.gc"
+                    :shchun="user.shares.shchun"
+                    :to="user.shares.to"
+                    :cst="user.shares.cst"
                     @add="addShares"
                 />
-                <ul v-if="user.shares.gc.length > 0" class="flex flex-col gap-2">
-                    <li class="grid grid-cols-3 gap-2 border-b-2 border-b-silver-900 text-secondary font-bold">
-                        <span>
-                            Ціна
-                        </span>
-                        <span>
-                            Кількість
-                        </span>
-                        <span>
-                            Вартість
-                        </span>
-                    </li>
-                    <List
-                        v-for="{id, worth, value, cost} in user.shares.gc"
-                        :key="id"
-                        :worth="worth"
-                        :value="value"
-                        :cost="cost"
-                    />
-                </ul>
-                <InputField
-                    label="ЩУН"
-                    type="shares"
-                    subType="shchun"
-                    placeholderWorth="Вартість"
-                    placeholderValue="Кількість"
-                    @add="addShares"
-                />
-                <ul v-if="user.shares.shchun.length > 0" class="flex flex-col gap-2">
-                    <li class="grid grid-cols-3 gap-2 border-b-2 border-b-silver-900 text-secondary font-bold">
-                        <span>
-                            Ціна
-                        </span>
-                        <span>
-                            Кількість
-                        </span>
-                        <span>
-                            Вартість
-                        </span>
-                    </li>
-                    <List
-                        v-for="{id, worth, value, cost} in user.shares.shchun"
-                        :key="id"
-                        :worth="worth"
-                        :value="value"
-                        :cost="cost"
-                    />
-                </ul>
-                <InputField
-                    label="TO"
-                    type="shares"
-                    subType="to"
-                    placeholderWorth="Вартість"
-                    placeholderValue="Кількість"
-                    @add="addShares"
-                />
-                <ul v-if="user.shares.to.length > 0" class="flex flex-col gap-2">
-                    <li class="grid grid-cols-3 gap-2 border-b-2 border-b-silver-900 text-secondary font-bold">
-                        <span>
-                            Ціна
-                        </span>
-                        <span>
-                            Кількість
-                        </span>
-                        <span>
-                            Вартість
-                        </span>
-                    </li>
-                    <List
-                        v-for="{id, worth, value, cost} in user.shares.to"
-                        :key="id"
-                        :worth="worth"
-                        :value="value"
-                        :cost="cost"
-                    />
-                </ul>
-                <InputField
-                    label="CST"
-                    type="shares"
-                    subType="cst"
-                    placeholderWorth="Вартість"
-                    placeholderValue="Кількість"
-                    @add="addShares"
-                />
-                <ul v-if="user.shares.cst.length > 0" class="flex flex-col gap-2">
-                    <li class="grid grid-cols-3 gap-2 border-b-2 border-b-silver-900 text-secondary font-bold">
-                        <span>
-                            Ціна
-                        </span>
-                        <span>
-                            Кількість
-                        </span>
-                        <span>
-                            Вартість
-                        </span>
-                    </li>
-                    <List
-                        v-for="{id, worth, value, cost} in user.shares.cst"
-                        :key="id"
-                        :worth="worth"
-                        :value="value"
-                        :cost="cost"
-                    />
-                </ul>
             </div>
         </div>
 
@@ -245,9 +139,8 @@ import WhimsAndFancies from './WhimsAndFancies.vue';
 import FamilyStatus from './FamilyStatus.vue';
 import Credits from './Credits.vue';
 import Income from './Income.vue';
+import Shares from './Shares.vue';
 import InfoField from './InfoField.vue';
-import InputField from './InputField.vue';
-import List from './List.vue';
 import ResetIcon from '../icons/ResetIcon.vue';
 import SaveIcon from '../icons/SaveIcon.vue';
 
