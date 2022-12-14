@@ -435,7 +435,7 @@ const changeAircraft = count => user.aircraft = count * 5000;
 const changeWhimsAndFancies = count => user.whimsAndFancies = count;
 
 const changeMarriage = checked => user.marriage = checked;
-const changeChildren = count => user.children = count;
+const changeChildren = count => user.children = count * 300;
 
 const addCredit = (id, name, payment, quantity) =>
     user.credits.push({ id, name, body: payment * quantity, payment, quantity });

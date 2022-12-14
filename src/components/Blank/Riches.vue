@@ -11,7 +11,7 @@
 import { ref } from "vue";
 import Quantity from './Quantity.vue';
 
-defineProps({
+const props = defineProps({
     userApartments: {
         type: Number,
         required: true,
@@ -42,31 +42,31 @@ const emit = defineEmits([
     'change:aircraft',
 ]);
 
-const apartments = ref(0);
+const apartments = ref(props.userApartments / 200);
 const changeApartments = count => {
     apartments.value = count;
     emit('change:apartments', apartments.value);
 };
 
-const cars = ref(0);
+const cars = ref(props.userCars / 600);
 const changeCars = count => {
     cars.value = count;
     emit('change:cars', cars.value);
 };
 
-const houses = ref(0);
+const houses = ref(props.userHouses / 1000);
 const changeHouses = count => {
     houses.value = count;
     emit('change:houses', houses.value);
 };
 
-const yachts = ref(0);
+const yachts = ref(props.userYachts / 1500);
 const changeYachts = count => {
     yachts.value = count;
     emit('change:yachts', yachts.value);
 };
 
-const aircraft = ref(0);
+const aircraft = ref(props.userAircraft / 5000);
 const changeAircraft = count => {
     aircraft.value = count;
     emit('change:aircraft', aircraft.value);
