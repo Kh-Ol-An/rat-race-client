@@ -57,6 +57,10 @@ const props = defineProps({
         type: Number,
         default: null,
     },
+    subType: {
+        type: String,
+        default: '',
+    },
     worth: {
         type: Number,
         required: true,
@@ -67,7 +71,7 @@ const props = defineProps({
     },
     cost: {
         type: Number,
-        default: '',
+        default: null,
     },
 });
 
@@ -80,6 +84,6 @@ const disabled = computed(() => editValue.value.length === 0);
 
 const save = () => {
     editable.value = !editable.value;
-    emit('edit', props.id, Number(removingSpaces(editValue.value)));
+    emit('edit', props.subType, props.id, Number(removingSpaces(editValue.value)));
 };
 </script>
