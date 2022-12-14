@@ -23,7 +23,7 @@
         placeholderValue="Доходи"
         @add="addBusiness"
     />
-    <ul v-if="userBusinessSmall.length > 0" class="flex flex-col gap-2">
+    <ul v-if="small.length > 0" class="flex flex-col gap-2">
         <li class="grid grid-cols-2 gap-2 border-b-2 border-b-silver-900 text-secondary font-bold">
             <span>
                 Вартість
@@ -33,7 +33,7 @@
             </span>
         </li>
         <List
-            v-for="{id, worth, value} in userBusinessSmall"
+            v-for="{id, worth, value} in small"
             :key="id"
             :id="id"
             subType="small"
@@ -52,7 +52,7 @@
         placeholderValue="Доходи"
         @add="addBusiness"
     />
-    <ul v-if="userBusinessMiddle.length > 0" class="flex flex-col gap-2">
+    <ul v-if="middle.length > 0" class="flex flex-col gap-2">
         <li class="grid grid-cols-2 gap-2 border-b-2 border-b-silver-900 text-secondary font-bold">
             <span>
                 Вартість
@@ -62,7 +62,7 @@
             </span>
         </li>
         <List
-            v-for="{id, worth, value} in userBusinessMiddle"
+            v-for="{id, worth, value} in middle"
             :key="id"
             :id="id"
             subType="middle"
@@ -81,7 +81,7 @@
         placeholderValue="Доходи"
         @add="addBusiness"
     />
-    <ul v-if="userBusinessBig.length > 0" class="flex flex-col gap-2">
+    <ul v-if="big.length > 0" class="flex flex-col gap-2">
         <li class="grid grid-cols-2 gap-2 border-b-2 border-b-silver-900 text-secondary font-bold">
             <span>
                 Вартість
@@ -91,7 +91,7 @@
             </span>
         </li>
         <List
-            v-for="{id, worth, value} in userBusinessBig"
+            v-for="{id, worth, value} in big"
             :key="id"
             :id="id"
             subType="big"
@@ -110,7 +110,7 @@
         placeholderValue="Доходи"
         @add="addBusiness"
     />
-    <ul v-if="userBusinessCorrupt.length > 0" class="flex flex-col gap-2">
+    <ul v-if="corrupt.length > 0" class="flex flex-col gap-2">
         <li class="grid grid-cols-2 gap-2 border-b-2 border-b-silver-900 text-secondary font-bold">
             <span>
                 Вартість
@@ -120,7 +120,7 @@
             </span>
         </li>
         <List
-            v-for="{id, worth, value} in userBusinessCorrupt"
+            v-for="{id, worth, value} in corrupt"
             :key="id"
             :id="id"
             subType="corrupt"
@@ -145,19 +145,19 @@ defineProps({
         type: Number,
         required: true,
     },
-    userBusinessSmall: {
+    small: {
         type: Array,
         required: true,
     },
-    userBusinessMiddle: {
+    middle: {
         type: Array,
         required: true,
     },
-    userBusinessBig: {
+    big: {
         type: Array,
         required: true,
     },
-    userBusinessCorrupt: {
+    corrupt: {
         type: Array,
         required: true,
     },

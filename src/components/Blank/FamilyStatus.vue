@@ -1,6 +1,6 @@
 <template>
     <h2 class="px-4 text-xl font-bold text-opposite text-center">Сімейний стан</h2>
-    <Checkbox label="Шлюб:" id="marriage" :checked="userMarriage" @change="changeMarriage" />
+    <Checkbox label="Шлюб:" id="marriage" :checked="marriage" @change="changeMarriage" />
     <Quantity label="Діти:" :count="children" :expense="userChildren" @change="changeChildren" />
 </template>
 
@@ -10,7 +10,7 @@ import Quantity from './Quantity.vue';
 import Checkbox from './Checkbox.vue';
 
 const props = defineProps({
-    userMarriage: {
+    marriage: {
         type: Boolean,
         required: true,
     },

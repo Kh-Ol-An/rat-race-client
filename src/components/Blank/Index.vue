@@ -48,18 +48,18 @@
                 />
 
                 <!-- Капризи та примхи -->
-                <WhimsAndFancies :userWhimsAndFancies="user.whimsAndFancies" @change="changeWhimsAndFancies" />
+                <WhimsAndFancies :whimsAndFancies="user.whimsAndFancies" @change="changeWhimsAndFancies" />
 
                 <!-- Сімейний стан -->
                 <FamilyStatus
-                    :userMarriage="user.marriage"
+                    :marriage="user.marriage"
                     :userChildren="user.children"
                     @change:marriage="changeMarriage"
                     @change:children="changeChildren"
                 />
 
                 <!-- Виплати за кредитами -->
-                <Credits :userCredits="user.credits" @add="addCredit" />
+                <Credits :credits="user.credits" @add="addCredit" />
             </div>
 
             <div class="flex flex-col gap-4">
@@ -73,10 +73,10 @@
                 <!-- Доходи -->
                 <Income
                     :userSalary="user.salary"
-                    :userBusinessSmall="user.business.small"
-                    :userBusinessMiddle="user.business.middle"
-                    :userBusinessBig="user.business.big"
-                    :userBusinessCorrupt="user.business.corrupt"
+                    :small="user.business.small"
+                    :middle="user.business.middle"
+                    :big="user.business.big"
+                    :corrupt="user.business.corrupt"
                     @add:salary="addSalary"
                     @edit:salary="editSalary"
                     @add:business="addBusiness"

@@ -1,7 +1,7 @@
 <template>
     <h2 class="px-4 text-xl font-bold text-opposite text-center">Виплати за кредитами</h2>
     <InputCredit @add="add" />
-    <ul v-if="userCredits.length > 0">
+    <ul v-if="credits.length > 0">
         <li class="grid grid-cols-4 gap-2 border-b-2 border-b-silver-900 text-opposite font-bold">
             <span>
                 Назва
@@ -17,7 +17,7 @@
             </span>
         </li>
         <InfoCredit
-            v-for="{ id, name, body, payment, quantity } in userCredits"
+            v-for="{ id, name, body, payment, quantity } in credits"
             :key="id"
             :name="name"
             :body="body"
@@ -32,7 +32,7 @@ import InputCredit from './InputCredit.vue';
 import InfoCredit from './InfoCredit.vue';
 
 defineProps({
-    userCredits: {
+    credits: {
         type: Array,
         required: true,
     },
