@@ -20,8 +20,9 @@ const props = defineProps({
     },
 });
 
+const emit = defineEmits([ 'get' ]);
+
 const user = toRef(props, 'userProp')
-console.log('props.user: ', user.value);
 
 const cash = computed(() => props.balance >= 0 ? props.balance : 0);
 const passiveIncome = computed(() => {
@@ -33,6 +34,8 @@ const passiveIncome = computed(() => {
     return sum;
 });
 const income = computed(() => {
-    return user.value.salary + passiveIncome.value;
+    const result = user.value.salary + passiveIncome.value;
+    emit('get', result);
+    return result;
 });
 </script>

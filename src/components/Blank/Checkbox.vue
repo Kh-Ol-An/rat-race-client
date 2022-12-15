@@ -5,7 +5,7 @@
         </label>
 
         <input
-            class="text-silver-800 cursor-pointer"
+            class="text-silver-800 cursor-pointer outline-0"
             :id="id"
             type="checkbox"
             :checked="checked"

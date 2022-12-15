@@ -1,12 +1,7 @@
 <template>
     <form class="relative py-6 px-8 w-full max-w-5xl flex flex-col gap-4 shadow rounded-md" @submit.prevent="submit">
         <div class="grid grid-cols-2 gap-4">
-            <UserIdentification
-                :userName="user.name"
-                :userProfession="user.profession"
-                @add:name="addName"
-                @add:profession="addProfession"
-            />
+            <UserIdentification :userProp="user" @add:name="addName" @add:profession="addProfession" />
         </div>
 
         <div class="flex items-center gap-4">
@@ -22,11 +17,7 @@
 
                 <!-- Витрати -->
                 <Costs
-                    :userRent="user.rent"
-                    :userFood="user.food"
-                    :userClothes="user.clothes"
-                    :userFare="user.fare"
-                    :userPhone="user.phone"
+                    :userProp="user"
                     @add:rent="addRent"
                     @edit:rent="editRent"
                     @add:food="addFood"
@@ -38,11 +29,7 @@
 
                 <!-- Багатство -->
                 <Riches
-                    :userApartments="user.apartments"
-                    :userCars="user.cars"
-                    :userHouses="user.houses"
-                    :userYachts="user.yachts"
-                    :userAircraft="user.aircraft"
+                    :userProp="user"
                     @change:apartments="changeApartments"
                     @change:cars="changeCars"
                     @change:houses="changeHouses"
@@ -55,8 +42,7 @@
 
                 <!-- Сімейний стан -->
                 <FamilyStatus
-                    :marriage="user.marriage"
-                    :userChildren="user.children"
+                    :userProp="user"
                     @change:marriage="changeMarriage"
                     @change:children="changeChildren"
                 />
@@ -66,15 +52,11 @@
             </div>
 
             <div class="flex flex-col gap-4">
-                <InfoIncomes :balance="balance" :userProp="user" />
+                <InfoIncomes :balance="balance" :userProp="user" @get="getIncome" />
 
                 <!-- Доходи -->
                 <Incomes
-                    :userSalary="user.salary"
-                    :small="user.business.small"
-                    :middle="user.business.middle"
-                    :big="user.business.big"
-                    :corrupt="user.business.corrupt"
+                    :userProp="user"
                     @add:salary="addSalary"
                     @edit:salary="editSalary"
                     @add:business="addBusiness"
@@ -82,13 +64,7 @@
                 />
 
                 <!-- Акції -->
-                <Shares
-                    :gc="user.shares.gc"
-                    :shchun="user.shares.shchun"
-                    :to="user.shares.to"
-                    :cst="user.shares.cst"
-                    @add="addShares"
-                />
+                <Shares :userProp="user" @add="addShares" />
             </div>
         </div>
 
@@ -226,9 +202,12 @@ const addCredit = (id, name, payment, quantity) =>
     user.credits.push({ id, name, body: payment * quantity, payment, quantity });
 
 // ACTIVE
-// const cashFlow = computed(() => {
-//     return income.value - expenses.value;
-// });
+const income = ref(0);
+const getIncome = (value) => income.value = value;
+
+const cashFlow = computed(() => {
+    return income.value - expenses.value;
+});
 const getCashFlow = () => balance.value += cashFlow.value;
 
 const addSalary = (salary) => user.salary = salary;

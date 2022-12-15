@@ -75,7 +75,7 @@ const props = defineProps({
     },
 });
 
-const emit = defineEmits(['edit']);
+const emit = defineEmits([ 'edit' ]);
 
 const editable = ref(true);
 const editValue = ref(addingSpaces(props.value));

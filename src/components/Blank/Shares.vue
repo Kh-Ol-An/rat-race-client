@@ -10,7 +10,7 @@
         placeholderValue="Кількість"
         @add="add"
     />
-    <ul v-if="gc.length > 0" class="flex flex-col gap-2">
+    <ul v-if="user.shares.gc.length > 0" class="flex flex-col gap-2">
         <li class="grid grid-cols-3 gap-2 border-b-2 border-b-silver-900 text-secondary font-bold">
             <span>
                 Ціна
@@ -23,7 +23,7 @@
             </span>
         </li>
         <List
-            v-for="{id, worth, value, cost} in gc"
+            v-for="{id, worth, value, cost} in user.shares.gc"
             :key="id"
             :worth="worth"
             :value="value"
@@ -40,7 +40,7 @@
         placeholderValue="Кількість"
         @add="add"
     />
-    <ul v-if="shchun.length > 0" class="flex flex-col gap-2">
+    <ul v-if="user.shares.shchun.length > 0" class="flex flex-col gap-2">
         <li class="grid grid-cols-3 gap-2 border-b-2 border-b-silver-900 text-secondary font-bold">
             <span>
                 Ціна
@@ -53,7 +53,7 @@
             </span>
         </li>
         <List
-            v-for="{id, worth, value, cost} in shchun"
+            v-for="{id, worth, value, cost} in user.shares.shchun"
             :key="id"
             :worth="worth"
             :value="value"
@@ -70,7 +70,7 @@
         placeholderValue="Кількість"
         @add="add"
     />
-    <ul v-if="to.length > 0" class="flex flex-col gap-2">
+    <ul v-if="user.shares.to.length > 0" class="flex flex-col gap-2">
         <li class="grid grid-cols-3 gap-2 border-b-2 border-b-silver-900 text-secondary font-bold">
             <span>
                 Ціна
@@ -83,7 +83,7 @@
             </span>
         </li>
         <List
-            v-for="{id, worth, value, cost} in to"
+            v-for="{id, worth, value, cost} in user.shares.to"
             :key="id"
             :worth="worth"
             :value="value"
@@ -100,7 +100,7 @@
         placeholderValue="Кількість"
         @add="add"
     />
-    <ul v-if="cst.length > 0" class="flex flex-col gap-2">
+    <ul v-if="user.shares.cst.length > 0" class="flex flex-col gap-2">
         <li class="grid grid-cols-3 gap-2 border-b-2 border-b-silver-900 text-secondary font-bold">
             <span>
                 Ціна
@@ -113,7 +113,7 @@
             </span>
         </li>
         <List
-            v-for="{id, worth, value, cost} in cst"
+            v-for="{id, worth, value, cost} in user.shares.cst"
             :key="id"
             :worth="worth"
             :value="value"
@@ -123,27 +123,18 @@
 </template>
 
 <script setup>
+import { toRef } from "vue";
 import InputField from './InputField.vue';
 import List from './List.vue';
 
-defineProps({
-    gc: {
-        type: Array,
-        required: true,
-    },
-    shchun: {
-        type: Array,
-        required: true,
-    },
-    to: {
-        type: Array,
-        required: true,
-    },
-    cst: {
-        type: Array,
+const props = defineProps({
+    userProp: {
+        type: Object,
         required: true,
     },
 });
+
+const user = toRef(props, 'userProp');
 
 const emit = defineEmits([ 'add' ]);
 
