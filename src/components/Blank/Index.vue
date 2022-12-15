@@ -12,8 +12,7 @@
 
         <div class="grid grid-cols-2 gap-4">
             <div class="flex flex-col gap-4">
-                <InfoField labelClasses="text-opposite" label="Борги:" :value="debt" />
-                <InfoField labelClasses="text-opposite" label="Загальні витрати:" :value="expenses" />
+                <ExpenseInfo :debt="debt" :expenses="expenses" />
 
                 <!-- Витрати -->
                 <Costs
@@ -52,7 +51,7 @@
             </div>
 
             <div class="flex flex-col gap-4">
-                <InfoIncomes :balance="balance" :userProp="user" @get="getIncome" />
+                <IncomeInfo :cash="cash" :userSalary="user.salary" :passiveIncome="passiveIncome" :income="income" />
 
                 <!-- Доходи -->
                 <Incomes
@@ -107,12 +106,13 @@
 import { reactive, ref, computed } from 'vue';
 import UserIdentification from './UserIdentification.vue';
 import Transaction from './Transaction.vue';
+import ExpenseInfo from './ExpenseInfo.vue';
 import Costs from './Costs.vue';
 import Riches from './Riches.vue';
 import WhimsAndFancies from './WhimsAndFancies.vue';
 import FamilyStatus from './FamilyStatus.vue';
 import Credits from './Credits.vue';
-import InfoIncomes from './InfoIncomes.vue';
+import IncomeInfo from './IncomeInfo.vue';
 import Incomes from './Incomes.vue';
 import Shares from './Shares.vue';
 import InfoField from './InfoField.vue';
@@ -161,7 +161,6 @@ const balance = ref(0);
 
 // PASSIVE
 const debt = computed(() => balance.value <= 0 ? balance.value : 0);
-
 const expenses = computed(() => {
     let sum = 0;
     sum += user.apartments;
@@ -202,8 +201,16 @@ const addCredit = (id, name, payment, quantity) =>
     user.credits.push({ id, name, body: payment * quantity, payment, quantity });
 
 // ACTIVE
-const income = ref(0);
-const getIncome = (value) => income.value = value;
+const cash = computed(() => balance.value >= 0 ? balance.value : 0);
+const passiveIncome = computed(() => {
+    let sum = 0;
+    user.business.small.map(business => sum += business.value);
+    user.business.middle.map(business => sum += business.value);
+    user.business.big.map(business => sum += business.value);
+    user.business.corrupt.map(business => sum += business.value);
+    return sum;
+});
+const income = computed(() => user.salary + passiveIncome.value);
 
 const cashFlow = computed(() => {
     return income.value - expenses.value;
