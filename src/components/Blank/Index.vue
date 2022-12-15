@@ -8,7 +8,14 @@
             <Transaction @decrement="decrement" @increment="increment" />
         </div>
 
-        <InfoField wrapClasses="mx-auto" labelClasses="text-lg font-bold text-primary" label="Грошовий потік:" :value="cashFlow" getting @get="getCashFlow" />
+        <InfoField
+            wrapClasses="mx-auto"
+            labelClasses="text-lg font-bold text-primary"
+            label="Грошовий потік:"
+            :value="cashFlow"
+            getting
+            @get="getCashFlow"
+        />
 
         <div class="grid grid-cols-2 gap-4">
             <div class="flex flex-col gap-4">
@@ -106,6 +113,7 @@
 import { reactive, ref, computed } from 'vue';
 import UserIdentification from './UserIdentification.vue';
 import Transaction from './Transaction.vue';
+import InfoField from './InfoField.vue';
 import ExpenseInfo from './ExpenseInfo.vue';
 import Costs from './Costs.vue';
 import Riches from './Riches.vue';
@@ -115,7 +123,6 @@ import Credits from './Credits.vue';
 import IncomeInfo from './IncomeInfo.vue';
 import Incomes from './Incomes.vue';
 import Shares from './Shares.vue';
-import InfoField from './InfoField.vue';
 import ResetIcon from '../icons/ResetIcon.vue';
 import SaveIcon from '../icons/SaveIcon.vue';
 
@@ -123,19 +130,11 @@ const savedUser = localStorage.getItem('user');
 const user = savedUser ? reactive(JSON.parse(savedUser)) : reactive({
     name: '',
     profession: '',
-    salary: 0,
-    shares: {
-        gc: [],
-        shchun: [],
-        to: [],
-        cst: [],
-    },
-    business: {
-        small: [],
-        middle: [],
-        big: [],
-        corrupt: [],
-    },
+    rent: 0,
+    food: 0,
+    clothes: 0,
+    fare: 0,
+    phone: 0,
     apartments: 0,
     cars: 0,
     houses: 0,
@@ -145,24 +144,37 @@ const user = savedUser ? reactive(JSON.parse(savedUser)) : reactive({
     marriage: false,
     children: 0,
     credits: [],
-    rent: 0,
-    food: 0,
-    clothes: 0,
-    fare: 0,
-    phone: 0,
+    salary: 0,
+    business: {
+        small: [],
+        middle: [],
+        big: [],
+        corrupt: [],
+    },
+    shares: {
+        gc: [],
+        shchun: [],
+        to: [],
+        cst: [],
+    },
 });
 
 const addName = (name) => user.name = name;
 const addProfession = (profession) => user.profession = profession;
 
+const balance = ref(0);
 const decrement = (transaction) => balance.value -= transaction;
 const increment = (transaction) => balance.value += transaction;
-const balance = ref(0);
 
 // PASSIVE
 const debt = computed(() => balance.value <= 0 ? balance.value : 0);
 const expenses = computed(() => {
     let sum = 0;
+    sum += user.rent;
+    sum += user.food;
+    sum += user.clothes;
+    sum += user.fare;
+    sum += user.phone;
     sum += user.apartments;
     sum += user.cars;
     sum += user.houses;
@@ -170,11 +182,6 @@ const expenses = computed(() => {
     sum += user.aircraft;
     sum += user.children;
     user.credits.map(credit => sum += credit.payment);
-    sum += user.rent;
-    sum += user.food;
-    sum += user.clothes;
-    sum += user.fare;
-    sum += user.phone;
     return sum;
 });
 
