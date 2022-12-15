@@ -6,7 +6,7 @@
 </template>
 
 <script setup>
-import InfoField from './InfoField.vue';
+import InfoField from '../plugins/InfoField.vue';
 
 const props = defineProps({
     cash: {

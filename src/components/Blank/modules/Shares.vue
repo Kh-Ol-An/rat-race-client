@@ -124,8 +124,8 @@
 
 <script setup>
 import { toRef } from "vue";
-import InputField from './InputField.vue';
-import List from './List.vue';
+import InputField from '../plugins/InputField.vue';
+import List from '../plugins/List.vue';
 
 const props = defineProps({
     userProp: {

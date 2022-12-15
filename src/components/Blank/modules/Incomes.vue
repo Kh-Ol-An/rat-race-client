@@ -134,12 +134,12 @@
 
 <script setup>
 import { ref, toRef } from 'vue';
-import Input from './Input.vue';
-import Add from './Add.vue';
-import InfoField from './InfoField.vue';
-import InputField from './InputField.vue';
-import List from './List.vue';
-import { removingSpaces } from "../../helpers/formating-values.js";
+import Input from '../plugins/Input.vue';
+import Add from '../plugins/Add.vue';
+import InfoField from '../plugins/InfoField.vue';
+import InputField from '../plugins/InputField.vue';
+import List from '../plugins/List.vue';
+import { removingSpaces } from "../../../helpers/formating-values.js";
 
 const props = defineProps({
     userProp: {

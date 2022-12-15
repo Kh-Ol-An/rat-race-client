@@ -28,9 +28,9 @@
 </template>
 
 <script setup>
-import EditIcon from '../icons/EditIcon.vue';
-import MoneyIcon from '../icons/MoneyIcon.vue';
-import { addingSpaces } from '../../helpers/formating-values.js';
+import EditIcon from '../../icons/EditIcon.vue';
+import MoneyIcon from '../../icons/MoneyIcon.vue';
+import { addingSpaces } from '../../../helpers/formating-values.js';
 
 defineProps({
     wrapClasses: {

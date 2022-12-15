@@ -4,7 +4,7 @@
 </template>
 
 <script setup>
-import Quantity from './Quantity.vue';
+import Quantity from '../plugins/Quantity.vue';
 
 defineProps({
     whimsAndFancies: {

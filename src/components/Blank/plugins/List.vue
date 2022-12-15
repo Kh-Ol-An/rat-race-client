@@ -48,9 +48,9 @@
 <script setup>
 import {computed, ref} from 'vue';
 import Input from './Input.vue';
-import EditIcon from '../icons/EditIcon.vue';
-import SaveIcon from '../icons/SaveIcon.vue';
-import { removingSpaces, addingSpaces } from '../../helpers/formating-values.js';
+import EditIcon from '../../icons/EditIcon.vue';
+import SaveIcon from '../../icons/SaveIcon.vue';
+import { removingSpaces, addingSpaces } from '../../../helpers/formating-values.js';
 
 const props = defineProps({
     id: {

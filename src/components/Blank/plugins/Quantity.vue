@@ -43,7 +43,7 @@
 
 <script setup>
 import { computed } from 'vue';
-import { addingSpaces } from '../../helpers/formating-values.js';
+import { addingSpaces } from '../../../helpers/formating-values.js';
 
 const props = defineProps({
     label: {

@@ -9,7 +9,7 @@
 
 <script setup>
 import { ref, toRef } from "vue";
-import Quantity from './Quantity.vue';
+import Quantity from '../plugins/Quantity.vue';
 
 const props = defineProps({
     userProp: {

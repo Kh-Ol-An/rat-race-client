@@ -14,9 +14,9 @@
 
 <script setup>
 import { ref, toRef } from "vue";
-import Input from './Input.vue';
-import Add from './Add.vue';
-import InfoField from './InfoField.vue';
+import Input from '../plugins/Input.vue';
+import Add from '../plugins/Add.vue';
+import InfoField from '../plugins/InfoField.vue';
 
 const props = defineProps({
     userProp: {

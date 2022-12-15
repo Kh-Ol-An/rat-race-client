@@ -27,7 +27,7 @@
 import { ref } from "vue";
 import Input from './Input.vue';
 import Add from './Add.vue';
-import { removingSpaces } from '../../helpers/formating-values.js';
+import { removingSpaces } from '../../../helpers/formating-values.js';
 
 const emit = defineEmits(['add']);
 

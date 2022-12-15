@@ -80,19 +80,19 @@
 
 <script setup>
 import { reactive, ref, computed } from 'vue';
-import UserIdentification from './UserIdentification.vue';
-import Transaction from './Transaction.vue';
-import InfoField from './InfoField.vue';
-import ExpenseInfo from './ExpenseInfo.vue';
-import Costs from './Costs.vue';
-import Riches from './Riches.vue';
-import WhimsAndFancies from './WhimsAndFancies.vue';
-import FamilyStatus from './FamilyStatus.vue';
-import Credits from './Credits.vue';
-import IncomeInfo from './IncomeInfo.vue';
-import Incomes from './Incomes.vue';
-import Shares from './Shares.vue';
-import Actions from './Actions.vue';
+import UserIdentification from './modules/UserIdentification.vue';
+import Transaction from './modules/Transaction.vue';
+import InfoField from './plugins/InfoField.vue';
+import ExpenseInfo from './modules/ExpenseInfo.vue';
+import Costs from './modules/Costs.vue';
+import Riches from './modules/Riches.vue';
+import WhimsAndFancies from './modules/WhimsAndFancies.vue';
+import FamilyStatus from './modules/FamilyStatus.vue';
+import Credits from './modules/Credits.vue';
+import IncomeInfo from './modules/IncomeInfo.vue';
+import Incomes from './modules/Incomes.vue';
+import Shares from './modules/Shares.vue';
+import Actions from './modules/Actions.vue';
 
 const savedUser = localStorage.getItem('user');
 const user = savedUser ? reactive(JSON.parse(savedUser)) : reactive({

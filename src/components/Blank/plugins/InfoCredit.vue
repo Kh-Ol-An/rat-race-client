@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-import { addingSpaces } from '../../helpers/formating-values.js';
+import { addingSpaces } from '../../../helpers/formating-values.js';
 
 defineProps({
     name: {

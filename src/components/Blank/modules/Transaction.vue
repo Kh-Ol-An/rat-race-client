@@ -20,8 +20,8 @@
 
 <script setup>
 import { ref } from "vue";
-import Input from './Input.vue';
-import { removingSpaces } from "../../helpers/formating-values.js";
+import Input from '../plugins/Input.vue';
+import { removingSpaces } from "../../../helpers/formating-values.js";
 
 const emit = defineEmits(['decrement', 'increment']);
 

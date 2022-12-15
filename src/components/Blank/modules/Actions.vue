@@ -34,8 +34,8 @@
 </template>
 
 <script setup>
-import ResetIcon from '../icons/ResetIcon.vue';
-import SaveIcon from '../icons/SaveIcon.vue';
+import ResetIcon from '../../icons/ResetIcon.vue';
+import SaveIcon from '../../icons/SaveIcon.vue';
 
 const reset = () => {
     localStorage.removeItem('user');

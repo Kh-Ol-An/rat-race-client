@@ -6,8 +6,8 @@
 
 <script setup>
 import { ref, toRef } from "vue";
-import Quantity from './Quantity.vue';
-import Checkbox from './Checkbox.vue';
+import Quantity from '../plugins/Quantity.vue';
+import Checkbox from '../plugins/Checkbox.vue';
 
 const props = defineProps({
     userProp: {

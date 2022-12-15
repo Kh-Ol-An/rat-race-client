@@ -28,8 +28,8 @@
 </template>
 
 <script setup>
-import InputCredit from './InputCredit.vue';
-import InfoCredit from './InfoCredit.vue';
+import InputCredit from '../plugins/InputCredit.vue';
+import InfoCredit from '../plugins/InfoCredit.vue';
 
 defineProps({
     credits: {
