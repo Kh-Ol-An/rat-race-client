@@ -7,10 +7,10 @@
     </div>
     <InfoField
         v-if="userRent > 0"
+        labelClasses="text-opposite"
         :value="userRent"
         label="Оренда житла:"
         editable
-        opposite
         @edit="$emit('edit:rent')"
     />
 
@@ -18,13 +18,13 @@
         <Input v-model:value="food" id="food" placeholder="Витрати на харчування" />
         <Add :value="food" opposite @add="$emit('add:food', Number(removingSpaces(food)))" />
     </div>
-    <InfoField v-if="userFood > 0" opposite label="Витрати на харчування:" :value="userFood" />
+    <InfoField v-if="userFood > 0" labelClasses="text-opposite" label="Витрати на харчування:" :value="userFood" />
 
     <div v-if="userClothes === 0" class="flex items-center gap-3">
         <Input v-model:value="clothes" id="food" placeholder="Витрати на одяг" />
         <Add :value="clothes" opposite @add="$emit('add:clothes', Number(removingSpaces(clothes)))" />
     </div>
-    <InfoField v-if="userClothes > 0" opposite label="Витрати на одяг:" :value="userClothes" />
+    <InfoField v-if="userClothes > 0" labelClasses="text-opposite" label="Витрати на одяг:" :value="userClothes" />
 
     <div v-if="userFare === 0" class="flex items-center gap-3">
         <Input v-model:value="fare" id="food" placeholder="Витрати на проїзд" />
@@ -32,10 +32,10 @@
     </div>
     <InfoField
         v-if="userFare > 0"
+        labelClasses="text-opposite"
         :value="userFare"
         label="Витрати на проїзд:"
         editable
-        opposite
         @edit="$emit('edit:fare')"
     />
 
@@ -43,7 +43,7 @@
         <Input v-model:value="phone" id="food" placeholder="Витрати на телефонні розмови" />
         <Add :value="phone" opposite @add="$emit('add:phone', Number(removingSpaces(phone)))" />
     </div>
-    <InfoField v-if="userPhone > 0" :value="userPhone" label="Витрати на телефонні розмови:" opposite />
+    <InfoField v-if="userPhone > 0" labelClasses="text-opposite" :value="userPhone" label="Витрати на телефонні розмови:" />
 </template>
 
 <script setup>

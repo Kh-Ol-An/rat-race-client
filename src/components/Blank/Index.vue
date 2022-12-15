@@ -13,9 +13,12 @@
             <Transaction @decrement="decrement" @increment="increment" />
         </div>
 
+        <InfoField wrapClasses="mx-auto" labelClasses="text-lg font-bold text-primary" label="Грошовий потік:" :value="cashFlow" getting @get="getCashFlow" />
+
         <div class="grid grid-cols-2 gap-4">
             <div class="flex flex-col gap-4">
-                <InfoField opposite label="Борги:" :value="debt" />
+                <InfoField labelClasses="text-opposite" label="Борги:" :value="debt" />
+                <InfoField labelClasses="text-opposite" label="Загальні витрати:" :value="expenses" />
 
                 <!-- Витрати -->
                 <Costs
@@ -63,15 +66,10 @@
             </div>
 
             <div class="flex flex-col gap-4">
-                <InfoField label="Готівка:" :value="cash" />
-                <InfoField label="Активний дохід:" :value="user.salary" />
-                <InfoField label="Пасивний дохід:" :value="passiveIncome" />
-                <InfoField label="Загальний дохід:" :value="income" />
-                <InfoField opposite label="Загальні витрати:" :value="expenses" />
-                <InfoField label="Грошовий потік:" :value="cashFlow" getting @get="getCashFlow" />
+                <InfoIncomes :balance="balance" :userProp="user" />
 
                 <!-- Доходи -->
-                <Income
+                <Incomes
                     :userSalary="user.salary"
                     :small="user.business.small"
                     :middle="user.business.middle"
@@ -138,7 +136,8 @@ import Riches from './Riches.vue';
 import WhimsAndFancies from './WhimsAndFancies.vue';
 import FamilyStatus from './FamilyStatus.vue';
 import Credits from './Credits.vue';
-import Income from './Income.vue';
+import InfoIncomes from './InfoIncomes.vue';
+import Incomes from './Incomes.vue';
 import Shares from './Shares.vue';
 import InfoField from './InfoField.vue';
 import ResetIcon from '../icons/ResetIcon.vue';
@@ -227,21 +226,9 @@ const addCredit = (id, name, payment, quantity) =>
     user.credits.push({ id, name, body: payment * quantity, payment, quantity });
 
 // ACTIVE
-const cash = computed(() => balance.value >= 0 ? balance.value : 0);
-const passiveIncome = computed(() => {
-    let sum = 0;
-    user.business.small.map(business => sum += business.value);
-    user.business.middle.map(business => sum += business.value);
-    user.business.big.map(business => sum += business.value);
-    user.business.corrupt.map(business => sum += business.value);
-    return sum;
-});
-const income = computed(() => {
-    return user.salary + passiveIncome.value;
-});
-const cashFlow = computed(() => {
-    return income.value - expenses.value;
-});
+// const cashFlow = computed(() => {
+//     return income.value - expenses.value;
+// });
 const getCashFlow = () => balance.value += cashFlow.value;
 
 const addSalary = (salary) => user.salary = salary;

@@ -1,14 +1,14 @@
 <template>
-    <div class="flex items-center gap-2">
-        <span :class="[opposite ? 'text-opposite' : 'text-additional']">
+    <div :class="['flex items-center', wrapClasses]">
+        <span :class="labelClasses">
             {{ label }}
         </span>
-        <span class="text-slate-800">
+        <span class="ml-2 text-slate-800">
             {{ typeof value === 'number' ? addingSpaces(value) : value }}
         </span>
         <button
             v-if="editable"
-            class="outline-0"
+            class="ml-2 outline-0"
             type="button"
             title="Редагувати"
             @click="$emit('edit')"
@@ -17,12 +17,12 @@
         </button>
         <button
             v-if="getting"
-            class="outline-0"
+            class="ml-4 outline-0"
             type="button"
             title="Отримати"
             @click="$emit('get')"
         >
-            <MoneyIcon width="20px" height="20px" />
+            <MoneyIcon width="30px" height="30px" />
         </button>
     </div>
 </template>
@@ -33,9 +33,13 @@ import MoneyIcon from '../icons/MoneyIcon.vue';
 import { addingSpaces } from '../../helpers/formating-values.js';
 
 defineProps({
-    opposite: {
-        type: Boolean,
-        default: false,
+    wrapClasses: {
+        type: String,
+        default: '',
+    },
+    labelClasses: {
+        type: String,
+        default: '',
     },
     label: {
         type: String,

@@ -8,6 +8,7 @@
     </div>
     <InfoField
         v-if="userSalary > 0"
+        labelClasses="text-additional"
         label="Зарплата:"
         :value="userSalary"
         editable
