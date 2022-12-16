@@ -34,13 +34,16 @@
             </span>
         </li>
         <List
-            v-for="{id, worth, value} in user.business.small"
+            v-for="({ id, worth, value }, idx) in user.business.small"
             :key="id"
             :id="id"
             subType="small"
             :worth="worth"
             :value="value"
+            :idx="idx"
+            :listLength="user.business.small.length"
             @edit="editBusiness"
+            @delete="deleteBusiness('small', id)"
         />
     </ul>
 
@@ -63,13 +66,16 @@
             </span>
         </li>
         <List
-            v-for="{id, worth, value} in user.business.middle"
+            v-for="({ id, worth, value }, idx)  in user.business.middle"
             :key="id"
             :id="id"
             subType="middle"
             :worth="worth"
             :value="value"
+            :idx="idx"
+            :listLength="user.business.middle.length"
             @edit="editBusiness"
+            @delete="deleteBusiness('middle', id)"
         />
     </ul>
 
@@ -92,13 +98,16 @@
             </span>
         </li>
         <List
-            v-for="{id, worth, value} in user.business.big"
+            v-for="({ id, worth, value }, idx)  in user.business.big"
             :key="id"
             :id="id"
             subType="big"
             :worth="worth"
             :value="value"
+            :idx="idx"
+            :listLength="user.business.big.length"
             @edit="editBusiness"
+            @delete="deleteBusiness('big', id)"
         />
     </ul>
 
@@ -121,13 +130,16 @@
             </span>
         </li>
         <List
-            v-for="{id, worth, value} in user.business.corrupt"
+            v-for="({ id, worth, value }, idx) in user.business.corrupt"
             :key="id"
             :id="id"
             subType="corrupt"
             :worth="worth"
             :value="value"
+            :idx="idx"
+            :listLength="user.business.corrupt.length"
             @edit="editBusiness"
+            @delete="deleteBusiness('corrupt', id)"
         />
     </ul>
 </template>
@@ -156,4 +168,5 @@ const salary = ref('');
 
 const addBusiness = (type, subType, id, worth, value) => emit('add:business', type, subType, id, worth, value);
 const editBusiness = (subType, id, value) => emit('edit:business', subType, id, value);
+const deleteBusiness = (subType, id) => emit('delete:business', subType, id);
 </script>

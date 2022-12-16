@@ -1,6 +1,13 @@
 <template>
     <button
-        class="py-2 px-24 shadow hover:shadow-lg rounded-md bg-opposite text-xl text-white font-bold leading-none transition-all duration-300"
+        class="
+            py-2 px-24
+            shadow hover:shadow-lg
+            rounded-md
+            bg-opposite
+            text-xl text-white font-bold leading-none
+            transition-all duration-300
+        "
         type="button"
         title="Заплатити"
         @click="decrement"
@@ -9,7 +16,14 @@
     </button>
     <Input v-model:value="transaction" id="transaction" placeholder="Транзакція" />
     <button
-        class="py-2 px-24 shadow hover:shadow-lg rounded-md bg-secondary  text-xl text-white font-bold leading-none transition-all duration-300"
+        class="
+            py-2 px-24
+            shadow hover:shadow-lg
+            rounded-md
+            bg-secondary
+            text-xl text-white font-bold leading-none
+            transition-all duration-300
+        "
         type="button"
         title="Отримати"
         @click="increment"

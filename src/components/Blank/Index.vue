@@ -67,6 +67,7 @@
                     @edit:salary="editSalary"
                     @add:business="addBusiness"
                     @edit:business="editBusiness"
+                    @delete:business="deleteBusiness"
                 />
 
                 <!-- Акції -->
@@ -197,6 +198,10 @@ const editSalary = () => user.salary = 0;
 const addBusiness = (type, subType, id, worth, value) => user[type][subType].push({ id, worth, value });
 const editBusiness = (subType, id, value) =>
     user.business[subType].find(business => business.id === id && (business.value = value));
+const deleteBusiness = (subType, id) => {
+    const removableIndex = user.business[subType].findIndex(business => business.id === id);
+    removableIndex !== -1 && user.business[subType].splice(removableIndex, 1);
+};
 
 const addShares = (type, subType, id, worth, value) =>
     user[type][subType].push({ id, worth, value, cost: worth * value });

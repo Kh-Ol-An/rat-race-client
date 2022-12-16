@@ -1,6 +1,6 @@
 <template>
     <li :class="[
-        'grid items-center gap-2',
+        'relative pr-8 grid items-center gap-2',
         cost ? 'grid-cols-3' : 'grid-cols-2'
     ]">
         <span class="text-silver-800 whitespace-nowrap">
@@ -42,6 +42,15 @@
         <span v-if="cost" class="text-silver-800 whitespace-nowrap">
             {{ addingSpaces(cost) }}
         </span>
+        <button
+            v-if="idx === listLength - 1"
+            class="absolute top-1/2 right-0 -translate-y-1/2 rotate-45 px-2 text-3xl text-opposite font-bold leading-none"
+            type="button"
+            title="Банкротство"
+            @click="$emit('delete')"
+        >
+            &#43;
+        </button>
     </li>
 </template>
 
@@ -72,6 +81,14 @@ const props = defineProps({
     cost: {
         type: Number,
         default: null,
+    },
+    idx: {
+        type: Number,
+        required: true,
+    },
+    listLength: {
+        type: Number,
+        required: true,
     },
 });
 
