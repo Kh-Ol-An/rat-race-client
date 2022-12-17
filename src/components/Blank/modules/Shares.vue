@@ -6,29 +6,20 @@
         label="GC"
         type="shares"
         subType="gc"
-        placeholderWorth="Вартість"
+        placeholderWorth="Ціна"
         placeholderValue="Кількість"
         @add="add"
     />
     <ul v-if="user.shares.gc.length > 0" class="flex flex-col gap-2">
-        <li class="grid grid-cols-3 gap-2 border-b-2 border-b-silver-900 text-secondary font-bold">
-            <span>
-                Ціна
-            </span>
-            <span>
-                Кількість
-            </span>
-            <span>
-                Вартість
-            </span>
-        </li>
+        <AssetHead firstTitle="Ціна" secondTitle="Кількість" thirdTitle="Вартість" />
         <List
-            v-for="{id, worth, value, cost} in user.shares.gc"
+            v-for="{id, price, quantity, cost} in user.shares.gc"
             :key="id"
-            :worth="worth"
-            :value="value"
-            :cost="cost"
+            :firstValue="price"
+            :secondValue="quantity"
+            :thirdValue="cost"
         />
+        <AssetTotal :userShare="user.shares.gc" />
     </ul>
 
     <!-- ЩУН -->
@@ -36,29 +27,20 @@
         label="ЩУН"
         type="shares"
         subType="shchun"
-        placeholderWorth="Вартість"
+        placeholderWorth="Ціна"
         placeholderValue="Кількість"
         @add="add"
     />
     <ul v-if="user.shares.shchun.length > 0" class="flex flex-col gap-2">
-        <li class="grid grid-cols-3 gap-2 border-b-2 border-b-silver-900 text-secondary font-bold">
-            <span>
-                Ціна
-            </span>
-            <span>
-                Кількість
-            </span>
-            <span>
-                Вартість
-            </span>
-        </li>
+        <AssetHead firstTitle="Ціна" secondTitle="Кількість" thirdTitle="Вартість" />
         <List
-            v-for="{id, worth, value, cost} in user.shares.shchun"
+            v-for="{id, price, quantity, cost} in user.shares.shchun"
             :key="id"
-            :worth="worth"
-            :value="value"
-            :cost="cost"
+            :firstValue="price"
+            :secondValue="quantity"
+            :thirdValue="cost"
         />
+        <AssetTotal :userShare="user.shares.shchun" />
     </ul>
 
     <!-- TO -->
@@ -66,29 +48,20 @@
         label="TO"
         type="shares"
         subType="to"
-        placeholderWorth="Вартість"
+        placeholderWorth="Ціна"
         placeholderValue="Кількість"
         @add="add"
     />
     <ul v-if="user.shares.to.length > 0" class="flex flex-col gap-2">
-        <li class="grid grid-cols-3 gap-2 border-b-2 border-b-silver-900 text-secondary font-bold">
-            <span>
-                Ціна
-            </span>
-            <span>
-                Кількість
-            </span>
-            <span>
-                Вартість
-            </span>
-        </li>
+        <AssetHead firstTitle="Ціна" secondTitle="Кількість" thirdTitle="Вартість" />
         <List
-            v-for="{id, worth, value, cost} in user.shares.to"
+            v-for="{id, price, quantity, cost} in user.shares.to"
             :key="id"
-            :worth="worth"
-            :value="value"
-            :cost="cost"
+            :firstValue="price"
+            :secondValue="quantity"
+            :thirdValue="cost"
         />
+        <AssetTotal :userShare="user.shares.to" />
     </ul>
 
     <!-- CST -->
@@ -96,36 +69,29 @@
         label="CST"
         type="shares"
         subType="cst"
-        placeholderWorth="Вартість"
+        placeholderWorth="Ціна"
         placeholderValue="Кількість"
         @add="add"
     />
     <ul v-if="user.shares.cst.length > 0" class="flex flex-col gap-2">
-        <li class="grid grid-cols-3 gap-2 border-b-2 border-b-silver-900 text-secondary font-bold">
-            <span>
-                Ціна
-            </span>
-            <span>
-                Кількість
-            </span>
-            <span>
-                Вартість
-            </span>
-        </li>
+        <AssetHead firstTitle="Ціна" secondTitle="Кількість" thirdTitle="Вартість" />
         <List
-            v-for="{id, worth, value, cost} in user.shares.cst"
+            v-for="{id, price, quantity, cost} in user.shares.cst"
             :key="id"
-            :worth="worth"
-            :value="value"
-            :cost="cost"
+            :firstValue="price"
+            :secondValue="quantity"
+            :thirdValue="cost"
         />
+        <AssetTotal :userShare="user.shares.cst" />
     </ul>
 </template>
 
 <script setup>
 import { toRef } from "vue";
 import InputField from '../plugins/InputField.vue';
+import AssetHead from '../plugins/AssetHead.vue';
 import List from '../plugins/List.vue';
+import AssetTotal from '../plugins/AssetTotal.vue';
 
 const props = defineProps({
     userProp: {
@@ -138,5 +104,5 @@ const user = toRef(props, 'userProp');
 
 const emit = defineEmits([ 'add' ]);
 
-const add = (subType, id, worth, value) => emit('add', subType, id, worth, value);
+const add = (subType, id, firstValue, secondValue) => emit('add', subType, id, firstValue, secondValue);
 </script>

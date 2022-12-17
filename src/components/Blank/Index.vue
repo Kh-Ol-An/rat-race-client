@@ -75,7 +75,7 @@
             </div>
         </div>
 
-        <UserActions />
+        <UserActions :isSavedUser="!!savedUser" />
     </form>
 </template>
 
@@ -95,8 +95,8 @@ import Incomes from './modules/Incomes.vue';
 import Shares from './modules/Shares.vue';
 import UserActions from './modules/UserActions.vue';
 
-const savedUser = localStorage.getItem('user');
-const user = savedUser ? reactive(JSON.parse(savedUser)) : reactive({
+const savedUser = ref(localStorage.getItem('user'));
+const user = savedUser.value ? reactive(JSON.parse(savedUser.value)) : reactive({
     name: '',
     profession: '',
     rent: 0,
@@ -181,10 +181,10 @@ const addCredit = (id, name, payment, quantity) =>
 const cash = computed(() => balance.value >= 0 ? balance.value : 0);
 const passiveIncome = computed(() => {
     let sum = 0;
-    user.business.small.map(business => sum += business.value);
-    user.business.middle.map(business => sum += business.value);
-    user.business.big.map(business => sum += business.value);
-    user.business.corrupt.map(business => sum += business.value);
+    user.business.small.map(business => sum += business.income);
+    user.business.middle.map(business => sum += business.income);
+    user.business.big.map(business => sum += business.income);
+    user.business.corrupt.map(business => sum += business.income);
     return sum;
 });
 const income = computed(() => user.salary + passiveIncome.value);
@@ -196,12 +196,12 @@ const getCashFlow = () => balance.value += cashFlow.value;
 
 const addSalary = (salary) => user.salary = salary;
 const editSalary = () => user.salary = 0;
-const addBusiness = (subType, id, worth, value) => {
-    user.business[subType].push({id, worth, value});
+const addBusiness = (subType, id, price, income) => {
+    user.business[subType].push({id, price, income});
     user.business.last.push(subType);
 };
-const editBusiness = (subType, id, value) => {
-    user.business[subType].find(business => business.id === id && (business.value = value))
+const editBusiness = (subType, id, income) => {
+    user.business[subType].find(business => business.id === id && (business.income = income))
 };
 const deleteBusiness = (subType, id) => {
     const removableIndex = user.business[subType].findIndex(business => business.id === id);
@@ -209,10 +209,12 @@ const deleteBusiness = (subType, id) => {
     user.business.last.pop();
 };
 
-const addShares = (subType, id, worth, value) => user.shares[subType].push({ id, worth, value, cost: worth * value });
+const addShares = (subType, id, price, quantity) =>
+    user.shares[subType].push({ id, price, quantity, cost: price * quantity });
 
 const submit = () => {
   console.log('user: ', user);
-  localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('user', JSON.stringify(user));
+    savedUser.value = localStorage.getItem('user');
 };
 </script>

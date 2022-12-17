@@ -1,5 +1,6 @@
 <template>
     <button
+        v-if="isSavedUser"
         class="
             fixed left-10 bottom-10
             p-4
@@ -48,6 +49,13 @@ import { ref } from 'vue';
 import ConfirmationModal from '../plugins/ConfirmationModal.vue';
 import ResetIcon from '../../icons/ResetIcon.vue';
 import SaveIcon from '../../icons/SaveIcon.vue';
+
+defineProps({
+    isSavedUser: {
+        type: Boolean,
+        required: true,
+    },
+});
 
 const showModal = ref(false);
 

@@ -16,7 +16,7 @@
                 Термін
             </span>
         </li>
-        <InfoCredit
+        <CreditInfo
             v-for="{ id, name, body, payment, quantity } in credits"
             :key="id"
             :name="name"
@@ -29,7 +29,7 @@
 
 <script setup>
 import InputCredit from '../plugins/InputCredit.vue';
-import InfoCredit from '../plugins/InfoCredit.vue';
+import CreditInfo from '../plugins/CreditInfo.vue';
 
 defineProps({
     credits: {

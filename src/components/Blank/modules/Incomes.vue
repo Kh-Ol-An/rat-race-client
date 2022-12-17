@@ -4,7 +4,7 @@
     <!-- Зарплата -->
     <div v-if="user.salary === 0" class="flex items-center gap-3">
         <Input v-model:value="salary" id="salary" placeholder="Зарплата" />
-        <Add :value="salary" @add="$emit('add:salary', Number(removingSpaces(salary)))" />
+        <Add :firstValue="salary" @add="$emit('add:salary', Number(removingSpaces(salary)))" />
     </div>
     <InfoField
         v-if="user.salary > 0"
@@ -25,21 +25,14 @@
         @add="addBusiness"
     />
     <ul v-if="user.business.small.length > 0" class="flex flex-col gap-2">
-        <li class="grid grid-cols-2 gap-2 border-b-2 border-b-silver-900 text-secondary font-bold">
-            <span>
-                Вартість
-            </span>
-            <span>
-                Доходи
-            </span>
-        </li>
+        <AssetHead firstTitle="Вартість" secondTitle="Доходи" />
         <List
-            v-for="({ id, worth, value }, idx) in user.business.small"
+            v-for="({ id, price, income }, idx) in user.business.small"
             :key="id"
             :id="id"
             subType="small"
-            :worth="worth"
-            :value="value"
+            :firstValue="price"
+            :secondValue="income"
             :idx="idx"
             :listLength="user.business.small.length"
             :lastBusiness="user.business.last"
@@ -58,21 +51,14 @@
         @add="addBusiness"
     />
     <ul v-if="user.business.middle.length > 0" class="flex flex-col gap-2">
-        <li class="grid grid-cols-2 gap-2 border-b-2 border-b-silver-900 text-secondary font-bold">
-            <span>
-                Вартість
-            </span>
-            <span>
-                Доходи
-            </span>
-        </li>
+        <AssetHead firstTitle="Вартість" secondTitle="Доходи" />
         <List
-            v-for="({ id, worth, value }, idx)  in user.business.middle"
+            v-for="({ id, price, income }, idx)  in user.business.middle"
             :key="id"
             :id="id"
             subType="middle"
-            :worth="worth"
-            :value="value"
+            :firstValue="price"
+            :secondValue="income"
             :idx="idx"
             :listLength="user.business.middle.length"
             :lastBusiness="user.business.last"
@@ -91,21 +77,14 @@
         @add="addBusiness"
     />
     <ul v-if="user.business.big.length > 0" class="flex flex-col gap-2">
-        <li class="grid grid-cols-2 gap-2 border-b-2 border-b-silver-900 text-secondary font-bold">
-            <span>
-                Вартість
-            </span>
-            <span>
-                Доходи
-            </span>
-        </li>
+        <AssetHead firstTitle="Вартість" secondTitle="Доходи" />
         <List
-            v-for="({ id, worth, value }, idx)  in user.business.big"
+            v-for="({ id, price, income }, idx)  in user.business.big"
             :key="id"
             :id="id"
             subType="big"
-            :worth="worth"
-            :value="value"
+            :firstValue="price"
+            :secondValue="income"
             :idx="idx"
             :listLength="user.business.big.length"
             :lastBusiness="user.business.last"
@@ -124,21 +103,14 @@
         @add="addBusiness"
     />
     <ul v-if="user.business.corrupt.length > 0" class="flex flex-col gap-2">
-        <li class="grid grid-cols-2 gap-2 border-b-2 border-b-silver-900 text-secondary font-bold">
-            <span>
-                Вартість
-            </span>
-            <span>
-                Доходи
-            </span>
-        </li>
+        <AssetHead firstTitle="Вартість" secondTitle="Доходи" />
         <List
-            v-for="({ id, worth, value }, idx) in user.business.corrupt"
+            v-for="({ id, price, income }, idx) in user.business.corrupt"
             :key="id"
             :id="id"
             subType="corrupt"
-            :worth="worth"
-            :value="value"
+            :firstValue="price"
+            :secondValue="income"
             :idx="idx"
             :listLength="user.business.corrupt.length"
             :lastBusiness="user.business.last"
@@ -154,6 +126,7 @@ import Input from '../plugins/Input.vue';
 import Add from '../plugins/Add.vue';
 import InfoField from '../plugins/InfoField.vue';
 import InputField from '../plugins/InputField.vue';
+import AssetHead from '../plugins/AssetHead.vue';
 import List from '../plugins/List.vue';
 import { removingSpaces } from "../../../helpers/formating-values.js";
 
@@ -170,7 +143,7 @@ const emit = defineEmits([ 'add:business', 'edit:business' ]);
 
 const salary = ref('');
 
-const addBusiness = (subType, id, worth, value) => emit('add:business', subType, id, worth, value);
-const editBusiness = (subType, id, value) => emit('edit:business', subType, id, value);
+const addBusiness = (subType, id, price, income) => emit('add:business', subType, id, price, income);
+const editBusiness = (subType, id, income) => emit('edit:business', subType, id, income);
 const deleteBusiness = (subType, id) => emit('delete:business', subType, id);
 </script>

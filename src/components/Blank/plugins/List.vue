@@ -1,13 +1,13 @@
 <template>
     <li :class="[
-        'relative pr-8 grid items-center gap-2',
-        cost ? 'grid-cols-3' : 'grid-cols-2'
+        'relative grid items-center gap-2',
+        thirdValue ? 'grid-cols-3' : 'grid-cols-2'
     ]">
-        <span class="text-silver-800 whitespace-nowrap">
-            {{ addingSpaces(worth) }}
+        <span class="text-silver-800 text-center whitespace-nowrap">
+            {{ addingSpaces(firstValue) }}
         </span>
-        <div class="flex items-center gap-3">
-            <span v-if="editable" class="text-silver-800 whitespace-nowrap">
+        <div class="mx-auto pr-8 flex items-center gap-3">
+            <span v-if="editable" class="text-silver-800 text-center whitespace-nowrap">
                 {{ editValue }}
             </span>
             <Input
@@ -39,8 +39,8 @@
                 </button>
             </div>
         </div>
-        <span v-if="cost" class="text-silver-800 whitespace-nowrap">
-            {{ addingSpaces(cost) }}
+        <span v-if="thirdValue" class="pr-8 text-silver-800 text-center whitespace-nowrap">
+            {{ addingSpaces(thirdValue) }}
         </span>
         <button
             v-if="
@@ -57,16 +57,23 @@
             "
             type="button"
             title="Банкротство"
-            @click="$emit('delete')"
+            @click="showModal = true"
         >
             &#43;
         </button>
+        <ConfirmationModal
+            :show="showModal"
+            text="Ти впевнений шо хочешь видалити останній відкритий бізнес?"
+            @confirm="$emit('delete')"
+            @cansel="showModal = false"
+        />
     </li>
 </template>
 
 <script setup>
 import {computed, ref} from 'vue';
 import Input from './Input.vue';
+import ConfirmationModal from './ConfirmationModal.vue';
 import EditIcon from '../../icons/EditIcon.vue';
 import SaveIcon from '../../icons/SaveIcon.vue';
 import { removingSpaces, addingSpaces } from '../../../helpers/formating-values.js';
@@ -80,15 +87,15 @@ const props = defineProps({
         type: String,
         default: '',
     },
-    worth: {
+    firstValue: {
         type: Number,
         required: true,
     },
-    value: {
+    secondValue: {
         type: Number,
         required: true,
     },
-    cost: {
+    thirdValue: {
         type: Number,
         default: null,
     },
@@ -109,7 +116,7 @@ const props = defineProps({
 const emit = defineEmits([ 'edit' ]);
 
 const editable = ref(true);
-const editValue = ref(addingSpaces(props.value));
+const editValue = ref(addingSpaces(props.secondValue));
 
 const disabled = computed(() => editValue.value.length === 0);
 
@@ -117,4 +124,6 @@ const save = () => {
     editable.value = !editable.value;
     emit('edit', props.subType, props.id, Number(removingSpaces(editValue.value)));
 };
+
+const showModal = ref(false);
 </script>

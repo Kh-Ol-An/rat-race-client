@@ -2,9 +2,19 @@
     <div class="flex flex-col gap-2">
         <span class="text-sm">{{ label }}</span>
         <div class="flex items-center gap-3">
-            <Input :id="`${subType}-${type}-value`" :placeholder="placeholderWorth" smallLabel v-model:value="worth" />
-            <Input :id="`${subType}-${type}-income`" :placeholder="placeholderValue" smallLabel v-model:value="value" />
-            <Add :value="worth" :secondValue="value" @add="add" />
+            <Input
+                :id="`${subType}-${type}-value`"
+                :placeholder="placeholderWorth"
+                smallLabel
+                v-model:value="firstValue"
+            />
+            <Input
+                :id="`${subType}-${type}-income`"
+                :placeholder="placeholderValue"
+                smallLabel
+                v-model:value="secondValue"
+            />
+            <Add :firstValue="firstValue" :secondValue="secondValue" @add="add" />
         </div>
     </div>
 </template>
@@ -40,18 +50,18 @@ const props = defineProps({
 
 const emit = defineEmits(['add']);
 
-const worth = ref('');
-const value = ref('');
+const firstValue = ref('');
+const secondValue = ref('');
 
 const add = () => {
     emit(
         'add',
         props.subType,
         new Date().valueOf(),
-        Number(removingSpaces(worth.value)),
-        Number(removingSpaces(value.value)),
+        Number(removingSpaces(firstValue.value)),
+        Number(removingSpaces(secondValue.value)),
     );
-    worth.value = '';
-    value.value = '';
+    firstValue.value = '';
+    secondValue.value = '';
 };
 </script>

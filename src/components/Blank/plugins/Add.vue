@@ -19,7 +19,7 @@ const props = defineProps({
         type: String,
         default: 'true',
     },
-    value: {
+    firstValue: {
         type: String,
         required: true,
     },
@@ -34,5 +34,5 @@ const props = defineProps({
 });
 
 const disabled = computed(() =>
-    props.name.length === 0 || props.value.length === 0 || props.secondValue.length === 0);
+    props.name.length === 0 || props.firstValue.length === 0 || props.secondValue.length === 0);
 </script>
