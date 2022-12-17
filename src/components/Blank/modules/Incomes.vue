@@ -42,6 +42,7 @@
             :value="value"
             :idx="idx"
             :listLength="user.business.small.length"
+            :lastBusiness="user.business.last"
             @edit="editBusiness"
             @delete="deleteBusiness('small', id)"
         />
@@ -74,6 +75,7 @@
             :value="value"
             :idx="idx"
             :listLength="user.business.middle.length"
+            :lastBusiness="user.business.last"
             @edit="editBusiness"
             @delete="deleteBusiness('middle', id)"
         />
@@ -106,6 +108,7 @@
             :value="value"
             :idx="idx"
             :listLength="user.business.big.length"
+            :lastBusiness="user.business.last"
             @edit="editBusiness"
             @delete="deleteBusiness('big', id)"
         />
@@ -138,6 +141,7 @@
             :value="value"
             :idx="idx"
             :listLength="user.business.corrupt.length"
+            :lastBusiness="user.business.last"
             @edit="editBusiness"
             @delete="deleteBusiness('corrupt', id)"
         />
@@ -166,7 +170,7 @@ const emit = defineEmits([ 'add:business', 'edit:business' ]);
 
 const salary = ref('');
 
-const addBusiness = (type, subType, id, worth, value) => emit('add:business', type, subType, id, worth, value);
+const addBusiness = (subType, id, worth, value) => emit('add:business', subType, id, worth, value);
 const editBusiness = (subType, id, value) => emit('edit:business', subType, id, value);
 const deleteBusiness = (subType, id) => emit('delete:business', subType, id);
 </script>

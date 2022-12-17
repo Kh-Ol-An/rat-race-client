@@ -43,8 +43,18 @@
             {{ addingSpaces(cost) }}
         </span>
         <button
-            v-if="idx === listLength - 1"
-            class="absolute top-1/2 right-0 -translate-y-1/2 rotate-45 px-2 text-3xl text-opposite font-bold leading-none"
+            v-if="
+                idx === listLength - 1 &&
+                lastBusiness.length > 0 &&
+                lastBusiness[lastBusiness.length - 1] === subType
+            "
+            class="
+                absolute
+                top-1/2 right-0
+                -translate-y-1/2 rotate-45
+                px-2
+                text-3xl text-opposite font-bold leading-none
+            "
             type="button"
             title="Банкротство"
             @click="$emit('delete')"
@@ -84,11 +94,15 @@ const props = defineProps({
     },
     idx: {
         type: Number,
-        required: true,
+        default: null,
     },
     listLength: {
         type: Number,
-        required: true,
+        default: null,
+    },
+    lastBusiness: {
+        type: Array,
+        default: [],
     },
 });
 

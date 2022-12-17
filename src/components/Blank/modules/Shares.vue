@@ -138,5 +138,5 @@ const user = toRef(props, 'userProp');
 
 const emit = defineEmits([ 'add' ]);
 
-const add = (type, subType, id, worth, value) => emit('add', type, subType, id, worth, value);
+const add = (subType, id, worth, value) => emit('add', subType, id, worth, value);
 </script>

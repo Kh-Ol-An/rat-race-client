@@ -119,6 +119,7 @@ const user = savedUser ? reactive(JSON.parse(savedUser)) : reactive({
         middle: [],
         big: [],
         corrupt: [],
+        last: [],
     },
     shares: {
         gc: [],
@@ -195,16 +196,20 @@ const getCashFlow = () => balance.value += cashFlow.value;
 
 const addSalary = (salary) => user.salary = salary;
 const editSalary = () => user.salary = 0;
-const addBusiness = (type, subType, id, worth, value) => user[type][subType].push({ id, worth, value });
-const editBusiness = (subType, id, value) =>
-    user.business[subType].find(business => business.id === id && (business.value = value));
+const addBusiness = (subType, id, worth, value) => {
+    user.business[subType].push({id, worth, value});
+    user.business.last.push(subType);
+};
+const editBusiness = (subType, id, value) => {
+    user.business[subType].find(business => business.id === id && (business.value = value))
+};
 const deleteBusiness = (subType, id) => {
     const removableIndex = user.business[subType].findIndex(business => business.id === id);
     removableIndex !== -1 && user.business[subType].splice(removableIndex, 1);
+    user.business.last.pop();
 };
 
-const addShares = (type, subType, id, worth, value) =>
-    user[type][subType].push({ id, worth, value, cost: worth * value });
+const addShares = (subType, id, worth, value) => user.shares[subType].push({ id, worth, value, cost: worth * value });
 
 const submit = () => {
   console.log('user: ', user);
