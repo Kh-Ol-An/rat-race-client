@@ -68,10 +68,11 @@
                     @add:business="addBusiness"
                     @edit:business="editBusiness"
                     @delete:business="deleteBusiness"
+                    @sell="sellBusiness"
                 />
 
                 <!-- Акції -->
-                <Shares :userProp="user" @add="addShares" />
+                <Shares :userProp="user" @add="addShares" @sell="sellShares" />
             </div>
         </div>
 
@@ -208,9 +209,17 @@ const deleteBusiness = (subType, id) => {
     removableIndex !== -1 && user.business[subType].splice(removableIndex, 1);
     user.business.last.pop();
 };
+const sellBusiness = subType => {
+    balance.value = user.business[subType].reduce((total, business) => total += business.price, balance.value);
+    user.business[subType] = [];
+};
 
 const addShares = (subType, id, price, quantity) =>
     user.shares[subType].push({ id, price, quantity, cost: price * quantity });
+const sellShares = subType => {
+    balance.value = user.shares[subType].reduce((total, share) => total += share.cost, balance.value);
+    user.shares[subType] = [];
+};
 
 const submit = () => {
   console.log('user: ', user);

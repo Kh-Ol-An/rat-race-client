@@ -11,7 +11,7 @@
         @add="add"
     />
     <ul v-if="user.shares.gc.length > 0" class="flex flex-col gap-2">
-        <AssetHead firstTitle="Ціна" secondTitle="Кількість" thirdTitle="Вартість" />
+        <AssetHead firstTitle="Ціна" secondTitle="Кількість" thirdTitle="Вартість" @sell="sell('gc')" />
         <List
             v-for="{id, price, quantity, cost} in user.shares.gc"
             :key="id"
@@ -32,7 +32,7 @@
         @add="add"
     />
     <ul v-if="user.shares.shchun.length > 0" class="flex flex-col gap-2">
-        <AssetHead firstTitle="Ціна" secondTitle="Кількість" thirdTitle="Вартість" />
+        <AssetHead firstTitle="Ціна" secondTitle="Кількість" thirdTitle="Вартість" @sell="sell('shchun')" />
         <List
             v-for="{id, price, quantity, cost} in user.shares.shchun"
             :key="id"
@@ -53,7 +53,7 @@
         @add="add"
     />
     <ul v-if="user.shares.to.length > 0" class="flex flex-col gap-2">
-        <AssetHead firstTitle="Ціна" secondTitle="Кількість" thirdTitle="Вартість" />
+        <AssetHead firstTitle="Ціна" secondTitle="Кількість" thirdTitle="Вартість" @sell="sell('to')" />
         <List
             v-for="{id, price, quantity, cost} in user.shares.to"
             :key="id"
@@ -74,7 +74,7 @@
         @add="add"
     />
     <ul v-if="user.shares.cst.length > 0" class="flex flex-col gap-2">
-        <AssetHead firstTitle="Ціна" secondTitle="Кількість" thirdTitle="Вартість" />
+        <AssetHead firstTitle="Ціна" secondTitle="Кількість" thirdTitle="Вартість" @sell="sell('cst')" />
         <List
             v-for="{id, price, quantity, cost} in user.shares.cst"
             :key="id"
@@ -102,7 +102,9 @@ const props = defineProps({
 
 const user = toRef(props, 'userProp');
 
-const emit = defineEmits([ 'add' ]);
+const emit = defineEmits([ 'add', 'sell' ]);
 
 const add = (subType, id, firstValue, secondValue) => emit('add', subType, id, firstValue, secondValue);
+
+const sell = subType => emit('sell', subType);
 </script>

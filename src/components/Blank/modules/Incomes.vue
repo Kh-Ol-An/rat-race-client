@@ -25,7 +25,7 @@
         @add="addBusiness"
     />
     <ul v-if="user.business.small.length > 0" class="flex flex-col gap-2">
-        <AssetHead firstTitle="Вартість" secondTitle="Доходи" />
+        <AssetHead firstTitle="Вартість" secondTitle="Доходи" @sell="sell('small')" />
         <List
             v-for="({ id, price, income }, idx) in user.business.small"
             :key="id"
@@ -51,7 +51,7 @@
         @add="addBusiness"
     />
     <ul v-if="user.business.middle.length > 0" class="flex flex-col gap-2">
-        <AssetHead firstTitle="Вартість" secondTitle="Доходи" />
+        <AssetHead firstTitle="Вартість" secondTitle="Доходи" @sell="sell('middle')" />
         <List
             v-for="({ id, price, income }, idx)  in user.business.middle"
             :key="id"
@@ -77,7 +77,7 @@
         @add="addBusiness"
     />
     <ul v-if="user.business.big.length > 0" class="flex flex-col gap-2">
-        <AssetHead firstTitle="Вартість" secondTitle="Доходи" />
+        <AssetHead firstTitle="Вартість" secondTitle="Доходи" @sell="sell('big')" />
         <List
             v-for="({ id, price, income }, idx)  in user.business.big"
             :key="id"
@@ -103,7 +103,7 @@
         @add="addBusiness"
     />
     <ul v-if="user.business.corrupt.length > 0" class="flex flex-col gap-2">
-        <AssetHead firstTitle="Вартість" secondTitle="Доходи" />
+        <AssetHead firstTitle="Вартість" secondTitle="Доходи" @sell="sell('corrupt')" />
         <List
             v-for="({ id, price, income }, idx) in user.business.corrupt"
             :key="id"
@@ -139,11 +139,12 @@ const props = defineProps({
 
 const user = toRef(props, 'userProp');
 
-const emit = defineEmits([ 'add:business', 'edit:business' ]);
+const emit = defineEmits([ 'add:business', 'edit:business', 'sell' ]);
 
 const salary = ref('');
 
 const addBusiness = (subType, id, price, income) => emit('add:business', subType, id, price, income);
 const editBusiness = (subType, id, income) => emit('edit:business', subType, id, income);
 const deleteBusiness = (subType, id) => emit('delete:business', subType, id);
+const sell = subType => emit('sell', subType);
 </script>

@@ -1,12 +1,15 @@
 <template>
-    <li v-if="userShare.length > 1" class="grid grid-cols-3 gap-2 border-t-2 border-b-silver-900 font-bold text-center">
+    <li
+        v-if="userShare.length > 1"
+        class="pr-20 grid grid-cols-3 gap-2 border-t-2 border-b-silver-900 font-bold text-center"
+    >
         <span>
             {{ addingSpaces(price) }}
         </span>
-        <span class="pr-8">
+        <span>
             {{ addingSpaces(quantity) }}
         </span>
-        <span class="pr-8">
+        <span>
             {{ addingSpaces(cost) }}
         </span>
     </li>

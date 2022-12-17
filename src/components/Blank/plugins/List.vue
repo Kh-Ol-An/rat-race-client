@@ -1,12 +1,12 @@
 <template>
     <li :class="[
-        'relative grid items-center gap-2',
+        'relative pr-20 grid items-center gap-2',
         thirdValue ? 'grid-cols-3' : 'grid-cols-2'
     ]">
         <span class="text-silver-800 text-center whitespace-nowrap">
             {{ addingSpaces(firstValue) }}
         </span>
-        <div class="mx-auto pr-8 flex items-center gap-3">
+        <div class="mx-auto flex items-center gap-3">
             <span v-if="editable" class="text-silver-800 text-center whitespace-nowrap">
                 {{ editValue }}
             </span>
@@ -39,7 +39,7 @@
                 </button>
             </div>
         </div>
-        <span v-if="thirdValue" class="pr-8 text-silver-800 text-center whitespace-nowrap">
+        <span v-if="thirdValue" class="text-silver-800 text-center whitespace-nowrap">
             {{ addingSpaces(thirdValue) }}
         </span>
         <button

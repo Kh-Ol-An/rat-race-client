@@ -1,21 +1,23 @@
 <template>
-    <button
-        v-if="isSavedUser"
-        class="
-            fixed left-10 bottom-10
-            p-4
-            shadow hover:shadow-lg
-            rounded-full
-            bg-opposite
-            outline-0
-            transition-all duration-300
-        "
-        type="button"
-        title="Почати спочатку"
-        @click="showModal = true"
-    >
-        <ResetIcon width="30px" height="30px" />
-    </button>
+    <transition>
+        <button
+            v-if="isSavedUser"
+            class="
+                fixed left-10 bottom-10
+                p-4
+                shadow hover:shadow-lg
+                rounded-full
+                bg-opposite
+                outline-0
+                transition-all duration-300
+            "
+            type="button"
+            title="Почати спочатку"
+            @click="showModal = true"
+        >
+            <ResetIcon width="30px" height="30px" />
+        </button>
+    </transition>
     <ConfirmationModal
         :show="showModal"
         text="
