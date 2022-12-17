@@ -1,10 +1,13 @@
 <template>
-    <form class="relative py-6 px-8 w-full max-w-5xl flex flex-col gap-4 shadow rounded-md" @submit.prevent="submit">
-        <div class="grid grid-cols-2 gap-4">
+    <form
+        class="relative md:mt-2 py-6 px-8 md:p-0 w-full max-w-5xl flex flex-col gap-4 shadow md:shadow-none rounded-md"
+        @submit.prevent="submit"
+    >
+        <div class="grid grid-cols-2 md:grid-cols-1 gap-4 md:gap-2">
             <UserIdentification :userProp="user" @add:name="addName" @add:profession="addProfession" />
         </div>
 
-        <div class="flex items-center gap-4">
+        <div class="flex items-center gap-4 md:gap-2">
             <Transaction @decrement="decrement" @increment="increment" />
         </div>
 
@@ -17,8 +20,8 @@
             @get="getCashFlow"
         />
 
-        <div class="grid grid-cols-2 gap-4">
-            <div class="flex flex-col gap-4">
+        <div class="grid grid-cols-2 md:grid-cols-1 gap-4">
+            <div class="flex flex-col gap-4 md:order-last">
                 <ExpenseInfo :debt="debt" :expenses="expenses" />
 
                 <!-- Витрати -->

@@ -1,7 +1,7 @@
 <template>
     <button
         class="
-            py-2 px-24
+            py-2 px-24 md:px-4
             shadow hover:shadow-lg
             rounded-md
             bg-opposite
@@ -17,7 +17,7 @@
     <Input v-model:value="transaction" id="transaction" placeholder="Транзакція" />
     <button
         class="
-            py-2 px-24
+            py-2 px-24 md:px-4
             shadow hover:shadow-lg
             rounded-md
             bg-secondary
