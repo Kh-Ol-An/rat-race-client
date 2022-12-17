@@ -11,10 +11,20 @@
         "
         type="button"
         title="Почати спочатку"
-        @click="reset"
+        @click="showModal = true"
     >
         <ResetIcon width="30px" height="30px" />
     </button>
+    <ConfirmationModal
+        :show="showModal"
+        text="
+            Якщо ти тицнешь 'Видалити', тебе вже нічого не врятує...
+            Усі ті циферки які ти так довго вводив, зникнуть.
+            І навіть самий головний розробник не зможе їх повернути.
+        "
+        @confirm="reset"
+        @cansel="showModal = false"
+    />
 
     <button
         class="
@@ -34,8 +44,12 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
+import ConfirmationModal from '../plugins/ConfirmationModal.vue';
 import ResetIcon from '../../icons/ResetIcon.vue';
 import SaveIcon from '../../icons/SaveIcon.vue';
+
+const showModal = ref(false);
 
 const reset = () => {
     localStorage.removeItem('user');

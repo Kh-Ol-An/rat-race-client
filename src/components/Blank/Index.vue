@@ -75,7 +75,7 @@
             </div>
         </div>
 
-        <Actions />
+        <UserActions />
     </form>
 </template>
 
@@ -93,7 +93,7 @@ import Credits from './modules/Credits.vue';
 import IncomeInfo from './modules/IncomeInfo.vue';
 import Incomes from './modules/Incomes.vue';
 import Shares from './modules/Shares.vue';
-import Actions from './modules/Actions.vue';
+import UserActions from './modules/UserActions.vue';
 
 const savedUser = localStorage.getItem('user');
 const user = savedUser ? reactive(JSON.parse(savedUser)) : reactive({
