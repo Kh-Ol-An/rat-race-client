@@ -21,7 +21,7 @@
         />
 
         <div class="grid grid-cols-2 md:grid-cols-1 gap-4">
-            <div class="flex flex-col gap-4 md:order-last">
+            <div class="flex flex-col gap-4 md:order-last md:gap-2">
                 <ExpenseInfo :debt="debt" :expenses="expenses" />
 
                 <!-- Витрати -->
@@ -60,7 +60,7 @@
                 <Credits :credits="user.credits" @add="addCredit" />
             </div>
 
-            <div class="flex flex-col gap-4">
+            <div class="flex flex-col gap-4 md:gap-2">
                 <IncomeInfo :cash="cash" :userSalary="user.salary" :passiveIncome="passiveIncome" :income="income" />
 
                 <!-- Доходи -->
