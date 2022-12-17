@@ -46,7 +46,6 @@ const value = ref('');
 const add = () => {
     emit(
         'add',
-        props.type,
         props.subType,
         new Date().valueOf(),
         Number(removingSpaces(worth.value)),
