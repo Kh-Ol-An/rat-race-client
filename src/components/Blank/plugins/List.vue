@@ -20,22 +20,23 @@
             <div v-if="id" class="flex items-center justify-center">
                 <button
                     v-if="editable"
-                    class="outline-0"
+                    :class="['outline-0', disabledEdit && 'cursor-not-allowed']"
                     type="button"
                     title="Редагувати"
+                    :disabled="disabledEdit"
                     @click="editable = !editable"
                 >
-                    <EditIcon width="16px" height="16px" />
+                    <EditIcon width="16px" height="16px" :color="disabledEdit ? 'fill-slate-300' : 'fill-secondary'" />
                 </button>
                 <button
                     v-else
-                    class="outline-0"
+                    :class="['outline-0', disabledSave && 'cursor-not-allowed']"
                     type="button"
                     title="Зберегти"
-                    :disabled="disabled"
+                    :disabled="disabledSave"
                     @click="save"
                 >
-                    <SaveIcon width="16px" height="16px" :color="disabled ? 'fill-slate-300' : 'fill-secondary'" />
+                    <SaveIcon width="16px" height="16px" :color="disabledSave ? 'fill-slate-300' : 'fill-secondary'" />
                 </button>
             </div>
         </div>
@@ -54,6 +55,7 @@
                 -translate-y-1/2 rotate-45
                 px-2
                 text-3xl text-opposite font-bold leading-none
+                outline-0
             "
             type="button"
             title="Банкротство"
@@ -111,6 +113,10 @@ const props = defineProps({
         type: Array,
         default: [],
     },
+    disabledEdit: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 const emit = defineEmits([ 'edit' ]);
@@ -118,7 +124,7 @@ const emit = defineEmits([ 'edit' ]);
 const editable = ref(true);
 const editValue = ref(addingSpaces(props.secondValue));
 
-const disabled = computed(() => editValue.value.length === 0);
+const disabledSave = computed(() => editValue.value.length === 0);
 
 const save = () => {
     editable.value = !editable.value;

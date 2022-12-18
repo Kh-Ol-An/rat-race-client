@@ -11,6 +11,7 @@
                     rotate-45
                     px-2
                     text-3xl text-slate-800 font-bold leading-none
+                    outline-0
                 "
                     type="button"
                     title="Банкротство"

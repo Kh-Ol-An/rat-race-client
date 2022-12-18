@@ -1,5 +1,8 @@
 <template>
-    <div class="flex flex-col gap-2">
+    <div :class="[
+        'flex flex-col gap-2',
+        disabled && 'pointer-events-none opacity-20',
+    ]">
         <span class="text-sm">{{ label }}</span>
         <div class="flex items-center gap-3">
             <Input
@@ -45,6 +48,10 @@ const props = defineProps({
     placeholderValue: {
         type: String,
         required: true,
+    },
+    disabled: {
+        type: Boolean,
+        default: false,
     },
 });
 

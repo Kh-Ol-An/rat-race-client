@@ -18,6 +18,7 @@
                 top-1/2 right-0
                 -translate-y-1/2
                 px-2
+                outline-0
             "
             type="button"
             title="Продати все"

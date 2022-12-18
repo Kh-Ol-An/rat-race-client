@@ -1,6 +1,6 @@
 <template>
     <button
-        class="outline-0"
+        :class="['outline-0', disabled && 'cursor-not-allowed']"
         type="button"
         title="Додати"
         :disabled="disabled"

@@ -6,6 +6,7 @@
             rounded-md
             bg-opposite
             text-xl text-white font-bold leading-none
+            outline-0
             transition-all duration-300
         "
         type="button"
@@ -22,6 +23,7 @@
             rounded-md
             bg-secondary
             text-xl text-white font-bold leading-none
+            outline-0
             transition-all duration-300
         "
         type="button"

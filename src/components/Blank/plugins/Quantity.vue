@@ -8,7 +8,7 @@
             <div class="flex items-center gap-2">
                 <button
                     :class="[
-                        'p-2 font-bold leading-none',
+                        'p-2 font-bold leading-none outline-0',
                         disabledDecrement ? 'text-slate-300' : 'text-slate-800'
                     ]"
                     type="button"
@@ -22,7 +22,7 @@
                 </span>
                 <button
                     :class="[
-                        'p-2 font-bold leading-none',
+                        'p-2 font-bold leading-none outline-0',
                         disabledIncrement ? 'text-slate-300' : 'text-slate-800'
                     ]"
                     type="button"
