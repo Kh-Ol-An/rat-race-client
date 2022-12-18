@@ -1,12 +1,32 @@
 <template>
+    <button
+        class="
+            fixed md:static
+            right-10 bottom-10
+            p-4
+            flex items-center justify-center
+            shadow hover:shadow-lg
+            rounded-full md:rounded-md
+            bg-secondary
+            outline-0
+            transition-all duration-300
+        "
+        type="submit"
+        title="Зберегти"
+    >
+        <SaveIcon width="30px" height="30px" color="fill-white" />
+    </button>
+
     <transition>
         <button
             v-if="isSavedUser"
             class="
-                fixed left-10 bottom-10
+                fixed md:static
+                left-10 bottom-10
                 p-4
+                flex items-center justify-center
                 shadow hover:shadow-lg
-                rounded-full
+                rounded-full md:rounded-md
                 bg-opposite
                 outline-0
                 transition-all duration-300
@@ -28,22 +48,6 @@
         @confirm="reset"
         @cansel="showModal = false"
     />
-
-    <button
-        class="
-            fixed right-10 bottom-10
-            p-4
-            shadow hover:shadow-lg
-            rounded-full
-            bg-secondary
-            outline-0
-            transition-all duration-300
-        "
-        type="submit"
-        title="Зберегти"
-    >
-        <SaveIcon width="30px" height="30px" color="fill-white" />
-    </button>
 </template>
 
 <script setup>

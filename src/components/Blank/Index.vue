@@ -7,6 +7,22 @@
             <UserIdentification :userProp="user" @add:name="addName" @add:profession="addProfession" />
         </div>
 
+        <button
+            class="
+                p-4
+                hidden md:flex items-center justify-center
+                shadow hover:shadow-lg
+                rounded-md
+                bg-secondary
+                outline-0
+                transition-all duration-300
+            "
+            type="submit"
+            title="Зберегти"
+        >
+            <SaveIcon width="30px" height="30px" color="fill-white" />
+        </button>
+
         <div class="flex items-center gap-4 md:gap-2">
             <Transaction @decrement="decrement" @increment="increment" />
         </div>
@@ -98,6 +114,7 @@ import IncomeInfo from './modules/IncomeInfo.vue';
 import Incomes from './modules/Incomes.vue';
 import Shares from './modules/Shares.vue';
 import UserActions from './modules/UserActions.vue';
+import SaveIcon from '../icons/SaveIcon.vue';
 
 const savedUser = ref(localStorage.getItem('user'));
 const user = savedUser.value ? reactive(JSON.parse(savedUser.value)) : reactive({

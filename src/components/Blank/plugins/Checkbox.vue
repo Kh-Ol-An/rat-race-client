@@ -5,12 +5,26 @@
         </label>
 
         <input
-            class="text-silver-800 cursor-pointer outline-0"
+            class="peer hidden"
             :id="id"
             type="checkbox"
             :checked="checked"
             @change="change"
         >
+        <div
+            class="
+                relative
+                mr-2
+                w-4 h-4
+                flex items-center justify-center
+                rounded-sm
+                border border-slate-800 peer-checked:border-primary
+                peer-checked:bg-primary
+                transition-all duration-300
+            "
+        >
+            <div class="w-1.5 h-3 border-r-2 border-b-2 border-white -translate-y-px rotate-45"></div>
+        </div>
     </div>
 </template>
 
