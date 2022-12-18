@@ -256,8 +256,8 @@ const sellShares = subType => {
 };
 
 const submit = () => {
-  console.log('user: ', user);
     localStorage.setItem('user', JSON.stringify(user));
     savedUser.value = localStorage.getItem('user');
 };
+setInterval(submit, 59000);
 </script>
