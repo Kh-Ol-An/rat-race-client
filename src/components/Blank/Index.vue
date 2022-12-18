@@ -22,7 +22,7 @@
 
         <div class="grid grid-cols-2 md:grid-cols-1 gap-4">
             <div class="flex flex-col gap-4 md:order-last md:gap-2">
-                <ExpenseInfo :debt="debt" :expenses="expenses" />
+                <ExpenseInfo :debt="user.debt" :expenses="expenses" />
 
                 <!-- Витрати -->
                 <Costs
@@ -61,7 +61,7 @@
             </div>
 
             <div class="flex flex-col gap-4 md:gap-2">
-                <IncomeInfo :cash="cash" :userSalary="user.salary" :passiveIncome="passiveIncome" :income="income" />
+                <IncomeInfo :userProp="user" :passiveIncome="passiveIncome" :income="income" />
 
                 <!-- Доходи -->
                 <Incomes
@@ -103,6 +103,7 @@ const savedUser = ref(localStorage.getItem('user'));
 const user = savedUser.value ? reactive(JSON.parse(savedUser.value)) : reactive({
     name: '',
     profession: '',
+    debt: 0,
     rent: 0,
     food: 0,
     clothes: 0,
@@ -117,6 +118,7 @@ const user = savedUser.value ? reactive(JSON.parse(savedUser.value)) : reactive(
     marriage: false,
     children: 0,
     credits: [],
+    cash: 0,
     salary: 0,
     business: {
         small: [],
@@ -136,12 +138,17 @@ const user = savedUser.value ? reactive(JSON.parse(savedUser.value)) : reactive(
 const addName = (name) => user.name = name;
 const addProfession = (profession) => user.profession = profession;
 
-const balance = ref(0);
-const decrement = (transaction) => balance.value -= transaction;
-const increment = (transaction) => balance.value += transaction;
+const decrement = (transaction) => {
+    if (user.cash < transaction) {
+        user.debt += transaction - user.cash;
+        return user.cash = 0;
+    }
+
+    return user.cash += transaction;
+};
+const increment = (transaction) => user.cash += transaction;
 
 // PASSIVE
-const debt = computed(() => balance.value <= 0 ? balance.value : 0);
 const expenses = computed(() => {
     let sum = 0;
     sum += user.rent;
@@ -182,7 +189,6 @@ const addCredit = (id, name, payment, quantity) =>
     user.credits.push({ id, name, body: payment * quantity, payment, quantity });
 
 // ACTIVE
-const cash = computed(() => balance.value >= 0 ? balance.value : 0);
 const passiveIncome = computed(() => {
     let sum = 0;
     user.business.small.map(business => sum += business.income);
@@ -196,7 +202,15 @@ const income = computed(() => user.salary + passiveIncome.value);
 const cashFlow = computed(() => {
     return income.value - expenses.value;
 });
-const getCashFlow = () => balance.value += cashFlow.value;
+const getCashFlow = () => {
+    const result = user.cash + cashFlow.value;
+    if (result < 0) {
+        user.debt += Math.abs(result);
+        return user.cash = 0;
+    }
+
+    return user.cash = result;
+};
 
 const addSalary = (salary) => user.salary = salary;
 const editSalary = () => user.salary = 0;
@@ -213,14 +227,14 @@ const deleteBusiness = (subType, id) => {
     user.business.last.pop();
 };
 const sellBusiness = subType => {
-    balance.value = user.business[subType].reduce((total, business) => total += business.price, balance.value);
+    user.cash = user.business[subType].reduce((total, business) => total += business.price, user.cash);
     user.business[subType] = [];
 };
 
 const addShares = (subType, id, price, quantity) =>
     user.shares[subType].push({ id, price, quantity, cost: price * quantity });
 const sellShares = subType => {
-    balance.value = user.shares[subType].reduce((total, share) => total += share.cost, balance.value);
+    user.cash = user.shares[subType].reduce((total, share) => total += share.cost, user.cash);
     user.shares[subType] = [];
 };
 
