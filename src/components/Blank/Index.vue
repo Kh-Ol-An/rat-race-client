@@ -161,7 +161,7 @@ const decrement = (transaction) => {
         return user.cash = 0;
     }
 
-    return user.cash += transaction;
+    return user.cash -= transaction;
 };
 const increment = (transaction) => user.cash += transaction;
 
