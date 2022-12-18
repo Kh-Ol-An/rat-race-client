@@ -1,6 +1,6 @@
 <template>
     <h2 class="px-4 text-xl font-bold text-opposite text-center">Сімейний стан</h2>
-    <Checkbox label="Шлюб:" id="marriage" :checked="user.marriage" @change="changeMarriage" />
+    <Checkbox label="Шлюб:" :checked="user.marriage" @change="changeMarriage" />
     <Quantity label="Діти:" :count="children" :expense="user.children" @change="changeChildren" />
 </template>
 

@@ -1,12 +1,9 @@
 <template>
-    <div class="flex items-center justify-between gap-2">
-        <label class="text-opposite cursor-pointer" :for="id">
-            {{ label }}
-        </label>
+    <label class="flex items-center justify-between gap-2 text-opposite cursor-pointer">
+        {{ label }}
 
         <input
             class="peer hidden"
-            :id="id"
             type="checkbox"
             :checked="checked"
             @change="change"
@@ -25,16 +22,12 @@
         >
             <div class="w-1.5 h-3 border-r-2 border-b-2 border-white -translate-y-px rotate-45"></div>
         </div>
-    </div>
+    </label>
 </template>
 
 <script setup>
 const props = defineProps({
     label: {
-        type: String,
-        required: true,
-    },
-    id: {
         type: String,
         required: true,
     },
