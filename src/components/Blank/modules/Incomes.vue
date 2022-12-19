@@ -37,7 +37,12 @@
         @add="addBusiness"
     />
     <ul v-if="user.business.small.length > 0" class="flex flex-col gap-2">
-        <AssetHead firstTitle="Вартість" secondTitle="Доходи" @sell="sell('small')" />
+        <AssetHead
+            firstTitle="Вартість"
+            secondTitle="Доходи"
+            confirmationModalText="Ти впевнений що хочешь продати всі свої малі бізнеси?"
+            @sell="sell('small')"
+        />
         <List
             v-for="({ id, price, income }, idx) in user.business.small"
             :key="id"
@@ -70,7 +75,12 @@
         @add="addBusiness"
     />
     <ul v-if="user.business.middle.length > 0" class="flex flex-col gap-2">
-        <AssetHead firstTitle="Вартість" secondTitle="Доходи" @sell="sell('middle')" />
+        <AssetHead
+            firstTitle="Вартість"
+            secondTitle="Доходи"
+            confirmationModalText="Ти впевнений що хочешь продати всі свої середні бізнеси?"
+            @sell="sell('middle')"
+        />
         <List
             v-for="({ id, price, income }, idx)  in user.business.middle"
             :key="id"
@@ -103,19 +113,16 @@
         @add="addBusiness"
     />
     <ul v-if="user.business.big.length > 0" class="flex flex-col gap-2">
-        <AssetHead firstTitle="Вартість" secondTitle="Доходи" @sell="sell('big')" />
+        <AssetHead firstTitle="Вартість" secondTitle="Доходи" :isSell="false" />
         <List
             v-for="({ id, price, income }, idx)  in user.business.big"
             :key="id"
-            :id="id"
             subType="big"
             :firstValue="price"
             :secondValue="income"
             :idx="idx"
             :listLength="user.business.big.length"
             :lastBusiness="user.business.last"
-            :disabledEdit="user.salary > 0"
-            @edit="editBusiness"
             @delete="deleteBusiness('big', id)"
         />
     </ul>
@@ -136,19 +143,16 @@
         @add="addBusiness"
     />
     <ul v-if="user.business.corrupt.length > 0" class="flex flex-col gap-2">
-        <AssetHead firstTitle="Вартість" secondTitle="Доходи" @sell="sell('corrupt')" />
+        <AssetHead firstTitle="Вартість" secondTitle="Доходи" :isSell="false" />
         <List
             v-for="({ id, price, income }, idx) in user.business.corrupt"
             :key="id"
-            :id="id"
             subType="corrupt"
             :firstValue="price"
             :secondValue="income"
             :idx="idx"
             :listLength="user.business.corrupt.length"
             :lastBusiness="user.business.last"
-            :disabledEdit="user.salary > 0"
-            @edit="editBusiness"
             @delete="deleteBusiness('corrupt', id)"
         />
     </ul>

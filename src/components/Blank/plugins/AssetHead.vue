@@ -13,6 +13,7 @@
             {{ thirdTitle }}
         </span>
         <button
+            v-if="isSell"
             class="
                 absolute
                 top-1/2 right-0
@@ -28,7 +29,8 @@
         </button>
         <ConfirmationModal
             :show="showModal"
-            text="Ти впевнений шо хочешь видалити останній відкритий бізнес?"
+            :text="confirmationModalText"
+            confirm="Продати"
             @confirm="sell"
             @cansel="showModal = false"
         />
@@ -52,6 +54,14 @@ defineProps({
     thirdTitle: {
         type: String,
         default: '',
+    },
+    isSell: {
+        type: Boolean,
+        default: true,
+    },
+    confirmationModalText: {
+        type: String,
+        default: 'Ти підтверджуєш свою дію?',
     },
 });
 

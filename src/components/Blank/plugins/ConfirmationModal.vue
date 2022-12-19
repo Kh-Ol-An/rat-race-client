@@ -3,7 +3,7 @@
         <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
             {{ title }}
         </h4>
-        <p class="mx-auto mt-4 text-lg text-center">
+        <p class="mx-auto mt-4 text-lg font-normal text-slate-800 text-center">
             {{ text }}
         </p>
     </Modal>
