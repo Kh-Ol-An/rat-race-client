@@ -7,36 +7,38 @@
             {{ addingSpaces(firstValue) }}
         </span>
         <div class="mx-auto flex items-center gap-3">
-            <span v-if="editable" class="text-silver-800 text-center whitespace-nowrap">
-                {{ addingSpaces(editValue) }}
+            <span class="text-silver-800 text-center whitespace-nowrap">
+                {{ addingSpaces(secondValue) }}
             </span>
             <Input
-                v-else
+                v-if="!addingIncome"
                 id="edit-value"
                 placeholder="Доходи"
                 smallLabel
-                v-model:value="editValue"
+                v-model:value="additionalIncome"
             />
             <div v-if="id" class="flex items-center justify-center">
                 <button
-                    v-if="editable"
-                    :class="['outline-0', disabledEdit && 'cursor-not-allowed']"
+                    v-if="addingIncome"
+                    :class="[
+                        'font-bold text-2xl outline-0',
+                         disabledEdit ? 'text-slate-300 cursor-not-allowed' : 'text-secondary',
+                    ]"
                     type="button"
                     title="Редагувати"
                     :disabled="disabledEdit"
-                    @click="editable = !editable"
+                    @click="addingIncome = !addingIncome"
                 >
-                    <EditIcon width="16px" height="16px" :color="disabledEdit ? 'fill-slate-300' : 'fill-secondary'" />
+                    &#43;
                 </button>
                 <button
                     v-else
-                    :class="['outline-0', disabledSave && 'cursor-not-allowed']"
+                    class="outline-0"
                     type="button"
                     title="Зберегти"
-                    :disabled="disabledSave"
-                    @click="save"
+                    @click="increment"
                 >
-                    <SaveIcon width="16px" height="16px" :color="disabledSave ? 'fill-slate-300' : 'fill-secondary'" />
+                    <SaveIcon width="16px" height="16px" />
                 </button>
             </div>
         </div>
@@ -73,10 +75,9 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue';
+import { ref } from 'vue';
 import Input from './Input.vue';
 import ConfirmationModal from './ConfirmationModal.vue';
-import EditIcon from '../../icons/EditIcon.vue';
 import SaveIcon from '../../icons/SaveIcon.vue';
 import { addingSpaces } from '../../../helpers/formating-values.js';
 
@@ -90,16 +91,16 @@ const props = defineProps({
         default: '',
     },
     firstValue: {
-        type: String,
+        type: Number,
         required: true,
     },
     secondValue: {
-        type: String,
+        type: Number,
         required: true,
     },
     thirdValue: {
-        type: String,
-        default: '',
+        type: Number,
+        default: null,
     },
     idx: {
         type: Number,
@@ -119,16 +120,15 @@ const props = defineProps({
     },
 });
 
-const emit = defineEmits([ 'edit' ]);
+const emit = defineEmits([ 'increment' ]);
 
-const editable = ref(true);
-const editValue = ref(props.secondValue);
+const addingIncome = ref(true);
+const additionalIncome = ref('');
 
-const disabledSave = computed(() => editValue.value.length === 0);
-
-const save = () => {
-    editable.value = !editable.value;
-    emit('edit', props.subType, props.id, Number(editValue.value));
+const increment = () => {
+    addingIncome.value = !addingIncome.value;
+    emit('increment', props.subType, props.id, Number(additionalIncome.value));
+    additionalIncome.value = '';
 };
 
 const showModal = ref(false);

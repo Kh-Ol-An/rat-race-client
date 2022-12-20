@@ -85,7 +85,7 @@
                     @add:salary="addSalary"
                     @edit:salary="editSalary"
                     @add:business="addBusiness"
-                    @edit:business="editBusiness"
+                    @increment:income="incrementIncomeBusiness"
                     @delete:business="deleteBusiness"
                     @sell="sellBusiness"
                 />
@@ -235,8 +235,8 @@ const addBusiness = (subType, id, price, income) => {
     user.business[subType].push({id, price, income});
     user.business.last.push(subType);
 };
-const editBusiness = (subType, id, income) => {
-    user.business[subType].find(business => business.id === id && (business.income = income))
+const incrementIncomeBusiness = (subType, id, income) => {
+    user.business[subType].find(business => business.id === id && (business.income += income))
 };
 const deleteBusiness = (subType, id) => {
     const removableIndex = user.business[subType].findIndex(business => business.id === id);

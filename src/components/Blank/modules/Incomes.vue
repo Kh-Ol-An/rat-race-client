@@ -54,7 +54,7 @@
             :listLength="user.business.small.length"
             :lastBusiness="user.business.last"
             :disabledEdit="user.salary > 0"
-            @edit="editBusiness"
+            @increment="incrementIncomeBusiness"
             @delete="deleteBusiness('small', id)"
         />
     </ul>
@@ -92,7 +92,7 @@
             :listLength="user.business.middle.length"
             :lastBusiness="user.business.last"
             :disabledEdit="user.salary > 0"
-            @edit="editBusiness"
+            @increment="incrementIncomeBusiness"
             @delete="deleteBusiness('middle', id)"
         />
     </ul>
@@ -176,7 +176,7 @@ const props = defineProps({
 
 const user = toRef(props, 'userProp');
 
-const emit = defineEmits([ 'add:business', 'edit:business', 'sell' ]);
+const emit = defineEmits([ 'add:business', 'increment:income', 'sell' ]);
 
 const salary = ref('');
 const salaryDisabled = computed(
@@ -189,7 +189,7 @@ const salaryDisabled = computed(
 );
 
 const addBusiness = (subType, id, price, income) => emit('add:business', subType, id, price, income);
-const editBusiness = (subType, id, income) => emit('edit:business', subType, id, income);
+const incrementIncomeBusiness = (subType, id, income) => emit('increment:income', subType, id, income);
 const deleteBusiness = (subType, id) => emit('delete:business', subType, id);
 const sell = subType => emit('sell', subType);
 </script>
