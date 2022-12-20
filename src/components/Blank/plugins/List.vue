@@ -8,7 +8,7 @@
         </span>
         <div class="mx-auto flex items-center gap-3">
             <span v-if="editable" class="text-silver-800 text-center whitespace-nowrap">
-                {{ editValue }}
+                {{ addingSpaces(editValue) }}
             </span>
             <Input
                 v-else
@@ -73,12 +73,12 @@
 </template>
 
 <script setup>
-import {computed, ref} from 'vue';
+import { computed, ref } from 'vue';
 import Input from './Input.vue';
 import ConfirmationModal from './ConfirmationModal.vue';
 import EditIcon from '../../icons/EditIcon.vue';
 import SaveIcon from '../../icons/SaveIcon.vue';
-import { removingSpaces, addingSpaces } from '../../../helpers/formating-values.js';
+import { addingSpaces } from '../../../helpers/formating-values.js';
 
 const props = defineProps({
     id: {
@@ -90,16 +90,16 @@ const props = defineProps({
         default: '',
     },
     firstValue: {
-        type: Number,
+        type: String,
         required: true,
     },
     secondValue: {
-        type: Number,
+        type: String,
         required: true,
     },
     thirdValue: {
-        type: Number,
-        default: null,
+        type: String,
+        default: '',
     },
     idx: {
         type: Number,
@@ -122,13 +122,13 @@ const props = defineProps({
 const emit = defineEmits([ 'edit' ]);
 
 const editable = ref(true);
-const editValue = ref(addingSpaces(props.secondValue));
+const editValue = ref(props.secondValue);
 
 const disabledSave = computed(() => editValue.value.length === 0);
 
 const save = () => {
     editable.value = !editable.value;
-    emit('edit', props.subType, props.id, Number(removingSpaces(editValue.value)));
+    emit('edit', props.subType, props.id, Number(editValue.value));
 };
 
 const showModal = ref(false);

@@ -1,12 +1,12 @@
 <template>
     <div v-if="user.name.length === 0" class="flex items-center gap-3">
-        <Input v-model:value="name" id="name" typeText placeholder="Ім'я" />
+        <Input v-model:value="name" id="name" type="text" placeholder="Ім'я" />
         <Add :firstValue="name" @add="$emit('add:name', name)" />
     </div>
     <InfoField v-if="user.name.length > 0" labelClasses="text-additional" label="Ім'я:" :value="user.name" />
 
     <div v-if="user.profession.length === 0" class="flex items-center gap-3">
-        <Input v-model:value="profession" id="profession" typeText placeholder="Професія" />
+        <Input v-model:value="profession" id="profession" type="text" placeholder="Професія" />
         <Add :firstValue="profession" @add="$emit('add:profession', profession)" />
     </div>
     <InfoField v-if="user.profession.length > 0" labelClasses="text-additional" label="Професія:" :value="user.profession" />

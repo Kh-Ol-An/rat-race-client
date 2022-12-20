@@ -19,10 +19,10 @@
             @input="input"
         />
         <div
-            v-if="value && value.length > 0"
+            v-if="value.length > 0"
             class="absolute top-1/2 left-3 -translate-y-1/2 flex items-center gap-px bg-white text-base text-secondary"
         >
-            {{ addingSpaces(value) }}
+            {{ type === 'number' ? addingSpaces(value) : value }}
             <div class="-mt-0.5 w-px h-4 bg-secondary animate-flashing"></div>
         </div>
         <label
@@ -50,7 +50,7 @@ import { addingSpaces } from '../../../helpers/formating-values.js';
 
 const props = defineProps({
     value: {
-        type: [Number, String],
+        type: String,
         required: true,
     },
     id: {
@@ -73,7 +73,7 @@ const props = defineProps({
 
 const emit = defineEmits(['input']);
 
-const entered = ref(props.type === 'number' ? null : '');
+const entered = ref('');
 
 const input = (event) => {
     const regExp = /\d|null/;

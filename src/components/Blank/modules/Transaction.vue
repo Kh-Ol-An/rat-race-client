@@ -37,17 +37,16 @@
 <script setup>
 import { ref } from "vue";
 import Input from '../plugins/Input.vue';
-import { removingSpaces } from "../../../helpers/formating-values.js";
 
 const emit = defineEmits(['decrement', 'increment']);
 
-const transaction = ref(null);
+const transaction = ref('');
 const decrement = () => {
-    emit('decrement', transaction.value);
-    transaction.value = null;
+    emit('decrement', Number(transaction.value));
+    transaction.value = '';
 };
 const increment = () => {
-    emit('increment', transaction.value);
-    transaction.value = null;
+    emit('increment', Number(transaction.value));
+    transaction.value = '';
 };
 </script>

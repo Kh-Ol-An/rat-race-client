@@ -10,7 +10,7 @@
         ]"
     >
         <Input v-model:value="salary" id="salary" placeholder="Зарплата" />
-        <Add :firstValue="salary" @add="$emit('add:salary', Number(removingSpaces(salary)))" />
+        <Add :firstValue="salary" @add="$emit('add:salary', Number(salary))" />
     </div>
     <InfoField
         v-if="user.salary > 0"
@@ -166,7 +166,6 @@ import InfoField from '../plugins/InfoField.vue';
 import InputField from '../plugins/InputField.vue';
 import AssetHead from '../plugins/AssetHead.vue';
 import List from '../plugins/List.vue';
-import { removingSpaces } from "../../../helpers/formating-values.js";
 
 const props = defineProps({
     userProp: {

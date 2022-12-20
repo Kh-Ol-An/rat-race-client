@@ -27,7 +27,6 @@
 import { ref } from "vue";
 import Input from './Input.vue';
 import Add from './Add.vue';
-import { removingSpaces } from '../../../helpers/formating-values.js';
 
 const emit = defineEmits(['add']);
 
@@ -36,13 +35,7 @@ const payment = ref('');
 const quantity = ref('');
 
 const add = () => {
-    emit(
-        'add',
-        new Date().valueOf(),
-        name.value,
-        Number(removingSpaces(payment.value)),
-        Number(removingSpaces(quantity.value)),
-    );
+    emit('add', new Date().valueOf(), name.value, Number(payment.value), Number(quantity.value));
     name.value = '';
     payment.value = '';
     quantity.value = '';

@@ -3,7 +3,7 @@
 
     <div v-if="user.rent === 0" class="flex items-center gap-3">
         <Input v-model:value="rent" id="rent" placeholder="Оренда житла" />
-        <Add :firstValue="rent" opposite @add="$emit('add:rent', Number(removingSpaces(rent)))" />
+        <Add :firstValue="rent" opposite @add="$emit('add:rent', Number(rent))" />
     </div>
     <InfoField
         v-if="user.rent > 0"
@@ -16,19 +16,19 @@
 
     <div v-if="user.food === 0" class="flex items-center gap-3">
         <Input v-model:value="food" id="food" placeholder="Витрати на харчування" />
-        <Add :firstValue="food" opposite @add="$emit('add:food', Number(removingSpaces(food)))" />
+        <Add :firstValue="food" opposite @add="$emit('add:food', Number(food))" />
     </div>
     <InfoField v-if="user.food > 0" labelClasses="text-opposite" label="Витрати на харчування:" :value="user.food" />
 
     <div v-if="user.clothes === 0" class="flex items-center gap-3">
         <Input v-model:value="clothes" id="food" placeholder="Витрати на одяг" />
-        <Add :firstValue="clothes" opposite @add="$emit('add:clothes', Number(removingSpaces(clothes)))" />
+        <Add :firstValue="clothes" opposite @add="$emit('add:clothes', Number(clothes))" />
     </div>
     <InfoField v-if="user.clothes > 0" labelClasses="text-opposite" label="Витрати на одяг:" :value="user.clothes" />
 
     <div v-if="user.fare === 0" class="flex items-center gap-3">
         <Input v-model:value="fare" id="food" placeholder="Витрати на проїзд" />
-        <Add :firstValue="fare" opposite @add="$emit('add:fare', Number(removingSpaces(fare)))" />
+        <Add :firstValue="fare" opposite @add="$emit('add:fare', Number(fare))" />
     </div>
     <InfoField
         v-if="user.fare > 0"
@@ -41,7 +41,7 @@
 
     <div v-if="user.phone === 0" class="flex items-center gap-3">
         <Input v-model:value="phone" id="food" placeholder="Витрати на телефонні розмови" />
-        <Add :firstValue="phone" opposite @add="$emit('add:phone', Number(removingSpaces(phone)))" />
+        <Add :firstValue="phone" opposite @add="$emit('add:phone', Number(phone))" />
     </div>
     <InfoField v-if="user.phone > 0" labelClasses="text-opposite" :value="user.phone" label="Витрати на телефонні розмови:" />
 </template>
@@ -51,7 +51,6 @@ import { ref, toRef } from "vue";
 import Input from '../plugins/Input.vue';
 import Add from '../plugins/Add.vue';
 import InfoField from '../plugins/InfoField.vue';
-import { removingSpaces } from "../../../helpers/formating-values.js";
 
 const props = defineProps({
     userProp: {
