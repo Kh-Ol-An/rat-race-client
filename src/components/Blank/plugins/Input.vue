@@ -7,17 +7,24 @@
                 w-full
                 shadow
                 border-2 rounded-md
-                text-secondary
+                text-base text-transparent
                 placeholder-transparent
                 focus:border-secondary focus:outline-none
                 transition-all duration-300
             "
             :id="id"
-            type="text"
+            :type="type"
             :placeholder="placeholder"
             :value="value"
             @input="input"
         />
+        <div
+            v-if="value && value.length > 0"
+            class="absolute top-1/2 left-3 -translate-y-1/2 flex items-center gap-px bg-white text-base text-secondary"
+        >
+            {{ addingSpaces(value) }}
+            <div class="-mt-0.5 w-px h-4 bg-secondary animate-flashing"></div>
+        </div>
         <label
             :class="[
                 'absolute',
@@ -43,16 +50,16 @@ import { addingSpaces } from '../../../helpers/formating-values.js';
 
 const props = defineProps({
     value: {
-        type: String,
+        type: [Number, String],
         required: true,
     },
     id: {
         type: String,
         required: true,
     },
-    typeText: {
-        type: Boolean,
-        default: false
+    type: {
+        type: String,
+        default: 'number'
     },
     placeholder: {
         type: String,
@@ -66,17 +73,19 @@ const props = defineProps({
 
 const emit = defineEmits(['input']);
 
-const entered = ref('');
+const entered = ref(props.type === 'number' ? null : '');
 
-const input = ({ target }) => {
-    if (!props.typeText) {
-        const regExp = /^[\d\s]*$/;
-        if (!regExp.test(target.value) || target.value === '0' || target.value.length > 19) {
-            return target.value = entered.value;
-        }
-        target.value = addingSpaces(target.value);
+const input = (event) => {
+    const regExp = /\d|null/;
+    if (
+        props.type === 'number' &&
+        !regExp.test(event.data) ||
+        event.target.value === '0' ||
+        event.target.value.length > 15
+    ) {
+        return event.target.value = entered.value;
     }
-    entered.value = target.value;
+    entered.value = event.target.value;
     emit('update:value', entered.value);
 };
 </script>

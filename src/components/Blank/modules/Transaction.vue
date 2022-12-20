@@ -41,13 +41,13 @@ import { removingSpaces } from "../../../helpers/formating-values.js";
 
 const emit = defineEmits(['decrement', 'increment']);
 
-const transaction = ref('');
+const transaction = ref(null);
 const decrement = () => {
-    emit('decrement', Number(removingSpaces(transaction.value)));
-    transaction.value = '';
+    emit('decrement', transaction.value);
+    transaction.value = null;
 };
 const increment = () => {
-    emit('increment', Number(removingSpaces(transaction.value)));
-    transaction.value = '';
+    emit('increment', transaction.value);
+    transaction.value = null;
 };
 </script>

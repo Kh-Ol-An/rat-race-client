@@ -25,6 +25,15 @@ module.exports = {
                 additional: '#859B3B',
                 opposite: '#983A4D',
             },
+            keyframes: {
+                flashing: {
+                    '0%, 100%': { transform: 'scale(1)' },
+                    '50%': { transform: 'scale(0)' },
+                },
+            },
+            animation: {
+                flashing: 'flashing 1s ease-in-out infinite',
+            },
         },
     },
     plugins: [],
