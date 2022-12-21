@@ -250,10 +250,10 @@ const sellBusiness = subType => {
 
 const addShares = (subType, id, price, quantity) =>
     user.shares[subType].push({ id, price, quantity, cost: price * quantity });
-const sellShares = subType => {
-    user.cash = user.shares[subType].reduce((total, share) => total += share.cost, user.cash);
+const sellShares = (subType, sellCost) => {
+    user.cash += sellCost;
     user.shares[subType] = [];
-};
+};1
 
 const submit = () => {
     console.log('user: ', user);

@@ -43,7 +43,7 @@
             confirmationModalText="Ти впевнений що хочешь продати всі свої малі бізнеси?"
             @sell="sell('small')"
         />
-        <List
+        <ListItem
             v-for="({ id, price, income }, idx) in user.business.small"
             :key="id"
             :id="id"
@@ -81,18 +81,15 @@
             confirmationModalText="Ти впевнений що хочешь продати всі свої середні бізнеси?"
             @sell="sell('middle')"
         />
-        <List
+        <ListItem
             v-for="({ id, price, income }, idx)  in user.business.middle"
             :key="id"
-            :id="id"
             subType="middle"
             :firstValue="price"
             :secondValue="income"
             :idx="idx"
             :listLength="user.business.middle.length"
             :lastBusiness="user.business.last"
-            :disabledEdit="user.salary > 0"
-            @increment="incrementIncomeBusiness"
             @delete="deleteBusiness('middle', id)"
         />
     </ul>
@@ -114,7 +111,7 @@
     />
     <ul v-if="user.business.big.length > 0" class="flex flex-col gap-2">
         <AssetHead firstTitle="Вартість" secondTitle="Доходи" :isSell="false" />
-        <List
+        <ListItem
             v-for="({ id, price, income }, idx)  in user.business.big"
             :key="id"
             subType="big"
@@ -144,7 +141,7 @@
     />
     <ul v-if="user.business.corrupt.length > 0" class="flex flex-col gap-2">
         <AssetHead firstTitle="Вартість" secondTitle="Доходи" :isSell="false" />
-        <List
+        <ListItem
             v-for="({ id, price, income }, idx) in user.business.corrupt"
             :key="id"
             subType="corrupt"
@@ -165,7 +162,7 @@ import Add from '../plugins/Add.vue';
 import InfoField from '../plugins/InfoField.vue';
 import InputField from '../plugins/InputField.vue';
 import AssetHead from '../plugins/AssetHead.vue';
-import List from '../plugins/List.vue';
+import ListItem from '../plugins/ListItem.vue';
 
 const props = defineProps({
     userProp: {

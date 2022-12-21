@@ -11,21 +11,19 @@
         @add="add"
     />
     <ul v-if="user.shares.gc.length > 0" class="flex flex-col gap-2">
-        <AssetHead
-            firstTitle="Ціна"
-            secondTitle="Кількість"
-            thirdTitle="Вартість"
-            confirmationModalText="Ти впевнений що хочешь продати всі свої акції GC?"
-            @sell="sell('gc')"
-        />
-        <List
+        <AssetHead :isSell="false" firstTitle="Ціна" secondTitle="Кількість" thirdTitle="Вартість" />
+        <ListItem
             v-for="{id, price, quantity, cost} in user.shares.gc"
             :key="id"
             :firstValue="price"
             :secondValue="quantity"
             :thirdValue="cost"
         />
-        <AssetTotal :userShare="user.shares.gc" />
+        <AssetTotal
+            :userShare="user.shares.gc"
+            confirmationModalText="Ти впевнений що хочешь продати всі свої акції GC?"
+            @sell="sellGc"
+        />
     </ul>
 
     <!-- ЩУН -->
@@ -38,21 +36,19 @@
         @add="add"
     />
     <ul v-if="user.shares.shchun.length > 0" class="flex flex-col gap-2">
-        <AssetHead
-            firstTitle="Ціна"
-            secondTitle="Кількість"
-            thirdTitle="Вартість"
-            confirmationModalText="Ти впевнений що хочешь продати всі свої акції ЩУН?"
-            @sell="sell('shchun')"
-        />
-        <List
+        <AssetHead :isSell="false" firstTitle="Ціна" secondTitle="Кількість" thirdTitle="Вартість" />
+        <ListItem
             v-for="{id, price, quantity, cost} in user.shares.shchun"
             :key="id"
             :firstValue="price"
             :secondValue="quantity"
             :thirdValue="cost"
         />
-        <AssetTotal :userShare="user.shares.shchun" />
+        <AssetTotal
+            :userShare="user.shares.shchun"
+            confirmationModalText="Ти впевнений що хочешь продати всі свої акції ЩУН?"
+            @sell="sellShchun"
+        />
     </ul>
 
     <!-- TO -->
@@ -65,21 +61,19 @@
         @add="add"
     />
     <ul v-if="user.shares.to.length > 0" class="flex flex-col gap-2">
-        <AssetHead
-            firstTitle="Ціна"
-            secondTitle="Кількість"
-            thirdTitle="Вартість"
-            confirmationModalText="Ти впевнений що хочешь продати всі свої акції TO?"
-            @sell="sell('to')"
-        />
-        <List
+        <AssetHead :isSell="false" firstTitle="Ціна" secondTitle="Кількість" thirdTitle="Вартість" />
+        <ListItem
             v-for="{id, price, quantity, cost} in user.shares.to"
             :key="id"
             :firstValue="price"
             :secondValue="quantity"
             :thirdValue="cost"
         />
-        <AssetTotal :userShare="user.shares.to" />
+        <AssetTotal
+            :userShare="user.shares.to"
+            confirmationModalText="Ти впевнений що хочешь продати всі свої акції TO?"
+            @sell="sellTo"
+        />
     </ul>
 
     <!-- CST -->
@@ -92,21 +86,19 @@
         @add="add"
     />
     <ul v-if="user.shares.cst.length > 0" class="flex flex-col gap-2">
-        <AssetHead
-            firstTitle="Ціна"
-            secondTitle="Кількість"
-            thirdTitle="Вартість"
-            confirmationModalText="Ти впевнений що хочешь продати всі свої акції CST?"
-            @sell="sell('cst')"
-        />
-        <List
+        <AssetHead :isSell="false" firstTitle="Ціна" secondTitle="Кількість" thirdTitle="Вартість" />
+        <ListItem
             v-for="{id, price, quantity, cost} in user.shares.cst"
             :key="id"
             :firstValue="price"
             :secondValue="quantity"
             :thirdValue="cost"
         />
-        <AssetTotal :userShare="user.shares.cst" />
+        <AssetTotal
+            :userShare="user.shares.cst"
+            confirmationModalText="Ти впевнений що хочешь продати всі свої акції CST?"
+            @sell="sellCst"
+        />
     </ul>
 </template>
 
@@ -114,7 +106,7 @@
 import { toRef } from "vue";
 import InputField from '../plugins/InputField.vue';
 import AssetHead from '../plugins/AssetHead.vue';
-import List from '../plugins/List.vue';
+import ListItem from '../plugins/ListItem.vue';
 import AssetTotal from '../plugins/AssetTotal.vue';
 
 const props = defineProps({
@@ -130,5 +122,8 @@ const emit = defineEmits([ 'add', 'sell' ]);
 
 const add = (subType, id, firstValue, secondValue) => emit('add', subType, id, firstValue, secondValue);
 
-const sell = subType => emit('sell', subType);
+const sellGc = sellCost => emit('sell', 'gc', sellCost);
+const sellShchun = sellCost => emit('sell', 'shchun', sellCost);
+const sellTo = sellCost => emit('sell', 'to', sellCost);
+const sellCst = sellCost => emit('sell', 'cst', sellCost);
 </script>

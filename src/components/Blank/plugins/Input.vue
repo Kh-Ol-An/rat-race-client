@@ -23,7 +23,7 @@
             class="absolute top-1/2 left-3 -translate-y-1/2 flex items-center gap-px bg-white text-base text-secondary"
         >
             {{ type === 'number' ? addingSpaces(value) : value }}
-            <div class="-mt-0.5 w-px h-4 bg-secondary animate-flashing"></div>
+            <div class="w-px h-4 bg-secondary animate-flashing"></div>
         </div>
         <label
             :class="[

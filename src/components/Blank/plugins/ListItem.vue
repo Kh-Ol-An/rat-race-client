@@ -1,12 +1,12 @@
 <template>
     <li :class="[
-        'relative pr-20 grid items-center gap-2',
-        thirdValue ? 'grid-cols-3' : 'grid-cols-2'
+        'relative pr-12 grid items-center gap-2',
+        thirdValue ? 'grid-cols-10' : 'grid-cols-6'
     ]">
-        <span class="text-silver-800 text-center whitespace-nowrap">
+        <span class="col-span-3 text-silver-800 text-center whitespace-nowrap">
             {{ addingSpaces(firstValue) }}
         </span>
-        <div class="mx-auto flex items-center gap-3">
+        <div class="col-span-3 mx-auto flex items-center gap-3">
             <span class="text-silver-800 text-center whitespace-nowrap">
                 {{ addingSpaces(secondValue) }}
             </span>
@@ -25,7 +25,7 @@
                          disabledEdit ? 'text-slate-300 cursor-not-allowed' : 'text-secondary',
                     ]"
                     type="button"
-                    title="Редагувати"
+                    title="Збільшити дохід"
                     :disabled="disabledEdit"
                     @click="addingIncome = !addingIncome"
                 >
@@ -42,7 +42,7 @@
                 </button>
             </div>
         </div>
-        <span v-if="thirdValue" class="text-silver-800 text-center whitespace-nowrap">
+        <span v-if="thirdValue" class="col-span-4 text-silver-800 text-center whitespace-nowrap">
             {{ addingSpaces(thirdValue) }}
         </span>
         <button

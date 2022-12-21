@@ -1,15 +1,15 @@
 <template>
     <li :class="[
-        'relative pr-20 grid gap-2 text-secondary font-bold text-center',
-        thirdTitle.length > 0 ? 'grid-cols-3' : 'grid-cols-2',
+        'relative pr-12 grid gap-2 text-secondary font-bold text-center',
+        thirdTitle.length > 0 ? 'grid-cols-10' : 'grid-cols-6',
     ]">
-        <span>
+        <span class="col-span-3">
             {{ firstTitle }}
         </span>
-        <span>
+        <span class="col-span-3">
             {{ secondTitle }}
         </span>
-        <span v-if="thirdTitle.length > 0">
+        <span v-if="thirdTitle.length > 0" class="col-span-4">
             {{ thirdTitle }}
         </span>
         <button
