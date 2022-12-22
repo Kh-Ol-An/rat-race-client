@@ -1,6 +1,6 @@
 <template>
     <li class="relative pr-12 grid grid-cols-12 items-center gap-2">
-        <div v-if="showPrice" class="relative col-span-4 flex items-center gap-2">
+        <div v-if="showPrice" class="relative col-span-5 flex items-center gap-2">
             <Input
                 id="sell-price-package"
                 placeholder="Ціна продажі"
@@ -31,7 +31,7 @@
         >
             <CheckIcon width="24px" height="24px" :color="sellPrice.length === 0 ? 'fill-slate-300' : 'fill-primary'" />
         </button>
-        <span v-else class="col-span-5 text-silver-800 text-center whitespace-nowrap">
+        <span v-else class="col-span-6 text-silver-800 text-center whitespace-nowrap">
             {{ addingSpaces(price) }}
         </span>
 
@@ -39,7 +39,7 @@
             {{ addingSpaces(quantity) }}
         </span>
 
-        <span class="col-span-4 text-silver-800 text-center whitespace-nowrap">
+        <span class="col-span-3 text-silver-800 text-center whitespace-nowrap">
             {{ addingSpaces(cost) }}
         </span>
         <button

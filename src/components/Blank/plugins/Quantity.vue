@@ -1,5 +1,8 @@
 <template>
-    <div class="flex items-center justify-between gap-2">
+    <div :class="[
+        'flex items-center justify-between gap-2',
+        disabled && 'opacity-20 cursor-not-allowed',
+    ]">
         <div class="flex items-center gap-8">
             <span class="text-opposite">
                 {{ label }}
@@ -57,6 +60,10 @@ const props = defineProps({
     expense: {
         type: Number,
         default: null,
+    },
+    disabled: {
+        type: Boolean,
+        default: false,
     },
 });
 

@@ -1,9 +1,9 @@
 <template>
-    <li class="relative pr-12 grid grid-cols-2 items-center gap-2 text-secondary font-bold text-center">
-        <span>
+    <li class="relative pr-12 grid grid-cols-5 items-center gap-2 text-secondary font-bold text-center">
+        <span class="col-span-2">
             {{ firstTitle }}
         </span>
-        <span>
+        <span class="col-span-3">
             {{ secondTitle }}
         </span>
         <button

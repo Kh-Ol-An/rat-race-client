@@ -3,7 +3,7 @@
         v-if="userShare.length > 1"
         class="relative py-2 pr-12 grid grid-cols-12 items-center gap-2 border-t-2 border-b-silver-900 font-bold text-center"
     >
-        <div v-if="showPrice" class="relative col-span-4 flex items-center gap-2">
+        <div v-if="showPrice" class="relative col-span-5 flex items-center gap-2">
             <Input
                 id="sell-price"
                 placeholder="Ціна продажі"
@@ -34,7 +34,7 @@
         >
             <CheckIcon width="24px" height="24px" :color="sellPrice.length === 0 ? 'fill-slate-300' : 'fill-primary'" />
         </button>
-        <span v-else class="col-span-5">
+        <span v-else class="col-span-6">
             {{ addingSpaces(price) }}
         </span>
 
@@ -42,7 +42,7 @@
             {{ addingSpaces(quantity) }}
         </span>
 
-        <span class="col-span-4">
+        <span class="col-span-3">
             {{ addingSpaces(cost) }}
         </span>
         <button

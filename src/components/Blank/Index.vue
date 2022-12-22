@@ -150,7 +150,10 @@ const user = savedUser.value ? reactive(JSON.parse(savedUser.value)) : reactive(
     aircraft: 0,
     whimsAndFancies: 0,
     marriage: false,
-    children: 0,
+    children: {
+        count: 0,
+        expense: 0,
+    },
     credits: [],
     cash: 0,
     salary: 0,
@@ -196,7 +199,7 @@ const expenses = computed(() => {
     sum += user.houses;
     sum += user.yachts;
     sum += user.aircraft;
-    sum += user.children;
+    sum += user.children.expense;
     user.credits.map(credit => sum += credit.payment);
     return sum;
 });
@@ -217,8 +220,25 @@ const changeAircraft = count => user.aircraft = count * 5000;
 
 const changeWhimsAndFancies = count => user.whimsAndFancies = count;
 
-const changeMarriage = checked => user.marriage = checked;
-const changeChildren = count => user.children = count * 300;
+const changeMarriage = checked => {
+    if (checked) {
+        user.gender === 'male' && decrement(5000);
+        user.gender === 'female' && (user.children.expense = 0);
+    } else {
+        if (user.gender === 'male' ) {
+            user.cash = user.cash / 2;
+            user.children.count = 0;
+            user.children.expense = 0;
+        }
+        user.gender === 'female' && (user.children.expense = user.children.count * 300);
+    }
+
+    user.marriage = checked;
+};
+const changeChildren = count => {
+    user.children.count = count
+    user.children.expense = count * 300;
+};
 
 const addCredit = (id, name, payment, quantity) =>
     user.credits.push({ id, name, body: payment * quantity, payment, quantity });
@@ -273,11 +293,11 @@ const addShares = (subType, id, price, quantity) => {
     user.cash -= cost;
 };
 const sellSharesPackage = (id, subType, sellPrice) => {
-    user.cash += sellPrice;
+    increment(sellPrice);
     user.shares[subType] = user.shares[subType].filter(share => share.id !== id);
 };
 const sellAllShares = (subType, sellPrice) => {
-    user.cash += sellPrice;
+    increment(sellPrice);
     user.shares[subType] = [];
 };
 

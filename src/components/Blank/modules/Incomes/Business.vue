@@ -1,10 +1,10 @@
 <template>
-    <li class="relative pr-12 grid grid-cols-2 items-center gap-2">
-        <span class="text-silver-800 text-center whitespace-nowrap">
+    <li class="relative pr-12 grid grid-cols-5 items-center gap-2">
+        <span class="col-span-2 text-silver-800 text-center whitespace-nowrap">
             {{ addingSpaces(firstValue) }}
         </span>
 
-        <div class="mx-auto flex items-center gap-3">
+        <div class="col-span-3 mx-auto flex items-center gap-3">
             <span class="text-silver-800 text-center whitespace-nowrap">
                 {{ addingSpaces(secondValue) }}
             </span>
