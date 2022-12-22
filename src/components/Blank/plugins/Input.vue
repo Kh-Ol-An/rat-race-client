@@ -16,6 +16,8 @@
             :type="type"
             :placeholder="placeholder"
             :value="value"
+            @focus="focused = true"
+            @blur="focused = false"
             @input="input"
         />
         <div
@@ -23,7 +25,7 @@
             class="absolute top-1/2 left-3 -translate-y-1/2 flex items-center gap-px bg-white text-base text-secondary"
         >
             {{ type === 'number' ? addingSpaces(value) : value }}
-            <div class="w-px h-4 bg-secondary animate-flashing"></div>
+            <div :class="['opacity-0 w-px h-4 bg-secondary animate-flashing', focused && 'opacity-100']"></div>
         </div>
         <label
             :class="[
@@ -74,7 +76,6 @@ const props = defineProps({
 const emit = defineEmits(['input']);
 
 const entered = ref('');
-
 const input = (event) => {
     const regExp = /\d|null/;
     if (
@@ -88,4 +89,6 @@ const input = (event) => {
     entered.value = event.target.value;
     emit('update:value', entered.value);
 };
+
+const focused = ref(false);
 </script>

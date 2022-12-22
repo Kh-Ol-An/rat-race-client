@@ -25,7 +25,7 @@
                 sellPrice.length === 0 && 'cursor-not-allowed',
             ]"
             type="button"
-            :title="`Продати по ціні ${sellPrice}`"
+            :title="`Продати по ціні ${addingSpaces(sellPrice)}`"
             :disabled="sellPrice.length === 0"
             @click="sell"
         >

@@ -46,7 +46,19 @@
 
         <div class="grid grid-cols-2 md:grid-cols-1 gap-4">
             <div class="flex flex-col gap-4 md:order-last md:gap-2">
-                <ExpenseInfo :debt="user.debt" :expenses="expenses" />
+                <ExpenseInfo :debt="user.debt" :expenses="expenses" @repay="repayDebt" />
+                <InfoModal
+                    :show="showModalDebt"
+                    title="Цікаво..."
+                    text="Перший раз бачу такого дивака який намагається повернути більш ніж брав. Нам чужого не треба."
+                    @cancel="showModalDebt = false"
+                />
+                <InfoModal
+                    :show="showModalCash"
+                    title="Ай-яй-яй..."
+                    text="Ми таких хитрунів здалеку бачимо. Будуть гроші повертайся."
+                    @cancel="showModalCash = false"
+                />
 
                 <!-- Витрати -->
                 <Costs
@@ -105,10 +117,10 @@
 
         <UserActions :isSavedUser="!!savedUser" @disable:storage="disableStorage" />
         <InfoModal
-            :show="showModal"
+            :show="showModalSaveInterval"
             title="Попередження."
             text="Автоматичне зберігання вимкнено."
-            @cancel="showModal = false"
+            @cancel="showModalSaveInterval = false"
         />
     </form>
 </template>
@@ -203,6 +215,15 @@ const expenses = computed(() => {
     user.credits.map(credit => sum += credit.payment);
     return sum;
 });
+
+const showModalDebt = ref(false);
+const showModalCash = ref(false);
+const repayDebt = (debt) => {
+    if (debt > user.debt) return showModalDebt.value = true;
+    if (debt > user.cash) return showModalCash.value = true;
+    user.debt -= debt;
+    user.cash -= debt;
+};
 
 const addRent = (rent) => user.rent = rent;
 const editRent = () => user.rent = 0;
@@ -307,11 +328,11 @@ const submit = () => {
     savedUser.value = localStorage.getItem('user');
 };
 const saveInterval = ref(true);
-const showModal = ref(false);
+const showModalSaveInterval = ref(false);
 const disableStorage = () => {
     saveInterval.value = false;
-    showModal.value = true;
-    setTimeout(() => showModal.value = false, 1000);
+    showModalSaveInterval.value = true;
+    setTimeout(() => showModalSaveInterval.value = false, 1000);
 };
 setInterval(() => saveInterval.value && submit(), 59000);
 </script>

@@ -46,7 +46,7 @@
                         addIncome.length === 0 && 'cursor-not-allowed',
                     ]"
                     type="button"
-                    :title="`Збільшити прибуток на ${addIncome}`"
+                    :title="`Збільшити прибуток на ${addingSpaces(addIncome)}`"
                     :disabled="addIncome.length === 0"
                     @click="increment"
                 >
