@@ -4,7 +4,12 @@
         @submit.prevent="submit"
     >
         <div class="grid grid-cols-2 md:grid-cols-1 gap-4 md:gap-2">
-            <UserIdentification :userProp="user" @add:name="addName" @add:profession="addProfession" />
+            <UserIdentification
+                :userProp="user"
+                @add:name="addName"
+                @add:gender="addGender"
+                @add:profession="addProfession"
+            />
         </div>
 
         <button
@@ -31,10 +36,13 @@
             wrapClasses="mx-auto"
             labelClasses="text-lg font-bold text-primary"
             label="Грошовий потік:"
-            :value="cashFlow"
             getting
             @get="getCashFlow"
-        />
+        >
+            <span class="ml-2 text-slate-800">
+                {{ addingSpaces(cashFlow) }}
+            </span>
+        </InfoField>
 
         <div class="grid grid-cols-2 md:grid-cols-1 gap-4">
             <div class="flex flex-col gap-4 md:order-last md:gap-2">
@@ -95,7 +103,13 @@
             </div>
         </div>
 
-        <UserActions :isSavedUser="!!savedUser" />
+        <UserActions :isSavedUser="!!savedUser" @disable:storage="disableStorage" />
+        <InfoModal
+            :show="showModal"
+            title="Попередження."
+            text="Автоматичне зберігання вимкнено."
+            @cancel="showModal = false"
+        />
     </form>
 </template>
 
@@ -114,11 +128,14 @@ import IncomeInfo from './modules/IncomeInfo.vue';
 import Incomes from './modules/Incomes/Index.vue';
 import Shares from './modules/Shares/Index.vue';
 import UserActions from './modules/UserActions.vue';
+import InfoModal from './plugins/InfoModal.vue';
 import SaveIcon from '../icons/SaveIcon.vue';
+import { addingSpaces } from '../../helpers/formating-values.js';
 
 const savedUser = ref(localStorage.getItem('user'));
 const user = savedUser.value ? reactive(JSON.parse(savedUser.value)) : reactive({
     name: '',
+    gender: '',
     profession: '',
     debt: 0,
     rent: 0,
@@ -153,6 +170,7 @@ const user = savedUser.value ? reactive(JSON.parse(savedUser.value)) : reactive(
 });
 
 const addName = (name) => user.name = name;
+const addGender = (gender) => user.gender = gender;
 const addProfession = (profession) => user.profession = profession;
 
 const decrement = (transaction) => {
@@ -268,5 +286,12 @@ const submit = () => {
     localStorage.setItem('user', JSON.stringify(user));
     savedUser.value = localStorage.getItem('user');
 };
-setInterval(submit, 59000);
+const saveInterval = ref(true);
+const showModal = ref(false);
+const disableStorage = () => {
+    saveInterval.value = false;
+    showModal.value = true;
+    setTimeout(() => showModal.value = false, 1000);
+};
+setInterval(() => saveInterval.value && submit(), 59000);
 </script>

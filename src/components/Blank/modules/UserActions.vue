@@ -19,7 +19,7 @@
 
     <transition>
         <button
-            v-if="isSavedUser"
+            v-if="isSavedUser && !saveInterval"
             class="
                 fixed md:static
                 left-10 bottom-10
@@ -48,6 +48,28 @@
         @confirm="reset"
         @cancel="showModal = false"
     />
+
+    <transition>
+        <button
+            v-if="saveInterval"
+            class="
+                fixed md:static
+                left-10 bottom-10
+                p-4
+                flex items-center justify-center
+                shadow hover:shadow-lg
+                rounded-full md:rounded-md
+                bg-opposite
+                outline-0
+                transition-all duration-300
+            "
+            type="button"
+            title="Вимкнути зберігання"
+            @click="$emit('disable:storage')"
+        >
+            <SaveIcon width="30px" height="30px" color="fill-white" />
+        </button>
+    </transition>
 </template>
 
 <script setup>
@@ -64,6 +86,9 @@ defineProps({
 });
 
 const showModal = ref(false);
+
+const saveInterval = ref(true);
+setInterval(() => saveInterval.value = false, 5000);
 
 const reset = () => {
     localStorage.removeItem('user');

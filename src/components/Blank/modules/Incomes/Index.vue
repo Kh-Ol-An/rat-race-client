@@ -16,10 +16,13 @@
         v-if="user.salary > 0"
         labelClasses="text-additional"
         label="Зарплата:"
-        :value="user.salary"
         editable
         @edit="$emit('edit:salary')"
-    />
+    >
+        <span class="ml-2 text-slate-800">
+            {{ addingSpaces(user.salary) }}
+        </span>
+    </InfoField>
 
     <!-- Малий -->
     <InputField
@@ -171,6 +174,7 @@ import InputField from '../../plugins/InputField.vue';
 import BusinessHead from './BusinessHead.vue';
 import Business from './Business.vue';
 import InfoModal from '../../plugins/InfoModal.vue';
+import { addingSpaces } from '../../../../helpers/formating-values.js';
 
 const props = defineProps({
     userProp: {

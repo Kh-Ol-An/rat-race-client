@@ -3,9 +3,7 @@
         <span :class="labelClasses">
             {{ label }}
         </span>
-        <span class="ml-2 text-slate-800">
-            {{ typeof value === 'number' ? addingSpaces(value) : value }}
-        </span>
+        <slot></slot>
         <button
             v-if="editable"
             class="ml-2 outline-0"
@@ -30,7 +28,6 @@
 <script setup>
 import EditIcon from '../../icons/EditIcon.vue';
 import MoneyIcon from '../../icons/MoneyIcon.vue';
-import { addingSpaces } from '../../../helpers/formating-values.js';
 
 defineProps({
     wrapClasses: {
@@ -43,10 +40,6 @@ defineProps({
     },
     label: {
         type: String,
-        required: true,
-    },
-    value: {
-        type: [String, Number],
         required: true,
     },
     editable: {
