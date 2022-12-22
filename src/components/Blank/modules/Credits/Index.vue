@@ -1,6 +1,6 @@
 <template>
     <h2 class="px-4 text-xl font-bold text-opposite text-center">Виплати за кредитами</h2>
-    <InputCredit @add="add" />
+    <Input @add="add" />
     <ul v-if="credits.length > 0">
         <li class="grid grid-cols-4 gap-2 border-b-2 border-b-silver-900 text-opposite font-bold">
             <span>
@@ -16,7 +16,7 @@
                 Термін
             </span>
         </li>
-        <CreditInfo
+        <Info
             v-for="{ id, name, body, payment, quantity } in credits"
             :key="id"
             :name="name"
@@ -28,8 +28,8 @@
 </template>
 
 <script setup>
-import InputCredit from '../plugins/InputCredit.vue';
-import CreditInfo from '../plugins/CreditInfo.vue';
+import Input from './Input.vue';
+import Info from './Info.vue';
 
 defineProps({
     credits: {

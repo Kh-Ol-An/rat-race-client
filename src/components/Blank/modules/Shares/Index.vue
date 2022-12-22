@@ -11,18 +11,22 @@
         @add="add"
     />
     <ul v-if="user.shares.gc.length > 0" class="flex flex-col gap-2">
-        <AssetHead :isSell="false" firstTitle="Ціна" secondTitle="Кількість" thirdTitle="Вартість" />
-        <ListItem
+        <PackagesHead />
+        <Package
             v-for="{id, price, quantity, cost} in user.shares.gc"
             :key="id"
-            :firstValue="price"
-            :secondValue="quantity"
-            :thirdValue="cost"
+            :id="id"
+            subType="gc"
+            :price="price"
+            :quantity="quantity"
+            :cost="cost"
+            @sell="sellPackage"
         />
-        <AssetTotal
+        <PackagesTotal
             :userShare="user.shares.gc"
+            subType="gc"
             confirmationModalText="Ти впевнений що хочешь продати всі свої акції GC?"
-            @sell="sellGc"
+            @sell="sellAll"
         />
     </ul>
 
@@ -36,18 +40,22 @@
         @add="add"
     />
     <ul v-if="user.shares.shchun.length > 0" class="flex flex-col gap-2">
-        <AssetHead :isSell="false" firstTitle="Ціна" secondTitle="Кількість" thirdTitle="Вартість" />
-        <ListItem
+        <PackagesHead />
+        <Package
             v-for="{id, price, quantity, cost} in user.shares.shchun"
             :key="id"
-            :firstValue="price"
-            :secondValue="quantity"
-            :thirdValue="cost"
+            :id="id"
+            subType="shchun"
+            :price="price"
+            :quantity="quantity"
+            :cost="cost"
+            @sell="sellPackage"
         />
-        <AssetTotal
+        <PackagesTotal
             :userShare="user.shares.shchun"
+            subType="shchun"
             confirmationModalText="Ти впевнений що хочешь продати всі свої акції ЩУН?"
-            @sell="sellShchun"
+            @sell="sellAll"
         />
     </ul>
 
@@ -61,18 +69,22 @@
         @add="add"
     />
     <ul v-if="user.shares.to.length > 0" class="flex flex-col gap-2">
-        <AssetHead :isSell="false" firstTitle="Ціна" secondTitle="Кількість" thirdTitle="Вартість" />
-        <ListItem
+        <PackagesHead />
+        <Package
             v-for="{id, price, quantity, cost} in user.shares.to"
             :key="id"
-            :firstValue="price"
-            :secondValue="quantity"
-            :thirdValue="cost"
+            :id="id"
+            subType="to"
+            :price="price"
+            :quantity="quantity"
+            :cost="cost"
+            @sell="sellPackage"
         />
-        <AssetTotal
+        <PackagesTotal
             :userShare="user.shares.to"
+            subType="to"
             confirmationModalText="Ти впевнений що хочешь продати всі свої акції TO?"
-            @sell="sellTo"
+            @sell="sellAll"
         />
     </ul>
 
@@ -86,28 +98,32 @@
         @add="add"
     />
     <ul v-if="user.shares.cst.length > 0" class="flex flex-col gap-2">
-        <AssetHead :isSell="false" firstTitle="Ціна" secondTitle="Кількість" thirdTitle="Вартість" />
-        <ListItem
+        <PackagesHead />
+        <Package
             v-for="{id, price, quantity, cost} in user.shares.cst"
             :key="id"
-            :firstValue="price"
-            :secondValue="quantity"
-            :thirdValue="cost"
+            :id="id"
+            subType="cst"
+            :price="price"
+            :quantity="quantity"
+            :cost="cost"
+            @sell="sellPackage"
         />
-        <AssetTotal
+        <PackagesTotal
             :userShare="user.shares.cst"
+            subType="cst"
             confirmationModalText="Ти впевнений що хочешь продати всі свої акції CST?"
-            @sell="sellCst"
+            @sell="sellAll"
         />
     </ul>
 </template>
 
 <script setup>
 import { toRef } from "vue";
-import InputField from '../plugins/InputField.vue';
-import AssetHead from '../plugins/AssetHead.vue';
-import ListItem from '../plugins/ListItem.vue';
-import AssetTotal from '../plugins/AssetTotal.vue';
+import InputField from '../../plugins/InputField.vue';
+import PackagesHead from './PackagesHead.vue';
+import Package from './Package.vue';
+import PackagesTotal from './PackagesTotal.vue';
 
 const props = defineProps({
     userProp: {
@@ -118,12 +134,10 @@ const props = defineProps({
 
 const user = toRef(props, 'userProp');
 
-const emit = defineEmits([ 'add', 'sell' ]);
+const emit = defineEmits([ 'add', 'sell:package', 'sell:all' ]);
 
 const add = (subType, id, firstValue, secondValue) => emit('add', subType, id, firstValue, secondValue);
 
-const sellGc = sellCost => emit('sell', 'gc', sellCost);
-const sellShchun = sellCost => emit('sell', 'shchun', sellCost);
-const sellTo = sellCost => emit('sell', 'to', sellCost);
-const sellCst = sellCost => emit('sell', 'cst', sellCost);
+const sellPackage = (id, subType, sellPrice) => emit('sell:package', id, subType, sellPrice);
+const sellAll = (subType, sellPrice) => emit('sell:all', subType, sellPrice);
 </script>

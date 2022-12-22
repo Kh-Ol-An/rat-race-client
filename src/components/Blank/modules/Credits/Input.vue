@@ -25,8 +25,8 @@
 
 <script setup>
 import { ref } from "vue";
-import Input from './Input.vue';
-import Add from './Add.vue';
+import Input from '../../plugins/Input.vue';
+import Add from '../../plugins/Add.vue';
 
 const emit = defineEmits(['add']);
 

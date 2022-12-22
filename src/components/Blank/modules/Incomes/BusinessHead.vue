@@ -1,16 +1,10 @@
 <template>
-    <li :class="[
-        'relative pr-12 grid gap-2 text-secondary font-bold text-center',
-        thirdTitle.length > 0 ? 'grid-cols-10' : 'grid-cols-6',
-    ]">
-        <span class="col-span-3">
+    <li class="relative pr-12 grid grid-cols-2 items-center gap-2 text-secondary font-bold text-center">
+        <span>
             {{ firstTitle }}
         </span>
-        <span class="col-span-3">
+        <span>
             {{ secondTitle }}
-        </span>
-        <span v-if="thirdTitle.length > 0" class="col-span-4">
-            {{ thirdTitle }}
         </span>
         <button
             v-if="isSell"
@@ -39,8 +33,8 @@
 
 <script setup>
 import { ref } from "vue";
-import ConfirmationModal from './ConfirmationModal.vue';
-import SellIcon from "../../icons/SellIcon.vue";
+import ConfirmationModal from '../../plugins/ConfirmationModal.vue';
+import SellIcon from "../../../icons/SellIcon.vue";
 
 defineProps({
     firstTitle: {
@@ -50,10 +44,6 @@ defineProps({
     secondTitle: {
         type: String,
         required: true,
-    },
-    thirdTitle: {
-        type: String,
-        default: '',
     },
     isSell: {
         type: Boolean,

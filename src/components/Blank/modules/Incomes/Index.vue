@@ -37,13 +37,13 @@
         @add="addBusiness"
     />
     <ul v-if="user.business.small.length > 0" class="flex flex-col gap-2">
-        <AssetHead
+        <BusinessHead
             firstTitle="Вартість"
             secondTitle="Доходи"
             confirmationModalText="Ти впевнений що хочешь продати всі свої малі бізнеси?"
             @sell="sell('small')"
         />
-        <ListItem
+        <Business
             v-for="({ id, price, income }, idx) in user.business.small"
             :key="id"
             :id="id"
@@ -51,7 +51,7 @@
             :firstValue="price"
             :secondValue="income"
             :idx="idx"
-            :listLength="user.business.small.length"
+            :businessLength="user.business.small.length"
             :lastBusiness="user.business.last"
             :disabledEdit="user.salary > 0"
             @increment="incrementIncomeBusiness"
@@ -75,20 +75,20 @@
         @add="addBusiness"
     />
     <ul v-if="user.business.middle.length > 0" class="flex flex-col gap-2">
-        <AssetHead
+        <BusinessHead
             firstTitle="Вартість"
             secondTitle="Доходи"
             confirmationModalText="Ти впевнений що хочешь продати всі свої середні бізнеси?"
             @sell="sell('middle')"
         />
-        <ListItem
+        <Business
             v-for="({ id, price, income }, idx)  in user.business.middle"
             :key="id"
             subType="middle"
             :firstValue="price"
             :secondValue="income"
             :idx="idx"
-            :listLength="user.business.middle.length"
+            :businessLength="user.business.middle.length"
             :lastBusiness="user.business.last"
             @delete="deleteBusiness('middle', id)"
         />
@@ -110,15 +110,15 @@
         @add="addBusiness"
     />
     <ul v-if="user.business.big.length > 0" class="flex flex-col gap-2">
-        <AssetHead firstTitle="Вартість" secondTitle="Доходи" :isSell="false" />
-        <ListItem
+        <BusinessHead firstTitle="Вартість" secondTitle="Доходи" :isSell="false" />
+        <Business
             v-for="({ id, price, income }, idx)  in user.business.big"
             :key="id"
             subType="big"
             :firstValue="price"
             :secondValue="income"
             :idx="idx"
-            :listLength="user.business.big.length"
+            :businessLength="user.business.big.length"
             :lastBusiness="user.business.last"
             @delete="deleteBusiness('big', id)"
         />
@@ -140,15 +140,15 @@
         @add="addBusiness"
     />
     <ul v-if="user.business.corrupt.length > 0" class="flex flex-col gap-2">
-        <AssetHead firstTitle="Вартість" secondTitle="Доходи" :isSell="false" />
-        <ListItem
+        <BusinessHead firstTitle="Вартість" secondTitle="Доходи" :isSell="false" />
+        <Business
             v-for="({ id, price, income }, idx) in user.business.corrupt"
             :key="id"
             subType="corrupt"
             :firstValue="price"
             :secondValue="income"
             :idx="idx"
-            :listLength="user.business.corrupt.length"
+            :businessLength="user.business.corrupt.length"
             :lastBusiness="user.business.last"
             @delete="deleteBusiness('corrupt', id)"
         />
@@ -157,12 +157,12 @@
 
 <script setup>
 import { ref, toRef, computed } from 'vue';
-import Input from '../plugins/Input.vue';
-import Add from '../plugins/Add.vue';
-import InfoField from '../plugins/InfoField.vue';
-import InputField from '../plugins/InputField.vue';
-import AssetHead from '../plugins/AssetHead.vue';
-import ListItem from '../plugins/ListItem.vue';
+import Input from '../../plugins/Input.vue';
+import Add from '../../plugins/Add.vue';
+import InfoField from '../../plugins/InfoField.vue';
+import InputField from '../../plugins/InputField.vue';
+import BusinessHead from './BusinessHead.vue';
+import Business from './Business.vue';
 
 const props = defineProps({
     userProp: {

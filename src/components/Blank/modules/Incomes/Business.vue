@@ -1,25 +1,32 @@
 <template>
-    <li :class="[
-        'relative pr-12 grid items-center gap-2',
-        thirdValue ? 'grid-cols-10' : 'grid-cols-6'
-    ]">
-        <span class="col-span-3 text-silver-800 text-center whitespace-nowrap">
+    <li class="relative pr-12 grid grid-cols-2 items-center gap-2">
+        <span class="text-silver-800 text-center whitespace-nowrap">
             {{ addingSpaces(firstValue) }}
         </span>
-        <div class="col-span-3 mx-auto flex items-center gap-3">
+
+        <div class="mx-auto flex items-center gap-3">
             <span class="text-silver-800 text-center whitespace-nowrap">
                 {{ addingSpaces(secondValue) }}
             </span>
-            <Input
-                v-if="!addingIncome"
-                id="edit-value"
-                placeholder="Доходи"
-                smallLabel
-                v-model:value="additionalIncome"
-            />
+            <div v-if="showIncome" class="relative">
+                <Input
+                    id="edit-value"
+                    placeholder="Доходи"
+                    smallLabel
+                    v-model:value="addIncome"
+                />
+                <button
+                    class="absolute top-1/2 right-3 -translate-y-1/2 rotate-45 text-2xl font-bold text-opposite"
+                    type="button"
+                    title="Скасувати"
+                    @click="hidIncome"
+                >
+                    &#43;
+                </button>
+            </div>
             <div v-if="id" class="flex items-center justify-center">
                 <button
-                    v-if="addingIncome"
+                    v-if="!showIncome"
                     :class="[
                         'font-bold text-2xl outline-0',
                          disabledEdit ? 'text-slate-300 cursor-not-allowed' : 'text-secondary',
@@ -27,27 +34,29 @@
                     type="button"
                     title="Збільшити дохід"
                     :disabled="disabledEdit"
-                    @click="addingIncome = !addingIncome"
+                    @click="showIncome = true"
                 >
                     &#43;
                 </button>
                 <button
                     v-else
                     class="outline-0"
+                    :class="[
+                        'outline-0',
+                        addIncome.length === 0 && 'cursor-not-allowed',
+                    ]"
                     type="button"
-                    title="Зберегти"
+                    :title="`Збільшити прибуток на ${addIncome}`"
+                    :disabled="addIncome.length === 0"
                     @click="increment"
                 >
-                    <SaveIcon width="16px" height="16px" />
+                    <CheckIcon width="24px" height="24px" :color="addIncome.length === 0 ? 'fill-slate-300' : 'fill-primary'" />
                 </button>
             </div>
         </div>
-        <span v-if="thirdValue" class="col-span-4 text-silver-800 text-center whitespace-nowrap">
-            {{ addingSpaces(thirdValue) }}
-        </span>
         <button
             v-if="
-                idx === listLength - 1 &&
+                idx === businessLength - 1 &&
                 lastBusiness.length > 0 &&
                 lastBusiness[lastBusiness.length - 1] === subType
             "
@@ -76,10 +85,10 @@
 
 <script setup>
 import { ref } from 'vue';
-import Input from './Input.vue';
-import ConfirmationModal from './ConfirmationModal.vue';
-import SaveIcon from '../../icons/SaveIcon.vue';
-import { addingSpaces } from '../../../helpers/formating-values.js';
+import Input from '../../plugins/Input.vue';
+import ConfirmationModal from '../../plugins/ConfirmationModal.vue';
+import CheckIcon from '../../../icons/CheckIcon.vue';
+import { addingSpaces } from '../../../../helpers/formating-values.js';
 
 const props = defineProps({
     id: {
@@ -88,7 +97,7 @@ const props = defineProps({
     },
     subType: {
         type: String,
-        default: '',
+        required: true,
     },
     firstValue: {
         type: Number,
@@ -98,21 +107,17 @@ const props = defineProps({
         type: Number,
         required: true,
     },
-    thirdValue: {
-        type: Number,
-        default: null,
-    },
     idx: {
         type: Number,
-        default: null,
+        required: true,
     },
-    listLength: {
+    businessLength: {
         type: Number,
-        default: null,
+        required: true,
     },
     lastBusiness: {
         type: Array,
-        default: [],
+        required: true,
     },
     disabledEdit: {
         type: Boolean,
@@ -122,13 +127,16 @@ const props = defineProps({
 
 const emit = defineEmits([ 'increment' ]);
 
-const addingIncome = ref(true);
-const additionalIncome = ref('');
-
+const showIncome = ref(false);
+const addIncome = ref('');
+const hidIncome = () => {
+    showIncome.value = false;
+    addIncome.value = '';
+};
 const increment = () => {
-    addingIncome.value = !addingIncome.value;
-    emit('increment', props.subType, props.id, Number(additionalIncome.value));
-    additionalIncome.value = '';
+    showIncome.value = false;
+    emit('increment', props.subType, props.id, Number(addIncome.value));
+    addIncome.value = '';
 };
 
 const showModal = ref(false);

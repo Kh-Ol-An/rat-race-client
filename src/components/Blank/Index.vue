@@ -91,7 +91,7 @@
                 />
 
                 <!-- Акції -->
-                <Shares :userProp="user" @add="addShares" @sell="sellShares" />
+                <Shares :userProp="user" @add="addShares" @sell:package="sellSharesPackage" @sell:all="sellAllShares" />
             </div>
         </div>
 
@@ -109,10 +109,10 @@ import Costs from './modules/Costs.vue';
 import Riches from './modules/Riches.vue';
 import WhimsAndFancies from './modules/WhimsAndFancies.vue';
 import FamilyStatus from './modules/FamilyStatus.vue';
-import Credits from './modules/Credits.vue';
+import Credits from './modules/Credits/Index.vue';
 import IncomeInfo from './modules/IncomeInfo.vue';
-import Incomes from './modules/Incomes.vue';
-import Shares from './modules/Shares.vue';
+import Incomes from './modules/Incomes/Index.vue';
+import Shares from './modules/Shares/Index.vue';
 import UserActions from './modules/UserActions.vue';
 import SaveIcon from '../icons/SaveIcon.vue';
 
@@ -250,10 +250,14 @@ const sellBusiness = subType => {
 
 const addShares = (subType, id, price, quantity) =>
     user.shares[subType].push({ id, price, quantity, cost: price * quantity });
-const sellShares = (subType, sellCost) => {
-    user.cash += sellCost;
+const sellSharesPackage = (id, subType, sellPrice) => {
+    user.cash += sellPrice;
+    user.shares[subType] = user.shares[subType].filter(share => share.id !== id);
+};
+const sellAllShares = (subType, sellPrice) => {
+    user.cash += sellPrice;
     user.shares[subType] = [];
-};1
+};
 
 const submit = () => {
     console.log('user: ', user);
