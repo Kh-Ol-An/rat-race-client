@@ -1,7 +1,7 @@
 <template>
     <transition>
         <div v-if="show" class="fixed top-0 right-0 bottom-0 left-0 z-40 flex items-center justify-center">
-            <div class="absolute w-full h-full bg-black opacity-60" @click="$emit('cansel')"></div>
+            <div class="absolute w-full h-full bg-black opacity-60" @click="$emit('cancel')"></div>
 
             <div class="relative z-50 py-4 px-6 max-w-lg shadow-lg rounded-2xl bg-white">
                 <button
@@ -15,7 +15,7 @@
                 "
                     type="button"
                     title="Банкротство"
-                    @click="$emit('cansel')"
+                    @click="$emit('cancel')"
                 >
                     &#43;
                 </button>
@@ -24,6 +24,7 @@
 
                 <div class="mt-4 flex items-center justify-center gap-6">
                     <button
+                        v-if="confirm.length > 0"
                         class="p-2 text-lg text-opposite font-bold outline-0"
                         type="button"
                         :title="confirm"
@@ -34,10 +35,10 @@
                     <button
                         class="p-2 text-lg text-primary font-bold outline-0"
                         type="button"
-                        :title="cansel"
-                        @click="$emit('cansel')"
+                        :title="cancel"
+                        @click="$emit('cancel')"
                     >
-                        {{ cansel }}
+                        {{ cancel }}
                     </button>
                 </div>
             </div>
@@ -55,17 +56,17 @@ const props = defineProps({
     },
     confirm: {
         type: String,
-        default: 'Так',
+        default: '',
     },
-    cansel: {
+    cancel: {
         type: String,
         default: 'Ні',
     },
 });
 
-const emit = defineEmits([ 'cansel' ]);
+const emit = defineEmits([ 'cancel' ]);
 
-const escapeHandler = (e) => e.key === 'Escape' && emit('cansel');
+const escapeHandler = (e) => e.key === 'Escape' && emit('cancel');
 
 watch(
     () => props.show,

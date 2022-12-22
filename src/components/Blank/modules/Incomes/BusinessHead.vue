@@ -26,7 +26,7 @@
             :text="confirmationModalText"
             confirm="Продати"
             @confirm="sell"
-            @cansel="showModal = false"
+            @cancel="showModal = false"
         />
     </li>
 </template>

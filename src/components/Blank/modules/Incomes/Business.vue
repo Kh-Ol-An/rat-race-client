@@ -78,7 +78,7 @@
             :show="showModal"
             text="Ти впевнений шо хочешь видалити останній відкритий бізнес?"
             @confirm="$emit('delete')"
-            @cansel="showModal = false"
+            @cancel="showModal = false"
         />
     </li>
 </template>

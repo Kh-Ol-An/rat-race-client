@@ -46,7 +46,7 @@
             І навіть найголовніший розробник не зможе їх повернути.
         "
         @confirm="reset"
-        @cansel="showModal = false"
+        @cancel="showModal = false"
     />
 </template>
 

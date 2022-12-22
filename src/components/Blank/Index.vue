@@ -233,6 +233,7 @@ const addSalary = (salary) => user.salary = salary;
 const editSalary = () => user.salary = 0;
 const addBusiness = (subType, id, price, income) => {
     user.business[subType].push({id, price, income});
+    user.cash -= price;
     user.business.last.push(subType);
 };
 const incrementIncomeBusiness = (subType, id, income) => {
@@ -248,8 +249,11 @@ const sellBusiness = subType => {
     user.business[subType] = [];
 };
 
-const addShares = (subType, id, price, quantity) =>
-    user.shares[subType].push({ id, price, quantity, cost: price * quantity });
+const addShares = (subType, id, price, quantity) => {
+    const cost = price * quantity;
+    user.shares[subType].push({id, price, quantity, cost});
+    user.cash -= cost;
+};
 const sellSharesPackage = (id, subType, sellPrice) => {
     user.cash += sellPrice;
     user.shares[subType] = user.shares[subType].filter(share => share.id !== id);

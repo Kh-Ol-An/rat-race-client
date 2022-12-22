@@ -1,5 +1,5 @@
 <template>
-    <Modal :show="show" :confirm="confirm" @confirm="$emit('confirm')" @cancel="$emit('cancel')">
+    <Modal :show="show" :cancel="cancel" @cancel="$emit('cancel')">
         <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
             {{ title }}
         </h4>
@@ -19,15 +19,15 @@ const props = defineProps({
     },
     title: {
         type: String,
-        default: 'Увага!!!',
+        default: 'Інформація!',
     },
     text: {
         type: String,
-        default: 'Ти підтверджуєш свою дію?',
+        default: 'Будь більш уважним!',
     },
-    confirm: {
+    cancel: {
         type: String,
-        default: 'Видалити',
+        default: 'Зрозумів',
     },
 });
 </script>

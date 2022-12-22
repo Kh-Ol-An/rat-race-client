@@ -116,14 +116,22 @@
             @sell="sellAll"
         />
     </ul>
+
+    <InfoModal
+        :show="showModal"
+        title="Це не можливо!"
+        text="Куди ти сунешся жебрак? Акції він зібрався купляти... Їди гроші заробляй!"
+        @cancel="showModal = false"
+    />
 </template>
 
 <script setup>
-import { toRef } from "vue";
+import {ref, toRef} from "vue";
 import InputField from '../../plugins/InputField.vue';
 import PackagesHead from './PackagesHead.vue';
 import Package from './Package.vue';
 import PackagesTotal from './PackagesTotal.vue';
+import InfoModal from '../../plugins/InfoModal.vue';
 
 const props = defineProps({
     userProp: {
@@ -136,7 +144,12 @@ const user = toRef(props, 'userProp');
 
 const emit = defineEmits([ 'add', 'sell:package', 'sell:all' ]);
 
-const add = (subType, id, firstValue, secondValue) => emit('add', subType, id, firstValue, secondValue);
+const showModal = ref(false);
+
+const add = (subType, id, firstValue, secondValue) => {
+    if (user.value.cash < Number(firstValue) * Number(secondValue)) return showModal.value = true;
+    emit('add', subType, id, firstValue, secondValue);
+};
 
 const sellPackage = (id, subType, sellPrice) => emit('sell:package', id, subType, sellPrice);
 const sellAll = (subType, sellPrice) => emit('sell:all', subType, sellPrice);

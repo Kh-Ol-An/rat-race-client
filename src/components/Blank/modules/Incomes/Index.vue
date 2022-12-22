@@ -153,6 +153,13 @@
             @delete="deleteBusiness('corrupt', id)"
         />
     </ul>
+
+    <InfoModal
+        :show="showModal"
+        title="Це не можливо!"
+        text="Куди ти сунешся жебрак? Бізнес він зібрався купляти... Їди гроші заробляй!"
+        @cancel="showModal = false"
+    />
 </template>
 
 <script setup>
@@ -163,6 +170,7 @@ import InfoField from '../../plugins/InfoField.vue';
 import InputField from '../../plugins/InputField.vue';
 import BusinessHead from './BusinessHead.vue';
 import Business from './Business.vue';
+import InfoModal from '../../plugins/InfoModal.vue';
 
 const props = defineProps({
     userProp: {
@@ -185,7 +193,12 @@ const salaryDisabled = computed(
         (user.value.business.big.length > 0 && user.value.business.corrupt.length > 0)
 );
 
-const addBusiness = (subType, id, price, income) => emit('add:business', subType, id, price, income);
+const showModal = ref(false);
+
+const addBusiness = (subType, id, price, income) => {
+    if (user.value.cash < price) return showModal.value = true;
+    emit('add:business', subType, id, price, income);
+};
 const incrementIncomeBusiness = (subType, id, income) => emit('increment:income', subType, id, income);
 const deleteBusiness = (subType, id) => emit('delete:business', subType, id);
 const sell = subType => emit('sell', subType);
