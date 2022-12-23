@@ -21,19 +21,25 @@
         >
             <SellIcon width="24px" height="24px" color="fill-primary" />
         </button>
-        <ConfirmationModal
+        <Modal
             :show="showModal"
-            :text="confirmationModalText"
             confirm="Продати"
             @confirm="sell"
             @cancel="showModal = false"
-        />
+        >
+            <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
+                Увага!!!
+            </h4>
+            <p class="mx-auto mt-4 text-lg font-normal text-slate-800 text-center">
+                {{ confirmationModalText }}
+            </p>
+        </Modal>
     </li>
 </template>
 
 <script setup>
 import { ref } from "vue";
-import ConfirmationModal from '../../plugins/ConfirmationModal.vue';
+import Modal from '../../plugins/Modal.vue';
 import SellIcon from "../../../icons/SellIcon.vue";
 
 defineProps({

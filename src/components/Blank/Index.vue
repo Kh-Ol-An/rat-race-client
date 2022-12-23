@@ -47,20 +47,27 @@
         <div class="grid grid-cols-2 md:grid-cols-1 gap-4">
             <div class="flex flex-col gap-4 md:order-last md:gap-2">
                 <ExpenseInfo :debt="user.debt" :expenses="expenses" @repay="repayDebt" />
-                <InfoModal
-                    :show="showModalRepay"
-                    :title="modalRepayTitle"
-                    :text="modalRepayText"
-                    @cancel="showModalRepay = false"
-                />
-                <InfoModal
+                <Modal :show="showModalRepay" cancel="Зрозумів" @cancel="showModalRepay = false">
+                    <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
+                        {{ modalRepayTitle }}
+                    </h4>
+                    <p class="mx-auto mt-4 text-lg font-normal text-slate-800 text-center">
+                        {{ modalRepayText }}
+                    </p>
+                </Modal>
+                <Modal
                     :show="showModalDebt"
-                    title="Дуже прикро..."
-                    text="Ти програв. Але не вмер. Не засмучуйся. Бери нову професію і починай спочатку :)"
                     cancel="Спочатку"
                     onlyCancelAction
                     @cancel="restart"
-                />
+                >
+                    <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
+                        Дуже прикро...
+                    </h4>
+                    <p class="mx-auto mt-4 text-lg font-normal text-slate-800 text-center">
+                        Ти програв. Але не вмер. Не засмучуйся. Бери нову професію і починай спочатку :)
+                    </p>
+                </Modal>
 
                 <!-- Витрати -->
                 <Costs
@@ -120,12 +127,14 @@
         </div>
 
         <UserActions :isSavedUser="!!savedUser" @restart="restart" @disable:storage="disableStorage" />
-        <InfoModal
-            :show="showModalSaveInterval"
-            title="Попередження."
-            text="Автоматичне зберігання вимкнено."
-            @cancel="showModalSaveInterval = false"
-        />
+        <Modal :show="showModalSaveInterval" cancel="Зрозумів" @cancel="showModalSaveInterval = false">
+            <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
+                Попередження.
+            </h4>
+            <p class="mx-auto mt-4 text-lg font-normal text-slate-800 text-center">
+                Автоматичне зберігання вимкнено.
+            </p>
+        </Modal>
     </form>
 </template>
 
@@ -144,7 +153,7 @@ import IncomeInfo from './modules/IncomeInfo.vue';
 import Incomes from './modules/Incomes/Index.vue';
 import Shares from './modules/Shares/Index.vue';
 import UserActions from './modules/UserActions.vue';
-import InfoModal from './plugins/InfoModal.vue';
+import Modal from './plugins/Modal.vue';
 import SaveIcon from '../icons/SaveIcon.vue';
 import { addingSpaces } from '../../helpers/formating-values.js';
 

@@ -8,7 +8,7 @@
 
         <div v-if="dismissal">
             <button
-                class="ml-4 outline-0"
+                class="ml-4 px-2 rounded shadow bg-opposite text-white font-bold outline-0"
                 type="button"
                 title="Звільнили"
                 @click="$emit('fired')"
@@ -16,7 +16,7 @@
                 Звільнили
             </button>
             <button
-                class="ml-4 outline-0"
+                class="ml-4 px-2 rounded shadow bg-secondary text-white font-bold outline-0"
                 type="button"
                 title="Звільнився"
                 @click="$emit('quit')"

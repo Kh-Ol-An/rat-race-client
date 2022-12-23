@@ -149,12 +149,14 @@
         />
     </ul>
 
-    <InfoModal
-        :show="showModal"
-        title="Це не можливо!"
-        text="Куди ти сунешся жебрак? Бізнес він зібрався купляти... Іди гроші заробляй!"
-        @cancel="showModal = false"
-    />
+    <Modal :show="showModal" cancel="Зрозумів" @cancel="showModal = false">
+        <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
+            Це не можливо!
+        </h4>
+        <p class="mx-auto mt-4 text-lg font-normal text-slate-800 text-center">
+            Куди ти сунешся жебрак? Бізнес він зібрався купляти... Іди гроші заробляй!
+        </p>
+    </Modal>
 </template>
 
 <script setup>
@@ -165,7 +167,7 @@ import InfoField from '../../plugins/InfoField.vue';
 import InputField from '../../plugins/InputField.vue';
 import BusinessHead from './BusinessHead.vue';
 import Business from './Business.vue';
-import InfoModal from '../../plugins/InfoModal.vue';
+import Modal from '../../plugins/Modal.vue';
 import { addingSpaces } from '../../../../helpers/formating-values.js';
 
 const props = defineProps({

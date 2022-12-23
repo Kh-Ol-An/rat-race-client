@@ -38,16 +38,19 @@
             <ResetIcon width="30px" height="30px" />
         </button>
     </transition>
-    <ConfirmationModal
+    <Modal
         :show="showModal"
-        text="
-            Якщо ти тицьнеш 'Видалити', тебе вже нічого не врятує...
-            Усі ті циферки які ти так довго вводив, зникнуть.
-            І навіть найголовніший розробник не зможе їх повернути.
-        "
+        confirm="Видалити"
         @confirm="$emit('restart')"
         @cancel="showModal = false"
-    />
+    >
+        <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
+            Увага!!!
+        </h4>
+        <p class="mx-auto mt-4 text-lg font-normal text-slate-800 text-center">
+            Якщо ти тицьнеш 'Видалити', тебе вже нічого не врятує... Усі ті циферки які ти так довго вводив, зникнуть. І навіть найголовніший розробник не зможе їх повернути.
+        </p>
+    </Modal>
 
     <transition>
         <button
@@ -74,7 +77,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import ConfirmationModal from '../plugins/ConfirmationModal.vue';
+import Modal from '../plugins/Modal.vue';
 import ResetIcon from '../../icons/ResetIcon.vue';
 import SaveIcon from '../../icons/SaveIcon.vue';
 

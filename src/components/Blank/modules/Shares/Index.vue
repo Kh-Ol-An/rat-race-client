@@ -25,7 +25,6 @@
         <PackagesTotal
             :userShare="user.shares.gc"
             subType="gc"
-            confirmationModalText="Ти впевнений що хочешь продати всі свої акції GC?"
             @sell="sellAll"
         />
     </ul>
@@ -54,7 +53,6 @@
         <PackagesTotal
             :userShare="user.shares.shchun"
             subType="shchun"
-            confirmationModalText="Ти впевнений що хочешь продати всі свої акції ЩУН?"
             @sell="sellAll"
         />
     </ul>
@@ -83,7 +81,6 @@
         <PackagesTotal
             :userShare="user.shares.to"
             subType="to"
-            confirmationModalText="Ти впевнений що хочешь продати всі свої акції TO?"
             @sell="sellAll"
         />
     </ul>
@@ -112,26 +109,27 @@
         <PackagesTotal
             :userShare="user.shares.cst"
             subType="cst"
-            confirmationModalText="Ти впевнений що хочешь продати всі свої акції CST?"
             @sell="sellAll"
         />
     </ul>
 
-    <InfoModal
-        :show="showModal"
-        title="Це не можливо!"
-        text="Куди ти сунешся жебрак? Акції він зібрався купляти... Іди гроші заробляй!"
-        @cancel="showModal = false"
-    />
+    <Modal :show="showModal" cancel="Зрозумів" @cancel="showModal = false">
+        <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
+            Це не можливо!
+        </h4>
+        <p class="mx-auto mt-4 text-lg font-normal text-slate-800 text-center">
+            Куди ти сунешся жебрак? Акції він зібрався купляти... Іди гроші заробляй!
+        </p>
+    </Modal>
 </template>
 
 <script setup>
-import {ref, toRef} from "vue";
+import { ref, toRef } from "vue";
 import InputField from '../../plugins/InputField.vue';
 import PackagesHead from './PackagesHead.vue';
 import Package from './Package.vue';
 import PackagesTotal from './PackagesTotal.vue';
-import InfoModal from '../../plugins/InfoModal.vue';
+import Modal from '../../plugins/Modal.vue';
 
 const props = defineProps({
     userProp: {
