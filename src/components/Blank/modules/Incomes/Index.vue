@@ -3,7 +3,7 @@
 
     <!-- Зарплата -->
     <div
-        v-if="user.salary === 0"
+        v-if="user.salary === 0 && savedSalary === 0"
         :class="[
             'flex items-center gap-3',
             salaryDisabled && 'pointer-events-none opacity-20',
@@ -13,11 +13,12 @@
         <Add :firstValue="salary" @add="$emit('add:salary', Number(salary))" />
     </div>
     <InfoField
-        v-if="user.salary > 0"
+        v-if="user.salary > 0 || savedSalary > 0"
         labelClasses="text-additional"
         label="Зарплата:"
-        editable
-        @edit="$emit('edit:salary')"
+        dismissal
+        @fired="fired"
+        @quit="quit"
     >
         <span class="ml-2 text-slate-800">
             {{ addingSpaces(user.salary) }}
@@ -44,17 +45,14 @@
             firstTitle="Вартість"
             secondTitle="Доходи"
             confirmationModalText="Ти впевнений що хочешь продати всі свої малі бізнеси?"
-            @sell="sell('small')"
+            @sell="sellBusiness('small')"
         />
         <Business
-            v-for="({ id, price, income }, idx) in user.business.small"
+            v-for="({ id, price, income }) in user.business.small"
             :key="id"
             :id="id"
-            subType="small"
             :firstValue="price"
             :secondValue="income"
-            :idx="idx"
-            :businessLength="user.business.small.length"
             :lastBusiness="user.business.last"
             :disabledEdit="user.salary > 0"
             @increment="incrementIncomeBusiness"
@@ -82,16 +80,14 @@
             firstTitle="Вартість"
             secondTitle="Доходи"
             confirmationModalText="Ти впевнений що хочешь продати всі свої середні бізнеси?"
-            @sell="sell('middle')"
+            @sell="sellBusiness('middle')"
         />
         <Business
-            v-for="({ id, price, income }, idx)  in user.business.middle"
+            v-for="({ id, price, income })  in user.business.middle"
             :key="id"
-            subType="middle"
+            :id="id"
             :firstValue="price"
             :secondValue="income"
-            :idx="idx"
-            :businessLength="user.business.middle.length"
             :lastBusiness="user.business.last"
             @delete="deleteBusiness('middle', id)"
         />
@@ -115,13 +111,11 @@
     <ul v-if="user.business.big.length > 0" class="flex flex-col gap-2">
         <BusinessHead firstTitle="Вартість" secondTitle="Доходи" :isSell="false" />
         <Business
-            v-for="({ id, price, income }, idx)  in user.business.big"
+            v-for="({ id, price, income })  in user.business.big"
             :key="id"
-            subType="big"
+            :id="id"
             :firstValue="price"
             :secondValue="income"
-            :idx="idx"
-            :businessLength="user.business.big.length"
             :lastBusiness="user.business.last"
             @delete="deleteBusiness('big', id)"
         />
@@ -145,13 +139,11 @@
     <ul v-if="user.business.corrupt.length > 0" class="flex flex-col gap-2">
         <BusinessHead firstTitle="Вартість" secondTitle="Доходи" :isSell="false" />
         <Business
-            v-for="({ id, price, income }, idx) in user.business.corrupt"
+            v-for="({ id, price, income }) in user.business.corrupt"
             :key="id"
-            subType="corrupt"
+            :id="id"
             :firstValue="price"
             :secondValue="income"
-            :idx="idx"
-            :businessLength="user.business.corrupt.length"
             :lastBusiness="user.business.last"
             @delete="deleteBusiness('corrupt', id)"
         />
@@ -181,15 +173,28 @@ const props = defineProps({
         type: Object,
         required: true,
     },
+    savedSalary: {
+        type: Number,
+        required: true,
+    },
 });
 
 const user = toRef(props, 'userProp');
 
-const emit = defineEmits([ 'add:business', 'increment:income', 'sell' ]);
+const emit = defineEmits([ 'fired:salary', 'quit:salary', 'add:business', 'increment:income', 'sell' ]);
 
 const salary = ref('');
+const fired = () => {
+    emit('fired:salary');
+    salary.value = '';
+};
+const quit = () => {
+    emit('quit:salary');
+    salary.value = '';
+};
 const salaryDisabled = computed(
     () =>
+        user.value.business.small.find(business => business.expanded) ||
         user.value.business.small.length > 1 ||
         user.value.business.middle.length > 1 ||
         user.value.business.big.length > 1 ||
@@ -203,7 +208,7 @@ const addBusiness = (subType, id, price, income) => {
     if (user.value.cash < price) return showModal.value = true;
     emit('add:business', subType, id, price, income);
 };
-const incrementIncomeBusiness = (subType, id, income) => emit('increment:income', subType, id, income);
+const incrementIncomeBusiness = (id, income) => emit('increment:income', id, income);
 const deleteBusiness = (subType, id) => emit('delete:business', subType, id);
-const sell = subType => emit('sell', subType);
+const sellBusiness = subType => emit('sell', subType);
 </script>

@@ -104,8 +104,10 @@
                 <!-- Доходи -->
                 <Incomes
                     :userProp="user"
+                    :savedSalary="savedSalary"
                     @add:salary="addSalary"
-                    @edit:salary="editSalary"
+                    @fired:salary="fired"
+                    @quit:salary="quit"
                     @add:business="addBusiness"
                     @increment:income="incrementIncomeBusiness"
                     @delete:business="deleteBusiness"
@@ -290,10 +292,17 @@ const income = computed(() => user.salary + passiveIncome.value);
 const cashFlow = computed(() => {
     return income.value - expenses.value;
 });
+const savedSalary = ref(0);
 const getCashFlow = () => {
     const result = user.cash + cashFlow.value;
+
+    if (savedSalary.value > 0) {
+        user.salary = savedSalary.value;
+        savedSalary.value = 0;
+    }
+
     if (result < 0) {
-        user.debt += Math.abs(result);
+        user.debt += Math.abs(result); // Math.abs(число) Перетворює негативне число на позитивне
         return user.cash = 0;
     }
 
@@ -301,15 +310,22 @@ const getCashFlow = () => {
 };
 
 const addSalary = (salary) => user.salary = salary;
-const editSalary = () => user.salary = 0;
+const fired = () => {
+    savedSalary.value = user.salary;
+    user.salary = 0;
+};
+const quit = () => user.salary = 0;
 const addBusiness = (subType, id, price, income) => {
     user.business[subType].push({id, price, income});
     user.cash -= price;
-    user.business.last.push(subType);
+    user.business.last.push(id);
 };
-const incrementIncomeBusiness = (subType, id, income) => {
-    user.business[subType].find(business => business.id === id && (business.income += income))
-};
+const incrementIncomeBusiness = (id, income) => user.business.small.find(business => {
+    if (business.id === id) {
+        business.expanded = true;
+        business.income += income;
+    }
+});
 const deleteBusiness = (subType, id) => {
     const removableIndex = user.business[subType].findIndex(business => business.id === id);
     removableIndex !== -1 && user.business[subType].splice(removableIndex, 1);

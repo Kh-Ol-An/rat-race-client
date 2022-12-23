@@ -3,16 +3,28 @@
         <span :class="labelClasses">
             {{ label }}
         </span>
+
         <slot></slot>
-        <button
-            v-if="editable"
-            class="ml-2 outline-0"
-            type="button"
-            title="Редагувати"
-            @click="$emit('edit')"
-        >
-            <EditIcon width="14px" height="14px" />
-        </button>
+
+        <div v-if="dismissal">
+            <button
+                class="ml-4 outline-0"
+                type="button"
+                title="Звільнили"
+                @click="$emit('fired')"
+            >
+                Звільнили
+            </button>
+            <button
+                class="ml-4 outline-0"
+                type="button"
+                title="Звільнився"
+                @click="$emit('quit')"
+            >
+                Звільнився
+            </button>
+        </div>
+
         <button
             v-if="getting"
             class="ml-4 outline-0"
@@ -26,7 +38,6 @@
 </template>
 
 <script setup>
-import EditIcon from '../../icons/EditIcon.vue';
 import MoneyIcon from '../../icons/MoneyIcon.vue';
 
 defineProps({
@@ -42,7 +53,7 @@ defineProps({
         type: String,
         required: true,
     },
-    editable: {
+    dismissal: {
         type: Boolean,
         default: false,
     },

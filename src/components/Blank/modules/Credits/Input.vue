@@ -3,7 +3,7 @@
         <Input
             id="credit-name"
             placeholder="Назва:"
-            typeText
+            type="text"
             smallLabel
             v-model:value="name"
         />

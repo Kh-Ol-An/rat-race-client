@@ -54,12 +54,9 @@
                 </button>
             </div>
         </div>
+
         <button
-            v-if="
-                idx === businessLength - 1 &&
-                lastBusiness.length > 0 &&
-                lastBusiness[lastBusiness.length - 1] === subType
-            "
+            v-if="lastBusiness[lastBusiness.length - 1] === id"
             class="
                 absolute
                 top-1/2 right-0
@@ -74,29 +71,32 @@
         >
             &#43;
         </button>
-        <ConfirmationModal
+        <Modal
             :show="showModal"
-            text="Ти впевнений шо хочешь видалити останній відкритий бізнес?"
+            confirm="Видалити"
             @confirm="$emit('delete')"
             @cancel="showModal = false"
-        />
+        >
+            <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
+                Увага!!!
+            </h4>
+            <p class="mx-auto mt-4 text-lg font-normal text-slate-800 text-center">
+                Ти впевнений шо хочешь видалити останній відкритий бізнес?
+            </p>
+        </Modal>
     </li>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import Input from '../../plugins/Input.vue';
-import ConfirmationModal from '../../plugins/ConfirmationModal.vue';
+import Modal from '../../plugins/Modal.vue';
 import CheckIcon from '../../../icons/CheckIcon.vue';
 import { addingSpaces } from '../../../../helpers/formating-values.js';
 
 const props = defineProps({
     id: {
         type: Number,
-        default: null,
-    },
-    subType: {
-        type: String,
         required: true,
     },
     firstValue: {
@@ -104,14 +104,6 @@ const props = defineProps({
         required: true,
     },
     secondValue: {
-        type: Number,
-        required: true,
-    },
-    idx: {
-        type: Number,
-        required: true,
-    },
-    businessLength: {
         type: Number,
         required: true,
     },
@@ -135,7 +127,7 @@ const hidIncome = () => {
 };
 const increment = () => {
     showIncome.value = false;
-    emit('increment', props.subType, props.id, Number(addIncome.value));
+    emit('increment', props.id, Number(addIncome.value));
     addIncome.value = '';
 };
 
