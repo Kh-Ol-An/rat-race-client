@@ -45,7 +45,7 @@
             Усі ті циферки які ти так довго вводив, зникнуть.
             І навіть найголовніший розробник не зможе їх повернути.
         "
-        @confirm="reset"
+        @confirm="$emit('restart')"
         @cancel="showModal = false"
     />
 
@@ -89,9 +89,4 @@ const showModal = ref(false);
 
 const saveInterval = ref(true);
 setInterval(() => saveInterval.value = false, 5000);
-
-const reset = () => {
-    localStorage.removeItem('user');
-    location.reload();
-};
 </script>

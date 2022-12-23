@@ -48,16 +48,18 @@
             <div class="flex flex-col gap-4 md:order-last md:gap-2">
                 <ExpenseInfo :debt="user.debt" :expenses="expenses" @repay="repayDebt" />
                 <InfoModal
-                    :show="showModalDebt"
-                    title="Цікаво..."
-                    text="Перший раз бачу такого дивака який намагається повернути більш ніж брав. Нам чужого не треба."
-                    @cancel="showModalDebt = false"
+                    :show="showModalRepay"
+                    :title="modalRepayTitle"
+                    :text="modalRepayText"
+                    @cancel="showModalRepay = false"
                 />
                 <InfoModal
-                    :show="showModalCash"
-                    title="Ай-яй-яй..."
-                    text="Ми таких хитрунів здалеку бачимо. Будуть гроші повертайся."
-                    @cancel="showModalCash = false"
+                    :show="showModalDebt"
+                    title="Дуже прикро..."
+                    text="Ти програв. Але не вмер. Не засмучуйся. Бери нову професію і починай спочатку :)"
+                    cancel="Спочатку"
+                    onlyCancelAction
+                    @cancel="restart"
                 />
 
                 <!-- Витрати -->
@@ -115,7 +117,7 @@
             </div>
         </div>
 
-        <UserActions :isSavedUser="!!savedUser" @disable:storage="disableStorage" />
+        <UserActions :isSavedUser="!!savedUser" @restart="restart" @disable:storage="disableStorage" />
         <InfoModal
             :show="showModalSaveInterval"
             title="Попередження."
@@ -216,14 +218,24 @@ const expenses = computed(() => {
     return sum;
 });
 
-const showModalDebt = ref(false);
-const showModalCash = ref(false);
+const showModalRepay = ref(false);
+const modalRepayTitle = ref('');
+const modalRepayText = ref('');
 const repayDebt = (debt) => {
-    if (debt > user.debt) return showModalDebt.value = true;
-    if (debt > user.cash) return showModalCash.value = true;
+    if (debt > user.debt) {
+        modalRepayTitle.value = 'Цікаво...';
+        modalRepayText.value = 'Перший раз бачу такого дивака який намагається повернути більш ніж брав. Нам чужого не треба.';
+        return showModalRepay.value = true;
+    }
+    if (debt > user.cash) {
+        modalRepayTitle.value = 'Ай-яй-яй...';
+        modalRepayText.value = 'Ми таких хитрунів здалеку бачимо. Будуть гроші повертайся.';
+        return showModalRepay.value = true;
+    }
     user.debt -= debt;
     user.cash -= debt;
 };
+const showModalDebt = computed(() => user.debt > 10000);
 
 const addRent = (rent) => user.rent = rent;
 const editRent = () => user.rent = 0;
@@ -320,6 +332,11 @@ const sellSharesPackage = (id, subType, sellPrice) => {
 const sellAllShares = (subType, sellPrice) => {
     increment(sellPrice);
     user.shares[subType] = [];
+};
+
+const restart = () => {
+    localStorage.removeItem('user');
+    location.reload();
 };
 
 const submit = () => {

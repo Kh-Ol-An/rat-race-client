@@ -1,5 +1,5 @@
 <template>
-    <Modal :show="show" :cancel="cancel" @cancel="$emit('cancel')">
+    <Modal :show="show" :cancel="cancel" :onlyCancelAction="onlyCancelAction" @cancel="$emit('cancel')">
         <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
             {{ title }}
         </h4>
@@ -28,6 +28,10 @@ const props = defineProps({
     cancel: {
         type: String,
         default: 'Зрозумів',
+    },
+    onlyCancelAction: {
+        type: Boolean,
+        default: false,
     },
 });
 </script>
