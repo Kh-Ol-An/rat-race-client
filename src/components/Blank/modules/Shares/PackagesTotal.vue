@@ -1,73 +1,28 @@
 <template>
     <li
         v-if="userShare.length > 1"
-        class="relative py-2 pr-12 grid grid-cols-12 items-center gap-2 border-t-2 border-b-silver-900 font-bold text-center"
+        class="relative py-2 pr-12 grid grid-cols-12 items-center gap-2 border-t-2 border-slate-300 font-bold text-center"
     >
-        <div v-if="showPrice" class="relative col-span-5 flex items-center gap-2">
-            <Input
-                id="sell-price"
-                placeholder="Ціна продажі"
-                smallLabel
-                v-model:value="sellPrice"
-            />
-            <button
-                class="absolute top-1/2 right-3 -translate-y-1/2 rotate-45 text-2xl font-bold text-opposite"
-                type="button"
-                title="Скасувати"
-                @click="hidPrice"
-            >
-                &#43;
-            </button>
+        <div class="col-span-7 flex items-center justify-center gap-2">
+            <span>
+                {{ addingSpaces(price) }}
+            </span>
+            <Sell inputId="sell-all-shares" @sell="sell" />
         </div>
-        <button
-            v-if="showPrice"
-            :class="[
-                'col-span-1',
-                'px-2',
-                'outline-0',
-                sellPrice.length === 0 && 'cursor-not-allowed',
-            ]"
-            type="button"
-            :title="`Продати по ціні ${addingSpaces(sellPrice)}`"
-            :disabled="sellPrice.length === 0"
-            @click="sell"
-        >
-            <CheckIcon width="24px" height="24px" :color="sellPrice.length === 0 ? 'fill-slate-300' : 'fill-primary'" />
-        </button>
-        <span v-else class="col-span-6">
-            {{ addingSpaces(price) }}
-        </span>
 
-        <span class="col-span-3">
+        <span class="col-span-2">
             {{ addingSpaces(quantity) }}
         </span>
 
         <span class="col-span-3">
             {{ addingSpaces(cost) }}
         </span>
-        <button
-            v-if="!showPrice"
-            class="
-                absolute
-                top-1/2 right-0
-                -translate-y-1/2
-                px-2
-                outline-0
-            "
-            type="button"
-            title="Продати все"
-            @click="showPrice = true"
-        >
-            <SellIcon width="24px" height="24px" color="fill-primary" />
-        </button>
     </li>
 </template>
 
 <script setup>
-import { computed, ref } from "vue";
-import Input from '../../plugins/Input.vue';
-import CheckIcon from "../../../icons/CheckIcon.vue";
-import SellIcon from "../../../icons/SellIcon.vue";
+import { computed } from "vue";
+import Sell from '../../plugins/Sell.vue';
 import { addingSpaces } from '../../../../helpers/formating-values.js';
 
 const props = defineProps({
@@ -94,11 +49,5 @@ const price = computed(() => {
     return `~${Math.round(result)}`;
 });
 
-const showPrice = ref(false);
-const sellPrice = ref('');
-const hidPrice = () => {
-    showPrice.value = false;
-    sellPrice.value = '';
-};
-const sell = () => emit('sell', props.subType, (quantity.value * Number(sellPrice.value)));
+const sell = (sellPrice) => emit('sell', props.subType, (quantity.value * sellPrice));
 </script>

@@ -12,17 +12,28 @@
         <Input v-model:value="salary" id="salary" placeholder="Зарплата" />
         <Add :firstValue="salary" @add="$emit('add:salary', Number(salary))" />
     </div>
-    <InfoField
-        v-if="user.salary > 0 || firedSalary > 0"
-        labelClasses="text-additional"
-        label="Зарплата:"
-        dismissal
-        @fired="fired"
-        @quit="quit"
-    >
+    <InfoField v-if="user.salary > 0 || firedSalary > 0" labelClasses="text-additional" label="Зарплата:">
         <span class="ml-2 text-slate-800">
             {{ addingSpaces(user.salary) }}
         </span>
+
+        <button
+            class="ml-4 px-2 rounded shadow bg-opposite text-white font-bold outline-0"
+            type="button"
+            title="Звільнили"
+            @click="fired"
+        >
+            Звільнили
+        </button>
+
+        <button
+            class="ml-4 px-2 rounded shadow bg-secondary text-white font-bold outline-0"
+            type="button"
+            title="Звільнитись"
+            @click="quit"
+        >
+            Звільнитись
+        </button>
     </InfoField>
 
     <!-- Малий -->

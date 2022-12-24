@@ -3,6 +3,7 @@
         <span class="ml-2 text-slate-800">
             {{ addingSpaces(debt) }}
         </span>
+
         <div v-if="showRepay" class="relative ml-6">
             <Input
                 id="repay-debt"
@@ -19,6 +20,7 @@
                 &#43;
             </button>
         </div>
+
         <button v-if="!showRepay" class="ml-4 outline-0" type="button" title="Повернути борг" @click="showRepay = true">
             <ReturnIcon
                 width="24px"
@@ -41,6 +43,7 @@
             <CheckIcon width="24px" height="24px" :color="repayDebt.length === 0 ? 'fill-slate-300' : 'fill-primary'" />
         </button>
     </InfoField>
+
     <InfoField labelClasses="text-opposite" label="Загальні витрати:">
         <span class="ml-2 text-slate-800">
             {{ addingSpaces(expenses) }}

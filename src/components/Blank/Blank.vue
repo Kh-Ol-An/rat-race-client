@@ -32,16 +32,19 @@
             <Transaction @decrement="decrement" @increment="increment" />
         </div>
 
-        <InfoField
-            wrapClasses="mx-auto"
-            labelClasses="text-lg font-bold text-primary"
-            label="Грошовий потік:"
-            getting
-            @get="getCashFlow"
-        >
+        <InfoField wrapClasses="mx-auto" labelClasses="text-lg font-bold text-primary" label="Грошовий потік:">
             <span class="ml-2 text-slate-800">
                 {{ addingSpaces(cashFlow) }}
             </span>
+
+            <button
+                class="ml-4 outline-0"
+                type="button"
+                title="Отримати"
+                @click="getCashFlow"
+            >
+                <MoneyIcon width="30px" height="30px" />
+            </button>
         </InfoField>
 
         <div class="grid grid-cols-2 md:grid-cols-1 gap-4">
@@ -121,6 +124,14 @@
 
                 <!-- Акції -->
                 <Shares :userProp="user" @add="addShares" @sell:package="sellSharesPackage" @sell:all="sellAllShares" />
+
+                <!-- Активи -->
+                <Assets
+                    :userProp="user"
+                    @buy:house="buyHouse"
+                    @sell:house="sellHouse"
+                    @sell:houses="sellHouses"
+                />
             </div>
         </div>
 
@@ -150,12 +161,14 @@ import Credits from './modules/Credits/Credits.vue';
 import IncomeInfo from './modules/IncomeInfo.vue';
 import Incomes from './modules/Incomes/Incomes.vue';
 import Shares from './modules/Shares/Shares.vue';
+import Assets from './modules/Assets/Assets.vue';
 import UserActions from './modules/UserActions.vue';
 import Modal from './plugins/Modal.vue';
 import SaveIcon from '../icons/SaveIcon.vue';
+import MoneyIcon from '../icons/MoneyIcon.vue';
 import { addingSpaces } from '../../helpers/formating-values.js';
 
-const savedUser = ref(localStorage.getItem('user'));
+const savedUser = computed(() => localStorage.getItem('user'));
 const user = savedUser.value ? reactive(JSON.parse(savedUser.value)) : reactive({
     name: '',
     gender: '',
@@ -193,6 +206,11 @@ const user = savedUser.value ? reactive(JSON.parse(savedUser.value)) : reactive(
         to: [],
         cst: [],
     },
+    assets: {
+        houses: [],
+        land: [],
+        corruptLand: [],
+    }
 });
 
 const addName = (name) => user.name = name;
@@ -376,13 +394,26 @@ const addShares = (subType, id, price, quantity) => {
     user.shares[subType].push({id, price, quantity, cost});
     user.cash -= cost;
 };
-const sellSharesPackage = (id, subType, sellPrice) => {
-    increment(sellPrice);
+const sellSharesPackage = (id, subType, price) => {
+    increment(price);
     user.shares[subType] = user.shares[subType].filter(share => share.id !== id);
 };
 const sellAllShares = (subType, sellPrice) => {
     increment(sellPrice);
     user.shares[subType] = [];
+};
+
+const buyHouse = (id, price) => {
+    user.assets.houses.push({ id, price });
+    user.cash -= price;
+};
+const sellHouse = (price, id) => {
+    increment(price);
+    user.assets.houses = user.assets.houses.filter(house => house.id !== id);
+};
+const sellHouses = (price) => {
+    increment(user.assets.houses.length * price);
+    user.assets.houses = [];
 };
 
 const restart = () => {
