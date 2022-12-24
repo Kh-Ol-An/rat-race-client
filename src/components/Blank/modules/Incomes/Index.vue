@@ -3,7 +3,7 @@
 
     <!-- Зарплата -->
     <div
-        v-if="user.salary === 0 && savedSalary === 0"
+        v-if="user.salary === 0 && firedSalary === 0"
         :class="[
             'flex items-center gap-3',
             salaryDisabled && 'pointer-events-none opacity-20',
@@ -13,7 +13,7 @@
         <Add :firstValue="salary" @add="$emit('add:salary', Number(salary))" />
     </div>
     <InfoField
-        v-if="user.salary > 0 || savedSalary > 0"
+        v-if="user.salary > 0 || firedSalary > 0"
         labelClasses="text-additional"
         label="Зарплата:"
         dismissal
@@ -175,7 +175,7 @@ const props = defineProps({
         type: Object,
         required: true,
     },
-    savedSalary: {
+    firedSalary: {
         type: Number,
         required: true,
     },

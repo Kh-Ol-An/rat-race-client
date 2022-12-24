@@ -111,7 +111,7 @@
                 <!-- Доходи -->
                 <Incomes
                     :userProp="user"
-                    :savedSalary="savedSalary"
+                    :firedSalary="firedSalary"
                     @add:salary="addSalary"
                     @fired:salary="fired"
                     @quit:salary="quit"
@@ -301,13 +301,13 @@ const income = computed(() => user.salary + passiveIncome.value);
 const cashFlow = computed(() => {
     return income.value - expenses.value;
 });
-const savedSalary = ref(0);
+const firedSalary = ref(0);
 const getCashFlow = () => {
     const result = user.cash + cashFlow.value;
 
-    if (savedSalary.value > 0) {
-        user.salary = savedSalary.value;
-        savedSalary.value = 0;
+    if (firedSalary.value > 0) {
+        user.salary = firedSalary.value;
+        firedSalary.value = 0;
     }
 
     if (result < 0) {
@@ -320,10 +320,14 @@ const getCashFlow = () => {
 
 const addSalary = (salary) => user.salary = salary;
 const fired = () => {
-    savedSalary.value = user.salary;
+    firedSalary.value = user.salary;
     user.salary = 0;
 };
-const quit = () => user.salary = 0;
+const quitSalary = ref(0);
+const quit = () => {
+    quitSalary.value = user.salary;
+    user.salary = 0;
+};
 const addBusiness = (subType, id, price, income) => {
     user.business[subType].push({id, price, income});
     user.cash -= price;
@@ -339,6 +343,8 @@ const deleteBusiness = (subType, id) => {
     const removableIndex = user.business[subType].findIndex(business => business.id === id);
     removableIndex !== -1 && user.business[subType].splice(removableIndex, 1);
     user.business.last.pop();
+
+    quitSalary.value > 0 && income.value === 0 && (user.salary = quitSalary.value);
 };
 const sellBusiness = subType => {
     user.cash = user.business[subType].reduce((total, business) => total += business.price, user.cash);
