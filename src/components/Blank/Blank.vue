@@ -73,11 +73,9 @@
                 <Costs
                     :userProp="user"
                     @add:rent="addRent"
-                    @edit:rent="editRent"
                     @add:food="addFood"
                     @add:clothes="addClothes"
                     @add:fare="addFare"
-                    @edit:fare="editFare"
                     @add:phone="addPhone"
                 />
 
@@ -148,10 +146,10 @@ import Costs from './modules/Costs.vue';
 import Riches from './modules/Riches.vue';
 import WhimsAndFancies from './modules/WhimsAndFancies.vue';
 import FamilyStatus from './modules/FamilyStatus.vue';
-import Credits from './modules/Credits/Index.vue';
+import Credits from './modules/Credits/Credits.vue';
 import IncomeInfo from './modules/IncomeInfo.vue';
-import Incomes from './modules/Incomes/Index.vue';
-import Shares from './modules/Shares/Index.vue';
+import Incomes from './modules/Incomes/Incomes.vue';
+import Shares from './modules/Shares/Shares.vue';
 import UserActions from './modules/UserActions.vue';
 import Modal from './plugins/Modal.vue';
 import SaveIcon from '../icons/SaveIcon.vue';
@@ -249,15 +247,37 @@ const repayDebt = (debt) => {
 const showModalDebt = computed(() => user.debt > 10000);
 
 const addRent = (rent) => user.rent = rent;
-const editRent = () => user.rent = 0;
 const addFood = (food) => user.food = food;
 const addClothes = (clothes) => user.clothes = clothes;
 const addFare = (fare) => user.fare = fare;
-const editFare = () => user.fare = 0;
 const addPhone = (phone) => user.phone = phone;
 
-const changeApartments = count => user.apartments = count * 200;
-const changeCars = count => user.cars = count * 600;
+const savedRent = ref(0);
+const changeApartments = count => {
+    user.apartments = count * 200;
+
+    if (count === 0) {
+        user.rent = savedRent.value;
+        savedRent.value = 0;
+    }
+    if (count > 0 && user.rent > 0) {
+        savedRent.value = user.rent;
+        user.rent = 0;
+    }
+};
+const savedFare = ref(0);
+const changeCars = count => {
+    user.cars = count * 600;
+
+    if (count === 0) {
+        user.fare = savedFare.value;
+        savedFare.value = 0;
+    }
+    if (count > 0 && user.fare > 0) {
+        savedFare.value = user.fare;
+        user.fare = 0;
+    }
+};
 const changeHouses = count => user.houses = count * 1000;
 const changeYachts = count => user.yachts = count * 1500;
 const changeAircraft = count => user.aircraft = count * 5000;

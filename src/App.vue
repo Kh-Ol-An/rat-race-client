@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-import Blank from './components/Blank/Index.vue'
+import Blank from './components/Blank/Blank.vue'
 </script>
 
 <style>
