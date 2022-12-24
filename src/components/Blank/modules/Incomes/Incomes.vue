@@ -49,7 +49,7 @@
             user.business.big.length > 0 ||
             user.business.corrupt.length > 0
         "
-        @add="addBusiness"
+        @add="buyBusiness"
     />
     <ul v-if="user.business.small.length > 0" class="flex flex-col gap-2">
         <BusinessHead
@@ -84,7 +84,7 @@
             user.business.big.length > 0 ||
             user.business.corrupt.length > 0
         "
-        @add="addBusiness"
+        @add="buyBusiness"
     />
     <ul v-if="user.business.middle.length > 0" class="flex flex-col gap-2">
         <BusinessHead
@@ -117,7 +117,7 @@
             user.business.small.length > 0 ||
             user.business.middle.length > 0
         "
-        @add="addBusiness"
+        @add="buyBusiness"
     />
     <ul v-if="user.business.big.length > 0" class="flex flex-col gap-2">
         <BusinessHead firstTitle="Вартість" secondTitle="Доходи" :isSell="false" />
@@ -145,7 +145,7 @@
             user.business.small.length > 0 ||
             user.business.middle.length > 0
         "
-        @add="addBusiness"
+        @add="buyBusiness"
     />
     <ul v-if="user.business.corrupt.length > 0" class="flex flex-col gap-2">
         <BusinessHead firstTitle="Вартість" secondTitle="Доходи" :isSell="false" />
@@ -194,7 +194,7 @@ const props = defineProps({
 
 const user = toRef(props, 'userProp');
 
-const emit = defineEmits([ 'fired:salary', 'quit:salary', 'add:business', 'increment:income', 'sell' ]);
+const emit = defineEmits([ 'fired:salary', 'quit:salary', 'buy:business', 'increment:income', 'sell' ]);
 
 const salary = ref('');
 const fired = () => {
@@ -217,9 +217,9 @@ const salaryDisabled = computed(
 
 const showModal = ref(false);
 
-const addBusiness = (subType, id, price, income) => {
+const buyBusiness = (id, price, income, subType) => {
     if (user.value.cash < price) return showModal.value = true;
-    emit('add:business', subType, id, price, income);
+    emit('buy:business', id, price, income, subType);
 };
 const incrementIncomeBusiness = (id, income) => emit('increment:income', id, income);
 const deleteBusiness = (subType, id) => emit('delete:business', subType, id);

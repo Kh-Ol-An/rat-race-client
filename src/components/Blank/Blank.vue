@@ -116,14 +116,14 @@
                     @add:salary="addSalary"
                     @fired:salary="fired"
                     @quit:salary="quit"
-                    @add:business="addBusiness"
+                    @buy:business="buyBusiness"
                     @increment:income="incrementIncomeBusiness"
                     @delete:business="deleteBusiness"
                     @sell="sellBusiness"
                 />
 
                 <!-- Акції -->
-                <Shares :userProp="user" @add="addShares" @sell:package="sellSharesPackage" @sell:all="sellAllShares" />
+                <Shares :userProp="user" @buy="buyShares" @sell:package="sellSharesPackage" @sell:all="sellAllShares" />
 
                 <!-- Активи -->
                 <Assets
@@ -131,6 +131,12 @@
                     @buy:house="buyHouse"
                     @sell:house="sellHouse"
                     @sell:houses="sellHouses"
+                    @buy:land="buyLand"
+                    @sell:land="sellLand"
+                    @sell:acres="sellAcres"
+                    @buy:corrupt-land="buyCorruptLand"
+                    @sell:corrupt-land="sellCorruptLand"
+                    @sell:corrupt-acres="sellCorruptAcres"
                 />
             </div>
         </div>
@@ -366,7 +372,7 @@ const quit = () => {
     quitSalary.value = user.salary;
     user.salary = 0;
 };
-const addBusiness = (subType, id, price, income) => {
+const buyBusiness = (id, price, income, subType) => {
     user.business[subType].push({id, price, income});
     user.cash -= price;
     user.business.last.push(id);
@@ -389,7 +395,7 @@ const sellBusiness = subType => {
     user.business[subType] = [];
 };
 
-const addShares = (subType, id, price, quantity) => {
+const buyShares = (id, price, quantity, subType) => {
     const cost = price * quantity;
     user.shares[subType].push({id, price, quantity, cost});
     user.cash -= cost;
@@ -398,8 +404,8 @@ const sellSharesPackage = (id, subType, price) => {
     increment(price);
     user.shares[subType] = user.shares[subType].filter(share => share.id !== id);
 };
-const sellAllShares = (subType, sellPrice) => {
-    increment(sellPrice);
+const sellAllShares = (subType, price) => {
+    increment(price);
     user.shares[subType] = [];
 };
 
@@ -414,6 +420,32 @@ const sellHouse = (price, id) => {
 const sellHouses = (price) => {
     increment(user.assets.houses.length * price);
     user.assets.houses = [];
+};
+const buyLand = (id, price, quantity) => {
+    const cost = price * quantity;
+    user.assets.land.push({id, price, quantity, cost});
+    user.cash -= cost;
+};
+const sellLand = (id, price) => {
+    increment(price);
+    user.assets.land = user.assets.land.filter(land => land.id !== id);
+};
+const sellAcres = (price) => {
+    increment(price);
+    user.assets.land= [];
+};
+const buyCorruptLand = (id, price, quantity) => {
+    const cost = price * quantity;
+    user.assets.corruptLand.push({id, price, quantity, cost});
+    user.cash -= cost;
+};
+const sellCorruptLand = (id, price) => {
+    increment(price);
+    user.assets.corruptLand = user.assets.corruptLand.filter(land => land.id !== id);
+};
+const sellCorruptAcres = (price) => {
+    increment(price);
+    user.assets.corruptLand= [];
 };
 
 const restart = () => {

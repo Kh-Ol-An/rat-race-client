@@ -8,7 +8,7 @@
         subType="gc"
         placeholderWorth="Ціна"
         placeholderValue="Кількість"
-        @add="add"
+        @add="buy"
     />
     <ul v-if="user.shares.gc.length > 0" class="flex flex-col gap-2">
         <PackagesHead />
@@ -36,7 +36,7 @@
         subType="shchun"
         placeholderWorth="Ціна"
         placeholderValue="Кількість"
-        @add="add"
+        @add="buy"
     />
     <ul v-if="user.shares.shchun.length > 0" class="flex flex-col gap-2">
         <PackagesHead />
@@ -64,7 +64,7 @@
         subType="to"
         placeholderWorth="Ціна"
         placeholderValue="Кількість"
-        @add="add"
+        @add="buy"
     />
     <ul v-if="user.shares.to.length > 0" class="flex flex-col gap-2">
         <PackagesHead />
@@ -92,7 +92,7 @@
         subType="cst"
         placeholderWorth="Ціна"
         placeholderValue="Кількість"
-        @add="add"
+        @add="buy"
     />
     <ul v-if="user.shares.cst.length > 0" class="flex flex-col gap-2">
         <PackagesHead />
@@ -140,15 +140,15 @@ const props = defineProps({
 
 const user = toRef(props, 'userProp');
 
-const emit = defineEmits([ 'add', 'sell:package', 'sell:all' ]);
+const emit = defineEmits([ 'buy', 'sell:package', 'sell:all' ]);
 
 const showModal = ref(false);
 
-const add = (subType, id, firstValue, secondValue) => {
-    if (user.value.cash < Number(firstValue) * Number(secondValue)) return showModal.value = true;
-    emit('add', subType, id, firstValue, secondValue);
+const buy = (id, price, quantity, subType) => {
+    if (user.value.cash < price * quantity) return showModal.value = true;
+    emit('buy', id, price, quantity, subType);
 };
 
-const sellPackage = (id, subType, sellPrice) => emit('sell:package', id, subType, sellPrice);
-const sellAll = (subType, sellPrice) => emit('sell:all', subType, sellPrice);
+const sellPackage = (id, subType, price) => emit('sell:package', id, subType, price);
+const sellAll = (subType, price) => emit('sell:all', subType, price);
 </script>

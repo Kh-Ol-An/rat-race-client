@@ -60,7 +60,7 @@ const firstValue = ref('');
 const secondValue = ref('');
 
 const add = () => {
-    emit('add', props.subType, new Date().valueOf(), Number(firstValue.value), Number(secondValue.value));
+    emit('add', new Date().valueOf(), Number(firstValue.value), Number(secondValue.value), props.subType);
     firstValue.value = '';
     secondValue.value = '';
 };

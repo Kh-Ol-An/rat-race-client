@@ -1,17 +1,22 @@
 <template>
-    <div class="flex items-center gap-3">
-        <Input v-model:value="price" id="assets-houses" placeholder="Ціна будинка" />
-        <Add :firstValue="price" @add="buyHouse" />
+    <div>
+        <span class="text-sm">Будинки</span>
 
-        <Modal :show="showModal" cancel="Зрозумів" @cancel="showModal = false">
-            <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
-                Це не можливо!
-            </h4>
-            <p class="mx-auto mt-4 text-lg font-normal text-slate-800 text-center">
-                Куди ти сунешся жебрак? Будинки він зібрався купляти... Іди гроші заробляй!
-            </p>
-        </Modal>
+        <div class="mt-2 flex items-center gap-3">
+            <Input v-model:value="price" id="assets-houses" placeholder="Ціна будинка" />
+            <Add :firstValue="price" @add="buyHouse" />
+
+            <Modal :show="showModal" cancel="Зрозумів" @cancel="showModal = false">
+                <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
+                    Це не можливо!
+                </h4>
+                <p class="mx-auto mt-4 text-lg font-normal text-slate-800 text-center">
+                    Куди ти сунешся жебрак? Будинки він зібрався купляти... Іди гроші заробляй!
+                </p>
+            </Modal>
+        </div>
     </div>
+
     <ul v-if="user.assets.houses.length > 0" class="flex flex-col gap-2">
         <House
             v-for="{ id, price } in user.assets.houses"
@@ -62,7 +67,10 @@ const showModal = ref(false);
 
 const price = ref('');
 const buyHouse = () => {
-    if (user.value.cash < Number(price.value)) return showModal.value = true;
+    if (user.value.cash < Number(price.value)) {
+        showModal.value = true;
+        return price.value = '';
+    }
 
     emit('buy:house', new Date().valueOf(), Number(price.value));
     price.value = '';
