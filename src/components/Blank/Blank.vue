@@ -151,6 +151,15 @@
             </p>
         </Modal>
     </form>
+
+    <Modal :show="showModalRich" cancel="Зрозумів" @cancel="rich = false">
+        <h4 class="mx-auto text-2xl font-bold text-primary text-center">
+            Вітаємо!!!
+        </h4>
+        <p class="mx-auto mt-4 text-lg font-normal text-slate-800 text-center">
+            Видихай) Ти багатий! Переходь на зовнішнє коло.
+        </p>
+    </Modal>
 </template>
 
 <script setup>
@@ -466,4 +475,15 @@ const disableStorage = () => {
     setTimeout(() => showModalSaveInterval.value = false, 1000);
 };
 setInterval(() => saveInterval.value && submit(), 59000);
+
+const rich = ref(true);
+const showModalRich = computed(
+    () =>
+        user.cash >= 3000000 &&
+        income.value >= 50000 &&
+        user.debt === 0 &&
+        user.apartments > 0 &&
+        user.cars > 0 &&
+        rich.value
+);
 </script>
