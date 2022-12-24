@@ -80,9 +80,9 @@ const input = (event) => {
     const regExp = /\d|null/;
     if (
         props.type === 'number' &&
-        !regExp.test(event.data) ||
+        (!regExp.test(event.data) ||
         event.target.value === '0' ||
-        event.target.value.length > 15
+        event.target.value.length > 15)
     ) {
         return event.target.value = entered.value;
     }
