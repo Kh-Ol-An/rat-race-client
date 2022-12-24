@@ -175,7 +175,7 @@ import MoneyIcon from '../icons/MoneyIcon.vue';
 import { addingSpaces } from '../../helpers/formating-values.js';
 
 const savedUser = computed(() => localStorage.getItem('user'));
-const user = !savedUser.value ? reactive(JSON.parse(savedUser.value)) : reactive({
+const user = savedUser.value ? reactive(JSON.parse(savedUser.value)) : reactive({
     name: '',
     gender: '',
     profession: '',
