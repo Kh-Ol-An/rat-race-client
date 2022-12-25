@@ -24,7 +24,7 @@
                     &#43;
                 </button>
             </div>
-            <div v-if="id" class="flex items-center justify-center">
+            <div v-if="incremental" class="flex items-center justify-center">
                 <button
                     v-if="!showIncome"
                     :class="[
@@ -110,6 +110,10 @@ const props = defineProps({
     lastBusiness: {
         type: Array,
         required: true,
+    },
+    incremental: {
+        type: Boolean,
+        default: false,
     },
     disabledEdit: {
         type: Boolean,

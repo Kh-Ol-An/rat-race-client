@@ -160,6 +160,15 @@
             Видихай) Ти багатий! Переходь на зовнішнє коло.
         </p>
     </Modal>
+
+    <Modal :show="showModalWin" cancel="Зрозумів" @cancel="win = false">
+        <h4 class="mx-auto text-2xl font-bold text-primary text-center">
+            Вітаємо!!!
+        </h4>
+        <p class="mx-auto mt-4 text-lg font-normal text-slate-800 text-center">
+            Ти переміг! Але можешь продовжувати гру.
+        </p>
+    </Modal>
 </template>
 
 <script setup>
@@ -485,5 +494,14 @@ const showModalRich = computed(
         user.apartments > 0 &&
         user.cars > 0 &&
         rich.value
+);
+const win = ref(true);
+const showModalWin = computed(
+    () =>
+        user.houses > 0 &&
+        user.yachts > 0 &&
+        user.aircraft > 0 &&
+        user.whimsAndFancies > 0 &&
+        win.value
 );
 </script>

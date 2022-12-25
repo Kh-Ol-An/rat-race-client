@@ -44,7 +44,7 @@
         placeholderWorth="Вартість"
         placeholderValue="Доходи"
         :disabled="
-            (user.salary > 0 && user.business.small.length > 0) ||
+            ((user.salary > 0 || firedSalary > 0) && user.business.small.length > 0) ||
             user.business.middle.length > 0 ||
             user.business.big.length > 0 ||
             user.business.corrupt.length > 0
@@ -65,6 +65,7 @@
             :firstValue="price"
             :secondValue="income"
             :lastBusiness="user.business.last"
+            incremental
             :disabledEdit="user.salary > 0"
             @increment="incrementIncomeBusiness"
             @delete="deleteBusiness('small', id)"
@@ -79,7 +80,7 @@
         placeholderWorth="Вартість"
         placeholderValue="Доходи"
         :disabled="
-            (user.salary > 0 && user.business.middle.length > 0) ||
+            ((user.salary > 0 || firedSalary > 0) && user.business.middle.length > 0) ||
             user.business.small.length > 0 ||
             user.business.big.length > 0 ||
             user.business.corrupt.length > 0
