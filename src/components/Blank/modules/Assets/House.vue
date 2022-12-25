@@ -1,12 +1,12 @@
 <template>
     <li class="relative pr-12 flex items-center gap-2">
-        <InfoField labelClasses="text-additional" label="Будинок:">
-            <span class="ml-2 text-slate-800">
-                {{ addingSpaces(price) }}
-            </span>
+        <InfoField wrapClasses="gap-2" labelClasses="text-additional" label="Будинок:">
+            <Sell :value="addingSpaces(price)" inputId="sell-price-house" @sell="sell">
+                <span class="ml-2 text-slate-800">
+                    {{ addingSpaces(price) }}
+                </span>
+            </Sell>
         </InfoField>
-
-        <Sell inputId="sell-price-house" @sell="sell" />
     </li>
 </template>
 

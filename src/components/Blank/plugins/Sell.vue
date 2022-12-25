@@ -1,5 +1,6 @@
 <template>
-    <div v-if="show" class="relative">
+    <slot v-if="!show"></slot>
+    <div v-if="show" class="relative col-span-1">
         <Input
             :id="inputId"
             placeholder="Продати по"

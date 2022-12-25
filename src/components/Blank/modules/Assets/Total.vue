@@ -10,10 +10,11 @@
         "
     >
         <div class="col-span-7 flex items-center justify-center gap-2">
-            <span>
-                {{ addingSpaces(price) }}
-            </span>
-            <Sell inputId="sell-all-shares" @sell="sell" />
+            <Sell :value="addingSpaces(price)" inputId="sell-all-shares" @sell="sell">
+                <span>
+                    {{ addingSpaces(price) }}
+                </span>
+            </Sell>
         </div>
 
         <span class="col-span-2">
