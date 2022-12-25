@@ -98,13 +98,13 @@
                 />
 
                 <!-- Капризи та примхи -->
-                <WhimsAndFancies :whimsAndFancies="user.whimsAndFancies" @change="changeWhimsAndFancies" />
+                <WhimsAndFancies :userProp="user" @buy="buyWhimsAndFancies" />
 
                 <!-- Сімейний стан -->
                 <FamilyStatus
                     :userProp="user"
                     @change:marriage="changeMarriage"
-                    @change:children="changeChildren"
+                    @have:baby="haveBaby"
                 />
 
                 <!-- Виплати за кредитами -->
@@ -183,9 +183,9 @@ import Transaction from './modules/Transaction.vue';
 import InfoField from './plugins/InfoField.vue';
 import ExpenseInfo from './modules/ExpenseInfo.vue';
 import Costs from './modules/Costs.vue';
-import Riches from './modules/Riches.vue';
+import Riches from './modules/Riches/Riches.vue';
 import WhimsAndFancies from './modules/WhimsAndFancies.vue';
-import FamilyStatus from './modules/FamilyStatus.vue';
+import FamilyStatus from './modules/FamilyStatus/FamilyStatus.vue';
 import Credits from './modules/Credits/Credits.vue';
 import IncomeInfo from './modules/IncomeInfo.vue';
 import Incomes from './modules/Incomes/Incomes.vue';
@@ -241,7 +241,7 @@ const user = savedUser.value ? reactive(JSON.parse(savedUser.value)) : reactive(
         houses: [],
         land: [],
         corruptLand: [],
-    }
+    },
 });
 
 const addName = (name) => user.name = name;
@@ -385,7 +385,10 @@ const sellPlane = id => {
     user.planes = user.planes.filter(plane => plane.id !== id);
 };
 
-const changeWhimsAndFancies = count => user.whimsAndFancies = count;
+const buyWhimsAndFancies = price => {
+    user.whimsAndFancies += 1;
+    user.cash -= price;
+};
 
 const changeMarriage = checked => {
     if (checked) {
@@ -393,7 +396,7 @@ const changeMarriage = checked => {
         user.gender === 'female' && (user.children.expense = 0);
     } else {
         if (user.gender === 'male' ) {
-            user.cash = user.cash / 2;
+            user.cash = Math.round(user.cash / 2);
             user.children.count = 0;
             user.children.expense = 0;
         }
@@ -402,9 +405,9 @@ const changeMarriage = checked => {
 
     user.marriage = checked;
 };
-const changeChildren = count => {
-    user.children.count = count
-    user.children.expense = count * 300;
+const haveBaby = () => {
+    user.children.count += 1;
+    user.children.expense = user.children.count * 300;
 };
 
 const addCredit = (id, name, payment, quantity) =>

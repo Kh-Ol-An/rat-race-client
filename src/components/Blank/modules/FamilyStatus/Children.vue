@@ -9,28 +9,13 @@
             </span>
 
             <div class="flex items-center gap-2">
-                <button
-                    :class="[
-                        'p-2 font-bold leading-none outline-0',
-                        disabledDecrement ? 'text-slate-300' : 'text-slate-800'
-                    ]"
-                    type="button"
-                    :disabled="disabledDecrement"
-                    @click="$emit('change', count - 1)"
-                >
-                    &#8722;
-                </button>
                 <span class="w-5 flex items-center justify-center text-silver-800 cursor-default">
                     {{ count }}
                 </span>
                 <button
-                    :class="[
-                        'p-2 font-bold leading-none outline-0',
-                        disabledIncrement ? 'text-slate-300' : 'text-slate-800'
-                    ]"
+                    class="p-2 font-bold leading-none text-slate-800 outline-0"
                     type="button"
-                    :disabled="disabledIncrement"
-                    @click="$emit('change', count + 1)"
+                    @click="$emit('have:baby')"
                 >
                     &#43;
                 </button>
@@ -45,8 +30,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import { addingSpaces } from '../../../helpers/formating-values.js';
+import { addingSpaces } from '../../../../helpers/formating-values.js';
 
 const props = defineProps({
     label: {
@@ -66,7 +50,4 @@ const props = defineProps({
         default: false,
     },
 });
-
-const disabledDecrement = computed(() => props.count === 0);
-const disabledIncrement = computed(() => props.count === 10);
 </script>

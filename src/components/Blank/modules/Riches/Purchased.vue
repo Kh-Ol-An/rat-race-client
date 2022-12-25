@@ -24,9 +24,9 @@
 </template>
 
 <script setup>
-import InfoField from './InfoField.vue';
-import SellIcon from "../../icons/SellIcon.vue";
-import { addingSpaces } from '../../../helpers/formating-values.js';
+import InfoField from '../../plugins/InfoField.vue';
+import SellIcon from "../../../icons/SellIcon.vue";
+import { addingSpaces } from '../../../../helpers/formating-values.js';
 
 const props = defineProps({
     id: {

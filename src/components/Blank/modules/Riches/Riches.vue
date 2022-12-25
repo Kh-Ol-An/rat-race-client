@@ -14,6 +14,13 @@
             label="Квартира:"
             @sell="sellApartment"
         />
+        <li>
+            <InfoField wrapClasses="gap-2" labelClasses="text-opposite" label="Витрати:">
+                <span class="text-slate-800">
+                    {{ user.apartments.length * 200 }}
+                </span>
+            </InfoField>
+        </li>
     </ul>
 
     <!-- Автівки -->
@@ -29,6 +36,13 @@
             label="Автівка:"
             @sell="sellCar"
         />
+        <li>
+            <InfoField wrapClasses="gap-2" labelClasses="text-opposite" label="Витрати:">
+                <span class="text-slate-800">
+                    {{ user.apartments.length * 600 }}
+                </span>
+            </InfoField>
+        </li>
     </ul>
 
     <!-- Котеджі -->
@@ -44,6 +58,13 @@
             label="Котедж:"
             @sell="sellCottage"
         />
+        <li>
+            <InfoField wrapClasses="gap-2" labelClasses="text-opposite" label="Витрати:">
+                <span class="text-slate-800">
+                    {{ user.apartments.length * 1000 }}
+                </span>
+            </InfoField>
+        </li>
     </ul>
 
     <!-- Яхти -->
@@ -59,6 +80,13 @@
             label="Яхта:"
             @sell="sellYacht"
         />
+        <li>
+            <InfoField wrapClasses="gap-2" labelClasses="text-opposite" label="Витрати:">
+                <span class="text-slate-800">
+                    {{ user.apartments.length * 1500 }}
+                </span>
+            </InfoField>
+        </li>
     </ul>
 
     <!-- Літаки -->
@@ -74,6 +102,13 @@
             label="Літак:"
             @sell="sellPlane"
         />
+        <li>
+            <InfoField wrapClasses="gap-2" labelClasses="text-opposite" label="Витрати:">
+                <span class="text-slate-800">
+                    {{ user.apartments.length * 5000 }}
+                </span>
+            </InfoField>
+        </li>
     </ul>
 
     <Modal :show="showModal" cancel="Зрозумів" @cancel="showModal = false">
@@ -88,10 +123,11 @@
 
 <script setup>
 import { ref, toRef } from "vue";
-import Input from '../plugins/Input.vue';
-import Add from '../plugins/Add.vue';
-import Purchased from '../plugins/Purchased.vue';
-import Modal from '../plugins/Modal.vue';
+import Input from '../../plugins/Input.vue';
+import Add from '../../plugins/Add.vue';
+import Purchased from './Purchased.vue';
+import Modal from '../../plugins/Modal.vue';
+import InfoField from "../../plugins/InfoField.vue";
 
 const props = defineProps({
     userProp: {
