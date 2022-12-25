@@ -85,11 +85,16 @@
                 <!-- Багатство -->
                 <Riches
                     :userProp="user"
-                    @change:apartments="changeApartments"
-                    @change:cars="changeCars"
-                    @change:houses="changeHouses"
-                    @change:yachts="changeYachts"
-                    @change:aircraft="changeAircraft"
+                    @buy:apartment="buyApartment"
+                    @sell:apartment="sellApartment"
+                    @buy:car="buyCar"
+                    @sell:car="sellCar"
+                    @buy:cottage="buyCottage"
+                    @sell:cottage="sellCottage"
+                    @buy:yacht="buyYacht"
+                    @sell:yacht="sellYacht"
+                    @buy:plane="buyPlane"
+                    @sell:plane="sellPlane"
                 />
 
                 <!-- Капризи та примхи -->
@@ -192,7 +197,9 @@ import SaveIcon from '../icons/SaveIcon.vue';
 import MoneyIcon from '../icons/MoneyIcon.vue';
 import { addingSpaces } from '../../helpers/formating-values.js';
 
+// console.log('localStorage: ', localStorage);
 const savedUser = computed(() => localStorage.getItem('user'));
+// console.log('savedUser: ', savedUser);
 const user = savedUser.value ? reactive(JSON.parse(savedUser.value)) : reactive({
     name: '',
     gender: '',
@@ -203,11 +210,11 @@ const user = savedUser.value ? reactive(JSON.parse(savedUser.value)) : reactive(
     clothes: 0,
     fare: 0,
     phone: 0,
-    apartments: 0,
-    cars: 0,
-    houses: 0,
-    yachts: 0,
-    aircraft: 0,
+    apartments: [],
+    cars: [],
+    cottages: [],
+    yachts: [],
+    planes: [],
     whimsAndFancies: 0,
     marriage: false,
     children: {
@@ -259,11 +266,11 @@ const expenses = computed(() => {
     sum += user.clothes;
     sum += user.fare;
     sum += user.phone;
-    sum += user.apartments;
-    sum += user.cars;
-    sum += user.houses;
-    sum += user.yachts;
-    sum += user.aircraft;
+    sum += user.apartments.length * 200;
+    sum += user.cars.length * 600;
+    sum += user.cottages.length * 1000;
+    sum += user.yachts.length * 1500;
+    sum += user.planes.length * 5000;
     sum += user.children.expense;
     user.credits.map(credit => sum += credit.payment);
     return sum;
@@ -295,34 +302,88 @@ const addFare = (fare) => user.fare = fare;
 const addPhone = (phone) => user.phone = phone;
 
 const savedRent = ref(0);
-const changeApartments = count => {
-    user.apartments = count * 200;
+const buyApartment = (id, price) => {
+    user.apartments.push({ id, price });
+    user.cash -= price;
 
-    if (count === 0) {
+    if (user.apartments.length === 0) {
         user.rent = savedRent.value;
         savedRent.value = 0;
     }
-    if (count > 0 && user.rent > 0) {
+    if (user.apartments.length > 0 && user.rent > 0) {
+        savedRent.value = user.rent;
+        user.rent = 0;
+    }
+};
+const sellApartment = id => {
+    const apartment = user.apartments.find(apartment => apartment.id === id);
+    user.cash += Math.floor(apartment.price / 2);
+    user.apartments = user.apartments.filter(apartment => apartment.id !== id);
+
+    if (user.apartments.length === 0) {
+        user.rent = savedRent.value;
+        savedRent.value = 0;
+    }
+    if (user.apartments.length > 0 && user.rent > 0) {
         savedRent.value = user.rent;
         user.rent = 0;
     }
 };
 const savedFare = ref(0);
-const changeCars = count => {
-    user.cars = count * 600;
+const buyCar = (id, price) => {
+    user.cars.push({ id, price });
+    user.cash -= price;
 
-    if (count === 0) {
+    if (user.cars.length === 0) {
         user.fare = savedFare.value;
         savedFare.value = 0;
     }
-    if (count > 0 && user.fare > 0) {
+    if (user.cars.length > 0 && user.fare > 0) {
         savedFare.value = user.fare;
         user.fare = 0;
     }
 };
-const changeHouses = count => user.houses = count * 1000;
-const changeYachts = count => user.yachts = count * 1500;
-const changeAircraft = count => user.aircraft = count * 5000;
+const sellCar = id => {
+    const cars = user.cars.find(car => car.id === id);
+    user.cash += Math.floor(cars.price / 2);
+    user.cars = user.cars.filter(car => car.id !== id);
+
+    if (user.cars.length === 0) {
+        user.fare = savedFare.value;
+        savedFare.value = 0;
+    }
+    if (user.cars.length > 0 && user.fare > 0) {
+        savedFare.value = user.fare;
+        user.fare = 0;
+    }
+};
+const buyCottage = (id, price) => {
+    user.cottages.push({ id, price });
+    user.cash -= price;
+};
+const sellCottage = id => {
+    const cottage = user.cottages.find(cottage => cottage.id === id);
+    user.cash += Math.floor(cottage.price / 2);
+    user.cottages = user.cottages.filter(cottage => cottage.id !== id);
+};
+const buyYacht = (id, price) => {
+    user.yachts.push({ id, price });
+    user.cash -= price;
+};
+const sellYacht = id => {
+    const yacht = user.yachts.find(yacht => yacht.id === id);
+    user.cash += Math.floor(yacht.price / 2);
+    user.yachts = user.yachts.filter(yacht => yacht.id !== id);
+};
+const buyPlane = (id, price) => {
+    user.planes.push({ id, price });
+    user.cash -= price;
+};
+const sellPlane = id => {
+    const plane = user.planes.find(plane => plane.id === id);
+    user.cash += Math.floor(plane.price / 2);
+    user.planes = user.planes.filter(plane => plane.id !== id);
+};
 
 const changeWhimsAndFancies = count => user.whimsAndFancies = count;
 
@@ -491,16 +552,16 @@ const showModalRich = computed(
         user.cash >= 3000000 &&
         income.value >= 50000 &&
         user.debt === 0 &&
-        user.apartments > 0 &&
-        user.cars > 0 &&
+        user.apartments.length > 0 &&
+        user.cars.length > 0 &&
         rich.value
 );
 const win = ref(true);
 const showModalWin = computed(
     () =>
-        user.houses > 0 &&
-        user.yachts > 0 &&
-        user.aircraft > 0 &&
+        user.cottages.length > 0 &&
+        user.yachts.length > 0 &&
+        user.planes.length > 0 &&
         user.whimsAndFancies > 0 &&
         win.value
 );

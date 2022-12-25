@@ -1,7 +1,7 @@
 <template>
     <h2 class="px-4 text-xl font-bold text-opposite text-center">Витрати</h2>
 
-    <div v-if="user.rent === 0 && user.apartments === 0" class="flex items-center gap-3">
+    <div v-if="user.rent === 0 && user.apartments.length === 0" class="flex items-center gap-3">
         <Input v-model:value="rent" id="rent" placeholder="Оренда житла" />
         <Add :firstValue="rent" opposite @add="$emit('add:rent', Number(rent))" />
     </div>
@@ -31,7 +31,7 @@
         </span>
     </InfoField>
 
-    <div v-if="user.fare === 0 && user.cars === 0" class="flex items-center gap-3">
+    <div v-if="user.fare === 0 && user.cars.length === 0" class="flex items-center gap-3">
         <Input v-model:value="fare" id="fare" placeholder="Витрати на проїзд" />
         <Add :firstValue="fare" opposite @add="$emit('add:fare', Number(fare))" />
     </div>

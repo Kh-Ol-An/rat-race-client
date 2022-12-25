@@ -19,10 +19,10 @@
     <button
         v-if="show"
         :class="[
-                'px-2',
-                'outline-0',
-                price.length === 0 && 'cursor-not-allowed',
-            ]"
+            'px-2',
+            'outline-0',
+            price.length === 0 && 'cursor-not-allowed',
+        ]"
         type="button"
         :title="`Продати по ціні ${addingSpaces(price)}`"
         :disabled="price.length === 0"
@@ -34,14 +34,14 @@
     <button
         v-if="!show"
         class="
-                absolute
-                top-1/2 right-0
-                -translate-y-1/2
-                px-2
-                outline-0
-            "
+            absolute
+            top-1/2 right-0
+            -translate-y-1/2
+            px-2
+            outline-0
+        "
         type="button"
-        title="Продати все"
+        title="Продати"
         @click="show = true"
     >
         <SellIcon width="24px" height="24px" color="fill-primary" />
