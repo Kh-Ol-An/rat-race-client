@@ -198,7 +198,7 @@ import MoneyIcon from '../icons/MoneyIcon.vue';
 import { addingSpaces } from '../../helpers/formating-values.js';
 
 const savedUser = computed(() => localStorage.getItem('user'));
-const savedUserObj = JSON.parse(savedUser.value);
+const savedUserObj = savedUser.value ? JSON.parse(savedUser.value) : {};
 const savedUserArr = Object.keys(savedUserObj);
 const userObj = {
     name: '',
@@ -244,9 +244,7 @@ const userObj = {
     },
 };
 const userArr = Object.keys(userObj);
-const user = savedUser.value.length > 0 && JSON.stringify(savedUserArr) === JSON.stringify(userArr) ?
-    reactive(savedUserObj) :
-    reactive(userObj);
+const user = JSON.stringify(savedUserArr) === JSON.stringify(userArr) ? reactive(savedUserObj) : reactive(userObj);
 
 const addName = (name) => user.name = name;
 const addGender = (gender) => user.gender = gender;
