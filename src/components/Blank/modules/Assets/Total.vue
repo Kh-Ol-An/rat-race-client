@@ -9,7 +9,7 @@
             font-bold text-center
         "
     >
-        <div class="col-span-7 flex items-center justify-center gap-2">
+        <div class="col-span-6 flex items-center justify-center gap-2">
             <Sell :value="addingSpaces(price)" inputId="sell-all-shares" @sell="sell">
                 <span>
                     {{ addingSpaces(price) }}
@@ -17,7 +17,7 @@
             </Sell>
         </div>
 
-        <span class="col-span-2">
+        <span class="col-span-3">
             {{ addingSpaces(quantity) }}
         </span>
 
