@@ -108,7 +108,7 @@
                 />
 
                 <!-- Виплати за кредитами -->
-                <Credits :credits="user.credits" @add="addCredit" />
+                <Credits :credits="user.credits" :cashFlow="cashFlow" @add="addCredit" />
             </div>
 
             <div class="flex flex-col gap-4 md:gap-2">
@@ -442,6 +442,13 @@ const getCashFlow = () => {
         user.debt += Math.abs(result); // Math.abs(число) Перетворює негативне число на позитивне
         return user.cash = 0;
     }
+
+    user.credits = user.credits.map(credit => ({
+        ...credit,
+        body: credit.body - credit.payment,
+        quantity: credit.quantity -= 1,
+    }));
+    user.credits = user.credits.filter(credit => credit.quantity > 0);
 
     return user.cash = result;
 };
