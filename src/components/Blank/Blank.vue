@@ -588,7 +588,7 @@ const rich = ref(true);
 const showModalRich = computed(
     () =>
         user.cash >= 3000000 &&
-        income.value >= 50000 &&
+        cashFlow.value >= 50000 &&
         user.debt === 0 &&
         user.apartments.length > 0 &&
         user.cars.length > 0 &&
