@@ -85,9 +85,12 @@
                 <!-- Багатство -->
                 <Riches
                     :userProp="user"
+                    :cashFlow="cashFlow"
                     @buy:apartment="buyApartment"
+                    @credit:apartment="creditApartment"
                     @sell:apartment="sellApartment"
                     @buy:car="buyCar"
+                    @credit:car="creditCar"
                     @sell:car="sellCar"
                     @buy:cottage="buyCottage"
                     @sell:cottage="sellCottage"
@@ -108,7 +111,7 @@
                 />
 
                 <!-- Виплати за кредитами -->
-                <Credits :credits="user.credits" :cashFlow="cashFlow" @add="addCredit" />
+                <Credits v-if="user.credits.length > 0" :credits="user.credits" />
             </div>
 
             <div class="flex flex-col gap-4 md:gap-2">
@@ -304,9 +307,22 @@ const addFare = (fare) => user.fare = fare;
 const addPhone = (phone) => user.phone = phone;
 
 const savedRent = ref(0);
-const buyApartment = (id, price) => {
-    user.apartments.push({ id, price });
+const buyApartment = (id, name, price) => {
+    user.apartments.push({ id, name, price });
     user.cash -= price;
+
+    if (user.apartments.length === 0) {
+        user.rent = savedRent.value;
+        savedRent.value = 0;
+    }
+    if (user.apartments.length > 0 && user.rent > 0) {
+        savedRent.value = user.rent;
+        user.rent = 0;
+    }
+};
+const creditApartment = (id, name, payment, term) => {
+    user.credits.push({id, name: name.length > 0 ? name : 'Кредит', body: payment * term, payment, term});
+    user.apartments.push({ id, name, price: payment * term });
 
     if (user.apartments.length === 0) {
         user.rent = savedRent.value;
@@ -332,9 +348,22 @@ const sellApartment = id => {
     }
 };
 const savedFare = ref(0);
-const buyCar = (id, price) => {
-    user.cars.push({ id, price });
+const buyCar = (id, name, price) => {
+    user.cars.push({ id, name, price });
     user.cash -= price;
+
+    if (user.cars.length === 0) {
+        user.fare = savedFare.value;
+        savedFare.value = 0;
+    }
+    if (user.cars.length > 0 && user.fare > 0) {
+        savedFare.value = user.fare;
+        user.fare = 0;
+    }
+};
+const creditCar = (id, name, payment, term) => {
+    user.credits.push({id, name: name.length > 0 ? name : 'Кредит', body: payment * term, payment, term});
+    user.cars.push({ id, name, price: payment * term });
 
     if (user.cars.length === 0) {
         user.fare = savedFare.value;
@@ -412,9 +441,6 @@ const haveBaby = () => {
     user.children.expense = user.children.count * 300;
 };
 
-const addCredit = (id, name, payment, quantity) =>
-    user.credits.push({ id, name, body: payment * quantity, payment, quantity });
-
 // ACTIVE
 const passiveIncome = computed(() => {
     let sum = 0;
@@ -446,9 +472,9 @@ const getCashFlow = () => {
     user.credits = user.credits.map(credit => ({
         ...credit,
         body: credit.body - credit.payment,
-        quantity: credit.quantity -= 1,
+        term: credit.term -= 1,
     }));
-    user.credits = user.credits.filter(credit => credit.quantity > 0);
+    user.credits = user.credits.filter(credit => credit.term > 0);
 
     return user.cash = result;
 };

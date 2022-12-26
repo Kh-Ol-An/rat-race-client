@@ -2,53 +2,106 @@
     <h2 class="px-4 text-xl font-bold text-opposite text-center">Багатство</h2>
 
     <!-- Квартири -->
-    <div class="mt-2 flex items-center gap-3">
-        <Input v-model:value="apartment" id="apartment" placeholder="Ціна квартири" />
-        <Add :firstValue="apartment" @add="buyApartment" />
+    <div class="flex flex-col gap-1">
+        <span>
+            Квартири
+        </span>
+        <div class="flex items-center gap-3">
+            <Input v-model:value="apartmentName" id="apartment-name" type="text" placeholder="Назва" />
+            <Input
+                v-model:value="apartmentPrice"
+                id="apartment-price"
+                placeholder="Ціна"
+                :disabled="apartmentPayment.length > 0 || apartmentTerm.length > 0"
+            />
+            <Add :firstValue="apartmentPrice" @add="buyApartment" />
+        </div>
+        <ul v-if="user.apartments.length > 0" class="flex flex-col gap-1">
+            <Purchased
+                v-for="{ id, name, price } in user.apartments"
+                :id="id"
+                :price="price"
+                :label="name.length > 0 ? name : 'Квартира:'"
+                @sell="sellApartment"
+            />
+            <li>
+                <InfoField wrapClasses="gap-2" labelClasses="text-opposite" label="Витрати:">
+                    <span class="text-slate-800">
+                        {{ user.apartments.length * 200 }}
+                    </span>
+                </InfoField>
+            </li>
+        </ul>
+        <span class="text-sm">
+            Кредит на квартиру
+        </span>
+        <div class="flex items-center gap-3">
+            <Input
+                v-model:value="apartmentPayment"
+                id="apartment-payment"
+                placeholder="Платіж"
+                :disabled="apartmentPrice.length > 0"
+            />
+            <Input
+                v-model:value="apartmentTerm"
+                id="apartment-term"
+                placeholder="Термін"
+                :disabled="apartmentPrice.length > 0"
+            />
+            <Add :firstValue="apartmentPayment" :secondValue="apartmentTerm" @add="buyApartmentOnCredit" />
+        </div>
     </div>
-    <ul v-if="user.apartments.length > 0" class="flex flex-col gap-2">
-        <Purchased
-            v-for="{ id, price } in user.apartments"
-            :id="id"
-            :price="price"
-            label="Квартира:"
-            @sell="sellApartment"
-        />
-        <li>
-            <InfoField wrapClasses="gap-2" labelClasses="text-opposite" label="Витрати:">
-                <span class="text-slate-800">
-                    {{ user.apartments.length * 200 }}
-                </span>
-            </InfoField>
-        </li>
-    </ul>
 
     <!-- Автівки -->
-    <div class="mt-2 flex items-center gap-3">
-        <Input v-model:value="car" id="car" placeholder="Ціна автівки" />
-        <Add :firstValue="car" @add="buyCar" />
+    <div class="flex flex-col gap-1">
+        <span>
+            Автівки
+        </span>
+        <div class="flex items-center gap-3">
+            <Input v-model:value="carName" id="car-name" type="text" placeholder="Назва" />
+            <Input
+                v-model:value="carPrice"
+                id="car-price"
+                placeholder="Ціна"
+                :disabled="carPayment.length > 0 || carTerm.length > 0"
+            />
+            <Add :firstValue="carPrice" @add="buyCar" />
+        </div>
+        <span class="text-sm">
+            Кредит на автівку
+        </span>
+        <div class="flex items-center gap-3">
+            <Input v-model:value="carPayment" id="car-payment" placeholder="Платіж" :disabled="carPrice.length > 0" />
+            <Input v-model:value="carTerm" id="car-term" placeholder="Термін" :disabled="carPrice.length > 0" />
+            <Add :firstValue="carPayment" :secondValue="carTerm" @add="buyCarOnCredit" />
+        </div>
+        <ul v-if="user.cars.length > 0" class="flex flex-col gap-1">
+            <Purchased
+                v-for="{ id, name, price } in user.cars"
+                :id="id"
+                :price="price"
+                :label="name.length > 0 ? name : 'Автівка:'"
+                @sell="sellCar"
+            />
+            <li>
+                <InfoField wrapClasses="gap-2" labelClasses="text-opposite" label="Витрати:">
+                    <span class="text-slate-800">
+                        {{ user.cars.length * 600 }}
+                    </span>
+                </InfoField>
+            </li>
+        </ul>
     </div>
-    <ul v-if="user.cars.length > 0" class="flex flex-col gap-2">
-        <Purchased
-            v-for="{ id, price } in user.cars"
-            :id="id"
-            :price="price"
-            label="Автівка:"
-            @sell="sellCar"
-        />
-        <li>
-            <InfoField wrapClasses="gap-2" labelClasses="text-opposite" label="Витрати:">
-                <span class="text-slate-800">
-                    {{ user.apartments.length * 600 }}
-                </span>
-            </InfoField>
-        </li>
-    </ul>
 
     <!-- Котеджі -->
-    <div class="mt-2 flex items-center gap-3">
-        <Input v-model:value="cottage" id="cottage" placeholder="Ціна котеджу" />
-        <Add :firstValue="cottage" @add="buyCottage" />
+    <div>
+        <span>
+            Котеджі
+        </span>
+        <div class="mt-2 flex items-center gap-3">
+            <Input v-model:value="cottage" id="cottage" placeholder="Ціна котеджу" />
+            <Add :firstValue="cottage" @add="buyCottage" />
+        </div>
     </div>
     <ul v-if="user.cottages.length > 0" class="flex flex-col gap-2">
         <Purchased
@@ -68,9 +121,14 @@
     </ul>
 
     <!-- Яхти -->
-    <div class="mt-2 flex items-center gap-3">
-        <Input v-model:value="yacht" id="yacht" placeholder="Ціна яхти" />
-        <Add :firstValue="yacht" @add="buyYacht" />
+    <div>
+        <span>
+            Яхти
+        </span>
+        <div class="mt-2 flex items-center gap-3">
+            <Input v-model:value="yacht" id="yacht" placeholder="Ціна яхти" />
+            <Add :firstValue="yacht" @add="buyYacht" />
+        </div>
     </div>
     <ul v-if="user.yachts.length > 0" class="flex flex-col gap-2">
         <Purchased
@@ -90,9 +148,14 @@
     </ul>
 
     <!-- Літаки -->
-    <div class="mt-2 flex items-center gap-3">
-        <Input v-model:value="plane" id="plane" placeholder="Ціна літака" />
-        <Add :firstValue="plane" @add="buyPlane" />
+    <div>
+        <span>
+            Літаки
+        </span>
+        <div class="mt-2 flex items-center gap-3">
+            <Input v-model:value="plane" id="plane" placeholder="Ціна літака" />
+            <Add :firstValue="plane" @add="buyPlane" />
+        </div>
     </div>
     <ul v-if="user.planes.length > 0" class="flex flex-col gap-2">
         <Purchased
@@ -119,6 +182,15 @@
             Куди ти сунешся жебрак? {{ purchase }} він зібрався купляти... Іди гроші заробляй!
         </p>
     </Modal>
+
+    <Modal :show="showModalCredit" cancel="Зрозумів" @cancel="showModalCredit = false">
+        <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
+            Це не можливо!
+        </h4>
+        <p class="mx-auto mt-4 text-lg font-normal text-slate-800 text-center">
+            На жаль кредит не схвалений службою безпеки банку. Нас не цікавить хто Ви і що робите. Нас хвилює як Ви будете віддавати наші гроші.
+        </p>
+    </Modal>
 </template>
 
 <script setup>
@@ -134,14 +206,20 @@ const props = defineProps({
         type: Object,
         required: true,
     },
+    cashFlow: {
+        type: Number,
+        required: true,
+    },
 });
 
 const user = toRef(props, 'userProp');
 
 const emit = defineEmits([
     'buy:apartment',
+    'credit:apartment',
     'sell:apartment',
     'buy:car',
+    'credit:car',
     'sell:car',
     'buy:cottage',
     'sell:cottage',
@@ -152,40 +230,96 @@ const emit = defineEmits([
 ]);
 
 const showModal = ref(false);
+const showModalCredit = ref(false);
 const purchase = ref('');
 
-const apartment = ref('');
+// Квартира
+const apartmentName = ref('');
+const apartmentPrice = ref('');
 const buyApartment = () => {
-    if (user.value.cash < Number(apartment.value)) {
+    if (user.value.cash < Number(apartmentPrice.value)) {
         purchase.value = 'Квартири';
         showModal.value = true;
-        return apartment.value = '';
+        apartmentName.value = '';
+        apartmentPrice.value = '';
+        return;
     }
 
-    emit('buy:apartment', new Date().valueOf(), Number(apartment.value));
-    apartment.value = '';
+    emit('buy:apartment', new Date().valueOf(), apartmentName.value, Number(apartmentPrice.value));
+    apartmentName.value = '';
+    apartmentPrice.value = '';
+};
+const apartmentPayment = ref('');
+const apartmentTerm = ref('');
+const buyApartmentOnCredit = () => {
+    if (props.cashFlow < Number(apartmentPayment.value)) {
+        showModalCredit.value = true;
+        apartmentName.value = '';
+        apartmentPayment.value = '';
+        apartmentTerm.value = '';
+        return;
+    }
+
+    emit(
+        'credit:apartment',
+        new Date().valueOf(),
+        apartmentName.value,
+        Number(apartmentPayment.value),
+        Number(apartmentTerm.value),
+    );
+    apartmentName.value = '';
+    apartmentPayment.value = '';
+    apartmentTerm.value = '';
 };
 const sellApartment = id => emit('sell:apartment', id);
 
-const car = ref('');
+// Автівка
+const carName = ref('');
+const carPrice = ref('');
 const buyCar = () => {
-    if (user.value.cash < Number(car.value)) {
+    if (user.value.cash < Number(carPrice.value)) {
         purchase.value = 'Машини';
         showModal.value = true;
-        return car.value = '';
+        carName.value = '';
+        carPrice.value = '';
+        return;
     }
 
-    emit('buy:car', new Date().valueOf(), Number(car.value));
-    car.value = '';
+    emit('buy:car', new Date().valueOf(), carName.value, Number(carPrice.value));
+    carName.value = '';
+    carPrice.value = '';
+};
+const carPayment = ref('');
+const carTerm = ref('');
+const buyCarOnCredit = () => {
+    if (props.cashFlow < Number(carPayment.value)) {
+        showModalCredit.value = true;
+        carPayment.value = '';
+        carTerm.value = '';
+        return;
+    }
+
+    emit(
+        'credit:car',
+        new Date().valueOf(),
+        carName.value,
+        Number(carPayment.value),
+        Number(carTerm.value),
+    );
+    carName.value = '';
+    carPayment.value = '';
+    carTerm.value = '';
 };
 const sellCar = id => emit('sell:car', id);
 
+// Котедж
 const cottage = ref('');
 const buyCottage = () => {
     if (user.value.cash < Number(cottage.value)) {
         purchase.value = 'Котеджі';
         showModal.value = true;
-        return cottage.value = '';
+        cottage.value = '';
+        return;
     }
 
     emit('buy:cottage', new Date().valueOf(), Number(cottage.value));
@@ -193,12 +327,14 @@ const buyCottage = () => {
 };
 const sellCottage = id => emit('sell:cottage', id);
 
+// Яхта
 const yacht = ref('');
 const buyYacht = () => {
     if (user.value.cash < Number(yacht.value)) {
         purchase.value = 'Яхти';
         showModal.value = true;
-        return yacht.value = '';
+        yacht.value = '';
+        return;
     }
 
     emit('buy:yacht', new Date().valueOf(), Number(yacht.value));
@@ -206,12 +342,14 @@ const buyYacht = () => {
 };
 const sellYacht = id => emit('sell:yacht', id);
 
+// Літак
 const plane = ref('');
 const buyPlane = () => {
     if (user.value.cash < Number(plane.value)) {
         purchase.value = 'Літаки';
         showModal.value = true;
-        return plane.value = '';
+        plane.value = '';
+        return;
     }
 
     emit('buy:plane', new Date().valueOf(), Number(plane.value));

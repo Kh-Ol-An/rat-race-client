@@ -1,5 +1,5 @@
 <template>
-    <div class="relative w-full">
+    <div :class="['relative w-full', disabled && 'opacity-20']">
         <input
             class="
                 peer
@@ -16,6 +16,7 @@
             :type="type"
             :placeholder="placeholder"
             :value="value"
+            :disabled="disabled"
             @focus="focused = true"
             @blur="focused = false"
             @input="input"
@@ -61,15 +62,19 @@ const props = defineProps({
     },
     type: {
         type: String,
-        default: 'number'
+        default: 'number',
     },
     placeholder: {
         type: String,
-        default: ''
+        default: '',
+    },
+    disabled: {
+        type: Boolean,
+        default: false,
     },
     smallLabel: {
         type: Boolean,
-        default: false
+        default: false,
     },
 });
 

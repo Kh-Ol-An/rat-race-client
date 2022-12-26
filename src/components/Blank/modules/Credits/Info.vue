@@ -10,7 +10,7 @@
             {{ addingSpaces(payment) }}
         </span>
         <span class="text-slate-800">
-            {{ addingSpaces(quantity) }}
+            {{ addingSpaces(term) }}
         </span>
     </li>
 </template>
@@ -31,7 +31,7 @@ defineProps({
         type: Number,
         required: true,
     },
-    quantity: {
+    term: {
         type: Number,
         required: true,
     },
