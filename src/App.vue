@@ -1,5 +1,5 @@
 <template>
-    <div class="pt-4 pb-8 px-8 md:p-2 flex flex-col items-center justify-center">
+    <div class="pt-4 pb-8 px-8 md:p-2 w-full flex flex-col items-center justify-center">
         <h1 class="p-4 md:p-2 text-4xl md:text-xl font-bold text-slate-700 text-center">
             ГРА 'Щурячі перегони Ⅱ'
         </h1>

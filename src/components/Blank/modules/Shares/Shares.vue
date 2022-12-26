@@ -29,30 +29,30 @@
         />
     </ul>
 
-    <!-- ЩУН -->
+    <!-- ЩГП -->
     <InputField
-        label="ЩУН"
+        label="ЩГП"
         type="shares"
-        subType="shchun"
+        subType="schp"
         placeholderWorth="Ціна"
         placeholderValue="Кількість"
         @add="buy"
     />
-    <ul v-if="user.shares.shchun.length > 0" class="flex flex-col gap-2">
+    <ul v-if="user.shares.schp.length > 0" class="flex flex-col gap-2">
         <PackagesHead />
         <Package
-            v-for="{id, price, quantity, cost} in user.shares.shchun"
+            v-for="{id, price, quantity, cost} in user.shares.schp"
             :key="id"
             :id="id"
-            subType="shchun"
+            subType="schp"
             :price="price"
             :quantity="quantity"
             :cost="cost"
             @sell="sellPackage"
         />
         <PackagesTotal
-            :userShare="user.shares.shchun"
-            subType="shchun"
+            :userShare="user.shares.schp"
+            subType="schp"
             @sell="sellAll"
         />
     </ul>

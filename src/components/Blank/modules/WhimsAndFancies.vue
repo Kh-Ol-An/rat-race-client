@@ -6,13 +6,13 @@
         <Add :firstValue="price" @add="buy" />
     </div>
     <InfoField
-        v-if="user.whimsAndFancies > 0"
+        v-if="user.whimsAndFanciesQ > 0"
         wrapClasses="gap-2"
         labelClasses="text-opposite"
         label="Капризи та примхи:"
     >
         <span class="text-slate-800">
-            {{ user.whimsAndFancies }}
+            {{ user.whimsAndFanciesQ }}
         </span>
     </InfoField>
 
