@@ -3,13 +3,14 @@
         <input
             class="
                 peer
-                py-1 px-3
+                py-1 px-3 md:px-2
                 w-full
                 shadow
-                border-2 rounded-md
+                rounded-md border-2 border-slate-700
+                bg-slate-800
                 text-base text-transparent
                 placeholder-transparent
-                focus:border-secondary focus:outline-none
+                focus:border-primary focus:outline-none
                 transition-all duration-300
             "
             :id="id"
@@ -21,21 +22,24 @@
             @blur="focused = false"
             @input="input"
         />
+
         <div
             v-if="value.length > 0"
-            class="absolute top-1/2 left-3 -translate-y-1/2 flex items-center gap-px bg-white text-base text-secondary"
+            class="absolute top-1/2 left-3 -translate-y-1/2 flex items-center gap-px bg-slate-800 text-base text-primary"
         >
             {{ type === 'number' ? addingSpaces(value) : value }}
-            <div :class="['opacity-0 w-px h-4 bg-secondary animate-flashing', focused && 'opacity-100']"></div>
+            <div :class="['opacity-0 w-px h-4 bg-primary animate-flashing', focused && 'opacity-100']"></div>
         </div>
+
         <label
             :class="[
                 'absolute',
-                'top-0 left-2 peer-placeholder-shown:top-1/2 peer-placeholder-shown:left-4',
+                'top-0 left-2',
+                'peer-placeholder-shown:top-1/2 peer-placeholder-shown:left-3 md:peer-placeholder-shown:left-2',
                 '-translate-y-1/2',
                 'px-1 peer-placeholder-shown:px-0',
-                'bg-white',
-                'text-xs text-secondary peer-placeholder-shown:text-slate-500',
+                'bg-slate-800',
+                'text-xs text-primary peer-placeholder-shown:text-slate-400',
                 'cursor-text',
                 'transition-all duration-300',
                  smallLabel ? 'peer-placeholder-shown:text-sm' : 'peer-placeholder-shown:text-base'

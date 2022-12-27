@@ -3,7 +3,7 @@
         <div v-if="show" class="fixed top-0 right-0 bottom-0 left-0 z-40 flex items-center justify-center">
             <div class="absolute w-full h-full bg-black opacity-60" @click="!onlyCancelAction && $emit('cancel')"></div>
 
-            <div class="relative z-50 py-4 px-6 max-w-lg shadow-lg rounded-2xl bg-white">
+            <div class="relative z-50 py-4 px-6 max-w-lg shadow-lg rounded-2xl bg-slate-800">
                 <button
                     v-if="!onlyCancelAction"
                     class="

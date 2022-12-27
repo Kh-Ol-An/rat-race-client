@@ -4,8 +4,8 @@
             <Input v-model:value="name" id="name" type="text" placeholder="Ім'я" />
             <Add :firstValue="name" @add="$emit('add:name', name)" />
         </div>
-        <InfoField v-else labelClasses="text-additional" label="Ім'я:">
-            <span class="ml-2 text-slate-800">
+        <InfoField v-else labelClasses="text-slate-500" label="Ім'я:">
+            <span class="ml-2 text-slate-400">
                 {{ user.name }}
             </span>
         </InfoField>
@@ -13,7 +13,7 @@
         <div v-if="user.name.length > 0 && user.gender.length === 0" class="mx-auto flex items-center gap-3">
             <input class="peer hidden" type="radio" id="male" name="gender" value="male" v-model="gender">
             <label class="cursor-pointer" for="male">
-                <MaleIcon width="24px" height="24px" :classes="gender === 'male' ? 'fill-primary' : 'fill-slate-300'" />
+                <MaleIcon width="24px" height="24px" :classes="gender === 'male' ? 'fill-blue-600' : 'fill-slate-400'" />
             </label>
 
             <input class="peer hidden" type="radio" id="female" name="gender" value="female" v-model="gender">
@@ -21,7 +21,7 @@
                 <FemaleIcon
                     width="24px"
                     height="24px"
-                    :classes="gender === 'female' ? 'fill-primary' : 'fill-slate-300'"
+                    :classes="gender === 'female' ? 'fill-opposite' : 'fill-slate-400'"
                 />
             </label>
             <Add :firstValue="gender" @add="$emit('add:gender', gender)" />
@@ -29,12 +29,12 @@
         <InfoField
             v-if="user.gender.length > 0"
             wrapClasses="mx-auto"
-            labelClasses="text-additional"
+            labelClasses="text-slate-500"
             label="Стать:"
             :value="user.gender"
         >
-            <MaleIcon v-if="user.gender === 'male'" width="24px" height="24px" classes="ml-4 fill-primary" />
-            <FemaleIcon v-if="user.gender === 'female'" width="24px" height="24px" classes="ml-4 fill-primary" />
+            <MaleIcon v-if="user.gender === 'male'" width="24px" height="24px" classes="ml-4 fill-blue-600" />
+            <FemaleIcon v-if="user.gender === 'female'" width="24px" height="24px" classes="ml-4 fill-opposite" />
         </InfoField>
     </div>
 
@@ -42,8 +42,8 @@
         <Input v-model:value="profession" id="profession" type="text" placeholder="Професія" />
         <Add :firstValue="profession" @add="$emit('add:profession', profession)" />
     </div>
-    <InfoField v-else labelClasses="text-additional" label="Професія:">
-        <span class="ml-2 text-slate-800">
+    <InfoField v-else labelClasses="text-slate-500" label="Професія:">
+        <span class="ml-2 text-slate-400">
             {{ user.profession }}
         </span>
     </InfoField>

@@ -25,15 +25,15 @@
             type="submit"
             title="Зберегти"
         >
-            <SaveIcon width="30px" height="30px" color="fill-white" />
+            <SaveIcon width="30px" height="30px" color="fill-slate-300" />
         </button>
 
         <div class="flex items-center gap-4 md:gap-2">
-            <Transaction @decrement="decrement" @increment="increment" />
+            <Transaction :rich="user.rich" @decrement="decrement" @tax="tax" @increment="increment" />
         </div>
 
-        <InfoField wrapClasses="mx-auto" labelClasses="text-lg font-bold text-primary" label="Грошовий потік:">
-            <span class="ml-2 text-slate-800">
+        <InfoField wrapClasses="mx-auto" labelClasses="font-bold text-primary" label="Грошовий потік:">
+            <span class="ml-2 font-bold text-slate-300">
                 {{ addingSpaces(cashFlow) }}
             </span>
 
@@ -54,7 +54,7 @@
                     <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
                         {{ modalRepayTitle }}
                     </h4>
-                    <p class="mx-auto mt-4 text-lg font-normal text-slate-800 text-center">
+                    <p class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center">
                         {{ modalRepayText }}
                     </p>
                 </Modal>
@@ -67,7 +67,7 @@
                     <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
                         Дуже прикро...
                     </h4>
-                    <p class="mx-auto mt-4 text-lg font-normal text-slate-800 text-center">
+                    <p class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center">
                         Ти програв. Але не вмер. Не засмучуйся. Бери нову професію і починай спочатку :)
                     </p>
                 </Modal>
@@ -117,7 +117,7 @@
             <div class="flex flex-col gap-4 md:gap-2">
                 <IncomeInfo :userProp="user" :passiveIncome="passiveIncome" :income="income" />
 
-                <!-- Доходи -->
+                <!-- Прибутки -->
                 <Incomes
                     :userProp="user"
                     :firedSalary="firedSalary"
@@ -160,20 +160,20 @@
         </Modal>
     </form>
 
-    <Modal :show="showModalRich" cancel="Зрозумів" @cancel="rich = false">
+    <Modal :show="showModalRich" cancel="Зрозумів" @cancel="user.rich = true">
         <h4 class="mx-auto text-2xl font-bold text-primary text-center">
             Вітаємо!!!
         </h4>
-        <p class="mx-auto mt-4 text-lg font-normal text-slate-800 text-center">
+        <p class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center">
             Видихай) Ти багатий! Переходь на зовнішнє коло.
         </p>
     </Modal>
 
-    <Modal :show="showModalWin" cancel="Зрозумів" @cancel="win = false">
+    <Modal :show="showModalWin" cancel="Зрозумів" @cancel="user.win = true">
         <h4 class="mx-auto text-2xl font-bold text-primary text-center">
             Вітаємо!!!
         </h4>
-        <p class="mx-auto mt-4 text-lg font-normal text-slate-800 text-center">
+        <p class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center">
             Ти переміг! Але можешь продовжувати гру.
         </p>
     </Modal>
@@ -245,6 +245,8 @@ const userObj = {
         land: [],
         corruptLand: [],
     },
+    rich: false,
+    win: false,
 };
 const userArr = Object.keys(userObj);
 const user = JSON.stringify(savedUserArr) === JSON.stringify(userArr) ? reactive(savedUserObj) : reactive(userObj);
@@ -261,6 +263,7 @@ const decrement = (transaction) => {
 
     return user.cash -= transaction;
 };
+const tax = () => user.cash -= user.cash * 0.1;
 const increment = (transaction) => user.cash += transaction;
 
 // PASSIVE
@@ -551,8 +554,8 @@ const sellAcres = (price) => {
     increment(price);
     user.assets.land= [];
 };
-const buyCorruptLand = (id, price, quantity) => {
-    const cost = price * quantity;
+const buyCorruptLand = (id, quantity, cost) => {
+    const price = cost / quantity;
     user.assets.corruptLand.push({id, price, quantity, cost});
     user.cash -= cost;
 };
@@ -584,7 +587,6 @@ const disableStorage = () => {
 };
 setInterval(() => saveInterval.value && submit(), 59000);
 
-const rich = ref(true);
 const showModalRich = computed(
     () =>
         user.cash >= 3000000 &&
@@ -592,15 +594,14 @@ const showModalRich = computed(
         user.debt === 0 &&
         user.apartments.length > 0 &&
         user.cars.length > 0 &&
-        rich.value
+        !user.rich
 );
-const win = ref(true);
 const showModalWin = computed(
     () =>
         user.cottages.length > 0 &&
         user.yachts.length > 0 &&
         user.planes.length > 0 &&
         user.whimsAndFancies > 0 &&
-        win.value
+        !user.win
 );
 </script>

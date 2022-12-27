@@ -1,17 +1,17 @@
 <template>
     <li class="relative pr-12 grid grid-cols-5 items-center gap-2">
-        <span class="col-span-2 text-silver-800 text-center whitespace-nowrap">
+        <span class="col-span-2 text-slate-400 text-center whitespace-nowrap">
             {{ addingSpaces(firstValue) }}
         </span>
 
         <div class="col-span-3 mx-auto flex items-center gap-3">
-            <span class="text-silver-800 text-center whitespace-nowrap">
+            <span class="text-slate-400 text-center whitespace-nowrap">
                 {{ addingSpaces(secondValue) }}
             </span>
             <div v-if="showIncome" class="relative">
                 <Input
                     id="edit-value"
-                    placeholder="Доходи"
+                    placeholder="Прибутки"
                     smallLabel
                     v-model:value="addIncome"
                 />
@@ -29,7 +29,7 @@
                     v-if="!showIncome"
                     :class="[
                         'font-bold text-2xl outline-0',
-                         disabledEdit ? 'text-slate-300 cursor-not-allowed' : 'text-secondary',
+                         disabledEdit ? 'text-slate-700 cursor-not-allowed' : 'text-primary',
                     ]"
                     type="button"
                     title="Збільшити дохід"
@@ -80,7 +80,7 @@
             <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
                 Увага!!!
             </h4>
-            <p class="mx-auto mt-4 text-lg font-normal text-slate-800 text-center">
+            <p class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center">
                 Ти впевнений шо хочешь видалити останній відкритий бізнес?
             </p>
         </Modal>

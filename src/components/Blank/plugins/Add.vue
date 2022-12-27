@@ -6,7 +6,7 @@
         :disabled="disabled"
         @click="$emit('add')"
     >
-        <AddIcon width="30px" height="30px" :color="disabled ? 'fill-slate-300' : 'fill-secondary'" />
+        <AddIcon width="30px" height="30px" :color="disabled ? 'fill-slate-400' : 'fill-primary'" />
     </button>
 </template>
 

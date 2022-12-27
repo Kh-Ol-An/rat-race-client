@@ -1,6 +1,6 @@
 <template>
     <div class="pt-4 pb-8 px-8 md:p-2 md:w-screen max-w-full flex flex-col items-center justify-center">
-        <h1 class="p-4 md:p-2 text-4xl md:text-xl font-bold text-slate-700 text-center">
+        <h1 class="p-4 md:p-2 text-4xl md:text-xl font-bold text-slate-300 text-center">
             ГРА 'Щурячі перегони Ⅱ'
         </h1>
         <Blank />
@@ -13,7 +13,7 @@ import Blank from './components/Blank/Blank.vue'
 
 <style>
 input:-webkit-autofill {
-    -webkit-box-shadow: inset 0 0 0 50px #fff !important; /* Цвет фона */
+    -webkit-box-shadow: inset 0 0 0 50px #1e293b !important; /* Цвет фона */
     -webkit-text-fill-color: #000 !important; /* цвет текста */
 }
 

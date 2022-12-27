@@ -1,5 +1,5 @@
 <template>
-    <li class="relative pr-12 grid grid-cols-5 items-center gap-2 text-secondary font-bold text-center">
+    <li class="relative pr-12 grid grid-cols-5 items-center gap-2 text-primary font-bold text-center">
         <span class="col-span-2">
             {{ firstTitle }}
         </span>
@@ -30,7 +30,7 @@
             <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
                 Увага!!!
             </h4>
-            <p class="mx-auto mt-4 text-lg font-normal text-slate-800 text-center">
+            <p class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center">
                 {{ confirmationModalText }}
             </p>
         </Modal>

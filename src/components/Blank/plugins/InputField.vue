@@ -3,7 +3,7 @@
         'flex flex-col gap-2',
         disabled && 'pointer-events-none opacity-20',
     ]">
-        <span class="text-sm">{{ label }}</span>
+        <span class="text-slate-500">{{ label }}</span>
         <div class="flex items-center gap-3">
             <Input
                 :id="`${subType}-${type}-value`"

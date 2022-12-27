@@ -43,7 +43,7 @@ const buyLand = (id, price, quantity) => emit('buy:land', id, price, quantity);
 const sellLand = (id, price) => emit('sell:land', id, price);
 const sellAcres = (price) => emit('sell:acres', price);
 
-const buyCorruptLand = (id, price, quantity) => emit('buy:corrupt-land', id, price, quantity);
+const buyCorruptLand = (id, quantity, cost) => emit('buy:corrupt-land', id, quantity, cost);
 const sellCorruptLand = (id, price) => emit('sell:corrupt-land', id, price);
 const sellCorruptAcres = (price) => emit('sell:corrupt-acres', price);
 </script>

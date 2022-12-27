@@ -3,8 +3,8 @@
         label="Корупційна земля"
         type="assets"
         subType="corruptLand"
-        placeholderWorth="Ціна за сотку"
-        placeholderValue="Кількість соток"
+        placeholderWorth="Кількість соток"
+        placeholderValue="Вартість"
         @add="buyLand"
     />
     <ul v-if="user.assets.corruptLand.length > 0" class="flex flex-col gap-2">
@@ -56,9 +56,9 @@ const emit = defineEmits([ 'buy:land', 'sell:land', 'sell:acres' ]);
 
 const showModal = ref(false);
 
-const buyLand = (id, price, quantity) => {
-    if (user.value.cash < price * quantity) return showModal.value = true;
-    emit('buy:land', id, price, quantity);
+const buyLand = (id, quantity, cost) => {
+    if (user.value.cash < cost) return showModal.value = true;
+    emit('buy:land', id, quantity, cost);
 };
 const sellLand = (id, price) => emit('sell:land', id, price);
 const sellAcres = (price) => emit('sell:acres', price);

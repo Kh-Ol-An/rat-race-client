@@ -1,184 +1,192 @@
 <template>
     <h2 class="px-4 text-xl font-bold text-opposite text-center">Багатство</h2>
 
-    <!-- Квартири -->
-    <div class="flex flex-col gap-1">
-        <span>
-            Квартири
-        </span>
-        <div class="flex items-center gap-3">
-            <Input v-model:value="apartmentName" id="apartment-name" type="text" placeholder="Назва" />
-            <Input
-                v-model:value="apartmentPrice"
-                id="apartment-price"
-                placeholder="Ціна"
-                :disabled="apartmentPayment.length > 0 || apartmentTerm.length > 0"
-            />
-            <Add :firstValue="apartmentPrice" @add="buyApartment" />
+    <div class="flex flex-col">
+        <!-- Квартири -->
+        <div class="pb-2 flex flex-col gap-1">
+            <span class="text-slate-500">
+                Квартири
+            </span>
+            <div class="flex items-center gap-3">
+                <Input v-model:value="apartmentName" id="apartment-name" type="text" placeholder="Назва" />
+                <Input
+                    v-model:value="apartmentPrice"
+                    id="apartment-price"
+                    placeholder="Ціна"
+                    :disabled="apartmentPayment.length > 0 || apartmentTerm.length > 0"
+                />
+                <Add :firstValue="apartmentPrice" @add="buyApartment" />
+            </div>
+            <ul v-if="user.apartments.length > 0" class="flex flex-col gap-1">
+                <Purchased
+                    v-for="{ id, name, price } in user.apartments"
+                    :id="id"
+                    :price="price"
+                    :label="name.length > 0 ? name : 'Квартира:'"
+                    @sell="sellApartment"
+                />
+                <li>
+                    <InfoField wrapClasses="gap-2" labelClasses="text-opposite" label="Витрати:">
+                        <span class="text-slate-400">
+                            {{ user.apartments.length * 200 }}
+                        </span>
+                    </InfoField>
+                </li>
+            </ul>
+            <span class="text-xs text-slate-500">
+                Кредит на квартиру
+            </span>
+            <div class="flex items-center gap-3">
+                <Input
+                    v-model:value="apartmentPayment"
+                    id="apartment-payment"
+                    placeholder="Платіж"
+                    :disabled="apartmentPrice.length > 0"
+                />
+                <Input
+                    v-model:value="apartmentTerm"
+                    id="apartment-term"
+                    placeholder="Термін"
+                    :disabled="apartmentPrice.length > 0"
+                />
+                <Add :firstValue="apartmentPayment" :secondValue="apartmentTerm" @add="buyApartmentOnCredit" />
+            </div>
         </div>
-        <ul v-if="user.apartments.length > 0" class="flex flex-col gap-1">
+
+        <!-- Автівки -->
+        <div class="pt-1 pb-2 flex flex-col gap-1 border-t border-dotted border-slate-700">
+            <span class="text-slate-500">
+                Автівки
+            </span>
+            <div class="flex items-center gap-3">
+                <Input v-model:value="carName" id="car-name" type="text" placeholder="Назва" />
+                <Input
+                    v-model:value="carPrice"
+                    id="car-price"
+                    placeholder="Ціна"
+                    :disabled="carPayment.length > 0 || carTerm.length > 0"
+                />
+                <Add :firstValue="carPrice" @add="buyCar" />
+            </div>
+            <ul v-if="user.cars.length > 0" class="flex flex-col gap-1">
+                <Purchased
+                    v-for="{ id, name, price } in user.cars"
+                    :id="id"
+                    :price="price"
+                    :label="name.length > 0 ? name : 'Автівка:'"
+                    @sell="sellCar"
+                />
+                <li>
+                    <InfoField wrapClasses="gap-2" labelClasses="text-opposite" label="Витрати:">
+                        <span class="text-slate-400">
+                            {{ user.cars.length * 600 }}
+                        </span>
+                    </InfoField>
+                </li>
+            </ul>
+            <span class="text-xs text-slate-500">
+                Кредит на автівку
+            </span>
+            <div class="flex items-center gap-3">
+                <Input v-model:value="carPayment" id="car-payment" placeholder="Платіж" :disabled="carPrice.length > 0" />
+                <Input v-model:value="carTerm" id="car-term" placeholder="Термін" :disabled="carPrice.length > 0" />
+                <Add :firstValue="carPayment" :secondValue="carTerm" @add="buyCarOnCredit" />
+            </div>
+        </div>
+
+        <!-- Котеджі -->
+        <div class="pt-1 pb-2 border-t border-dotted border-slate-700">
+            <div>
+                <span class="text-slate-500">
+                    Котеджі
+                </span>
+                <div class="mt-2 flex items-center gap-3">
+                    <Input v-model:value="cottage" id="cottage" placeholder="Ціна котеджу" />
+                    <Add :firstValue="cottage" @add="buyCottage" />
+                </div>
+            </div>
+            <ul v-if="user.cottages.length > 0" class="flex flex-col gap-2">
+                <Purchased
+                    v-for="{ id, price } in user.cottages"
+                    :id="id"
+                    :price="price"
+                    label="Котедж:"
+                    @sell="sellCottage"
+                />
+                <li>
+                    <InfoField wrapClasses="gap-2" labelClasses="text-opposite" label="Витрати:">
+                        <span class="text-slate-400">
+                            {{ user.apartments.length * 1000 }}
+                        </span>
+                    </InfoField>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Яхти -->
+        <div class="pt-1 pb-2 border-t border-dotted border-slate-700">
+            <div>
+                <span class="text-slate-500">
+                    Яхти
+                </span>
+                <div class="mt-2 flex items-center gap-3">
+                    <Input v-model:value="yacht" id="yacht" placeholder="Ціна яхти" />
+                    <Add :firstValue="yacht" @add="buyYacht" />
+                </div>
+            </div>
+            <ul v-if="user.yachts.length > 0" class="flex flex-col gap-2">
+                <Purchased
+                    v-for="{ id, price } in user.yachts"
+                    :id="id"
+                    :price="price"
+                    label="Яхта:"
+                    @sell="sellYacht"
+                />
+                <li>
+                    <InfoField wrapClasses="gap-2" labelClasses="text-opposite" label="Витрати:">
+                        <span class="text-slate-400">
+                            {{ user.apartments.length * 1500 }}
+                        </span>
+                    </InfoField>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Літаки -->
+        <div class="pt-1 border-t border-dotted border-slate-700">
+            <div>
+                <span class="text-slate-500">
+                    Літаки
+                </span>
+                <div class="mt-2 flex items-center gap-3">
+                    <Input v-model:value="plane" id="plane" placeholder="Ціна літака" />
+                    <Add :firstValue="plane" @add="buyPlane" />
+                </div>
+            </div>
+            <ul v-if="user.planes.length > 0" class="flex flex-col gap-2">
             <Purchased
-                v-for="{ id, name, price } in user.apartments"
+                v-for="{ id, price } in user.planes"
                 :id="id"
                 :price="price"
-                :label="name.length > 0 ? name : 'Квартира:'"
-                @sell="sellApartment"
+                label="Літак:"
+                @sell="sellPlane"
             />
             <li>
                 <InfoField wrapClasses="gap-2" labelClasses="text-opposite" label="Витрати:">
-                    <span class="text-slate-800">
-                        {{ user.apartments.length * 200 }}
+                    <span class="text-slate-400">
+                        {{ user.apartments.length * 5000 }}
                     </span>
                 </InfoField>
             </li>
         </ul>
-        <span class="text-sm">
-            Кредит на квартиру
-        </span>
-        <div class="flex items-center gap-3">
-            <Input
-                v-model:value="apartmentPayment"
-                id="apartment-payment"
-                placeholder="Платіж"
-                :disabled="apartmentPrice.length > 0"
-            />
-            <Input
-                v-model:value="apartmentTerm"
-                id="apartment-term"
-                placeholder="Термін"
-                :disabled="apartmentPrice.length > 0"
-            />
-            <Add :firstValue="apartmentPayment" :secondValue="apartmentTerm" @add="buyApartmentOnCredit" />
         </div>
     </div>
-
-    <!-- Автівки -->
-    <div class="flex flex-col gap-1">
-        <span>
-            Автівки
-        </span>
-        <div class="flex items-center gap-3">
-            <Input v-model:value="carName" id="car-name" type="text" placeholder="Назва" />
-            <Input
-                v-model:value="carPrice"
-                id="car-price"
-                placeholder="Ціна"
-                :disabled="carPayment.length > 0 || carTerm.length > 0"
-            />
-            <Add :firstValue="carPrice" @add="buyCar" />
-        </div>
-        <span class="text-sm">
-            Кредит на автівку
-        </span>
-        <div class="flex items-center gap-3">
-            <Input v-model:value="carPayment" id="car-payment" placeholder="Платіж" :disabled="carPrice.length > 0" />
-            <Input v-model:value="carTerm" id="car-term" placeholder="Термін" :disabled="carPrice.length > 0" />
-            <Add :firstValue="carPayment" :secondValue="carTerm" @add="buyCarOnCredit" />
-        </div>
-        <ul v-if="user.cars.length > 0" class="flex flex-col gap-1">
-            <Purchased
-                v-for="{ id, name, price } in user.cars"
-                :id="id"
-                :price="price"
-                :label="name.length > 0 ? name : 'Автівка:'"
-                @sell="sellCar"
-            />
-            <li>
-                <InfoField wrapClasses="gap-2" labelClasses="text-opposite" label="Витрати:">
-                    <span class="text-slate-800">
-                        {{ user.cars.length * 600 }}
-                    </span>
-                </InfoField>
-            </li>
-        </ul>
-    </div>
-
-    <!-- Котеджі -->
-    <div>
-        <span>
-            Котеджі
-        </span>
-        <div class="mt-2 flex items-center gap-3">
-            <Input v-model:value="cottage" id="cottage" placeholder="Ціна котеджу" />
-            <Add :firstValue="cottage" @add="buyCottage" />
-        </div>
-    </div>
-    <ul v-if="user.cottages.length > 0" class="flex flex-col gap-2">
-        <Purchased
-            v-for="{ id, price } in user.cottages"
-            :id="id"
-            :price="price"
-            label="Котедж:"
-            @sell="sellCottage"
-        />
-        <li>
-            <InfoField wrapClasses="gap-2" labelClasses="text-opposite" label="Витрати:">
-                <span class="text-slate-800">
-                    {{ user.apartments.length * 1000 }}
-                </span>
-            </InfoField>
-        </li>
-    </ul>
-
-    <!-- Яхти -->
-    <div>
-        <span>
-            Яхти
-        </span>
-        <div class="mt-2 flex items-center gap-3">
-            <Input v-model:value="yacht" id="yacht" placeholder="Ціна яхти" />
-            <Add :firstValue="yacht" @add="buyYacht" />
-        </div>
-    </div>
-    <ul v-if="user.yachts.length > 0" class="flex flex-col gap-2">
-        <Purchased
-            v-for="{ id, price } in user.yachts"
-            :id="id"
-            :price="price"
-            label="Яхта:"
-            @sell="sellYacht"
-        />
-        <li>
-            <InfoField wrapClasses="gap-2" labelClasses="text-opposite" label="Витрати:">
-                <span class="text-slate-800">
-                    {{ user.apartments.length * 1500 }}
-                </span>
-            </InfoField>
-        </li>
-    </ul>
-
-    <!-- Літаки -->
-    <div>
-        <span>
-            Літаки
-        </span>
-        <div class="mt-2 flex items-center gap-3">
-            <Input v-model:value="plane" id="plane" placeholder="Ціна літака" />
-            <Add :firstValue="plane" @add="buyPlane" />
-        </div>
-    </div>
-    <ul v-if="user.planes.length > 0" class="flex flex-col gap-2">
-        <Purchased
-            v-for="{ id, price } in user.planes"
-            :id="id"
-            :price="price"
-            label="Літак:"
-            @sell="sellPlane"
-        />
-        <li>
-            <InfoField wrapClasses="gap-2" labelClasses="text-opposite" label="Витрати:">
-                <span class="text-slate-800">
-                    {{ user.apartments.length * 5000 }}
-                </span>
-            </InfoField>
-        </li>
-    </ul>
 
     <Modal :show="showModal" cancel="Зрозумів" @cancel="showModal = false">
         <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
             Це не можливо!
         </h4>
-        <p class="mx-auto mt-4 text-lg font-normal text-slate-800 text-center">
+        <p class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center">
             Куди ти сунешся жебрак? {{ purchase }} він зібрався купляти... Іди гроші заробляй!
         </p>
     </Modal>
@@ -187,7 +195,7 @@
         <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
             Це не можливо!
         </h4>
-        <p class="mx-auto mt-4 text-lg font-normal text-slate-800 text-center">
+        <p class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center">
             На жаль кредит не схвалений службою безпеки банку. Нас не цікавить хто Ви і що робите. Нас хвилює як Ви будете віддавати наші гроші.
         </p>
     </Modal>

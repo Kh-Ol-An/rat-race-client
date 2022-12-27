@@ -6,7 +6,7 @@
         <Add :firstValue="rent" opposite @add="$emit('add:rent', Number(rent))" />
     </div>
     <InfoField v-else labelClasses="text-opposite" label="Оренда житла:">
-        <span class="ml-2 text-slate-800">
+        <span class="ml-2 text-slate-400">
             {{ addingSpaces(user.rent) }}
         </span>
     </InfoField>
@@ -16,7 +16,7 @@
         <Add :firstValue="food" opposite @add="$emit('add:food', Number(food))" />
     </div>
     <InfoField v-else labelClasses="text-opposite" label="Витрати на харчування:">
-        <span class="ml-2 text-slate-800">
+        <span class="ml-2 text-slate-400">
             {{ addingSpaces(user.food) }}
         </span>
     </InfoField>
@@ -26,7 +26,7 @@
         <Add :firstValue="clothes" opposite @add="$emit('add:clothes', Number(clothes))" />
     </div>
     <InfoField v-else labelClasses="text-opposite" label="Витрати на одяг:">
-        <span class="ml-2 text-slate-800">
+        <span class="ml-2 text-slate-400">
             {{ addingSpaces(user.clothes) }}
         </span>
     </InfoField>
@@ -36,7 +36,7 @@
         <Add :firstValue="fare" opposite @add="$emit('add:fare', Number(fare))" />
     </div>
     <InfoField v-else labelClasses="text-opposite" label="Витрати на проїзд:">
-        <span class="ml-2 text-slate-800">
+        <span class="ml-2 text-slate-400">
             {{ addingSpaces(user.fare) }}
         </span>
     </InfoField>
@@ -46,7 +46,7 @@
         <Add :firstValue="phone" opposite @add="$emit('add:phone', Number(phone))" />
     </div>
     <InfoField v-else labelClasses="text-opposite" label="Витрати на телефонні розмови:">
-        <span class="ml-2 text-slate-800">
+        <span class="ml-2 text-slate-400">
             {{ addingSpaces(user.phone) }}
         </span>
     </InfoField>

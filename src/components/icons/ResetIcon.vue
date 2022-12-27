@@ -30,7 +30,7 @@ defineProps({
     },
     color: {
         type: String,
-        default: 'fill-white',
+        default: 'fill-slate-400',
     },
 });
 </script>

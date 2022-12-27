@@ -35,7 +35,7 @@ defineProps({
     },
     classes: {
         type: String,
-        default: 'fill-slate-800',
+        default: 'fill-slate-400',
     },
 });
 </script>

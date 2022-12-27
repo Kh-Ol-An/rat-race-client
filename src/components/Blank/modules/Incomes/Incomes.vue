@@ -1,5 +1,5 @@
 <template>
-    <h2 class="px-4 text-xl font-bold text-primary text-center">Доходи</h2>
+    <h2 class="px-4 text-xl font-bold text-primary text-center">Прибутки</h2>
 
     <!-- Зарплата -->
     <div
@@ -12,13 +12,13 @@
         <Input v-model:value="salary" id="salary" placeholder="Зарплата" />
         <Add :firstValue="salary" @add="$emit('add:salary', Number(salary))" />
     </div>
-    <InfoField v-if="user.salary > 0 || firedSalary > 0" labelClasses="text-additional" label="Зарплата:">
-        <span class="ml-2 text-slate-800">
+    <InfoField v-if="user.salary > 0 || firedSalary > 0" labelClasses="text-primary" label="Зарплата:">
+        <span class="ml-2 text-slate-400">
             {{ addingSpaces(user.salary) }}
         </span>
 
         <button
-            class="ml-4 px-2 rounded shadow bg-opposite text-white font-bold outline-0"
+            class="ml-4 px-2 rounded shadow bg-opposite text-sm text-slate-300 font-bold outline-0"
             type="button"
             title="Звільнили"
             @click="fired"
@@ -27,7 +27,7 @@
         </button>
 
         <button
-            class="ml-4 px-2 rounded shadow bg-secondary text-white font-bold outline-0"
+            class="ml-4 px-2 rounded shadow bg-secondary text-sm text-slate-300 font-bold outline-0"
             type="button"
             title="Звільнитись"
             @click="quit"
@@ -42,7 +42,7 @@
         type="business"
         subType="small"
         placeholderWorth="Вартість"
-        placeholderValue="Доходи"
+        placeholderValue="Прибутки"
         :disabled="
             ((user.salary > 0 || firedSalary > 0) && user.business.small.length > 0) ||
             user.business.middle.length > 0 ||
@@ -54,7 +54,7 @@
     <ul v-if="user.business.small.length > 0" class="flex flex-col gap-2">
         <BusinessHead
             firstTitle="Вартість"
-            secondTitle="Доходи"
+            secondTitle="Прибутки"
             confirmationModalText="Ти впевнений що хочешь продати всі свої малі бізнеси?"
             @sell="sellBusiness('small')"
         />
@@ -78,7 +78,7 @@
         type="business"
         subType="middle"
         placeholderWorth="Вартість"
-        placeholderValue="Доходи"
+        placeholderValue="Прибутки"
         :disabled="
             ((user.salary > 0 || firedSalary > 0) && user.business.middle.length > 0) ||
             user.business.small.length > 0 ||
@@ -90,7 +90,7 @@
     <ul v-if="user.business.middle.length > 0" class="flex flex-col gap-2">
         <BusinessHead
             firstTitle="Вартість"
-            secondTitle="Доходи"
+            secondTitle="Прибутки"
             confirmationModalText="Ти впевнений що хочешь продати всі свої середні бізнеси?"
             @sell="sellBusiness('middle')"
         />
@@ -111,7 +111,7 @@
         type="business"
         subType="big"
         placeholderWorth="Вартість"
-        placeholderValue="Доходи"
+        placeholderValue="Прибутки"
         :disabled="
             (user.salary > 0 && user.business.big.length > 0) ||
             (user.salary > 0 && user.business.corrupt.length > 0) ||
@@ -121,7 +121,7 @@
         @add="buyBusiness"
     />
     <ul v-if="user.business.big.length > 0" class="flex flex-col gap-2">
-        <BusinessHead firstTitle="Вартість" secondTitle="Доходи" :isSell="false" />
+        <BusinessHead firstTitle="Вартість" secondTitle="Прибутки" :isSell="false" />
         <Business
             v-for="({ id, price, income })  in user.business.big"
             :key="id"
@@ -139,7 +139,7 @@
         type="business"
         subType="corrupt"
         placeholderWorth="Вартість"
-        placeholderValue="Доходи"
+        placeholderValue="Прибутки"
         :disabled="
             (user.salary > 0 && user.business.big.length > 0) ||
             (user.salary > 0 && user.business.corrupt.length > 0) ||
@@ -149,7 +149,7 @@
         @add="buyBusiness"
     />
     <ul v-if="user.business.corrupt.length > 0" class="flex flex-col gap-2">
-        <BusinessHead firstTitle="Вартість" secondTitle="Доходи" :isSell="false" />
+        <BusinessHead firstTitle="Вартість" secondTitle="Прибутки" :isSell="false" />
         <Business
             v-for="({ id, price, income }) in user.business.corrupt"
             :key="id"

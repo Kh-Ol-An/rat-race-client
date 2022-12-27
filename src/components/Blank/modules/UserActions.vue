@@ -14,7 +14,7 @@
         type="submit"
         title="Зберегти"
     >
-        <SaveIcon width="30px" height="30px" color="fill-white" />
+        <SaveIcon width="30px" height="30px" color="fill-slate-300" />
     </button>
 
     <transition>
@@ -35,7 +35,7 @@
             title="Почати спочатку"
             @click="showModal = true"
         >
-            <ResetIcon width="30px" height="30px" />
+            <ResetIcon width="30px" height="30px" color="fill-slate-300" />
         </button>
     </transition>
     <Modal
@@ -47,7 +47,7 @@
         <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
             Увага!!!
         </h4>
-        <p class="mx-auto mt-4 text-lg font-normal text-slate-800 text-center">
+        <p class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center">
             Якщо ти тицьнеш 'Видалити', тебе вже нічого не врятує... Усі ті циферки які ти так довго вводив, зникнуть. І навіть найголовніший розробник не зможе їх повернути.
         </p>
     </Modal>
@@ -70,7 +70,7 @@
             title="Вимкнути зберігання"
             @click="$emit('disable:storage')"
         >
-            <SaveIcon width="30px" height="30px" color="fill-white" />
+            <SaveIcon width="30px" height="30px" color="fill-slate-300" />
         </button>
     </transition>
 </template>

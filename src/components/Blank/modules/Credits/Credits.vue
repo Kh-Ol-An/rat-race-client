@@ -2,7 +2,7 @@
     <h2 class="px-4 text-xl font-bold text-opposite text-center">Виплати за кредитами</h2>
 
     <ul>
-        <li class="grid grid-cols-4 gap-2 border-b-2 border-b-silver-900 text-opposite font-bold">
+        <li class="grid grid-cols-4 gap-2 border-b-2 border-b-slate-700 text-opposite font-bold">
             <span>
                 Назва
             </span>

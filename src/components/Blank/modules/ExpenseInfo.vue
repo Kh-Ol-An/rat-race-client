@@ -1,6 +1,6 @@
 <template>
     <InfoField labelClasses="text-opposite" label="Борги:">
-        <span class="ml-2 text-slate-800">
+        <span class="ml-2 text-slate-400 whitespace-nowrap">
             {{ addingSpaces(debt) }}
         </span>
 
@@ -25,7 +25,7 @@
             <ReturnIcon
                 width="24px"
                 height="24px"
-                :color="debt > 0 ? 'fill-primary' : 'fill-slate-300'"
+                :color="debt > 0 ? 'fill-primary' : 'fill-slate-400'"
             />
         </button>
         <button
@@ -40,12 +40,12 @@
             :disabled="repayDebt.length === 0"
             @click="repay"
         >
-            <CheckIcon width="24px" height="24px" :color="repayDebt.length === 0 ? 'fill-slate-300' : 'fill-primary'" />
+            <CheckIcon width="24px" height="24px" :color="repayDebt.length === 0 ? 'fill-slate-400' : 'fill-primary'" />
         </button>
     </InfoField>
 
     <InfoField labelClasses="text-opposite" label="Загальні витрати:">
-        <span class="ml-2 text-slate-800">
+        <span class="ml-2 text-slate-400">
             {{ addingSpaces(expenses) }}
         </span>
     </InfoField>

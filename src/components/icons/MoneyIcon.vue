@@ -47,7 +47,7 @@ defineProps({
     },
     color: {
         type: String,
-        default: 'fill-secondary',
+        default: 'fill-primary',
     },
 });
 </script>

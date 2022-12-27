@@ -1,7 +1,7 @@
 <template>
     <li class="relative pr-12 flex items-center gap-2">
-        <InfoField wrapClasses="gap-2" labelClasses="text-additional" :label="label">
-            <span class="text-slate-800">
+        <InfoField wrapClasses="gap-2" labelClasses="text-primary" :label="label">
+            <span class="text-slate-400">
                 {{ addingSpaces(price) }}
             </span>
         </InfoField>
