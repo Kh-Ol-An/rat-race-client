@@ -66,7 +66,7 @@
             :secondValue="income"
             :lastBusiness="user.business.last"
             incremental
-            :disabledEdit="user.salary > 0"
+            :disabledEdit="user.salary > 0 || firedSalary > 0"
             @increment="incrementIncomeBusiness"
             @delete="deleteBusiness('small', id)"
         />

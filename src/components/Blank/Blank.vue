@@ -489,7 +489,14 @@ const fired = () => {
 };
 const quitSalary = ref(0);
 const quit = () => {
-    quitSalary.value = user.salary;
+    if (user.salary > 0) {
+        quitSalary.value = user.salary;
+    }
+
+    if (firedSalary.value > 0) {
+        quitSalary.value = firedSalary.value;
+        firedSalary.value = 0;
+    }
     user.salary = 0;
 };
 const buyBusiness = (id, price, income, subType) => {
