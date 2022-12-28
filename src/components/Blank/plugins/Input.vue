@@ -48,7 +48,7 @@
                 'text-xs text-primary peer-placeholder-shown:text-slate-400',
                 'cursor-text',
                 'transition-all duration-300',
-                secondBg ? 'bg-zinc-800' : 'bg-slate-800',
+                secondBg ? 'bg-gray-800' : 'bg-slate-800',
                 smallLabel ? 'peer-placeholder-shown:text-sm' : 'peer-placeholder-shown:text-base',
             ]"
             :for="id"

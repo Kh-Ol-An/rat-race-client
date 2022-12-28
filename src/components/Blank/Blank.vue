@@ -78,7 +78,7 @@
                 </div>
 
                 <!-- Витрати -->
-                <div class="py-4 pr-4 pl-8 md:px-2 flex flex-col gap-2 bg-zinc-800">
+                <div class="py-4 pr-4 pl-8 md:px-2 flex flex-col gap-2 bg-gray-800">
                     <Costs
                         :userProp="user"
                         @add:rent="addRent"
@@ -110,7 +110,7 @@
                 </div>
 
                 <!-- Капризи та примхи -->
-                <div class="py-4 pr-4 pl-8 md:px-2 flex flex-col gap-2 bg-zinc-800">
+                <div class="py-4 pr-4 pl-8 md:px-2 flex flex-col gap-2 bg-gray-800">
                     <WhimsAndFancies :userProp="user" @buy="buyWhimsAndFancies" />
                 </div>
 
@@ -124,7 +124,7 @@
                 </div>
 
                 <!-- Виплати за кредитами -->
-                <div v-if="user.credits.length > 0" class="pt-4 pr-4 pb-8 pl-8 md:px-2 flex flex-col gap-2 bg-zinc-800">
+                <div v-if="user.credits.length > 0" class="pt-4 pr-4 pb-8 pl-8 md:px-2 flex flex-col gap-2 bg-gray-800">
                     <Credits :credits="user.credits" />
                 </div>
             </div>
@@ -135,7 +135,7 @@
                 </div>
 
                 <!-- Прибутки -->
-                <div class="py-4 pr-8 pl-4 md:px-2 flex flex-col gap-2 bg-zinc-800">
+                <div class="py-4 pr-8 pl-4 md:px-2 flex flex-col gap-2 bg-gray-800">
                     <Incomes
                         :userProp="user"
                         :firedSalary="firedSalary"
@@ -160,7 +160,7 @@
                 </div>
 
                 <!-- Активи -->
-                <div class="pt-4 pr-8 pl-4 pb-8 md:px-2 flex flex-col gap-2 bg-zinc-800">
+                <div class="pt-4 pr-8 pl-4 pb-8 md:px-2 flex flex-col gap-2 bg-gray-800">
                     <Assets
                         :userProp="user"
                         @buy:house="buyHouse"
