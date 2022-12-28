@@ -26,16 +26,29 @@
             </label>
             <Add :firstValue="gender" @add="$emit('add:gender', gender)" />
         </div>
-        <InfoField
+        <div
             v-if="user.gender.length > 0"
-            wrapClasses="mx-auto"
-            labelClasses="text-slate-500"
-            label="Стать:"
-            :value="user.gender"
+            class="ml-4 flex items-center gap-4"
         >
-            <MaleIcon v-if="user.gender === 'male'" width="24px" height="24px" classes="ml-4 fill-blue-600" />
-            <FemaleIcon v-if="user.gender === 'female'" width="24px" height="24px" classes="ml-4 fill-opposite" />
-        </InfoField>
+            <MaleIcon
+                v-if="user.gender === 'male'"
+                width="24px"
+                height="24px"
+                :classes="user.marriage ? 'fill-blue-600' : 'fill-slate-400'"
+            />
+            <FemaleIcon
+                v-if="user.gender === 'female'"
+                width="24px"
+                height="24px"
+                :classes="user.marriage ? 'fill-opposite' : 'fill-slate-400'"
+            />
+            <SexIcon
+                v-if="havingChildren"
+                width="24px"
+                height="24px"
+                color="fill-primary"
+            />
+        </div>
     </div>
 
     <div v-if="user.profession.length === 0" class="flex items-center gap-3">
@@ -50,12 +63,13 @@
 </template>
 
 <script setup>
-import { ref, toRef } from "vue";
+import { ref, toRef, computed } from "vue";
 import Input from '../plugins/Input.vue';
 import Add from '../plugins/Add.vue';
 import InfoField from '../plugins/InfoField.vue';
 import MaleIcon from '../../icons/MaleIcon.vue';
 import FemaleIcon from '../../icons/FemaleIcon.vue';
+import SexIcon from '../../icons/SexIcon.vue';
 
 const props = defineProps({
     userProp: {
@@ -68,5 +82,16 @@ const user = toRef(props, 'userProp');
 
 const name = ref('');
 const gender = ref('');
+
+const havingChildren = computed(() => {
+    if (user.value.gender === 'female') {
+        return !user.value.marriage && user.value.children.count > 0;
+    }
+
+    if (user.value.gender === 'male') {
+        return user.value.children.count > 0;
+    }
+});
+
 const profession = ref('');
 </script>
