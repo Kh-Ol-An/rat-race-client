@@ -7,7 +7,7 @@
                 w-full
                 shadow
                 rounded-md border-2 border-slate-700
-                bg-slate-800
+                bg-transparent
                 text-base text-transparent
                 placeholder-transparent
                 focus:border-primary focus:outline-none
@@ -25,7 +25,14 @@
 
         <div
             v-if="value.length > 0"
-            class="absolute top-1/2 left-3 -translate-y-1/2 flex items-center gap-px bg-slate-800 text-base text-primary"
+            class="
+                absolute
+                top-1/2 left-3
+                -translate-y-1/2
+                flex items-center gap-px
+                bg-transparent
+                text-base text-primary
+            "
         >
             {{ type === 'number' ? addingSpaces(value) : value }}
             <div :class="['opacity-0 w-px h-4 bg-primary animate-flashing', focused && 'opacity-100']"></div>
@@ -38,11 +45,11 @@
                 'peer-placeholder-shown:top-1/2 peer-placeholder-shown:left-3 md:peer-placeholder-shown:left-2',
                 '-translate-y-1/2',
                 'px-1 peer-placeholder-shown:px-0',
-                'bg-slate-800',
                 'text-xs text-primary peer-placeholder-shown:text-slate-400',
                 'cursor-text',
                 'transition-all duration-300',
-                 smallLabel ? 'peer-placeholder-shown:text-sm' : 'peer-placeholder-shown:text-base'
+                secondBg ? 'bg-zinc-800' : 'bg-slate-800',
+                smallLabel ? 'peer-placeholder-shown:text-sm' : 'peer-placeholder-shown:text-base',
             ]"
             :for="id"
         >
@@ -73,6 +80,10 @@ const props = defineProps({
         default: '',
     },
     disabled: {
+        type: Boolean,
+        default: false,
+    },
+    secondBg: {
         type: Boolean,
         default: false,
     },

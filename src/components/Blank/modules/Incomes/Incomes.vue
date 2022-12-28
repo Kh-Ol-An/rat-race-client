@@ -9,7 +9,7 @@
             salaryDisabled && 'pointer-events-none opacity-20',
         ]"
     >
-        <Input v-model:value="salary" id="salary" placeholder="Зарплата" />
+        <Input v-model:value="salary" id="salary" placeholder="Зарплата" secondBg />
         <Add :firstValue="salary" @add="$emit('add:salary', Number(salary))" />
     </div>
     <InfoField v-if="user.salary > 0 || firedSalary > 0" labelClasses="text-primary" label="Зарплата:">
@@ -49,6 +49,7 @@
             user.business.big.length > 0 ||
             user.business.corrupt.length > 0
         "
+        secondBg
         @add="buyBusiness"
     />
     <ul v-if="user.business.small.length > 0" class="flex flex-col gap-2">
@@ -85,6 +86,7 @@
             user.business.big.length > 0 ||
             user.business.corrupt.length > 0
         "
+        secondBg
         @add="buyBusiness"
     />
     <ul v-if="user.business.middle.length > 0" class="flex flex-col gap-2">
@@ -118,6 +120,7 @@
             user.business.small.length > 0 ||
             user.business.middle.length > 0
         "
+        secondBg
         @add="buyBusiness"
     />
     <ul v-if="user.business.big.length > 0" class="flex flex-col gap-2">
@@ -146,6 +149,7 @@
             user.business.small.length > 0 ||
             user.business.middle.length > 0
         "
+        secondBg
         @add="buyBusiness"
     />
     <ul v-if="user.business.corrupt.length > 0" class="flex flex-col gap-2">

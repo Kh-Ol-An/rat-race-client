@@ -3,7 +3,7 @@
         <span class="text-slate-500">Будинки</span>
 
         <div class="mt-2 flex items-center gap-3">
-            <Input v-model:value="price" id="assets-houses" placeholder="Ціна будинка" />
+            <Input v-model:value="price" id="assets-houses" placeholder="Ціна будинка" secondBg />
             <Add :firstValue="price" @add="buyHouse" />
 
             <Modal :show="showModal" cancel="Зрозумів" @cancel="showModal = false">

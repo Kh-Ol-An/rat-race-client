@@ -5,6 +5,7 @@
         subType="land"
         placeholderWorth="Ціна за сотку"
         placeholderValue="Кількість соток"
+        secondBg
         @add="buyLand"
     />
     <ul v-if="user.assets.land.length > 0" class="flex flex-col gap-2">

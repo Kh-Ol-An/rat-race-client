@@ -5,6 +5,7 @@
         subType="corruptLand"
         placeholderWorth="Кількість соток"
         placeholderValue="Вартість"
+        secondBg
         @add="buyLand"
     />
     <ul v-if="user.assets.corruptLand.length > 0" class="flex flex-col gap-2">

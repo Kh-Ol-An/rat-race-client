@@ -5,6 +5,7 @@
             right-10 bottom-10
             p-4
             flex items-center justify-center
+            w-full
             shadow hover:shadow-lg
             rounded-full md:rounded-md
             bg-secondary
@@ -25,6 +26,7 @@
                 left-10 bottom-10
                 p-4
                 flex items-center justify-center
+                w-full
                 shadow hover:shadow-lg
                 rounded-full md:rounded-md
                 bg-opposite
@@ -60,6 +62,7 @@
                 left-10 bottom-10
                 p-4
                 flex items-center justify-center
+                w-full
                 shadow hover:shadow-lg
                 rounded-full md:rounded-md
                 bg-opposite

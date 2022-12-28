@@ -9,12 +9,14 @@
                 :id="`${subType}-${type}-value`"
                 :placeholder="placeholderWorth"
                 smallLabel
+                :secondBg="secondBg"
                 v-model:value="firstValue"
             />
             <Input
                 :id="`${subType}-${type}-income`"
                 :placeholder="placeholderValue"
                 smallLabel
+                :secondBg="secondBg"
                 v-model:value="secondValue"
             />
             <Add :firstValue="firstValue" :secondValue="secondValue" @add="add" />
@@ -49,6 +51,10 @@ const props = defineProps({
         required: true,
     },
     disabled: {
+        type: Boolean,
+        default: false,
+    },
+    secondBg: {
         type: Boolean,
         default: false,
     },

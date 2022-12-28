@@ -1,9 +1,9 @@
 <template>
     <form
-        class="relative md:mt-2 py-6 px-8 md:p-0 w-full max-w-5xl flex flex-col gap-4 shadow md:shadow-none rounded-md"
+        class="relative md:mt-2 w-full max-w-5xl flex flex-col gap-4 shadow-lg md:shadow-none rounded-md bg-slate-800"
         @submit.prevent="submit"
     >
-        <div class="grid grid-cols-2 md:grid-cols-1 gap-4 md:gap-2">
+        <div class="pt-6 px-8 md:pt-2 md:px-2 grid grid-cols-2 md:grid-cols-1 gap-4 md:gap-2">
             <UserIdentification
                 :userProp="user"
                 @add:name="addName"
@@ -12,27 +12,30 @@
             />
         </div>
 
-        <button
-            class="
+        <div class="px-2 hidden md:block">
+            <button
+                class="
                 p-4
-                hidden md:flex items-center justify-center
+                flex items-center justify-center
+                w-full
                 shadow hover:shadow-lg
                 rounded-md
                 bg-secondary
                 outline-0
                 transition-all duration-300
             "
-            type="submit"
-            title="Зберегти"
-        >
-            <SaveIcon width="30px" height="30px" color="fill-slate-300" />
-        </button>
+                type="submit"
+                title="Зберегти"
+            >
+                <SaveIcon width="30px" height="30px" color="fill-slate-300" />
+            </button>
+        </div>
 
-        <div class="flex items-center gap-4 md:gap-2">
+        <div class="px-8 md:px-2 flex items-center gap-4 md:gap-2">
             <Transaction :rich="user.rich" @decrement="decrement" @tax="tax" @increment="increment" />
         </div>
 
-        <InfoField wrapClasses="mx-auto" labelClasses="font-bold text-primary" label="Грошовий потік:">
+        <InfoField wrapClasses="mx-auto px-8 md:px-2" labelClasses="font-bold text-primary" label="Грошовий потік:">
             <span class="ml-2 font-bold text-slate-300">
                 {{ addingSpaces(cashFlow) }}
             </span>
@@ -47,117 +50,144 @@
             </button>
         </InfoField>
 
-        <div class="grid grid-cols-2 md:grid-cols-1 gap-4">
-            <div class="flex flex-col gap-4 md:order-last md:gap-2">
-                <ExpenseInfo :debt="user.debt" :expenses="expenses" @repay="repayDebt" />
-                <Modal :show="showModalRepay" cancel="Зрозумів" @cancel="showModalRepay = false">
-                    <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
-                        {{ modalRepayTitle }}
-                    </h4>
-                    <p class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center">
-                        {{ modalRepayText }}
-                    </p>
-                </Modal>
-                <Modal
-                    :show="showModalDebt"
-                    cancel="Спочатку"
-                    onlyCancelAction
-                    @cancel="restart"
-                >
-                    <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
-                        Дуже прикро...
-                    </h4>
-                    <p class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center">
-                        Ти програв. Але не вмер. Не засмучуйся. Бери нову професію і починай спочатку :)
-                    </p>
-                </Modal>
+        <div class="grid grid-cols-2 md:grid-cols-1">
+            <div class="flex flex-col md:order-last">
+                <div class="pb-4 pr-4 pl-8 md:px-2 md:py-4 flex flex-col gap-2">
+                    <ExpenseInfo :debt="user.debt" :expenses="expenses" @repay="repayDebt" />
+                    <Modal :show="showModalRepay" cancel="Зрозумів" @cancel="showModalRepay = false">
+                        <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
+                            {{ modalRepayTitle }}
+                        </h4>
+                        <p class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center">
+                            {{ modalRepayText }}
+                        </p>
+                    </Modal>
+                    <Modal
+                        :show="showModalDebt"
+                        cancel="Спочатку"
+                        onlyCancelAction
+                        @cancel="restart"
+                    >
+                        <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
+                            Дуже прикро...
+                        </h4>
+                        <p class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center">
+                            Ти програв. Але не вмер. Не засмучуйся. Бери нову професію і починай спочатку :)
+                        </p>
+                    </Modal>
+                </div>
 
                 <!-- Витрати -->
-                <Costs
-                    :userProp="user"
-                    @add:rent="addRent"
-                    @add:food="addFood"
-                    @add:clothes="addClothes"
-                    @add:fare="addFare"
-                    @add:phone="addPhone"
-                />
+                <div class="py-4 pr-4 pl-8 md:px-2 flex flex-col gap-2 bg-zinc-800">
+                    <Costs
+                        :userProp="user"
+                        @add:rent="addRent"
+                        @add:food="addFood"
+                        @add:clothes="addClothes"
+                        @add:fare="addFare"
+                        @add:phone="addPhone"
+                    />
+                </div>
 
                 <!-- Багатство -->
-                <Riches
-                    :userProp="user"
-                    :cashFlow="cashFlow"
-                    @buy:apartment="buyApartment"
-                    @credit:apartment="creditApartment"
-                    @sell:apartment="sellApartment"
-                    @buy:car="buyCar"
-                    @credit:car="creditCar"
-                    @sell:car="sellCar"
-                    @buy:cottage="buyCottage"
-                    @sell:cottage="sellCottage"
-                    @buy:yacht="buyYacht"
-                    @sell:yacht="sellYacht"
-                    @buy:plane="buyPlane"
-                    @sell:plane="sellPlane"
-                />
+                <div class="py-4 pr-4 pl-8 md:px-2 flex flex-col gap-2">
+                    <Riches
+                        :userProp="user"
+                        :cashFlow="cashFlow"
+                        @buy:apartment="buyApartment"
+                        @credit:apartment="creditApartment"
+                        @sell:apartment="sellApartment"
+                        @buy:car="buyCar"
+                        @credit:car="creditCar"
+                        @sell:car="sellCar"
+                        @buy:cottage="buyCottage"
+                        @sell:cottage="sellCottage"
+                        @buy:yacht="buyYacht"
+                        @sell:yacht="sellYacht"
+                        @buy:plane="buyPlane"
+                        @sell:plane="sellPlane"
+                    />
+                </div>
 
                 <!-- Капризи та примхи -->
-                <WhimsAndFancies :userProp="user" @buy="buyWhimsAndFancies" />
+                <div class="py-4 pr-4 pl-8 md:px-2 flex flex-col gap-2 bg-zinc-800">
+                    <WhimsAndFancies :userProp="user" @buy="buyWhimsAndFancies" />
+                </div>
 
                 <!-- Сімейний стан -->
-                <FamilyStatus
-                    :userProp="user"
-                    @change:marriage="changeMarriage"
-                    @have:baby="haveBaby"
-                />
+                <div :class="['pt-4 pr-4 pl-8 md:px-2 flex flex-col gap-2', user.credits.length === 0 ? 'pb-8' : 'pb-4']">
+                    <FamilyStatus
+                        :userProp="user"
+                        @change:marriage="changeMarriage"
+                        @have:baby="haveBaby"
+                    />
+                </div>
 
                 <!-- Виплати за кредитами -->
-                <Credits v-if="user.credits.length > 0" :credits="user.credits" />
+                <div v-if="user.credits.length > 0" class="pt-4 pr-4 pb-8 pl-8 md:px-2 flex flex-col gap-2 bg-zinc-800">
+                    <Credits :credits="user.credits" />
+                </div>
             </div>
 
-            <div class="flex flex-col gap-4 md:gap-2">
-                <IncomeInfo :userProp="user" :passiveIncome="passiveIncome" :income="income" />
+            <div class="flex flex-col">
+                <div class="pb-4 pr-8 pl-4 md:px-2 flex flex-col gap-2">
+                    <IncomeInfo :userProp="user" :passiveIncome="passiveIncome" :income="income" />
+                </div>
 
                 <!-- Прибутки -->
-                <Incomes
-                    :userProp="user"
-                    :firedSalary="firedSalary"
-                    @add:salary="addSalary"
-                    @fired:salary="fired"
-                    @quit:salary="quit"
-                    @buy:business="buyBusiness"
-                    @increment:income="incrementIncomeBusiness"
-                    @delete:business="deleteBusiness"
-                    @sell="sellBusiness"
-                />
+                <div class="py-4 pr-8 pl-4 md:px-2 flex flex-col gap-2 bg-zinc-800">
+                    <Incomes
+                        :userProp="user"
+                        :firedSalary="firedSalary"
+                        @add:salary="addSalary"
+                        @fired:salary="fired"
+                        @quit:salary="quit"
+                        @buy:business="buyBusiness"
+                        @increment:income="incrementIncomeBusiness"
+                        @delete:business="deleteBusiness"
+                        @sell="sellBusiness"
+                    />
+                </div>
 
                 <!-- Акції -->
-                <Shares :userProp="user" @buy="buyShares" @sell:package="sellSharesPackage" @sell:all="sellAllShares" />
+                <div class="py-4 pr-8 pl-4 md:px-2 flex flex-col gap-2">
+                    <Shares
+                        :userProp="user"
+                        @buy="buyShares"
+                        @sell:package="sellSharesPackage"
+                        @sell:all="sellAllShares"
+                    />
+                </div>
 
                 <!-- Активи -->
-                <Assets
-                    :userProp="user"
-                    @buy:house="buyHouse"
-                    @sell:house="sellHouse"
-                    @sell:houses="sellHouses"
-                    @buy:land="buyLand"
-                    @sell:land="sellLand"
-                    @sell:acres="sellAcres"
-                    @buy:corrupt-land="buyCorruptLand"
-                    @sell:corrupt-land="sellCorruptLand"
-                    @sell:corrupt-acres="sellCorruptAcres"
-                />
+                <div class="pt-4 pr-8 pl-4 pb-8 md:px-2 flex flex-col gap-2 bg-zinc-800">
+                    <Assets
+                        :userProp="user"
+                        @buy:house="buyHouse"
+                        @sell:house="sellHouse"
+                        @sell:houses="sellHouses"
+                        @buy:land="buyLand"
+                        @sell:land="sellLand"
+                        @sell:acres="sellAcres"
+                        @buy:corrupt-land="buyCorruptLand"
+                        @sell:corrupt-land="sellCorruptLand"
+                        @sell:corrupt-acres="sellCorruptAcres"
+                    />
+                </div>
             </div>
         </div>
 
-        <UserActions :isSavedUser="!!savedUser" @restart="restart" @disable:storage="disableStorage" />
-        <Modal :show="showModalSaveInterval" cancel="Зрозумів" @cancel="showModalSaveInterval = false">
-            <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
-                Попередження.
-            </h4>
-            <p class="mx-auto mt-4 text-lg font-normal text-slate-800 text-center">
-                Автоматичне зберігання вимкнено.
-            </p>
-        </Modal>
+        <div class="md:px-2 md:space-y-2">
+            <UserActions :isSavedUser="!!savedUser" @restart="restart" @disable:storage="disableStorage" />
+            <Modal :show="showModalSaveInterval" cancel="Зрозумів" @cancel="showModalSaveInterval = false">
+                <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
+                    Попередження.
+                </h4>
+                <p class="mx-auto mt-4 text-lg font-normal text-slate-800 text-center">
+                    Автоматичне зберігання вимкнено.
+                </p>
+            </Modal>
+        </div>
     </form>
 
     <Modal :show="showModalRich" cancel="Зрозумів" @cancel="user.rich = true">
