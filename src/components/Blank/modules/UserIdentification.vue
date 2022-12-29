@@ -48,6 +48,18 @@
                 height="24px"
                 color="fill-primary"
             />
+            <ApartmentIcon
+                v-if="user.apartments.length > 0"
+                width="24px"
+                height="24px"
+                color="fill-primary"
+            />
+            <CarIcon
+                v-if="user.cars.length > 0"
+                width="32px"
+                height="32px"
+                color="fill-primary"
+            />
         </div>
     </div>
 
@@ -70,6 +82,8 @@ import InfoField from '../plugins/InfoField.vue';
 import MaleIcon from '../../icons/MaleIcon.vue';
 import FemaleIcon from '../../icons/FemaleIcon.vue';
 import SexIcon from '../../icons/SexIcon.vue';
+import ApartmentIcon from '../../icons/ApartmentIcon.vue';
+import CarIcon from '../../icons/CarIcon.vue';
 
 const props = defineProps({
     userProp: {

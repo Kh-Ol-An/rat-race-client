@@ -13,6 +13,7 @@
                     id="edit-value"
                     placeholder="Прибутки"
                     smallLabel
+                    secondBg
                     v-model:value="addIncome"
                 />
                 <button
