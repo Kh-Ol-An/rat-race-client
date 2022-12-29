@@ -169,7 +169,7 @@
         <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
             Це не можливо!
         </h4>
-        <p class="mx-auto mt-4 text-lg font-normal text-slate-800 text-center">
+        <p class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center">
             Куди ти сунешся жебрак? Бізнес він зібрався купляти... Іди гроші заробляй!
         </p>
     </Modal>

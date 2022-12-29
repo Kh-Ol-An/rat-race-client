@@ -183,7 +183,7 @@
                 <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
                     Попередження.
                 </h4>
-                <p class="mx-auto mt-4 text-lg font-normal text-slate-800 text-center">
+                <p class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center">
                     Автоматичне зберігання вимкнено.
                 </p>
             </Modal>

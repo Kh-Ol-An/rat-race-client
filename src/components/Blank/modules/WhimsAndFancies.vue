@@ -20,7 +20,7 @@
         <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
             Це не можливо!
         </h4>
-        <p class="mx-auto mt-4 text-lg font-normal text-slate-800 text-center">
+        <p class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center">
             Не поспішай. Все в тебе буде. Ти вже багатий. Піднакопи ще трохи і приходь.
         </p>
     </Modal>
