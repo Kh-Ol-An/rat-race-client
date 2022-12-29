@@ -99,10 +99,10 @@ const entered = ref('');
 const input = (event) => {
     const regExp = /\d|null/;
     if (
+        event.target.value.length > 15 ||
         props.type === 'number' &&
         (!regExp.test(event.data) ||
-        event.target.value === '0' ||
-        event.target.value.length > 15)
+        event.target.value === '0')
     ) {
         return event.target.value = entered.value;
     }
