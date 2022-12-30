@@ -3,11 +3,17 @@
 
     <!-- Зарплата -->
     <div
-        v-if="user.salary === 0 && firedSalary === 0"
-        :class="[
-            'flex items-center gap-3',
-            salaryDisabled && 'pointer-events-none opacity-20',
-        ]"
+        v-if="
+            user.salary === 0 &&
+            firedSalary === 0 &&
+            user.business.small.length < 2 &&
+            !user.business.small.some(({ expanded }) => expanded) &&
+            user.business.middle.length < 2 &&
+            user.business.big.length < 2 &&
+            user.business.corrupt.length < 2 &&
+            (user.business.big.length < 1 || user.business.corrupt.length < 1)
+        "
+        class="flex items-center gap-3"
     >
         <Input v-model:value="salary" id="salary" placeholder="Зарплата" secondBg />
         <Add :firstValue="salary" @add="$emit('add:salary', Number(salary))" />
@@ -38,6 +44,11 @@
 
     <!-- Малий -->
     <InputField
+        v-if="
+            user.business.middle.length === 0 &&
+            user.business.big.length === 0 &&
+            user.business.corrupt.length === 0
+        "
         label="Малий бізнес"
         type="business"
         subType="small"
@@ -75,6 +86,11 @@
 
     <!-- Середній -->
     <InputField
+        v-if="
+            user.business.small.length === 0 &&
+            user.business.big.length === 0 &&
+            user.business.corrupt.length === 0
+        "
         label="Середній бізнес"
         type="business"
         subType="middle"
@@ -109,6 +125,10 @@
 
     <!-- Великий -->
     <InputField
+        v-if="
+            user.business.small.length === 0 &&
+            user.business.middle.length === 0
+        "
         label="Великий бізнес"
         type="business"
         subType="big"
@@ -138,6 +158,10 @@
 
     <!-- Корупційний -->
     <InputField
+        v-if="
+            user.business.small.length === 0 &&
+            user.business.middle.length === 0
+        "
         label="Корупційний бізнес"
         type="business"
         subType="corrupt"
@@ -210,15 +234,6 @@ const quit = () => {
     emit('quit:salary');
     salary.value = '';
 };
-const salaryDisabled = computed(
-    () =>
-        user.value.business.small.find(business => business.expanded) ||
-        user.value.business.small.length > 1 ||
-        user.value.business.middle.length > 1 ||
-        user.value.business.big.length > 1 ||
-        user.value.business.corrupt.length > 1 ||
-        (user.value.business.big.length > 0 && user.value.business.corrupt.length > 0)
-);
 
 const showModal = ref(false);
 
