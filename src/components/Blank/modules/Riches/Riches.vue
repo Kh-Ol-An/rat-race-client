@@ -183,21 +183,21 @@
                 </div>
             </div>
             <ul v-if="user.planes.length > 0" class="flex flex-col gap-2">
-            <Purchased
-                v-for="{ id, name, price } in user.planes"
-                :id="id"
-                :price="price"
-                :label="name.length > 0 ? `${name}:` : 'Літак:'"
-                @sell="sellPlane"
-            />
-            <li>
-                <InfoField wrapClasses="gap-2" labelClasses="text-opposite" label="Витрати:">
-                    <span class="text-slate-400">
-                        {{ user.apartments.length * 5000 }}
-                    </span>
-                </InfoField>
-            </li>
-        </ul>
+                <Purchased
+                    v-for="{ id, name, price } in user.planes"
+                    :id="id"
+                    :price="price"
+                    :label="name.length > 0 ? `${name}:` : 'Літак:'"
+                    @sell="sellPlane"
+                />
+                <li>
+                    <InfoField wrapClasses="gap-2" labelClasses="text-opposite" label="Витрати:">
+                        <span class="text-slate-400">
+                            {{ user.apartments.length * 5000 }}
+                        </span>
+                    </InfoField>
+                </li>
+            </ul>
         </div>
     </div>
 

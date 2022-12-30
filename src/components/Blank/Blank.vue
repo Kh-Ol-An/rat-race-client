@@ -250,7 +250,7 @@ const userObj = {
     cottages: [],
     yachts: [],
     planes: [],
-    whimsAndFancies: 0,
+    whimsAndFancies: [],
     marriage: false,
     children: {
         count: 0,
@@ -451,8 +451,8 @@ const sellPlane = id => {
     user.planes = user.planes.filter(plane => plane.id !== id);
 };
 
-const buyWhimsAndFancies = price => {
-    user.whimsAndFancies += 1;
+const buyWhimsAndFancies = (name, price) => {
+    user.whimsAndFancies.push({ name, price });
     user.cash -= price;
 };
 
@@ -641,7 +641,7 @@ const showModalWin = computed(
         user.cottages.length > 0 &&
         user.yachts.length > 0 &&
         user.planes.length > 0 &&
-        user.whimsAndFancies > 0 &&
+        user.whimsAndFancies.length > 0 &&
         !user.win
 );
 </script>

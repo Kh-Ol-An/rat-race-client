@@ -2,19 +2,23 @@
     <h2 class="px-4 text-xl font-bold text-opposite text-center">Капризи та примхи</h2>
 
     <div class="mt-2 flex items-center gap-3">
+        <Input v-model:value="name" id="whim-and-fancies" type="text" placeholder="Назва" />
         <Input v-model:value="price" id="whim-and-fancies" placeholder="Ціна" />
         <Add :firstValue="price" @add="buy" />
     </div>
-    <InfoField
-        v-if="user.whimsAndFancies > 0"
-        wrapClasses="gap-2"
-        labelClasses="text-opposite"
-        label="Капризи та примхи:"
-    >
-        <span class="text-slate-800">
-            {{ user.whimsAndFancies }}
-        </span>
-    </InfoField>
+    <ul v-if="user.whimsAndFancies.length > 0" class="flex flex-col gap-2">
+        <li v-for="{ name, price } in user.whimsAndFancies">
+            <InfoField
+                wrapClasses="gap-2"
+                labelClasses="text-opposite"
+                :label="name.length > 0 ? `${name}:` : 'Капризи та примхи:'"
+            >
+                <span class="text-slate-400">
+                    {{ price }}
+                </span>
+            </InfoField>
+        </li>
+    </ul>
 
     <Modal :show="showModal" cancel="Зрозумів" @cancel="showModal = false">
         <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
@@ -45,14 +49,18 @@ const user = toRef(props, 'userProp');
 const emit = defineEmits([ 'buy' ]);
 
 const showModal = ref(false);
+const name = ref('');
 const price = ref('');
 const buy = () => {
     if (user.value.cash < Number(price.value)) {
         showModal.value = true;
-        return price.value = '';
+        name.value = '';
+        price.value = '';
+        return;
     }
 
-    emit('buy', Number(price.value));
+    emit('buy', name.value, Number(price.value));
+    name.value = '';
     price.value = '';
 };
 </script>

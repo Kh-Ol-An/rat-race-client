@@ -79,7 +79,7 @@
                 color="fill-primary"
             />
             <TargetIcon
-                v-if="user.whimsAndFancies > 0 && user.rich"
+                v-if="user.whimsAndFancies.length > 0 && user.rich"
                 width="28px"
                 height="28px"
             />
