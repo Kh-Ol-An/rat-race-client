@@ -32,7 +32,7 @@
             <span class="flex items-center gap-1 text-primary whitespace-nowrap">
                 <span class="text-slate-400">{{ user.assets.houses.length }}</span>
                 {{ user.assets.houses.length > 4 ? 'будинків' : 'будинки' }}
-                <Sell inputId="sell-price-houses" @sell="sellHouses">
+                <Sell inputId="sell-price-houses" secondBg @sell="sellHouses">
                     на суму
                     <span class="text-slate-400">
                         {{ addingSpaces(user.assets.houses.reduce((total, house) => total += house.price, 0)) }}

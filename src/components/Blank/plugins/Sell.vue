@@ -5,6 +5,7 @@
             :id="inputId"
             placeholder="Продати по"
             smallLabel
+            secondBg
             v-model:value="price"
         />
         <button
@@ -59,6 +60,10 @@ defineProps({
     inputId: {
         type: String,
         required: true,
+    },
+    secondBg: {
+        type: Boolean,
+        default: false,
     },
 });
 

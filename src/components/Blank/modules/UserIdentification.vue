@@ -34,31 +34,54 @@
                 v-if="user.gender === 'male'"
                 width="24px"
                 height="24px"
-                :classes="user.marriage ? 'fill-blue-600' : 'fill-slate-400'"
+                :classes="(user.marriage && !user.rich) ? 'fill-blue-600' : 'fill-slate-400'"
             />
             <FemaleIcon
                 v-if="user.gender === 'female'"
                 width="24px"
                 height="24px"
-                :classes="user.marriage ? 'fill-opposite' : 'fill-slate-400'"
+                :classes="(user.marriage && !user.rich) ? 'fill-opposite' : 'fill-slate-400'"
             />
             <SexIcon
-                v-if="havingChildren"
+                v-if="havingChildren && !user.rich"
                 width="24px"
                 height="24px"
                 color="fill-primary"
             />
             <ApartmentIcon
-                v-if="user.apartments.length > 0"
+                v-if="user.apartments.length > 0 && !user.rich"
                 width="24px"
                 height="24px"
                 color="fill-primary"
             />
             <CarIcon
-                v-if="user.cars.length > 0"
+                v-if="user.cars.length > 0 && !user.rich"
                 width="32px"
                 height="32px"
                 color="fill-primary"
+            />
+            <CottageIcon
+                v-if="user.cottages.length > 0 && user.rich"
+                width="32px"
+                height="32px"
+                color="fill-primary"
+            />
+            <YachtIcon
+                v-if="user.yachts.length > 0 && user.rich"
+                width="26px"
+                height="26px"
+                color="fill-primary"
+            />
+            <PlaneIcon
+                v-if="user.planes.length > 0 && user.rich"
+                width="32px"
+                height="32px"
+                color="fill-primary"
+            />
+            <TargetIcon
+                v-if="user.whimsAndFancies > 0 && user.rich"
+                width="28px"
+                height="28px"
             />
         </div>
     </div>
@@ -84,6 +107,10 @@ import FemaleIcon from '../../icons/FemaleIcon.vue';
 import SexIcon from '../../icons/SexIcon.vue';
 import ApartmentIcon from '../../icons/ApartmentIcon.vue';
 import CarIcon from '../../icons/CarIcon.vue';
+import CottageIcon from '../../icons/CottageIcon.vue';
+import YachtIcon from '../../icons/YachtIcon.vue';
+import PlaneIcon from '../../icons/PlaneIcon.vue';
+import TargetIcon from '../../icons/TargetIcon.vue';
 
 const props = defineProps({
     userProp: {
