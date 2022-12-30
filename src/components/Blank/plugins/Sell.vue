@@ -5,7 +5,7 @@
             :id="inputId"
             placeholder="Продати по"
             smallLabel
-            secondBg
+            :secondBg="secondBg"
             v-model:value="price"
         />
         <button
