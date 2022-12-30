@@ -10,7 +10,7 @@
         "
     >
         <div class="col-span-6 flex items-center justify-center">
-            <Sell :value="addingSpaces(price)" inputId="sell-all-shares" @sell="sell">
+            <Sell :value="addingSpaces(price)" inputId="sell-all-shares" secondBg @sell="sell">
                 <span class="text-slate-400">
                     {{ addingSpaces(price) }}
                 </span>
