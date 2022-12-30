@@ -295,7 +295,7 @@ const decrement = (transaction) => {
 
     return user.cash -= transaction;
 };
-const tax = () => user.cash -= user.cash * 0.1;
+const tax = () => user.cash -= Math.round(user.cash * 0.1);
 const increment = (transaction) => user.cash += transaction;
 
 // PASSIVE
