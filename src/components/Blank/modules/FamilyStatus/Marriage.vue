@@ -20,7 +20,9 @@
                 transition-all duration-300
             "
         >
-            <div class="w-1.5 h-3 border-r-2 border-b-2 border-slate-800 -translate-y-px rotate-45"></div>
+            <div
+                class="w-1.5 h-3 border-r-2 border-b-2 border-slate-800 md:border-slate-900 -translate-y-px rotate-45"
+            ></div>
         </div>
     </label>
 </template>

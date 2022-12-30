@@ -52,6 +52,65 @@
 
         <div class="grid grid-cols-2 md:grid-cols-1">
             <div class="flex flex-col md:order-last">
+                <!-- Витрати -->
+                <div class="py-4 pr-4 pl-8 md:px-2 flex flex-col gap-2">
+                    <Costs
+                        :userProp="user"
+                        @add:rent="addRent"
+                        @add:food="addFood"
+                        @add:clothes="addClothes"
+                        @add:fare="addFare"
+                        @add:phone="addPhone"
+                    />
+                </div>
+
+                <!-- Багатство -->
+                <div class="py-4 pr-4 pl-8 md:px-2 flex flex-col gap-2 md:bg-slate-900">
+                    <Riches
+                        :userProp="user"
+                        :cashFlow="cashFlow"
+                        @buy:apartment="buyApartment"
+                        @credit:apartment="creditApartment"
+                        @sell:apartment="sellApartment"
+                        @buy:car="buyCar"
+                        @credit:car="creditCar"
+                        @sell:car="sellCar"
+                        @buy:cottage="buyCottage"
+                        @sell:cottage="sellCottage"
+                        @buy:yacht="buyYacht"
+                        @sell:yacht="sellYacht"
+                        @buy:plane="buyPlane"
+                        @sell:plane="sellPlane"
+                    />
+                </div>
+
+                <!-- Капризи та примхи -->
+                <div class="py-4 pr-4 pl-8 md:px-2 flex flex-col gap-2">
+                    <WhimsAndFancies :userProp="user" @buy="buyWhimsAndFancies" />
+                </div>
+
+                <!-- Сімейний стан -->
+                <div :class="['pt-4 pr-4 pl-8 md:px-2 flex flex-col gap-2 md:bg-slate-900', user.credits.length === 0 ? 'pb-8' : 'pb-4']">
+                    <FamilyStatus
+                        :userProp="user"
+                        @change:marriage="changeMarriage"
+                        @have:baby="haveBaby"
+                    />
+                </div>
+
+                <!-- Виплати за кредитами -->
+                <div v-if="user.credits.length > 0" class="pt-4 pr-4 pb-8 pl-8 md:px-2 flex flex-col gap-2">
+                    <Credits :credits="user.credits" />
+                </div>
+            </div>
+
+            <div class="flex flex-col">
+                <!-- Загальні прибутки -->
+                <div class="pb-4 pr-8 pl-4 md:px-2 flex flex-col gap-2">
+                    <IncomeInfo :userProp="user" :passiveIncome="passiveIncome" :income="income" />
+                </div>
+
+                <!-- Борги та витрати -->
                 <div class="pb-4 pr-4 pl-8 md:px-2 md:py-4 flex flex-col gap-2">
                     <ExpenseInfo :debt="user.debt" :expenses="expenses" @repay="repayDebt" />
                     <Modal :show="showModalRepay" cancel="Зрозумів" @cancel="showModalRepay = false">
@@ -75,63 +134,6 @@
                             Ти програв. Але не вмер. Не засмучуйся. Бери нову професію і починай спочатку :)
                         </p>
                     </Modal>
-                </div>
-
-                <!-- Витрати -->
-                <div class="py-4 pr-4 pl-8 md:px-2 flex flex-col gap-2 md:bg-slate-900">
-                    <Costs
-                        :userProp="user"
-                        @add:rent="addRent"
-                        @add:food="addFood"
-                        @add:clothes="addClothes"
-                        @add:fare="addFare"
-                        @add:phone="addPhone"
-                    />
-                </div>
-
-                <!-- Багатство -->
-                <div class="py-4 pr-4 pl-8 md:px-2 flex flex-col gap-2">
-                    <Riches
-                        :userProp="user"
-                        :cashFlow="cashFlow"
-                        @buy:apartment="buyApartment"
-                        @credit:apartment="creditApartment"
-                        @sell:apartment="sellApartment"
-                        @buy:car="buyCar"
-                        @credit:car="creditCar"
-                        @sell:car="sellCar"
-                        @buy:cottage="buyCottage"
-                        @sell:cottage="sellCottage"
-                        @buy:yacht="buyYacht"
-                        @sell:yacht="sellYacht"
-                        @buy:plane="buyPlane"
-                        @sell:plane="sellPlane"
-                    />
-                </div>
-
-                <!-- Капризи та примхи -->
-                <div class="py-4 pr-4 pl-8 md:px-2 flex flex-col gap-2 md:bg-slate-900">
-                    <WhimsAndFancies :userProp="user" @buy="buyWhimsAndFancies" />
-                </div>
-
-                <!-- Сімейний стан -->
-                <div :class="['pt-4 pr-4 pl-8 md:px-2 flex flex-col gap-2', user.credits.length === 0 ? 'pb-8' : 'pb-4']">
-                    <FamilyStatus
-                        :userProp="user"
-                        @change:marriage="changeMarriage"
-                        @have:baby="haveBaby"
-                    />
-                </div>
-
-                <!-- Виплати за кредитами -->
-                <div v-if="user.credits.length > 0" class="pt-4 pr-4 pb-8 pl-8 md:px-2 flex flex-col gap-2 md:bg-slate-900">
-                    <Credits :credits="user.credits" />
-                </div>
-            </div>
-
-            <div class="flex flex-col">
-                <div class="pb-4 pr-8 pl-4 md:px-2 flex flex-col gap-2">
-                    <IncomeInfo :userProp="user" :passiveIncome="passiveIncome" :income="income" />
                 </div>
 
                 <!-- Прибутки -->
@@ -421,8 +423,8 @@ const sellCar = id => {
         user.fare = 0;
     }
 };
-const buyCottage = (id, price) => {
-    user.cottages.push({ id, price });
+const buyCottage = (id, name, price) => {
+    user.cottages.push({ id, name, price });
     user.cash -= price;
 };
 const sellCottage = id => {
@@ -430,8 +432,8 @@ const sellCottage = id => {
     user.cash += Math.floor(cottage.price / 2);
     user.cottages = user.cottages.filter(cottage => cottage.id !== id);
 };
-const buyYacht = (id, price) => {
-    user.yachts.push({ id, price });
+const buyYacht = (id, name, price) => {
+    user.yachts.push({ id, name, price });
     user.cash -= price;
 };
 const sellYacht = id => {
@@ -439,8 +441,8 @@ const sellYacht = id => {
     user.cash += Math.floor(yacht.price / 2);
     user.yachts = user.yachts.filter(yacht => yacht.id !== id);
 };
-const buyPlane = (id, price) => {
-    user.planes.push({ id, price });
+const buyPlane = (id, name, price) => {
+    user.planes.push({ id, name, price });
     user.cash -= price;
 };
 const sellPlane = id => {
