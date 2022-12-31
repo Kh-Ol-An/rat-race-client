@@ -1,207 +1,213 @@
 <template>
-    <form
-        class="relative md:mt-2 w-full max-w-5xl flex flex-col gap-4 shadow-lg md:shadow-none rounded-md bg-slate-800"
-        @submit.prevent="submit"
-    >
-        <div class="pt-6 px-8 md:pt-2 md:px-2 grid grid-cols-2 md:grid-cols-1 gap-4 md:gap-2">
-            <UserIdentification
-                :userProp="user"
-                @add:name="addName"
-                @add:gender="addGender"
-                @add:profession="addProfession"
-            />
-        </div>
+    <div class="pt-4 pb-8 px-8 md:py-2 md:px-0 md:w-screen max-w-full flex flex-col items-center justify-center">
+        <router-link to="/game" class="md:hidden">Game</router-link>
+        <h1 class="p-4 md:p-2 text-4xl md:text-xl font-bold text-slate-300 text-center">
+            ГРА 'Щурячі перегони Ⅱ'
+        </h1>
 
-        <div class="px-2 hidden md:block">
-            <button
-                class="
-                p-4
-                flex items-center justify-center
-                w-full
-                shadow hover:shadow-lg
-                rounded-md
-                bg-secondary
-                outline-0
-                transition-all duration-300
-            "
-                type="submit"
-                title="Зберегти"
-            >
-                <SaveIcon width="30px" height="30px" color="fill-slate-300" />
-            </button>
-        </div>
+        <form
+            class="relative md:mt-2 w-full max-w-5xl flex flex-col gap-4 shadow-lg md:shadow-none rounded-md bg-slate-800"
+            @submit.prevent="submit"
+        >
+            <div class="pt-6 px-8 md:pt-2 md:px-2 grid grid-cols-2 md:grid-cols-1 gap-4 md:gap-2">
+                <UserIdentification
+                    :userProp="user"
+                    @add:name="addName"
+                    @add:gender="addGender"
+                    @add:profession="addProfession"
+                />
+            </div>
 
-        <div class="px-8 md:px-2 flex items-center gap-4 md:gap-2">
-            <Transaction :rich="user.rich" @decrement="decrement" @tax="tax" @increment="increment" />
-        </div>
+            <div class="px-2 hidden md:block">
+                <button
+                    class="
+                    p-4
+                    flex items-center justify-center
+                    w-full
+                    shadow hover:shadow-lg
+                    rounded-md
+                    bg-secondary
+                    outline-0
+                    transition-all duration-300
+                "
+                    type="submit"
+                    title="Зберегти"
+                >
+                    <SaveIcon width="30px" height="30px" color="fill-slate-300" />
+                </button>
+            </div>
 
-        <InfoField wrapClasses="mx-auto px-8 md:px-2" labelClasses="font-bold text-primary" label="Грошовий потік:">
-            <span class="ml-2 font-bold text-slate-300">
-                {{ addingSpaces(cashFlow) }}
-            </span>
+            <div class="px-8 md:px-2 flex items-center gap-4 md:gap-2">
+                <Transaction :rich="user.rich" @decrement="decrement" @tax="tax" @increment="increment" />
+            </div>
 
-            <button
-                class="ml-4 outline-0"
-                type="button"
-                title="Отримати"
-                @click="getCashFlow"
-            >
-                <MoneyIcon width="30px" height="30px" />
-            </button>
-        </InfoField>
+            <InfoField wrapClasses="mx-auto px-8 md:px-2" labelClasses="font-bold text-primary" label="Грошовий потік:">
+                <span class="ml-2 font-bold text-slate-300">
+                    {{ addingSpaces(cashFlow) }}
+                </span>
 
-        <div class="grid grid-cols-2 md:grid-cols-1">
-            <div class="flex flex-col md:order-last">
-                <!-- Витрати -->
-                <div class="py-4 pr-4 pl-8 md:px-2 flex flex-col gap-2">
-                    <Costs
-                        :userProp="user"
-                        @add:rent="addRent"
-                        @add:food="addFood"
-                        @add:clothes="addClothes"
-                        @add:fare="addFare"
-                        @add:phone="addPhone"
-                    />
+                <button
+                    class="ml-4 outline-0"
+                    type="button"
+                    title="Отримати"
+                    @click="getCashFlow"
+                >
+                    <MoneyIcon width="30px" height="30px" />
+                </button>
+            </InfoField>
+
+            <div class="grid grid-cols-2 md:grid-cols-1">
+                <div class="flex flex-col md:order-last">
+                    <!-- Витрати -->
+                    <div class="py-4 pr-4 pl-8 md:px-2 flex flex-col gap-2">
+                        <Costs
+                            :userProp="user"
+                            @add:rent="addRent"
+                            @add:food="addFood"
+                            @add:clothes="addClothes"
+                            @add:fare="addFare"
+                            @add:phone="addPhone"
+                        />
+                    </div>
+
+                    <!-- Багатство -->
+                    <div class="py-4 pr-4 pl-8 md:px-2 flex flex-col gap-2 md:bg-slate-900">
+                        <Riches
+                            :userProp="user"
+                            :cashFlow="cashFlow"
+                            @buy:apartment="buyApartment"
+                            @credit:apartment="creditApartment"
+                            @sell:apartment="sellApartment"
+                            @buy:car="buyCar"
+                            @credit:car="creditCar"
+                            @sell:car="sellCar"
+                            @buy:cottage="buyCottage"
+                            @sell:cottage="sellCottage"
+                            @buy:yacht="buyYacht"
+                            @sell:yacht="sellYacht"
+                            @buy:plane="buyPlane"
+                            @sell:plane="sellPlane"
+                        />
+                    </div>
+
+                    <!-- Капризи та примхи -->
+                    <div class="py-4 pr-4 pl-8 md:px-2 flex flex-col gap-2">
+                        <WhimsAndFancies :userProp="user" @buy="buyWhimsAndFancies" />
+                    </div>
+
+                    <!-- Сімейний стан -->
+                    <div :class="['pt-4 pr-4 pl-8 md:px-2 flex flex-col gap-2 md:bg-slate-900', user.credits.length === 0 ? 'pb-8' : 'pb-4']">
+                        <FamilyStatus
+                            :userProp="user"
+                            @change:marriage="changeMarriage"
+                            @have:baby="haveBaby"
+                        />
+                    </div>
+
+                    <!-- Виплати за кредитами -->
+                    <div v-if="user.credits.length > 0" class="pt-4 pr-4 pb-8 pl-8 md:px-2 flex flex-col gap-2">
+                        <Credits :credits="user.credits" />
+                    </div>
                 </div>
 
-                <!-- Багатство -->
-                <div class="py-4 pr-4 pl-8 md:px-2 flex flex-col gap-2 md:bg-slate-900">
-                    <Riches
-                        :userProp="user"
-                        :cashFlow="cashFlow"
-                        @buy:apartment="buyApartment"
-                        @credit:apartment="creditApartment"
-                        @sell:apartment="sellApartment"
-                        @buy:car="buyCar"
-                        @credit:car="creditCar"
-                        @sell:car="sellCar"
-                        @buy:cottage="buyCottage"
-                        @sell:cottage="sellCottage"
-                        @buy:yacht="buyYacht"
-                        @sell:yacht="sellYacht"
-                        @buy:plane="buyPlane"
-                        @sell:plane="sellPlane"
-                    />
-                </div>
+                <div class="flex flex-col">
+                    <!-- Загальні прибутки -->
+                    <div class="pb-4 pr-8 pl-4 md:px-2 flex flex-col gap-2">
+                        <IncomeInfo :userProp="user" :passiveIncome="passiveIncome" :income="income" />
+                    </div>
 
-                <!-- Капризи та примхи -->
-                <div class="py-4 pr-4 pl-8 md:px-2 flex flex-col gap-2">
-                    <WhimsAndFancies :userProp="user" @buy="buyWhimsAndFancies" />
-                </div>
+                    <!-- Борги та витрати -->
+                    <div class="pb-4 pr-4 pl-8 md:px-2 md:py-4 flex flex-col gap-2">
+                        <ExpenseInfo :debt="user.debt" :expenses="expenses" @repay="repayDebt" />
+                        <Modal :show="showModalRepay" cancel="Зрозумів" @cancel="showModalRepay = false">
+                            <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
+                                {{ modalRepayTitle }}
+                            </h4>
+                            <p class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center">
+                                {{ modalRepayText }}
+                            </p>
+                        </Modal>
+                        <Modal
+                            :show="showModalDebt"
+                            cancel="Спочатку"
+                            onlyCancelAction
+                            @cancel="restart"
+                        >
+                            <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
+                                Дуже прикро...
+                            </h4>
+                            <p class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center">
+                                Ти програв. Але не вмер. Не засмучуйся. Бери нову професію і починай спочатку :)
+                            </p>
+                        </Modal>
+                    </div>
 
-                <!-- Сімейний стан -->
-                <div :class="['pt-4 pr-4 pl-8 md:px-2 flex flex-col gap-2 md:bg-slate-900', user.credits.length === 0 ? 'pb-8' : 'pb-4']">
-                    <FamilyStatus
-                        :userProp="user"
-                        @change:marriage="changeMarriage"
-                        @have:baby="haveBaby"
-                    />
-                </div>
+                    <!-- Прибутки -->
+                    <div class="py-4 pr-8 pl-4 md:px-2 flex flex-col gap-2 md:bg-slate-900">
+                        <Incomes
+                            :userProp="user"
+                            :firedSalary="firedSalary"
+                            @add:salary="addSalary"
+                            @fired:salary="fired"
+                            @quit:salary="quit"
+                            @buy:business="buyBusiness"
+                            @increment:income="incrementIncomeBusiness"
+                            @delete:business="deleteBusiness"
+                            @sell="sellBusiness"
+                        />
+                    </div>
 
-                <!-- Виплати за кредитами -->
-                <div v-if="user.credits.length > 0" class="pt-4 pr-4 pb-8 pl-8 md:px-2 flex flex-col gap-2">
-                    <Credits :credits="user.credits" />
+                    <!-- Акції -->
+                    <div class="py-4 pr-8 pl-4 md:px-2 flex flex-col gap-2">
+                        <Shares
+                            :userProp="user"
+                            @buy="buyShares"
+                            @sell:package="sellSharesPackage"
+                            @sell:all="sellAllShares"
+                        />
+                    </div>
+
+                    <!-- Активи -->
+                    <div class="pt-4 pr-8 pl-4 pb-8 md:px-2 flex flex-col gap-2 md:bg-slate-900">
+                        <Assets
+                            :userProp="user"
+                            @buy:house="buyHouse"
+                            @sell:house="sellHouse"
+                            @sell:houses="sellHouses"
+                            @buy:land="buyLand"
+                            @sell:land="sellLand"
+                            @sell:acres="sellAcres"
+                            @buy:corrupt-land="buyCorruptLand"
+                            @sell:corrupt-land="sellCorruptLand"
+                            @sell:corrupt-acres="sellCorruptAcres"
+                        />
+                    </div>
                 </div>
             </div>
 
-            <div class="flex flex-col">
-                <!-- Загальні прибутки -->
-                <div class="pb-4 pr-8 pl-4 md:px-2 flex flex-col gap-2">
-                    <IncomeInfo :userProp="user" :passiveIncome="passiveIncome" :income="income" />
-                </div>
-
-                <!-- Борги та витрати -->
-                <div class="pb-4 pr-4 pl-8 md:px-2 md:py-4 flex flex-col gap-2">
-                    <ExpenseInfo :debt="user.debt" :expenses="expenses" @repay="repayDebt" />
-                    <Modal :show="showModalRepay" cancel="Зрозумів" @cancel="showModalRepay = false">
-                        <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
-                            {{ modalRepayTitle }}
-                        </h4>
-                        <p class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center">
-                            {{ modalRepayText }}
-                        </p>
-                    </Modal>
-                    <Modal
-                        :show="showModalDebt"
-                        cancel="Спочатку"
-                        onlyCancelAction
-                        @cancel="restart"
-                    >
-                        <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
-                            Дуже прикро...
-                        </h4>
-                        <p class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center">
-                            Ти програв. Але не вмер. Не засмучуйся. Бери нову професію і починай спочатку :)
-                        </p>
-                    </Modal>
-                </div>
-
-                <!-- Прибутки -->
-                <div class="py-4 pr-8 pl-4 md:px-2 flex flex-col gap-2 md:bg-slate-900">
-                    <Incomes
-                        :userProp="user"
-                        :firedSalary="firedSalary"
-                        @add:salary="addSalary"
-                        @fired:salary="fired"
-                        @quit:salary="quit"
-                        @buy:business="buyBusiness"
-                        @increment:income="incrementIncomeBusiness"
-                        @delete:business="deleteBusiness"
-                        @sell="sellBusiness"
-                    />
-                </div>
-
-                <!-- Акції -->
-                <div class="py-4 pr-8 pl-4 md:px-2 flex flex-col gap-2">
-                    <Shares
-                        :userProp="user"
-                        @buy="buyShares"
-                        @sell:package="sellSharesPackage"
-                        @sell:all="sellAllShares"
-                    />
-                </div>
-
-                <!-- Активи -->
-                <div class="pt-4 pr-8 pl-4 pb-8 md:px-2 flex flex-col gap-2 md:bg-slate-900">
-                    <Assets
-                        :userProp="user"
-                        @buy:house="buyHouse"
-                        @sell:house="sellHouse"
-                        @sell:houses="sellHouses"
-                        @buy:land="buyLand"
-                        @sell:land="sellLand"
-                        @sell:acres="sellAcres"
-                        @buy:corrupt-land="buyCorruptLand"
-                        @sell:corrupt-land="sellCorruptLand"
-                        @sell:corrupt-acres="sellCorruptAcres"
-                    />
-                </div>
+            <div class="md:px-2 md:space-y-2">
+                <UserActions :isSavedUser="!!savedUser" @restart="restart" @disable:storage="disableStorage" />
+                <Modal :show="showModalSaveInterval" cancel="Зрозумів" @cancel="showModalSaveInterval = false">
+                    <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
+                        Попередження.
+                    </h4>
+                    <p class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center">
+                        Автоматичне зберігання вимкнено.
+                    </p>
+                </Modal>
             </div>
-        </div>
+        </form>
 
-        <div class="md:px-2 md:space-y-2">
-            <UserActions :isSavedUser="!!savedUser" @restart="restart" @disable:storage="disableStorage" />
-            <Modal :show="showModalSaveInterval" cancel="Зрозумів" @cancel="showModalSaveInterval = false">
-                <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
-                    Попередження.
-                </h4>
-                <p class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center">
-                    Автоматичне зберігання вимкнено.
-                </p>
-            </Modal>
-        </div>
-    </form>
+        <Modal :show="showModalRich" cancel="Зрозумів" @cancel="user.rich = true">
+            <h4 class="mx-auto text-2xl font-bold text-primary text-center">
+                Вітаємо!!!
+            </h4>
+            <p class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center">
+                Видихай) Ти багатий! Переходь на зовнішнє коло.
+            </p>
+        </Modal>
 
-    <Modal :show="showModalRich" cancel="Зрозумів" @cancel="user.rich = true">
-        <h4 class="mx-auto text-2xl font-bold text-primary text-center">
-            Вітаємо!!!
-        </h4>
-        <p class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center">
-            Видихай) Ти багатий! Переходь на зовнішнє коло.
-        </p>
-    </Modal>
-
-    <Modal :show="showModalWin" cancel="Зрозумів" @cancel="user.win = true">
+        <Modal :show="showModalWin" cancel="Зрозумів" @cancel="user.win = true">
         <h4 class="mx-auto text-2xl font-bold text-primary text-center">
             Вітаємо!!!
         </h4>
@@ -209,28 +215,29 @@
             Ти переміг! Але можешь продовжувати гру.
         </p>
     </Modal>
+    </div>
 </template>
 
 <script setup>
 import { reactive, ref, computed } from 'vue';
-import UserIdentification from './modules/UserIdentification.vue';
-import Transaction from './modules/Transaction.vue';
-import InfoField from './plugins/InfoField.vue';
-import ExpenseInfo from './modules/ExpenseInfo.vue';
-import Costs from './modules/Costs.vue';
-import Riches from './modules/Riches/Riches.vue';
-import WhimsAndFancies from './modules/WhimsAndFancies.vue';
-import FamilyStatus from './modules/FamilyStatus/FamilyStatus.vue';
-import Credits from './modules/Credits/Credits.vue';
-import IncomeInfo from './modules/IncomeInfo.vue';
-import Incomes from './modules/Incomes/Incomes.vue';
-import Shares from './modules/Shares/Shares.vue';
-import Assets from './modules/Assets/Assets.vue';
-import UserActions from './modules/UserActions.vue';
-import Modal from './plugins/Modal.vue';
-import SaveIcon from '../icons/SaveIcon.vue';
-import MoneyIcon from '../icons/MoneyIcon.vue';
-import { addingSpaces } from '../../helpers/formating-values.js';
+import UserIdentification from '../components/Blank/modules/UserIdentification.vue';
+import Transaction from '../components/Blank/modules/Transaction.vue';
+import InfoField from '../components/Blank/plugins/InfoField.vue';
+import ExpenseInfo from '../components/Blank/modules/ExpenseInfo.vue';
+import Costs from '../components/Blank/modules/Costs.vue';
+import Riches from '../components/Blank/modules/Riches/Riches.vue';
+import WhimsAndFancies from '../components/Blank/modules/WhimsAndFancies.vue';
+import FamilyStatus from '../components/Blank/modules/FamilyStatus/FamilyStatus.vue';
+import Credits from '../components/Blank/modules/Credits/Credits.vue';
+import IncomeInfo from '../components/Blank/modules/IncomeInfo.vue';
+import Incomes from '../components/Blank/modules/Incomes/Incomes.vue';
+import Shares from '../components/Blank/modules/Shares/Shares.vue';
+import Assets from '../components/Blank/modules/Assets/Assets.vue';
+import UserActions from '../components/Blank/modules/UserActions.vue';
+import Modal from '../components/Blank/plugins/Modal.vue';
+import SaveIcon from '../components/icons/SaveIcon.vue';
+import MoneyIcon from '../components/icons/MoneyIcon.vue';
+import { addingSpaces } from '../helpers/formating-values.js';
 
 const savedUser = computed(() => localStorage.getItem('user'));
 const savedUserObj = savedUser.value ? JSON.parse(savedUser.value) : {};

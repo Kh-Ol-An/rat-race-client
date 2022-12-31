@@ -1,14 +1,8 @@
 <template>
-    <div class="pt-4 pb-8 px-8 md:py-2 md:px-0 md:w-screen max-w-full flex flex-col items-center justify-center">
-        <h1 class="p-4 md:p-2 text-4xl md:text-xl font-bold text-slate-300 text-center">
-            ГРА 'Щурячі перегони Ⅱ'
-        </h1>
-        <Blank />
-    </div>
+    <router-view></router-view>
 </template>
 
 <script setup>
-import Blank from './components/Blank/Blank.vue'
 </script>
 
 <style>
