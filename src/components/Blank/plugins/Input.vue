@@ -45,10 +45,11 @@
                 'peer-placeholder-shown:top-1/2 peer-placeholder-shown:left-3 md:peer-placeholder-shown:left-2',
                 '-translate-y-1/2',
                 'px-1 peer-placeholder-shown:px-0',
+                'bg-slate-800',
                 'text-xs text-primary peer-placeholder-shown:text-slate-400',
                 'cursor-text',
                 'transition-all duration-300',
-                secondBg ? 'md:bg-slate-900' : 'bg-slate-800',
+                secondBg && 'md:bg-slate-900',
                 smallLabel ? 'peer-placeholder-shown:text-sm' : 'peer-placeholder-shown:text-base',
             ]"
             :for="id"

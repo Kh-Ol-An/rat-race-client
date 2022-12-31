@@ -473,7 +473,8 @@ const changeMarriage = checked => {
 };
 const haveBaby = () => {
     user.children.count += 1;
-    user.children.expense = user.children.count * 300;
+    user.gender === 'male' && (user.children.expense = user.children.count * 300);
+    user.gender === 'female' && !user.marriage && (user.children.expense = user.children.count * 300);
     user.cash += 1000;
 };
 
