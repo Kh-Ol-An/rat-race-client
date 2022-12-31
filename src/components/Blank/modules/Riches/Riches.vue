@@ -8,7 +8,14 @@
                 Квартири
             </span>
             <div class="flex items-center gap-3">
-                <Input v-model:value="apartmentName" id="apartment-name" type="text" placeholder="Назва" secondBg />
+                <Input
+                    v-model:value="apartmentName"
+                    id="apartment-name"
+                    type="text"
+                    placeholder="Назва"
+                    secondBg
+                    :maxLength="15"
+                />
                 <Input
                     v-model:value="apartmentPrice"
                     id="apartment-price"
@@ -62,7 +69,14 @@
                 Автівки
             </span>
             <div class="flex items-center gap-3">
-                <Input v-model:value="carName" id="car-name" type="text" placeholder="Назва" secondBg />
+                <Input
+                    v-model:value="carName"
+                    id="car-name"
+                    type="text"
+                    placeholder="Назва"
+                    secondBg
+                    :maxLength="15"
+                />
                 <Input
                     v-model:value="carPrice"
                     id="car-price"
@@ -117,7 +131,14 @@
                     Котеджі
                 </span>
                 <div class="mt-2 flex items-center gap-3">
-                    <Input v-model:value="cottageName" id="plane" type="text" placeholder="Назва" secondBg />
+                    <Input
+                        v-model:value="cottageName"
+                        id="plane"
+                        type="text"
+                        placeholder="Назва"
+                        secondBg
+                        :maxLength="15"
+                    />
                     <Input v-model:value="cottagePrice" id="cottage" placeholder="Ціна" secondBg />
                     <Add :firstValue="cottagePrice" @add="buyCottage" />
                 </div>
@@ -147,7 +168,14 @@
                     Яхти
                 </span>
                 <div class="mt-2 flex items-center gap-3">
-                    <Input v-model:value="yachtName" id="plane" type="text" placeholder="Назва" secondBg />
+                    <Input
+                        v-model:value="yachtName"
+                        id="plane"
+                        type="text"
+                        placeholder="Назва"
+                        secondBg
+                        :maxLength="15"
+                    />
                     <Input v-model:value="yachtPrice" id="yacht" placeholder="Ціна" secondBg />
                     <Add :firstValue="yachtPrice" @add="buyYacht" />
                 </div>
@@ -177,7 +205,14 @@
                     Літаки
                 </span>
                 <div class="mt-2 flex items-center gap-3">
-                    <Input v-model:value="planeName" id="plane" type="text" placeholder="Назва" secondBg />
+                    <Input
+                        v-model:value="planeName"
+                        id="plane"
+                        type="text"
+                        placeholder="Назва"
+                        secondBg
+                        :maxLength="15"
+                    />
                     <Input v-model:value="planePrice" id="plane" placeholder="Ціна" secondBg />
                     <Add :firstValue="planePrice" @add="buyPlane" />
                 </div>

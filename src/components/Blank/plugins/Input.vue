@@ -92,6 +92,10 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
+    maxLength: {
+        type: Number,
+        default: 35,
+    },
 });
 
 const emit = defineEmits(['input']);
@@ -100,10 +104,11 @@ const entered = ref('');
 const input = (event) => {
     const regExp = /\d|null/;
     if (
-        event.target.value.length > 15 ||
-        props.type === 'number' &&
+        (props.type === 'number' &&
         (!regExp.test(event.data) ||
-        event.target.value === '0')
+        event.target.value === '0' ||
+        event.target.value.length > 15)) ||
+        (props.type === 'text' && event.target.value.length > props.maxLength)
     ) {
         return event.target.value = entered.value;
     }

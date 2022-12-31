@@ -2,7 +2,7 @@
     <h2 class="px-4 text-xl font-bold text-opposite text-center">Капризи та примхи</h2>
 
     <div class="mt-2 flex items-center gap-3">
-        <Input v-model:value="name" id="whim-and-fancies" type="text" placeholder="Назва" />
+        <Input v-model:value="name" id="whim-and-fancies" type="text" :maxLength="15" placeholder="Назва" />
         <Input v-model:value="price" id="whim-and-fancies" placeholder="Ціна" />
         <Add :firstValue="price" @add="buy" />
     </div>
