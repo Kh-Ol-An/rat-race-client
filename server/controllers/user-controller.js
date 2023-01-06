@@ -9,7 +9,7 @@ class UserController {
             res.cookie('refreshToken', userData.refreshToken, {
                 maxAge: 30 * 24 * 60 * 60 * 1000,
                 httpOnly: true,
-                // secure: true, // якщо використовується https
+                secure: true, // якщо використовується https
             })
 
             return res.json(userData);

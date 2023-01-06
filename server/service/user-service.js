@@ -19,8 +19,6 @@ class MailService {
         await mailService.sendActivationMail(email, activationLink);
 
         const userDto = new UserDto(user);
-        console.log('user: ', user);
-        console.log('userDto: ', userDto);
         const tokens = tokenService.generatesTokens({ ...userDto });
         await tokenService.saveToken(userDto.id, tokens.refreshToken);
 
