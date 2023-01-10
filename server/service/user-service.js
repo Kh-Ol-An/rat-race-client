@@ -4,12 +4,13 @@ const uuid = require('uuid');
 const mailService = require('./mail-service');
 const tokenService = require('./token-service');
 const UserDto = require('../dtos/user-dto');
+const ApiError = require('../exceptions/api-error');
 
 class MailService {
     async registration(email, password) {
         const candidate = await UserModel.findOne({ email });
         if (candidate) {
-            throw new Error(`Користувач з поштовою адресою ${email} вже існує.`);
+            throw ApiError.BadRequest(`Користувач з поштовою адресою ${email} вже існує.`);
         }
 
         const hashPassword = await bcrypt.hash(password, 3);
@@ -31,12 +32,37 @@ class MailService {
     async activate(activationLink) {
         const user = await UserModel.findOne({ activationLink });
         if (!user) {
-            throw new Error('Некоректне посиланя активації.');
+            throw ApiError.BadRequest('Некоректне посиланя активації.');
         }
 
         user.isActivated = true;
         await user.save();
     };
+
+    async login(email, password) {
+        const user = await UserModel.findOne({ email });
+        if (!user) {
+            throw ApiError.BadRequest('Користувач з таким email не знайдений');
+        }
+
+        const isPassEquals = await bcrypt.compare(password, user.password);
+        if (!isPassEquals) {
+            throw ApiError.BadRequest('Невірний пароль');
+        }
+
+        const userDto = new UserDto(user);
+        const tokens = tokenService.generatesTokens({ ...userDto });
+        await tokenService.saveToken(userDto.id, tokens.refreshToken);
+
+        return {
+            ...tokens,
+            user: userDto,
+        };
+    }
+
+    async logout(refreshToken) {
+        return await tokenService.removeToken(refreshToken);
+    }
 }
 
 module.exports = new MailService();
