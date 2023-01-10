@@ -27,5 +27,5 @@ const start = async () => {
     } catch (err) {
         console.log(err);
     }
-}
+};
 start();
