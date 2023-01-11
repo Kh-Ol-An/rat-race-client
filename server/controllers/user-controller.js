@@ -75,7 +75,6 @@ class UserController {
         try {
             const { refreshToken } = req.cookies;
             const userData = await userService.refresh(refreshToken);
-
             res.cookie(
                 'refreshToken',
                 userData.refreshToken,
@@ -85,6 +84,7 @@ class UserController {
                     // secure: true, // якщо використовується https
                 },
             );
+            return res.json(userData);
         } catch (err) {
             next(err);
         }
