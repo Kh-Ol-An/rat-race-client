@@ -1,14 +1,14 @@
-const UserModel = require('../models/user-model');
 const bcrypt = require('bcrypt');
 const uuid = require('uuid');
+const userModel = require('../models/user-model');
 const mailService = require('./mail-service');
 const tokenService = require('./token-service');
 const UserDto = require('../dtos/user-dto');
 const ApiError = require('../exceptions/api-error');
 
 class MailService {
-    async registration(email, password) {
-        const candidate = await UserModel.findOne({ email });
+    async registration(email, password, name) {
+        const candidate = await userModel.findOne({ email });
         if (candidate) {
             throw ApiError.BadRequest(`Користувач з поштовою адресою ${email} вже існує.`);
         }
@@ -16,7 +16,7 @@ class MailService {
         const hashPassword = await bcrypt.hash(password, 3);
         const activationLink = uuid.v4();
 
-        const user = await UserModel.create({ email, password: hashPassword, activationLink });
+        const user = await userModel.create({ email, password: hashPassword, activationLink, name });
         await mailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`);
 
         const userDto = new UserDto(user);
@@ -30,7 +30,7 @@ class MailService {
     };
 
     async activate(activationLink) {
-        const user = await UserModel.findOne({ activationLink });
+        const user = await userModel.findOne({ activationLink });
         if (!user) {
             throw ApiError.BadRequest('Некоректне посиланя активації.');
         }
@@ -40,7 +40,7 @@ class MailService {
     };
 
     async login(email, password) {
-        const user = await UserModel.findOne({ email });
+        const user = await userModel.findOne({ email });
         if (!user) {
             throw ApiError.BadRequest('Користувач з таким email не знайдений');
         }
@@ -75,7 +75,7 @@ class MailService {
             throw ApiError.UnauthorizedError();
         }
 
-        const user = await UserModel.findById(userData.id);
+        const user = await userModel.findById(userData.id);
         const userDto = new UserDto(user);
         const tokens = tokenService.generatesTokens({ ...userDto });
         await tokenService.saveToken(userDto.id, tokens.refreshToken);
@@ -87,8 +87,8 @@ class MailService {
     };
 
     async getUsers() {
-        return await UserModel.find();
+        return await userModel.find();
     };
-};
+}
 
 module.exports = new MailService();
