@@ -1,9 +1,28 @@
 <template>
-    <div class="w-full h-screen flex items-center justify-center">
-        <div class="py-6 px-8 flex flex-col items-center justify-center gap-4 shadow-lg rounded-md bg-slate-800">
+    <div class="w-full h-screen flex flex-col items-center justify-center">
+        <div v-if="getError.length > 0" class="text-red-400">{{ getError }}</div>
+        <div v-if="getLoading">getLoading...</div>
+        <div v-else class="py-6 px-8 flex flex-col items-center justify-center gap-4 shadow-lg rounded-md bg-slate-800">
+            <p class="text-white">{{ getAuth ? getUser.email : 'Авторизуйся' }}</p>
+            <p class="text-white">{{ getUser.isActivated ? getUser.id : 'Активуй аккаунт' }}</p>
             <Input v-model:value="email" type="text" id="email" placeholder="Пошта" />
             <Input v-model:value="password" type="text" id="password" placeholder="Пароль" />
-            <Input v-model:value="repeatPassword" type="text" id="repeat-password" placeholder="Повторити пароль" />
+<!--            <Input v-model:value="repeatPassword" type="text" id="repeat-password" placeholder="Повторити пароль" />-->
+            <button class="text-white" type="button" @click="registration({ email, password })">
+                Зареєструватися
+            </button>
+            <button class="text-white" type="button" @click="login({ email, password })">
+                Увійти
+            </button>
+            <button class="text-white" type="button" @click="logout">
+                Вийти
+            </button>
+        </div>
+        <button class="text-white" type="button" @click="requestAllUsers">
+            requestAllUsers
+        </button>
+        <div v-for="item in getUsers">
+            getUsers: {{ item.email }}
         </div>
     </div>
 </template>
@@ -11,10 +30,12 @@
 <script setup>
 import { ref } from "vue";
 import Input from '../components/Blank/plugins/Input.vue';
+import { mapActions, mapGetters } from '../store/helpers.js';
 
 const email = ref('');
 const password = ref('');
 const repeatPassword = ref('');
 
-console.log(email.value, password.value);
+const { registration, login, logout, requestAllUsers } = mapActions();
+const { getUsers, getUser, getAuth, getLoading, getError } = mapGetters();
 </script>

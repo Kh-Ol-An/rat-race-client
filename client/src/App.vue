@@ -3,11 +3,21 @@
 </template>
 
 <script setup>
+import { onMounted } from "vue";
+import { mapActions } from './store/helpers.js';
+
+const { checkAuth } = mapActions();
+
+onMounted(() => {
+    if (localStorage.getItem('token')) {
+        checkAuth();
+    }
+});
 </script>
 
 <style>
 input:-webkit-autofill {
-    -webkit-box-shadow: inset 0 0 0 50px transparent !important; /* Цвет фона */
+    -webkit-box-shadow: inset 0 0 0 50px #1e293b !important; /* Цвет фона */
     -webkit-text-fill-color: #000 !important; /* цвет текста */
 }
 
