@@ -1,16 +1,7 @@
 <template>
     <div class="flex items-center">
-        <div v-if="user.name.length === 0" class="flex items-center gap-3 w-full">
-            <Input v-model:value="name" id="name" type="text" placeholder="Ім'я" />
-            <Add :firstValue="name" @add="$emit('add:name', name)" />
-        </div>
-        <InfoField v-else labelClasses="text-slate-500" label="Ім'я:">
-            <span class="ml-2 text-slate-400">
-                {{ user.name }}
-            </span>
-        </InfoField>
 
-        <div v-if="user.name.length > 0 && user.gender.length === 0" class="mx-auto flex items-center gap-3">
+        <div v-if="blank.gender.length === 0" class="mx-auto flex items-center gap-3">
             <input class="peer hidden" type="radio" id="male" name="gender" value="male" v-model="gender">
             <label class="cursor-pointer" for="male">
                 <MaleIcon width="24px" height="24px" :classes="gender === 'male' ? 'fill-blue-600' : 'fill-slate-400'" />
@@ -27,72 +18,72 @@
             <Add :firstValue="gender" @add="$emit('add:gender', gender)" />
         </div>
         <div
-            v-if="user.gender.length > 0"
+            v-if="blank.gender.length > 0"
             class="ml-4 flex items-center gap-4"
         >
             <MaleIcon
-                v-if="user.gender === 'male'"
+                v-if="blank.gender === 'male'"
                 width="24px"
                 height="24px"
-                :classes="(user.marriage && !user.rich) ? 'fill-blue-600' : 'fill-slate-400'"
+                :classes="(blank.marriage && !blank.rich) ? 'fill-blue-600' : 'fill-slate-400'"
             />
             <FemaleIcon
-                v-if="user.gender === 'female'"
+                v-if="blank.gender === 'female'"
                 width="24px"
                 height="24px"
-                :classes="(user.marriage && !user.rich) ? 'fill-opposite' : 'fill-slate-400'"
+                :classes="(blank.marriage && !blank.rich) ? 'fill-opposite' : 'fill-slate-400'"
             />
             <SexIcon
-                v-if="havingChildren && !user.rich"
+                v-if="havingChildren && !blank.rich"
                 width="24px"
                 height="24px"
                 color="fill-primary"
             />
             <ApartmentIcon
-                v-if="user.apartments.length > 0 && !user.rich"
+                v-if="blank.apartments.length > 0 && !blank.rich"
                 width="24px"
                 height="24px"
                 color="fill-primary"
             />
             <CarIcon
-                v-if="user.cars.length > 0 && !user.rich"
+                v-if="blank.cars.length > 0 && !blank.rich"
                 width="32px"
                 height="32px"
                 color="fill-primary"
             />
             <CottageIcon
-                v-if="user.cottages.length > 0 && user.rich"
+                v-if="blank.cottages.length > 0 && blank.rich"
                 width="32px"
                 height="32px"
                 color="fill-primary"
             />
             <YachtIcon
-                v-if="user.yachts.length > 0 && user.rich"
+                v-if="blank.yachts.length > 0 && blank.rich"
                 width="26px"
                 height="26px"
                 color="fill-primary"
             />
             <PlaneIcon
-                v-if="user.planes.length > 0 && user.rich"
+                v-if="blank.planes.length > 0 && blank.rich"
                 width="32px"
                 height="32px"
                 color="fill-primary"
             />
             <TargetIcon
-                v-if="user.whimsAndFancies.length > 0 && user.rich"
+                v-if="blank.whimsAndFancies.length > 0 && blank.rich"
                 width="28px"
                 height="28px"
             />
         </div>
     </div>
 
-    <div v-if="user.profession.length === 0" class="flex items-center gap-3">
+    <div v-if="blank.profession.length === 0" class="flex items-center gap-3">
         <Input v-model:value="profession" id="profession" type="text" placeholder="Професія" />
         <Add :firstValue="profession" @add="$emit('add:profession', profession)" />
     </div>
     <InfoField v-else labelClasses="text-slate-500" label="Професія:">
         <span class="ml-2 text-slate-400">
-            {{ user.profession }}
+            {{ blank.profession }}
         </span>
     </InfoField>
 </template>
@@ -113,24 +104,23 @@ import PlaneIcon from '../../icons/PlaneIcon.vue';
 import TargetIcon from '../../icons/TargetIcon.vue';
 
 const props = defineProps({
-    userProp: {
+    blankProp: {
         type: Object,
         required: true,
     },
 });
 
-const user = toRef(props, 'userProp');
+const blank = toRef(props, 'blankProp');
 
-const name = ref('');
 const gender = ref('');
 
 const havingChildren = computed(() => {
-    if (user.value.gender === 'female') {
-        return !user.value.marriage && user.value.children.count > 0;
+    if (blank.value.gender === 'female') {
+        return !blank.value.marriage && blank.value.children.count > 0;
     }
 
-    if (user.value.gender === 'male') {
-        return user.value.children.count > 0;
+    if (blank.value.gender === 'male') {
+        return blank.value.children.count > 0;
     }
 });
 

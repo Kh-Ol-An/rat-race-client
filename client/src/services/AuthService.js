@@ -1,8 +1,8 @@
 import api from "../api/index.js";
 
 export default class AuthService {
-    static async registration(email, password) {
-        return api.post('/registration', { email, password });
+    static async registration(name, email, password) {
+        return api.post('/registration', { name, email, password });
     };
 
     static async login(email, password) {

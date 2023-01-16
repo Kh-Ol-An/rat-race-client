@@ -1,19 +1,14 @@
 import axios from "axios";
 import AuthService from "../../services/AuthService.js";
 import { API_URL } from "../../api/index.js";
-import UserService from "../../services/UserService.js";
 
 export default {
     state: {
-        users: [],
         user: {},
         isAuth: false,
         isLoading: false,
     },
     mutations: {
-        setUsers(state, users) {
-            state.users = users;
-        },
         setUser(state, user) {
             state.user = user;
         },
@@ -25,9 +20,9 @@ export default {
         },
     },
     actions: {
-        async registration({ commit }, { email, password }) {
+        async registration({ commit }, { name, email, password }) {
             try {
-                const response = await AuthService.registration(email, password);
+                const response = await AuthService.registration(name, email, password);
                 localStorage.setItem('token', response.data.accessToken);
                 commit('setUser', response.data.user);
                 commit('setAuth', true);
@@ -68,19 +63,8 @@ export default {
                 commit('setLoading', false);
             }
         },
-        async requestAllUsers({ commit }) {
-            try {
-                const response = await UserService.fetchUsers();
-                commit('setUsers', response.data);
-            } catch (err) {
-                commit('setError', err.response?.data?.message);
-            }
-        }
     },
     getters: {
-        getUsers(state) {
-            return state.users;
-        },
         getUser(state) {
             return state.user;
         },

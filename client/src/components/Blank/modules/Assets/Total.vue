@@ -1,6 +1,6 @@
 <template>
     <li
-        v-if="userLand.length > 1"
+        v-if="blankLand.length > 1"
         class="
             relative
             py-2 pr-12
@@ -33,7 +33,7 @@ import Sell from '../../plugins/Sell.vue';
 import { addingSpaces } from '../../../../helpers/formating-values.js';
 
 const props = defineProps({
-    userLand: {
+    blankLand: {
         type: Array,
         required: true,
     },
@@ -41,8 +41,8 @@ const props = defineProps({
 
 const emit = defineEmits([ 'sell' ]);
 
-const cost = computed(() => props.userLand.reduce((total, land) => total += land.cost, 0));
-const quantity = computed(() => props.userLand.reduce((total, land) => total += land.quantity, 0));
+const cost = computed(() => props.blankLand.reduce((total, land) => total += land.cost, 0));
+const quantity = computed(() => props.blankLand.reduce((total, land) => total += land.quantity, 0));
 const price = computed(() => {
     const result = cost.value / quantity.value;
     if (Number.isInteger(result)) {

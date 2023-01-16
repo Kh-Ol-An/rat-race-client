@@ -6,8 +6,8 @@
         <Input v-model:value="price" id="whim-and-fancies" placeholder="Ціна" />
         <Add :firstValue="price" @add="buy" />
     </div>
-    <ul v-if="user.whimsAndFancies.length > 0" class="flex flex-col gap-2">
-        <li v-for="{ name, price } in user.whimsAndFancies">
+    <ul v-if="blank.whimsAndFancies.length > 0" class="flex flex-col gap-2">
+        <li v-for="{ name, price } in blank.whimsAndFancies">
             <InfoField
                 wrapClasses="gap-2"
                 labelClasses="text-opposite"
@@ -38,13 +38,13 @@ import InfoField from '../plugins/InfoField.vue';
 import Modal from '../plugins/Modal.vue';
 
 const props = defineProps({
-    userProp: {
-        type: Number,
+    blankProp: {
+        type: Object,
         required: true,
     },
 });
 
-const user = toRef(props, 'userProp');
+const blank = toRef(props, 'blankProp');
 
 const emit = defineEmits([ 'buy' ]);
 
@@ -52,7 +52,7 @@ const showModal = ref(false);
 const name = ref('');
 const price = ref('');
 const buy = () => {
-    if (user.value.cash < Number(price.value)) {
+    if (blank.value.cash < Number(price.value)) {
         showModal.value = true;
         name.value = '';
         price.value = '';

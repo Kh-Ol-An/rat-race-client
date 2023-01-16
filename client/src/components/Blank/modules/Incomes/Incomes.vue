@@ -4,23 +4,23 @@
     <!-- Зарплата -->
     <div
         v-if="
-            user.salary === 0 &&
+            blank.salary === 0 &&
             firedSalary === 0 &&
-            user.business.small.length < 2 &&
-            !user.business.small.some(({ expanded }) => expanded) &&
-            user.business.middle.length < 2 &&
-            user.business.big.length < 2 &&
-            user.business.corrupt.length < 2 &&
-            (user.business.big.length < 1 || user.business.corrupt.length < 1)
+            blank.business.small.length < 2 &&
+            !blank.business.small.some(({ expanded }) => expanded) &&
+            blank.business.middle.length < 2 &&
+            blank.business.big.length < 2 &&
+            blank.business.corrupt.length < 2 &&
+            (blank.business.big.length < 1 || blank.business.corrupt.length < 1)
         "
         class="flex items-center gap-3"
     >
         <Input v-model:value="salary" id="salary" placeholder="Зарплата" secondBg />
         <Add :firstValue="salary" @add="$emit('add:salary', Number(salary))" />
     </div>
-    <InfoField v-if="user.salary > 0 || firedSalary > 0" labelClasses="text-primary" label="Зарплата:">
+    <InfoField v-if="blank.salary > 0 || firedSalary > 0" labelClasses="text-primary" label="Зарплата:">
         <span class="ml-2 text-slate-400">
-            {{ addingSpaces(user.salary) }}
+            {{ addingSpaces(blank.salary) }}
         </span>
 
         <button
@@ -45,9 +45,9 @@
     <!-- Малий -->
     <InputField
         v-if="
-            user.business.middle.length === 0 &&
-            user.business.big.length === 0 &&
-            user.business.corrupt.length === 0
+            blank.business.middle.length === 0 &&
+            blank.business.big.length === 0 &&
+            blank.business.corrupt.length === 0
         "
         label="Малий бізнес"
         type="business"
@@ -55,15 +55,15 @@
         placeholderWorth="Вартість"
         placeholderValue="Прибутки"
         :disabled="
-            ((user.salary > 0 || firedSalary > 0) && user.business.small.length > 0) ||
-            user.business.middle.length > 0 ||
-            user.business.big.length > 0 ||
-            user.business.corrupt.length > 0
+            ((blank.salary > 0 || firedSalary > 0) && blank.business.small.length > 0) ||
+            blank.business.middle.length > 0 ||
+            blank.business.big.length > 0 ||
+            blank.business.corrupt.length > 0
         "
         secondBg
         @add="buyBusiness"
     />
-    <ul v-if="user.business.small.length > 0" class="flex flex-col gap-2">
+    <ul v-if="blank.business.small.length > 0" class="flex flex-col gap-2">
         <BusinessHead
             firstTitle="Вартість"
             secondTitle="Прибутки"
@@ -71,14 +71,14 @@
             @sell="sellBusiness('small')"
         />
         <Business
-            v-for="({ id, price, income }) in user.business.small"
+            v-for="({ id, price, income }) in blank.business.small"
             :key="id"
             :id="id"
             :firstValue="price"
             :secondValue="income"
-            :lastBusiness="user.business.last"
+            :lastBusiness="blank.business.last"
             incremental
-            :disabledEdit="user.salary > 0 || firedSalary > 0"
+            :disabledEdit="blank.salary > 0 || firedSalary > 0"
             @increment="incrementIncomeBusiness"
             @delete="deleteBusiness('small', id)"
         />
@@ -87,9 +87,9 @@
     <!-- Середній -->
     <InputField
         v-if="
-            user.business.small.length === 0 &&
-            user.business.big.length === 0 &&
-            user.business.corrupt.length === 0
+            blank.business.small.length === 0 &&
+            blank.business.big.length === 0 &&
+            blank.business.corrupt.length === 0
         "
         label="Середній бізнес"
         type="business"
@@ -97,15 +97,15 @@
         placeholderWorth="Вартість"
         placeholderValue="Прибутки"
         :disabled="
-            ((user.salary > 0 || firedSalary > 0) && user.business.middle.length > 0) ||
-            user.business.small.length > 0 ||
-            user.business.big.length > 0 ||
-            user.business.corrupt.length > 0
+            ((blank.salary > 0 || firedSalary > 0) && blank.business.middle.length > 0) ||
+            blank.business.small.length > 0 ||
+            blank.business.big.length > 0 ||
+            blank.business.corrupt.length > 0
         "
         secondBg
         @add="buyBusiness"
     />
-    <ul v-if="user.business.middle.length > 0" class="flex flex-col gap-2">
+    <ul v-if="blank.business.middle.length > 0" class="flex flex-col gap-2">
         <BusinessHead
             firstTitle="Вартість"
             secondTitle="Прибутки"
@@ -113,12 +113,12 @@
             @sell="sellBusiness('middle')"
         />
         <Business
-            v-for="({ id, price, income })  in user.business.middle"
+            v-for="({ id, price, income })  in blank.business.middle"
             :key="id"
             :id="id"
             :firstValue="price"
             :secondValue="income"
-            :lastBusiness="user.business.last"
+            :lastBusiness="blank.business.last"
             @delete="deleteBusiness('middle', id)"
         />
     </ul>
@@ -126,8 +126,8 @@
     <!-- Великий -->
     <InputField
         v-if="
-            user.business.small.length === 0 &&
-            user.business.middle.length === 0
+            blank.business.small.length === 0 &&
+            blank.business.middle.length === 0
         "
         label="Великий бізнес"
         type="business"
@@ -135,23 +135,23 @@
         placeholderWorth="Вартість"
         placeholderValue="Прибутки"
         :disabled="
-            (user.salary > 0 && user.business.big.length > 0) ||
-            (user.salary > 0 && user.business.corrupt.length > 0) ||
-            user.business.small.length > 0 ||
-            user.business.middle.length > 0
+            (blank.salary > 0 && blank.business.big.length > 0) ||
+            (blank.salary > 0 && blank.business.corrupt.length > 0) ||
+            blank.business.small.length > 0 ||
+            blank.business.middle.length > 0
         "
         secondBg
         @add="buyBusiness"
     />
-    <ul v-if="user.business.big.length > 0" class="flex flex-col gap-2">
+    <ul v-if="blank.business.big.length > 0" class="flex flex-col gap-2">
         <BusinessHead firstTitle="Вартість" secondTitle="Прибутки" :isSell="false" />
         <Business
-            v-for="({ id, price, income })  in user.business.big"
+            v-for="({ id, price, income })  in blank.business.big"
             :key="id"
             :id="id"
             :firstValue="price"
             :secondValue="income"
-            :lastBusiness="user.business.last"
+            :lastBusiness="blank.business.last"
             @delete="deleteBusiness('big', id)"
         />
     </ul>
@@ -159,8 +159,8 @@
     <!-- Корупційний -->
     <InputField
         v-if="
-            user.business.small.length === 0 &&
-            user.business.middle.length === 0
+            blank.business.small.length === 0 &&
+            blank.business.middle.length === 0
         "
         label="Корупційний бізнес"
         type="business"
@@ -168,23 +168,23 @@
         placeholderWorth="Вартість"
         placeholderValue="Прибутки"
         :disabled="
-            (user.salary > 0 && user.business.big.length > 0) ||
-            (user.salary > 0 && user.business.corrupt.length > 0) ||
-            user.business.small.length > 0 ||
-            user.business.middle.length > 0
+            (blank.salary > 0 && blank.business.big.length > 0) ||
+            (blank.salary > 0 && blank.business.corrupt.length > 0) ||
+            blank.business.small.length > 0 ||
+            blank.business.middle.length > 0
         "
         secondBg
         @add="buyBusiness"
     />
-    <ul v-if="user.business.corrupt.length > 0" class="flex flex-col gap-2">
+    <ul v-if="blank.business.corrupt.length > 0" class="flex flex-col gap-2">
         <BusinessHead firstTitle="Вартість" secondTitle="Прибутки" :isSell="false" />
         <Business
-            v-for="({ id, price, income }) in user.business.corrupt"
+            v-for="({ id, price, income }) in blank.business.corrupt"
             :key="id"
             :id="id"
             :firstValue="price"
             :secondValue="income"
-            :lastBusiness="user.business.last"
+            :lastBusiness="blank.business.last"
             @delete="deleteBusiness('corrupt', id)"
         />
     </ul>
@@ -211,7 +211,7 @@ import Modal from '../../plugins/Modal.vue';
 import { addingSpaces } from '../../../../helpers/formating-values.js';
 
 const props = defineProps({
-    userProp: {
+    blankProp: {
         type: Object,
         required: true,
     },
@@ -221,7 +221,7 @@ const props = defineProps({
     },
 });
 
-const user = toRef(props, 'userProp');
+const blank = toRef(props, 'blankProp');
 
 const emit = defineEmits([ 'fired:salary', 'quit:salary', 'buy:business', 'increment:income', 'sell' ]);
 
@@ -238,7 +238,7 @@ const quit = () => {
 const showModal = ref(false);
 
 const buyBusiness = (id, price, income, subType) => {
-    if (user.value.cash < price) return showModal.value = true;
+    if (blank.value.cash < price) return showModal.value = true;
     emit('buy:business', id, price, income, subType);
 };
 const incrementIncomeBusiness = (id, income) => emit('increment:income', id, income);

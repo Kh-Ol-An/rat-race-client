@@ -2,13 +2,13 @@
     <h2 class="px-4 text-xl font-bold text-primary text-center">Активи</h2>
 
     <!-- Будинки -->
-    <Houses :userProp="userProp" @buy:house="buyHouse" @sell:house="sellHouse" @sell:houses="sellHouses" />
+    <Houses :blankProp="blankProp" @buy:house="buyHouse" @sell:house="sellHouse" @sell:houses="sellHouses" />
 
     <!-- Земля -->
-    <Land :userProp="userProp" @buy:land="buyLand" @sell:land="sellLand" @sell:acres="sellAcres" />
+    <Land :blankProp="blankProp" @buy:land="buyLand" @sell:land="sellLand" @sell:acres="sellAcres" />
 
     <!-- Корупційна земля -->
-    <CorruptLand :userProp="userProp" @buy:land="buyCorruptLand" @sell:land="sellCorruptLand" @sell:acres="sellCorruptAcres" />
+    <CorruptLand :blankProp="blankProp" @buy:land="buyCorruptLand" @sell:land="sellCorruptLand" @sell:acres="sellCorruptAcres" />
 </template>
 
 <script setup>
@@ -17,7 +17,7 @@ import Land from './Land.vue';
 import CorruptLand from './CorruptLand.vue';
 
 const props = defineProps({
-    userProp: {
+    blankProp: {
         type: Object,
         required: true,
     },

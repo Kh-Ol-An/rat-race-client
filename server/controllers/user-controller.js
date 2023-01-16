@@ -10,8 +10,8 @@ class UserController {
                 return next(ApiError.BadRequest('Помилка під час валідації', errors.array()))
             }
 
-            const { email, password } = req.body;
-            const userData = await userService.registration(email, password);
+            const { name, email, password } = req.body;
+            const userData = await userService.registration(name, email, password);
 
             res.cookie(
                 'refreshToken',
@@ -85,15 +85,6 @@ class UserController {
                 },
             );
             return res.json(userData);
-        } catch (err) {
-            next(err);
-        }
-    };
-
-    async getUsers(req, res, next) {
-        try {
-            const users = await userService.getUsers();
-            res.json(users);
         } catch (err) {
             next(err);
         }

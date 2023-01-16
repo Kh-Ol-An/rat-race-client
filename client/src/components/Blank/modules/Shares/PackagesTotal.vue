@@ -1,6 +1,6 @@
 <template>
     <li
-        v-if="userShare.length > 1"
+        v-if="blankShare.length > 1"
         class="
             relative
             py-2 pr-12
@@ -33,7 +33,7 @@ import Sell from '../../plugins/Sell.vue';
 import { addingSpaces } from '../../../../helpers/formating-values.js';
 
 const props = defineProps({
-    userShare: {
+    blankShare: {
         type: Array,
         required: true,
     },
@@ -45,8 +45,8 @@ const props = defineProps({
 
 const emit = defineEmits([ 'sell' ]);
 
-const cost = computed(() => props.userShare.reduce((total, share) => total += share.cost, 0));
-const quantity = computed(() => props.userShare.reduce((total, share) => total += share.quantity, 0));
+const cost = computed(() => props.blankShare.reduce((total, share) => total += share.cost, 0));
+const quantity = computed(() => props.blankShare.reduce((total, share) => total += share.quantity, 0));
 const price = computed(() => {
     const result = cost.value / quantity.value;
     if (Number.isInteger(result)) {

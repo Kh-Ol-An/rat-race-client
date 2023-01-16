@@ -1,11 +1,11 @@
 <template>
     <h2 class="px-4 text-xl font-bold text-opposite text-center">Сімейний стан</h2>
-    <Checkbox label="Шлюб:" :checked="user.marriage" @change="changeMarriage" />
+    <Checkbox label="Шлюб:" :checked="blank.marriage" @change="changeMarriage" />
     <Children
         label="Діти:"
-        :count="user.children.count"
-        :expense="user.children.expense"
-        :disabled="user.gender === 'male' && !user.marriage"
+        :count="blank.children.count"
+        :expense="blank.children.expense"
+        :disabled="blank.gender === 'male' && !blank.marriage"
         @have:baby="$emit('have:baby')"
     />
 </template>
@@ -16,13 +16,13 @@ import Checkbox from './Marriage.vue';
 import Children from './Children.vue';
 
 const props = defineProps({
-    userProp: {
+    blankProp: {
         type: Object,
         required: true,
     },
 });
 
-const user = toRef(props, 'userProp');
+const blank = toRef(props, 'blankProp');
 
 const emit = defineEmits([ 'change:marriage', 'have:baby' ]);
 

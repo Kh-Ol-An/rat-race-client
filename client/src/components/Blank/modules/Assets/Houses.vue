@@ -17,25 +17,25 @@
         </div>
     </div>
 
-    <ul v-if="user.assets.houses.length > 0" class="flex flex-col gap-2">
+    <ul v-if="blank.assets.houses.length > 0" class="flex flex-col gap-2">
         <House
-            v-for="{ id, price } in user.assets.houses"
+            v-for="{ id, price } in blank.assets.houses"
             :id="id"
             :price="price"
             @sell="sellHouse"
         />
 
         <li
-            v-if="user.assets.houses.length > 1"
+            v-if="blank.assets.houses.length > 1"
             class="relative py-2 flex items-center gap-3 border-t-2 border-slate-700"
         >
             <span class="flex items-center gap-1 text-primary whitespace-nowrap">
-                <span class="text-slate-400">{{ user.assets.houses.length }}</span>
-                {{ user.assets.houses.length > 4 ? 'будинків' : 'будинки' }}
+                <span class="text-slate-400">{{ blank.assets.houses.length }}</span>
+                {{ blank.assets.houses.length > 4 ? 'будинків' : 'будинки' }}
                 <Sell inputId="sell-price-houses" secondBg @sell="sellHouses">
                     на суму
                     <span class="text-slate-400">
-                        {{ addingSpaces(user.assets.houses.reduce((total, house) => total += house.price, 0)) }}
+                        {{ addingSpaces(blank.assets.houses.reduce((total, house) => total += house.price, 0)) }}
                     </span>
                 </Sell>
             </span>
@@ -53,13 +53,13 @@ import Sell from '../../plugins/Sell.vue';
 import { addingSpaces } from '../../../../helpers/formating-values.js';
 
 const props = defineProps({
-    userProp: {
+    blankProp: {
         type: Object,
         required: true,
     },
 });
 
-const user = toRef(props, 'userProp');
+const blank = toRef(props, 'blankProp');
 
 const emit = defineEmits([ 'buy:house', 'sell:house', 'sell:houses' ]);
 
@@ -67,7 +67,7 @@ const showModal = ref(false);
 
 const price = ref('');
 const buyHouse = () => {
-    if (user.value.cash < Number(price.value)) {
+    if (blank.value.cash < Number(price.value)) {
         showModal.value = true;
         return price.value = '';
     }

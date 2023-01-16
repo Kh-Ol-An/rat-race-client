@@ -8,10 +8,10 @@
         secondBg
         @add="buyLand"
     />
-    <ul v-if="user.assets.corruptLand.length > 0" class="flex flex-col gap-2">
+    <ul v-if="blank.assets.corruptLand.length > 0" class="flex flex-col gap-2">
         <LandHead />
         <PieceOfLand
-            v-for="{id, price, quantity, cost} in user.assets.corruptLand"
+            v-for="{id, price, quantity, cost} in blank.assets.corruptLand"
             :key="id"
             :id="id"
             :price="price"
@@ -20,7 +20,7 @@
             @sell="sellLand"
         />
         <Total
-            :userLand="user.assets.corruptLand"
+            :blankLand="blank.assets.corruptLand"
             @sell="sellAcres"
         />
     </ul>
@@ -45,20 +45,20 @@ import Total from './Total.vue';
 import Modal from '../../plugins/Modal.vue';
 
 const props = defineProps({
-    userProp: {
+    blankProp: {
         type: Object,
         required: true,
     },
 });
 
-const user = toRef(props, 'userProp');
+const blank = toRef(props, 'blankProp');
 
 const emit = defineEmits([ 'buy:land', 'sell:land', 'sell:acres' ]);
 
 const showModal = ref(false);
 
 const buyLand = (id, quantity, cost) => {
-    if (user.value.cash < cost) return showModal.value = true;
+    if (blank.value.cash < cost) return showModal.value = true;
     emit('buy:land', id, quantity, cost);
 };
 const sellLand = (id, price) => emit('sell:land', id, price);

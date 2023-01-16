@@ -25,9 +25,9 @@
                 />
                 <Add :firstValue="apartmentPrice" @add="buyApartment" />
             </div>
-            <ul v-if="user.apartments.length > 0" class="flex flex-col gap-1">
+            <ul v-if="blank.apartments.length > 0" class="flex flex-col gap-1">
                 <Purchased
-                    v-for="{ id, name, price } in user.apartments"
+                    v-for="{ id, name, price } in blank.apartments"
                     :id="id"
                     :price="price"
                     :label="name.length > 0 ? `${name}:` : 'Квартира:'"
@@ -36,7 +36,7 @@
                 <li>
                     <InfoField wrapClasses="gap-2" labelClasses="text-opposite" label="Витрати:">
                         <span class="text-slate-400">
-                            {{ user.apartments.length * 200 }}
+                            {{ blank.apartments.length * 200 }}
                         </span>
                     </InfoField>
                 </li>
@@ -86,9 +86,9 @@
                 />
                 <Add :firstValue="carPrice" @add="buyCar" />
             </div>
-            <ul v-if="user.cars.length > 0" class="flex flex-col gap-1">
+            <ul v-if="blank.cars.length > 0" class="flex flex-col gap-1">
                 <Purchased
-                    v-for="{ id, name, price } in user.cars"
+                    v-for="{ id, name, price } in blank.cars"
                     :id="id"
                     :price="price"
                     :label="name.length > 0 ? `${name}:` : 'Автівка:'"
@@ -97,7 +97,7 @@
                 <li>
                     <InfoField wrapClasses="gap-2" labelClasses="text-opposite" label="Витрати:">
                         <span class="text-slate-400">
-                            {{ user.cars.length * 600 }}
+                            {{ blank.cars.length * 600 }}
                         </span>
                     </InfoField>
                 </li>
@@ -143,9 +143,9 @@
                     <Add :firstValue="cottagePrice" @add="buyCottage" />
                 </div>
             </div>
-            <ul v-if="user.cottages.length > 0" class="flex flex-col gap-2">
+            <ul v-if="blank.cottages.length > 0" class="flex flex-col gap-2">
                 <Purchased
-                    v-for="{ id, name, price } in user.cottages"
+                    v-for="{ id, name, price } in blank.cottages"
                     :id="id"
                     :price="price"
                     :label="name.length > 0 ? `${name}:` : 'Котедж:'"
@@ -154,7 +154,7 @@
                 <li>
                     <InfoField wrapClasses="gap-2" labelClasses="text-opposite" label="Витрати:">
                         <span class="text-slate-400">
-                            {{ user.apartments.length * 1000 }}
+                            {{ blank.apartments.length * 1000 }}
                         </span>
                     </InfoField>
                 </li>
@@ -180,9 +180,9 @@
                     <Add :firstValue="yachtPrice" @add="buyYacht" />
                 </div>
             </div>
-            <ul v-if="user.yachts.length > 0" class="flex flex-col gap-2">
+            <ul v-if="blank.yachts.length > 0" class="flex flex-col gap-2">
                 <Purchased
-                    v-for="{ id, name, price } in user.yachts"
+                    v-for="{ id, name, price } in blank.yachts"
                     :id="id"
                     :price="price"
                     :label="name.length > 0 ? `${name}:` : 'Яхта:'"
@@ -191,7 +191,7 @@
                 <li>
                     <InfoField wrapClasses="gap-2" labelClasses="text-opposite" label="Витрати:">
                         <span class="text-slate-400">
-                            {{ user.apartments.length * 1500 }}
+                            {{ blank.apartments.length * 1500 }}
                         </span>
                     </InfoField>
                 </li>
@@ -217,9 +217,9 @@
                     <Add :firstValue="planePrice" @add="buyPlane" />
                 </div>
             </div>
-            <ul v-if="user.planes.length > 0" class="flex flex-col gap-2">
+            <ul v-if="blank.planes.length > 0" class="flex flex-col gap-2">
                 <Purchased
-                    v-for="{ id, name, price } in user.planes"
+                    v-for="{ id, name, price } in blank.planes"
                     :id="id"
                     :price="price"
                     :label="name.length > 0 ? `${name}:` : 'Літак:'"
@@ -228,7 +228,7 @@
                 <li>
                     <InfoField wrapClasses="gap-2" labelClasses="text-opposite" label="Витрати:">
                         <span class="text-slate-400">
-                            {{ user.apartments.length * 5000 }}
+                            {{ blank.apartments.length * 5000 }}
                         </span>
                     </InfoField>
                 </li>
@@ -264,7 +264,7 @@ import Modal from '../../plugins/Modal.vue';
 import InfoField from "../../plugins/InfoField.vue";
 
 const props = defineProps({
-    userProp: {
+    blankProp: {
         type: Object,
         required: true,
     },
@@ -274,7 +274,7 @@ const props = defineProps({
     },
 });
 
-const user = toRef(props, 'userProp');
+const blank = toRef(props, 'blankProp');
 
 const emit = defineEmits([
     'buy:apartment',
@@ -299,7 +299,7 @@ const purchase = ref('');
 const apartmentName = ref('');
 const apartmentPrice = ref('');
 const buyApartment = () => {
-    if (user.value.cash < Number(apartmentPrice.value)) {
+    if (blank.value.cash < Number(apartmentPrice.value)) {
         purchase.value = 'Квартири';
         showModal.value = true;
         apartmentName.value = '';
@@ -339,7 +339,7 @@ const sellApartment = id => emit('sell:apartment', id);
 const carName = ref('');
 const carPrice = ref('');
 const buyCar = () => {
-    if (user.value.cash < Number(carPrice.value)) {
+    if (blank.value.cash < Number(carPrice.value)) {
         purchase.value = 'Машини';
         showModal.value = true;
         carName.value = '';
@@ -378,7 +378,7 @@ const sellCar = id => emit('sell:car', id);
 const cottageName = ref('');
 const cottagePrice = ref('');
 const buyCottage = () => {
-    if (user.value.cash < Number(cottagePrice.value)) {
+    if (blank.value.cash < Number(cottagePrice.value)) {
         purchase.value = 'Котеджі';
         showModal.value = true;
         cottageName.value = '';
@@ -396,7 +396,7 @@ const sellCottage = id => emit('sell:cottage', id);
 const yachtName = ref('');
 const yachtPrice = ref('');
 const buyYacht = () => {
-    if (user.value.cash < Number(yachtPrice.value)) {
+    if (blank.value.cash < Number(yachtPrice.value)) {
         purchase.value = 'Яхти';
         showModal.value = true;
         yachtName.value = '';
@@ -414,7 +414,7 @@ const sellYacht = id => emit('sell:yacht', id);
 const planeName = ref('');
 const planePrice = ref('');
 const buyPlane = () => {
-    if (user.value.cash < Number(planePrice.value)) {
+    if (blank.value.cash < Number(planePrice.value)) {
         purchase.value = 'Літаки';
         showModal.value = true;
         planeName.value = '';

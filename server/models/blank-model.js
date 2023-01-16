@@ -17,6 +17,33 @@ const BlankSchema = new Schema({
     planes: { type: Array, default: [] },
     whimsAndFancies: { type: Array, default: [] },
     marriage: { type: Boolean, default: false },
+    children: { type: {
+            count: { type: Number, default: 0 },
+            expense: { type: Number, default: 0 },
+        }, required: true },
+    credits: { type: Array, default: [] },
+    cash: { type: Number, default: 0 },
+    salary: { type: Number, default: 0 },
+    business: { type: {
+            small: { type: Array, default: [] },
+            middle: { type: Array, default: [] },
+            big: { type: Array, default: [] },
+            corrupt: { type: Array, default: [] },
+            last: { type: Array, default: [] },
+        }, required: true },
+    shares: { type: {
+            gc: { type: Array, default: [] },
+            schp: { type: Array, default: [] },
+            to: { type: Array, default: [] },
+            cst: { type: Array, default: [] },
+        }, required: true },
+    assets: { type: {
+            houses: { type: Array, default: [] },
+            land: { type: Array, default: [] },
+            corruptLand: { type: Array, default: [] },
+        }, required: true },
+    rich: { type: Boolean, default: false },
+    win: { type: Boolean, default: false },
 });
 
 module.exports = model('Blank', BlankSchema);

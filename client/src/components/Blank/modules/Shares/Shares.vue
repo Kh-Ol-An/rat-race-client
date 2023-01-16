@@ -10,10 +10,10 @@
         placeholderValue="Кількість"
         @add="buy"
     />
-    <ul v-if="user.shares.gc.length > 0" class="flex flex-col gap-2">
+    <ul v-if="blank.shares.gc.length > 0" class="flex flex-col gap-2">
         <PackagesHead />
         <Package
-            v-for="{id, price, quantity, cost} in user.shares.gc"
+            v-for="{id, price, quantity, cost} in blank.shares.gc"
             :key="id"
             :id="id"
             subType="gc"
@@ -23,7 +23,7 @@
             @sell="sellPackage"
         />
         <PackagesTotal
-            :userShare="user.shares.gc"
+            :blankShare="blank.shares.gc"
             subType="gc"
             @sell="sellAll"
         />
@@ -38,10 +38,10 @@
         placeholderValue="Кількість"
         @add="buy"
     />
-    <ul v-if="user.shares.schp.length > 0" class="flex flex-col gap-2">
+    <ul v-if="blank.shares.schp.length > 0" class="flex flex-col gap-2">
         <PackagesHead />
         <Package
-            v-for="{id, price, quantity, cost} in user.shares.schp"
+            v-for="{id, price, quantity, cost} in blank.shares.schp"
             :key="id"
             :id="id"
             subType="schp"
@@ -51,7 +51,7 @@
             @sell="sellPackage"
         />
         <PackagesTotal
-            :userShare="user.shares.schp"
+            :blankShare="blank.shares.schp"
             subType="schp"
             @sell="sellAll"
         />
@@ -66,10 +66,10 @@
         placeholderValue="Кількість"
         @add="buy"
     />
-    <ul v-if="user.shares.to.length > 0" class="flex flex-col gap-2">
+    <ul v-if="blank.shares.to.length > 0" class="flex flex-col gap-2">
         <PackagesHead />
         <Package
-            v-for="{id, price, quantity, cost} in user.shares.to"
+            v-for="{id, price, quantity, cost} in blank.shares.to"
             :key="id"
             :id="id"
             subType="to"
@@ -79,7 +79,7 @@
             @sell="sellPackage"
         />
         <PackagesTotal
-            :userShare="user.shares.to"
+            :blankShare="blank.shares.to"
             subType="to"
             @sell="sellAll"
         />
@@ -94,10 +94,10 @@
         placeholderValue="Кількість"
         @add="buy"
     />
-    <ul v-if="user.shares.cst.length > 0" class="flex flex-col gap-2">
+    <ul v-if="blank.shares.cst.length > 0" class="flex flex-col gap-2">
         <PackagesHead />
         <Package
-            v-for="{id, price, quantity, cost} in user.shares.cst"
+            v-for="{id, price, quantity, cost} in blank.shares.cst"
             :key="id"
             :id="id"
             subType="cst"
@@ -107,7 +107,7 @@
             @sell="sellPackage"
         />
         <PackagesTotal
-            :userShare="user.shares.cst"
+            :blankShare="blank.shares.cst"
             subType="cst"
             @sell="sellAll"
         />
@@ -132,20 +132,20 @@ import PackagesTotal from './PackagesTotal.vue';
 import Modal from '../../plugins/Modal.vue';
 
 const props = defineProps({
-    userProp: {
+    blankProp: {
         type: Object,
         required: true,
     },
 });
 
-const user = toRef(props, 'userProp');
+const blank = toRef(props, 'blankProp');
 
 const emit = defineEmits([ 'buy', 'sell:package', 'sell:all' ]);
 
 const showModal = ref(false);
 
 const buy = (id, price, quantity, subType) => {
-    if (user.value.cash < price * quantity) return showModal.value = true;
+    if (blank.value.cash < price * quantity) return showModal.value = true;
     emit('buy', id, price, quantity, subType);
 };
 
