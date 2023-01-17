@@ -3,7 +3,6 @@ const blankService = require('../service/blank-service');
 class BlankController {
     async setBlank(req, res, next) {
         try {
-            console.log('req: ', req);
             const blank = await blankService.saveBlank(req.body);
             return res.json(blank);
         } catch (err) {
