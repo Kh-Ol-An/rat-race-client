@@ -628,7 +628,7 @@ const restart = () => {
 };
 
 const submit = () => {
-    console.log('submit blank: ', blank);
+    console.log('blank: ', blank);
     saveBlank(blank);
 };
 

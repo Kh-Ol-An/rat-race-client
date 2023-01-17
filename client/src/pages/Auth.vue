@@ -18,12 +18,6 @@
                 Вийти
             </button>
         </div>
-        <button class="text-white" type="button" @click="requestAllUsers">
-            requestAllUsers
-        </button>
-        <div v-for="item in getUsers">
-            getUsers: {{ item.email }}
-        </div>
     </div>
 </template>
 
@@ -36,6 +30,6 @@ const name = ref('');
 const email = ref('');
 const password = ref('');
 
-const { registration, login, logout, requestAllUsers } = mapActions();
-const { getUsers, getUser, getAuth, getLoading, getError } = mapGetters();
+const { registration, login, logout } = mapActions();
+const { getUser, getAuth, getLoading, getError } = mapGetters();
 </script>
