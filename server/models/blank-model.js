@@ -18,37 +18,41 @@ const BlankSchema = new Schema({
     whimsAndFancies: { type: Array, default: [] },
     marriage: { type: Boolean, default: false },
     children: {
-        type: {
-            count: { type: Number, default: 0 },
-            expense: { type: Number, default: 0 },
-        },
+        type: Object,
+        default: {
+            count: 0,
+            expense: 0,
+        }
     },
     credits: { type: Array, default: [] },
     cash: { type: Number, default: 0 },
     salary: { type: Number, default: 0 },
     business: {
-        type: {
-            small: { type: Array, default: [] },
-            middle: { type: Array, default: [] },
-            big: { type: Array, default: [] },
-            corrupt: { type: Array, default: [] },
-            last: { type: Array, default: [] },
-        },
+        type: Object,
+        default: {
+            small: [],
+            middle: [],
+            big: [],
+            corrupt: [],
+            last: [],
+        }
     },
     shares: {
-        type: {
-            gc: { type: Array, default: [] },
-            schp: { type: Array, default: [] },
-            to: { type: Array, default: [] },
-            cst: { type: Array, default: [] },
-        },
+        type: Object,
+        default: {
+            gc: [],
+            schp: [],
+            to: [],
+            cst: [],
+        }
     },
     assets: {
-        type: {
-            houses: { type: Array, default: [] },
-            land: { type: Array, default: [] },
-            corruptLand: { type: Array, default: [] },
-        },
+        type: Object,
+        default: {
+            houses: [],
+            land: [],
+            corruptLand: [],
+        }
     },
     rich: { type: Boolean, default: false },
     win: { type: Boolean, default: false },
