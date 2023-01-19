@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useStore } from 'vuex'
 
-export const API_URL = 'http://localhost:5000/api';
+export const API_URL = 'https://rate-race.onrender.com/api';
 
 const api = axios.create({
     withCredentials: true,
