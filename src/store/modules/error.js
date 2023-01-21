@@ -1,10 +1,14 @@
 export default {
     state: {
-        error: '',
+        error: {
+            message: '',
+            type: '',
+        },
     },
     mutations: {
         setError(state, error) {
-            state.error = error;
+            state.error.message = error.message;
+            state.error.type = error.errors;
         },
     },
     getters: {

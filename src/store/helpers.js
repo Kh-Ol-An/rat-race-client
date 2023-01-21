@@ -1,5 +1,5 @@
-import { computed } from 'vue'
-import { useStore } from 'vuex'
+import { computed } from 'vue';
+import { useStore } from 'vuex';
 
 export const mapState = () => {
     const store = useStore();

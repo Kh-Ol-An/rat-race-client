@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useStore } from 'vuex'
 
+// export const API_URL = 'http://localhost:5000/api';
 export const API_URL = 'https://rate-race.onrender.com/api';
 
 const api = axios.create({
@@ -22,7 +23,10 @@ api.interceptors.response.use((config) => config, async (error) => {
             localStorage.setItem('token', response.data.accessToken);
             return api.request(originalRequest);
         } catch (err) {
-            useStore().commit('setError', 'Користувач не авторизований');
+            useStore().commit('setError', {
+                message: 'Користувач не авторизований',
+                type: 'auth',
+            });
         }
     }
 

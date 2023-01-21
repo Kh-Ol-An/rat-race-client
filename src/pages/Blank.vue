@@ -232,6 +232,7 @@
 <script setup>
 import { reactive, ref, computed } from 'vue';
 import { mapActions, mapGetters } from '../store/helpers.js';
+import router from '../router/index.js';
 import BlankIdentification from '../components/Blank/modules/BlankIdentification.vue';
 import Transaction from '../components/Blank/modules/Transaction.vue';
 import InfoField from '../components/Blank/plugins/InfoField.vue';
@@ -251,6 +252,21 @@ import MoneyIcon from '../components/icons/MoneyIcon.vue';
 import { addingSpaces } from '../helpers/formating-values.js';
 
 const { saveBlank, getBlank } = mapActions();
+const { getAuth } = mapGetters();
+
+router.beforeEach(async (to) => {
+    const publicPages = ['/auth'];
+    const authRequired = !publicPages.includes(to.path);
+    // const auth = store.getters['getAuth'];
+    console.log('publicPages: ', publicPages);
+    console.log('to: ', to);
+    console.log('getAuth: ', getAuth);
+
+    // if (authRequired && !auth.user) {
+    //     auth.returnUrl = to.fullPath;
+    //     return '/login';
+    // }
+});
 
 const savedBlank = computed(() => getBlank());
 const blank = reactive({

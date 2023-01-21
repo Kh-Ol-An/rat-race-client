@@ -27,7 +27,7 @@ export default {
                 commit('setUser', response.data.user);
                 commit('setAuth', true);
             } catch (err) {
-                commit('setError', err.response?.data?.message);
+                commit('setError', err.response?.data);
             }
         },
         async login({ commit }, { email, password }) {
@@ -37,7 +37,7 @@ export default {
                 commit('setUser', response.data.user);
                 commit('setAuth', true);
             } catch (err) {
-                commit('setError', err.response?.data?.message);
+                commit('setError', err.response?.data);
             }
         },
         async logout({ commit }) {
@@ -47,7 +47,7 @@ export default {
                 commit('setUser', {});
                 commit('setAuth', false);
             } catch (err) {
-                commit('setError', err.response?.data?.message);
+                commit('setError', err.response?.data);
             }
         },
         async checkAuth({ commit }) {
@@ -58,7 +58,7 @@ export default {
                 commit('setUser', response.data.user);
                 commit('setAuth', true);
             } catch (err) {
-                commit('setError', err.response?.data?.message);
+                commit('setError', err.response?.data);
             } finally {
                 commit('setLoading', false);
             }
