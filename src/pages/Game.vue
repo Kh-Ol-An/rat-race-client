@@ -1,8 +1,6 @@
 <template>
     <AuthGuard>
         <h1 class="text-white">Game</h1>
-        <p class="text-white">getAuth: {{ getAuth }}</p>
-        <router-link class="text-white" to="/">Blank</router-link>
     </AuthGuard>
 </template>
 

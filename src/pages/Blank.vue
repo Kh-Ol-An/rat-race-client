@@ -231,7 +231,7 @@
 </template>
 
 <script setup>
-import { reactive, ref, computed } from 'vue';
+import { onMounted, reactive, ref, computed } from 'vue';
 import { mapActions, mapGetters } from '../store/helpers.js';
 import AuthGuard from '../components/plugins/AuthGuard.vue';
 import BlankIdentification from '../components/Blank/modules/BlankIdentification.vue';
@@ -252,10 +252,15 @@ import SaveIcon from '../components/icons/SaveIcon.vue';
 import MoneyIcon from '../components/icons/MoneyIcon.vue';
 import { addingSpaces } from '../helpers/formating-values.js';
 
-const { saveBlank, getBlank } = mapActions();
-const { getAuth } = mapGetters();
+const { uploadBlank, downloadBlank } = mapActions();
+const { getBlank } = mapGetters();
+onMounted(() => downloadBlank().then((response) => {
+    console.log('response: ', response);
+}))
 
-const savedBlank = computed(() => getBlank());
+
+// const savedBlank = computed(() => downloadBlank());
+// const blank = reactive(getBlank);
 const blank = reactive({
     gender: '',
     profession: '',
@@ -632,7 +637,7 @@ const restart = () => {
 
 const submit = () => {
     console.log('blank: ', blank);
-    saveBlank(blank);
+    uploadBlank(blank);
 };
 
 const showModalRich = computed(

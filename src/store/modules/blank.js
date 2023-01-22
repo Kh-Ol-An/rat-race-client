@@ -10,7 +10,7 @@ export default {
         },
     },
     actions: {
-        async saveBlank({ commit }, blank) {
+        async uploadBlank({ commit }, blank) {
             try {
                 const response = await BlankService.saveBlank(blank);
                 commit('setBlank', response.data.blank);
@@ -18,10 +18,10 @@ export default {
                 console.log(err)
             }
         },
-        async getBlank({ commit }) {
+        async downloadBlank({ commit }) {
             try {
                 const response = await BlankService.getBlank();
-                commit('setBlank', response.data.blank);
+                commit('setBlank', response.data[0]);
             } catch (err) {
                 console.log(err)
             }
