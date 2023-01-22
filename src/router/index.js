@@ -1,13 +1,14 @@
-import { createRouter, createWebHashHistory } from 'vue-router';
-import Blank from '../pages/Blank.vue';
-import Game from '../pages/Game.vue';
-import Auth from '../pages/Auth.vue';
+import { createRouter, createWebHistory } from 'vue-router';
 
-export default createRouter({
-    history: createWebHashHistory(),
-    routes: [
-        { path: '/', component: Blank },
-        { path: '/game', component: Game },
-        { path: '/auth', component: Auth },
-    ],
+const routes = [
+    { path: '/', name: 'Home', component: () => import('../pages/Home.vue') },
+    { path: '/blank', name: 'Blank', component: () => import('../pages/Blank.vue') },
+    { path: '/game', name: 'Game', component: () => import('../pages/Game.vue') },
+]
+
+const router = createRouter({
+    history: createWebHistory(),
+    routes,
 });
+
+export default router;

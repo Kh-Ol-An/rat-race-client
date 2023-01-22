@@ -3,7 +3,6 @@
         <div class="text-red-400">{{ getError }}</div>
         <div v-if="getLoading">getLoading...</div>
         <div v-else class="py-6 px-8 flex flex-col items-center justify-center gap-4 shadow-lg rounded-md bg-slate-800">
-            <p class="text-white">{{ getAuth ? getUser.email : 'Авторизуйся' }}</p>
             <Input v-model:value="name" type="text" id="name" placeholder="Ім'я" />
             <Input v-model:value="email" type="text" id="email" placeholder="Унікальне будь-що" />
             <Input v-model:value="password" type="text" id="password" placeholder="Те що знаєшь тільки ти" />
@@ -13,9 +12,6 @@
             </button>
             <button class="text-white" type="button" @click="login({ email, password })">
                 Увійти
-            </button>
-            <button class="text-white" type="button" @click="logout">
-                Вийти
             </button>
         </div>
     </div>
@@ -31,6 +27,6 @@ const email = ref('');
 const password = ref('');
 const repeatPassword = ref('');
 
-const { registration, login, logout } = mapActions();
-const { getUser, getAuth, getLoading, getError } = mapGetters();
+const { registration, login } = mapActions();
+const { getLoading, getError } = mapGetters();
 </script>
