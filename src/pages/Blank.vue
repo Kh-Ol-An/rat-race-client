@@ -20,15 +20,15 @@
                 <div class="px-2 hidden md:block">
                     <button
                         class="
-                    p-4
-                    flex items-center justify-center
-                    w-full
-                    shadow hover:shadow-lg
-                    rounded-md
-                    bg-secondary
-                    outline-0
-                    transition-all duration-300
-                "
+                            p-4
+                            flex items-center justify-center
+                            w-full
+                            shadow hover:shadow-lg
+                            rounded-md
+                            bg-secondary
+                            outline-0
+                            transition-all duration-300
+                        "
                         type="submit"
                         title="Зберегти"
                     >
@@ -41,9 +41,9 @@
                 </div>
 
                 <InfoField wrapClasses="mx-auto px-8 md:px-2" labelClasses="font-bold text-primary" label="Грошовий потік:">
-                <span class="ml-2 font-bold text-slate-300">
-                    {{ addingSpaces(cashFlow) }}
-                </span>
+                    <span class="ml-2 font-bold text-slate-300">
+                        {{ addingSpaces(cashFlow) }}
+                    </span>
 
                     <button
                         class="ml-4 outline-0"
@@ -97,9 +97,9 @@
                         <!-- Сімейний стан -->
                         <div
                             :class="[
-                            'pt-4 pr-4 pl-8 md:px-2 flex flex-col gap-2 md:bg-slate-900',
-                             blank.credits.length === 0 ? 'pb-8' : 'pb-4',
-                        ]"
+                                'pt-4 pr-4 pl-8 md:px-2 flex flex-col gap-2 md:bg-slate-900',
+                                 blank.credits.length === 0 ? 'pb-8' : 'pb-4',
+                            ]"
                         >
                             <FamilyStatus
                                 :blankProp="blank"
@@ -191,17 +191,17 @@
 
                 <button
                     class="
-                    fixed md:static
-                    right-10 bottom-10
-                    p-4
-                    flex items-center justify-center
-                    md:w-full
-                    shadow hover:shadow-lg
-                    rounded-full md:rounded-md
-                    bg-secondary
-                    outline-0
-                    transition-all duration-300
-                "
+                        fixed md:static
+                        right-10 bottom-10
+                        p-4
+                        flex items-center justify-center
+                        md:w-full
+                        shadow hover:shadow-lg
+                        rounded-full md:rounded-md
+                        bg-secondary
+                        outline-0
+                        transition-all duration-300
+                    "
                     type="submit"
                     title="Зберегти"
                 >
@@ -231,7 +231,7 @@
 </template>
 
 <script setup>
-import { onMounted, reactive, ref, computed } from 'vue';
+import { reactive, ref, computed } from 'vue';
 import { mapActions, mapGetters } from '../store/helpers.js';
 import AuthGuard from '../components/plugins/AuthGuard.vue';
 import BlankIdentification from '../components/Blank/modules/BlankIdentification.vue';
@@ -252,59 +252,10 @@ import SaveIcon from '../components/icons/SaveIcon.vue';
 import MoneyIcon from '../components/icons/MoneyIcon.vue';
 import { addingSpaces } from '../helpers/formating-values.js';
 
-const { uploadBlank, downloadBlank } = mapActions();
+const { uploadBlank } = mapActions();
 const { getBlank } = mapGetters();
-onMounted(() => downloadBlank().then((response) => {
-    console.log('response: ', response);
-}))
 
-
-// const savedBlank = computed(() => downloadBlank());
-// const blank = reactive(getBlank);
-const blank = reactive({
-    gender: '',
-    profession: '',
-    debt: 0,
-    rent: 0,
-    food: 0,
-    clothes: 0,
-    fare: 0,
-    phone: 0,
-    apartments: [],
-    cars: [],
-    cottages: [],
-    yachts: [],
-    planes: [],
-    whimsAndFancies: [],
-    marriage: false,
-    children: {
-        count: 0,
-        expense: 0,
-    },
-    credits: [],
-    cash: 0,
-    salary: 0,
-    business: {
-        small: [],
-        middle: [],
-        big: [],
-        corrupt: [],
-        last: [],
-    },
-    shares: {
-        gc: [],
-        schp: [],
-        to: [],
-        cst: [],
-    },
-    assets: {
-        houses: [],
-        land: [],
-        corruptLand: [],
-    },
-    rich: false,
-    win: false,
-});
+const blank = reactive(getBlank.value);
 
 const addGender = (gender) => blank.gender = gender;
 const addProfession = (profession) => blank.profession = profession;

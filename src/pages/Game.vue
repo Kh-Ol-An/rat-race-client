@@ -5,8 +5,5 @@
 </template>
 
 <script setup>
-import { mapGetters } from '../store/helpers.js';
 import AuthGuard from '../components/plugins/AuthGuard.vue';
-
-const { getAuth } = mapGetters();
 </script>

@@ -6,12 +6,14 @@
 import { onMounted } from "vue";
 import { mapActions } from './store/helpers.js';
 
-const { checkAuth } = mapActions();
+const { checkAuth, downloadBlank } = mapActions();
 
 onMounted(() => {
     if (localStorage.getItem('token')) {
         checkAuth();
     }
+
+    downloadBlank();
 });
 </script>
 
