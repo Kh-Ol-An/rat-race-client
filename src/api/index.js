@@ -24,7 +24,7 @@ api.interceptors.response.use((config) => config, async (error) => {
             return api.request(originalRequest);
         } catch (err) {
             useStore().commit('setError', {
-                message: 'Користувач не авторизований',
+                message: 'Користувач не авторизований...',
                 type: 'auth',
             });
         }
