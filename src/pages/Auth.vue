@@ -4,9 +4,9 @@
         <div v-if="getLoading">getLoading...</div>
         <div v-else class="py-6 px-8 flex flex-col items-center justify-center gap-4 shadow-lg rounded-md bg-slate-800">
             <Input v-model:value="name" type="text" id="name" placeholder="Ім'я" />
-            <Input v-model:value="email" type="text" id="email" placeholder="Унікальне будь-що" />
-            <Input v-model:value="password" type="text" id="password" placeholder="Те що знаєшь тільки ти" />
-            <Input v-model:value="repeatPassword" type="text" id="password" placeholder="Ще раз" />
+            <Input v-model:value="email" type="text" id="email" placeholder="Пошта" />
+            <Input v-model:value="password" type="text" id="password" placeholder="Пароль" />
+            <Input v-model:value="repeatPassword" type="text" id="password" placeholder="Пароль ще раз" />
             <button class="text-white" type="button" @click="registration({ name, email, password })">
                 Зареєструватися
             </button>
