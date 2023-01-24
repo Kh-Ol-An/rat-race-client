@@ -24,6 +24,7 @@ export default {
             try {
                 const response = await AuthService.registration(name, email, password);
                 localStorage.setItem('token', response.data.accessToken);
+                document.cookie = `refreshToken=${response.data.refreshToken}; max-age=${30 * 24 * 60 * 60 * 1000}; secure`;
                 commit('setUser', response.data.user);
                 commit('setAuth', true);
             } catch (err) {
@@ -34,6 +35,7 @@ export default {
             try {
                 const response = await AuthService.login(email, password);
                 localStorage.setItem('token', response.data.accessToken);
+                document.cookie = `refreshToken=${response.data.refreshToken}; max-age=${30 * 24 * 60 * 60 * 1000}; secure`;
                 commit('setUser', response.data.user);
                 commit('setAuth', true);
             } catch (err) {
@@ -44,6 +46,7 @@ export default {
             try {
                 await AuthService.logout();
                 localStorage.removeItem('token');
+                document.cookie = `refreshToken=; max-age=-1`;
                 commit('setUser', {});
                 commit('setAuth', false);
             } catch (err) {
@@ -55,6 +58,7 @@ export default {
             try {
                 const response = await axios.get(`${API_URL}/refresh`, { withCredentials: true });
                 localStorage.setItem('token', response.data.accessToken);
+                document.cookie = `refreshToken=${response.data.refreshToken}; max-age=${30 * 24 * 60 * 60 * 1000}; secure`;
                 commit('setUser', response.data.user);
                 commit('setAuth', true);
             } catch (err) {
