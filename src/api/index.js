@@ -7,6 +7,12 @@ export const API_URL = 'https://rate-race.onrender.com/api';
 const api = axios.create({
     withCredentials: true,
     baseURL: API_URL,
+    headers: {
+        'Access-Control-Allow-Origin': API_URL,
+        'Access-Control-Allow-Methods': 'DELETE, PUT, GET, POST',
+        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
+    },
+    credentials: 'include',
 });
 
 api.interceptors.request.use((config) => {
