@@ -5,8 +5,8 @@ import { useStore } from 'vuex'
 export const API_URL = 'https://rate-race.onrender.com/api';
 
 const api = axios.create({
-    withCredentials: true,
     baseURL: API_URL,
+    withCredentials: true,
 });
 
 api.interceptors.request.use((config) => {
