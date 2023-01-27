@@ -21,7 +21,7 @@ export default {
         async downloadBlank({ commit }) {
             try {
                 const response = await BlankService.getBlank();
-                commit('setBlank', response.data[0]);
+                commit('setBlank', response.data);
             } catch (err) {
                 console.log(err)
             }
