@@ -1,19 +1,17 @@
 import axios from "axios";
 import AuthService from "../../services/AuthService.js";
 import { API_URL } from "../../api/index.js";
+import router from '../../router/index.js';
+import BlankService from "../../services/BlankService.js";
 
 export default {
     state: {
         user: {},
-        isAuth: false,
         isLoading: false,
     },
     mutations: {
         setUser(state, user) {
             state.user = user;
-        },
-        setAuth(state, bool) {
-            state.isAuth = bool;
         },
         setLoading(state, bool) {
             state.isLoading = bool;
@@ -22,22 +20,28 @@ export default {
     actions: {
         async registration({ commit }, { name, email, password }) {
             try {
-                const response = await AuthService.registration(name, email, password);
-                localStorage.setItem('token', response.data.accessToken);
-                // document.cookie = `refreshToken=${response.data.refreshToken}; max-age=${30 * 24 * 60 * 60 * 1000}; secure`;
-                commit('setUser', response.data.user);
-                commit('setAuth', true);
+                const userResponse = await AuthService.registration(name, email, password);
+                localStorage.setItem('token', userResponse.data.accessToken);
+                // document.cookie = `refreshToken=${userResponse.data.refreshToken}; max-age=${30 * 24 * 60 * 60 * 1000}; secure`;
+                commit('setUser', userResponse.data.user);
+
+                const blankResponse = await BlankService.getBlank();
+                commit('setBlank', blankResponse.data[0]);
+                await router.push('/');
             } catch (err) {
                 commit('setError', err.response?.data);
             }
         },
         async login({ commit }, { email, password }) {
             try {
-                const response = await AuthService.login(email, password);
-                localStorage.setItem('token', response.data.accessToken);
-                // document.cookie = `refreshToken=${response.data.refreshToken}; max-age=${30 * 24 * 60 * 60 * 1000}; secure`;
-                commit('setUser', response.data.user);
-                commit('setAuth', true);
+                const userResponse = await AuthService.login(email, password);
+                localStorage.setItem('token', userResponse.data.accessToken);
+                // document.cookie = `refreshToken=${userResponse.data.refreshToken}; max-age=${30 * 24 * 60 * 60 * 1000}; secure`;
+                commit('setUser', userResponse.data.user);
+
+                const blankResponse = await BlankService.getBlank();
+                commit('setBlank', blankResponse.data[0]);
+                await router.push('/');
             } catch (err) {
                 commit('setError', err.response?.data);
             }
@@ -48,7 +52,7 @@ export default {
                 localStorage.removeItem('token');
                 // document.cookie = `refreshToken=; max-age=-1`;
                 commit('setUser', {});
-                commit('setAuth', false);
+                await router.push('/auth');
             } catch (err) {
                 commit('setError', err.response?.data);
             }
@@ -56,13 +60,17 @@ export default {
         async checkAuth({ commit }) {
             commit('setLoading', true);
             try {
-                const response = await axios.get(`${API_URL}/refresh`, { withCredentials: true });
-                localStorage.setItem('token', response.data.accessToken);
-                // document.cookie = `refreshToken=${response.data.refreshToken}; max-age=${30 * 24 * 60 * 60 * 1000}; secure`;
-                commit('setUser', response.data.user);
-                commit('setAuth', true);
+                const userResponse = await axios.get(`${API_URL}/refresh`, { withCredentials: true });
+                localStorage.setItem('token', userResponse.data.accessToken);
+                // document.cookie = `refreshToken=${userResponse.data.refreshToken}; max-age=${30 * 24 * 60 * 60 * 1000}; secure`;
+                commit('setUser', userResponse.data.user);
+
+                const blankResponse = await BlankService.getBlank();
+                commit('setBlank', blankResponse.data[0]);
             } catch (err) {
                 commit('setError', err.response?.data);
+                localStorage.removeItem('token');
+                await router.push('/auth');
             } finally {
                 commit('setLoading', false);
             }
@@ -71,9 +79,6 @@ export default {
     getters: {
         getUser(state) {
             return state.user;
-        },
-        getAuth(state) {
-            return state.isAuth;
         },
         getLoading(state) {
             return state.isLoading;

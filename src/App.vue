@@ -5,6 +5,7 @@
 <script setup>
 import { onMounted } from "vue";
 import { mapActions } from './store/helpers.js';
+import router from "./router/index.js";
 
 const { checkAuth, downloadBlank } = mapActions();
 
@@ -15,6 +16,24 @@ onMounted(() => {
 
     downloadBlank();
 });
+
+router.beforeEach((to, from, next) => {
+    if (to.name !== 'Auth' && !localStorage.getItem('token')) {
+        next({
+            path: 'auth',
+            replace: true
+        })
+    }
+
+    if (to.name === 'Auth' && localStorage.getItem('token')) {
+        next({
+            path: '/',
+            replace: true
+        })
+    }
+
+    next();
+})
 </script>
 
 <style>
