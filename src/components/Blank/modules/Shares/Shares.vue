@@ -1,3 +1,33 @@
+<script setup>
+import { ref, toRef } from "vue";
+import InputField from '../../plugins/InputField.vue';
+import PackagesHead from './PackagesHead.vue';
+import Package from './Package.vue';
+import PackagesTotal from './PackagesTotal.vue';
+import Modal from '../../plugins/Modal.vue';
+
+const props = defineProps({
+    blankProp: {
+        type: Object,
+        required: true,
+    },
+});
+
+const blank = toRef(props, 'blankProp');
+
+const emit = defineEmits([ 'buy', 'sell:package', 'sell:all' ]);
+
+const showModal = ref(false);
+
+const buy = (id, price, quantity, subType) => {
+    if (blank.value.cash < price * quantity) return showModal.value = true;
+    emit('buy', id, price, quantity, subType);
+};
+
+const sellPackage = (id, subType, price) => emit('sell:package', id, subType, price);
+const sellAll = (subType, price) => emit('sell:all', subType, price);
+</script>
+
 <template>
     <h2 class="px-4 text-xl font-bold text-primary text-center">Акції</h2>
 
@@ -122,33 +152,3 @@
         </p>
     </Modal>
 </template>
-
-<script setup>
-import { ref, toRef } from "vue";
-import InputField from '../../plugins/InputField.vue';
-import PackagesHead from './PackagesHead.vue';
-import Package from './Package.vue';
-import PackagesTotal from './PackagesTotal.vue';
-import Modal from '../../plugins/Modal.vue';
-
-const props = defineProps({
-    blankProp: {
-        type: Object,
-        required: true,
-    },
-});
-
-const blank = toRef(props, 'blankProp');
-
-const emit = defineEmits([ 'buy', 'sell:package', 'sell:all' ]);
-
-const showModal = ref(false);
-
-const buy = (id, price, quantity, subType) => {
-    if (blank.value.cash < price * quantity) return showModal.value = true;
-    emit('buy', id, price, quantity, subType);
-};
-
-const sellPackage = (id, subType, price) => emit('sell:package', id, subType, price);
-const sellAll = (subType, price) => emit('sell:all', subType, price);
-</script>

@@ -1,3 +1,39 @@
+<script setup>
+import { ref, toRef } from "vue";
+import Input from '../../plugins/Input.vue';
+import Add from '../../plugins/Add.vue';
+import Modal from '../../plugins/Modal.vue';
+import House from './House.vue';
+import Sell from '../../plugins/Sell.vue';
+import { addingSpaces } from '../../../../helpers/formating-values.js';
+
+const props = defineProps({
+    blankProp: {
+        type: Object,
+        required: true,
+    },
+});
+
+const blank = toRef(props, 'blankProp');
+
+const emit = defineEmits([ 'buy:house', 'sell:house', 'sell:houses' ]);
+
+const showModal = ref(false);
+
+const price = ref('');
+const buyHouse = () => {
+    if (blank.value.cash < Number(price.value)) {
+        showModal.value = true;
+        return price.value = '';
+    }
+
+    emit('buy:house', new Date().valueOf(), Number(price.value));
+    price.value = '';
+};
+const sellHouse = (price, id) => emit('sell:house', price, id);
+const sellHouses = (price) => emit('sell:houses', price);
+</script>
+
 <template>
     <div>
         <span class="text-slate-500">Будинки</span>
@@ -42,39 +78,3 @@
         </li>
     </ul>
 </template>
-
-<script setup>
-import { ref, toRef } from "vue";
-import Input from '../../plugins/Input.vue';
-import Add from '../../plugins/Add.vue';
-import Modal from '../../plugins/Modal.vue';
-import House from './House.vue';
-import Sell from '../../plugins/Sell.vue';
-import { addingSpaces } from '../../../../helpers/formating-values.js';
-
-const props = defineProps({
-    blankProp: {
-        type: Object,
-        required: true,
-    },
-});
-
-const blank = toRef(props, 'blankProp');
-
-const emit = defineEmits([ 'buy:house', 'sell:house', 'sell:houses' ]);
-
-const showModal = ref(false);
-
-const price = ref('');
-const buyHouse = () => {
-    if (blank.value.cash < Number(price.value)) {
-        showModal.value = true;
-        return price.value = '';
-    }
-
-    emit('buy:house', new Date().valueOf(), Number(price.value));
-    price.value = '';
-};
-const sellHouse = (price, id) => emit('sell:house', price, id);
-const sellHouses = (price) => emit('sell:houses', price);
-</script>

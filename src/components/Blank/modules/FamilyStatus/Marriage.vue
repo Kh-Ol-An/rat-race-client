@@ -1,3 +1,20 @@
+<script setup>
+const props = defineProps({
+    label: {
+        type: String,
+        required: true,
+    },
+    checked: {
+        type: Boolean,
+        required: true,
+    },
+});
+
+const emit = defineEmits([ 'change' ]);
+
+const change = () => emit('change', !props.checked);
+</script>
+
 <template>
     <label class="flex items-center justify-between gap-2 text-slate-500 cursor-pointer">
         {{ label }}
@@ -26,20 +43,3 @@
         </div>
     </label>
 </template>
-
-<script setup>
-const props = defineProps({
-    label: {
-        type: String,
-        required: true,
-    },
-    checked: {
-        type: Boolean,
-        required: true,
-    },
-});
-
-const emit = defineEmits([ 'change' ]);
-
-const change = () => emit('change', !props.checked);
-</script>

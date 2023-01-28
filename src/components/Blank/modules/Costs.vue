@@ -1,3 +1,26 @@
+<script setup>
+import { ref, toRef } from "vue";
+import Input from '../plugins/Input.vue';
+import Add from '../plugins/Add.vue';
+import InfoField from '../plugins/InfoField.vue';
+import { addingSpaces } from '../../../helpers/formating-values.js';
+
+const props = defineProps({
+    blankProp: {
+        type: Object,
+        required: true,
+    },
+});
+
+const blank = toRef(props, 'blankProp');
+
+const rent = ref('');
+const food = ref('');
+const clothes = ref('');
+const fare = ref('');
+const phone = ref('');
+</script>
+
 <template>
     <h2 class="text-xl font-bold text-opposite text-center">Витрати</h2>
 
@@ -51,26 +74,3 @@
         </span>
     </InfoField>
 </template>
-
-<script setup>
-import { ref, toRef } from "vue";
-import Input from '../plugins/Input.vue';
-import Add from '../plugins/Add.vue';
-import InfoField from '../plugins/InfoField.vue';
-import { addingSpaces } from '../../../helpers/formating-values.js';
-
-const props = defineProps({
-    blankProp: {
-        type: Object,
-        required: true,
-    },
-});
-
-const blank = toRef(props, 'blankProp');
-
-const rent = ref('');
-const food = ref('');
-const clothes = ref('');
-const fare = ref('');
-const phone = ref('');
-</script>

@@ -1,20 +1,20 @@
-<template>
-    <router-view></router-view>
-</template>
-
 <script setup>
-import { onMounted } from "vue";
+import { onMounted, ref, onErrorCaptured } from "vue";
 import { mapActions } from './store/helpers.js';
 import router from "./router/index.js";
 
-const { checkAuth, downloadBlank } = mapActions();
+const { checkAuth } = mapActions();
+
+const error = ref(null);
+
+onErrorCaptured(() => {
+    error.value = "Ой-йо-йой!!! Щось пішло не так...";
+});
 
 onMounted(() => {
     if (localStorage.getItem('token')) {
         checkAuth();
     }
-
-    downloadBlank();
 });
 
 router.beforeEach((to, from, next) => {
@@ -35,6 +35,18 @@ router.beforeEach((to, from, next) => {
     next();
 })
 </script>
+
+<template>
+    <div v-if="error">{{ error }}</div>
+    <Suspense>
+        <template #default>
+            <router-view></router-view>
+        </template>
+        <template #fallback>
+            <h1>Loading...</h1>
+        </template>
+    </Suspense>
+</template>
 
 <style>
 input:-webkit-autofill {

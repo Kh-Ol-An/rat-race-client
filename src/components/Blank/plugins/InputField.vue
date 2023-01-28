@@ -1,29 +1,3 @@
-<template>
-    <div :class="[
-        'flex flex-col gap-2',
-        disabled && 'pointer-events-none opacity-20',
-    ]">
-        <span class="text-slate-500">{{ label }}</span>
-        <div class="flex items-center gap-3">
-            <Input
-                :id="`${subType}-${type}-value`"
-                :placeholder="placeholderWorth"
-                smallLabel
-                :secondBg="secondBg"
-                v-model:value="firstValue"
-            />
-            <Input
-                :id="`${subType}-${type}-income`"
-                :placeholder="placeholderValue"
-                smallLabel
-                :secondBg="secondBg"
-                v-model:value="secondValue"
-            />
-            <Add :firstValue="firstValue" :secondValue="secondValue" @add="add" />
-        </div>
-    </div>
-</template>
-
 <script setup>
 import { ref } from 'vue';
 import Input from './Input.vue';
@@ -71,3 +45,29 @@ const add = () => {
     secondValue.value = '';
 };
 </script>
+
+<template>
+    <div :class="[
+        'flex flex-col gap-2',
+        disabled && 'pointer-events-none opacity-20',
+    ]">
+        <span class="text-slate-500">{{ label }}</span>
+        <div class="flex items-center gap-3">
+            <Input
+                :id="`${subType}-${type}-value`"
+                :placeholder="placeholderWorth"
+                smallLabel
+                :secondBg="secondBg"
+                v-model:value="firstValue"
+            />
+            <Input
+                :id="`${subType}-${type}-income`"
+                :placeholder="placeholderValue"
+                smallLabel
+                :secondBg="secondBg"
+                v-model:value="secondValue"
+            />
+            <Add :firstValue="firstValue" :secondValue="secondValue" @add="add" />
+        </div>
+    </div>
+</template>

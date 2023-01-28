@@ -1,3 +1,38 @@
+<script setup>
+import { watch } from "vue";
+
+const props = defineProps({
+    show: {
+        type: Boolean,
+        required: true,
+    },
+    confirm: {
+        type: String,
+        default: '',
+    },
+    cancel: {
+        type: String,
+        default: 'Ні',
+    },
+    onlyCancelAction: {
+        type: Boolean,
+        default: false,
+    },
+});
+
+const emit = defineEmits([ 'cancel' ]);
+
+const escapeHandler = (e) => e.key === 'Escape' && emit('cancel');
+
+watch(
+    () => props.show,
+    () =>
+        props.show && !props.onlyCancelAction
+            ? document.addEventListener('keyup', escapeHandler)
+            : document.removeEventListener('keyup', escapeHandler),
+);
+</script>
+
 <template>
     <transition>
         <div v-if="show" class="fixed top-0 right-0 bottom-0 left-0 z-40 flex items-center justify-center">
@@ -46,38 +81,3 @@
         </div>
     </transition>
 </template>
-
-<script setup>
-import { watch } from "vue";
-
-const props = defineProps({
-    show: {
-        type: Boolean,
-        required: true,
-    },
-    confirm: {
-        type: String,
-        default: '',
-    },
-    cancel: {
-        type: String,
-        default: 'Ні',
-    },
-    onlyCancelAction: {
-        type: Boolean,
-        default: false,
-    },
-});
-
-const emit = defineEmits([ 'cancel' ]);
-
-const escapeHandler = (e) => e.key === 'Escape' && emit('cancel');
-
-watch(
-    () => props.show,
-    () =>
-        props.show && !props.onlyCancelAction
-            ? document.addEventListener('keyup', escapeHandler)
-            : document.removeEventListener('keyup', escapeHandler),
-);
-</script>

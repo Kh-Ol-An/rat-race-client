@@ -1,3 +1,17 @@
+<script setup>
+import { ref } from "vue";
+import Input from '../components/Blank/plugins/Input.vue';
+import { mapActions, mapGetters } from '../store/helpers.js';
+
+const name = ref('');
+const email = ref('');
+const password = ref('');
+const repeatPassword = ref('');
+
+const { registration, login } = mapActions();
+const { getLoading, getError } = mapGetters();
+</script>
+
 <template>
     <div class="w-full h-screen flex flex-col items-center justify-center">
         <div class="text-red-400">{{ getError }}</div>
@@ -16,17 +30,3 @@
         </div>
     </div>
 </template>
-
-<script setup>
-import { ref } from "vue";
-import Input from '../components/Blank/plugins/Input.vue';
-import { mapActions, mapGetters } from '../store/helpers.js';
-
-const name = ref('');
-const email = ref('');
-const password = ref('');
-const repeatPassword = ref('');
-
-const { registration, login } = mapActions();
-const { getLoading, getError } = mapGetters();
-</script>

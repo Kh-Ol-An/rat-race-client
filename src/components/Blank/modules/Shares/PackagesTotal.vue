@@ -1,32 +1,3 @@
-<template>
-    <li
-        v-if="blankShare.length > 1"
-        class="
-            relative
-            py-2 pr-12
-            grid grid-cols-12 items-center gap-2
-            border-t-2 border-slate-700
-            font-bold text-center
-        "
-    >
-        <div class="col-span-6 flex items-center justify-center">
-            <Sell inputId="sell-all-shares" @sell="sell">
-                <span class="text-slate-500">
-                    {{ addingSpaces(price) }}
-                </span>
-            </Sell>
-        </div>
-
-        <span class="col-span-3 text-slate-500">
-            {{ addingSpaces(quantity) }}
-        </span>
-
-        <span class="col-span-3 text-slate-500">
-            {{ addingSpaces(cost) }}
-        </span>
-    </li>
-</template>
-
 <script setup>
 import { computed } from "vue";
 import Sell from '../../plugins/Sell.vue';
@@ -58,3 +29,32 @@ const price = computed(() => {
 
 const sell = (price) => emit('sell', props.subType, (quantity.value * price));
 </script>
+
+<template>
+    <li
+        v-if="blankShare.length > 1"
+        class="
+            relative
+            py-2 pr-12
+            grid grid-cols-12 items-center gap-2
+            border-t-2 border-slate-700
+            font-bold text-center
+        "
+    >
+        <div class="col-span-6 flex items-center justify-center">
+            <Sell inputId="sell-all-shares" @sell="sell">
+                <span class="text-slate-500">
+                    {{ addingSpaces(price) }}
+                </span>
+            </Sell>
+        </div>
+
+        <span class="col-span-3 text-slate-500">
+            {{ addingSpaces(quantity) }}
+        </span>
+
+        <span class="col-span-3 text-slate-500">
+            {{ addingSpaces(cost) }}
+        </span>
+    </li>
+</template>

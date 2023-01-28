@@ -1,3 +1,36 @@
+<script setup>
+import { ref } from "vue";
+import Modal from '../../plugins/Modal.vue';
+import SellIcon from "../../../icons/SellIcon.vue";
+
+defineProps({
+    firstTitle: {
+        type: String,
+        required: true,
+    },
+    secondTitle: {
+        type: String,
+        required: true,
+    },
+    isSell: {
+        type: Boolean,
+        default: true,
+    },
+    confirmationModalText: {
+        type: String,
+        default: 'Ти підтверджуєш свою дію?',
+    },
+});
+
+const emit = defineEmits([ 'sell' ]);
+
+const showModal = ref(false);
+const sell = () => {
+    emit('sell');
+    showModal.value = false;
+};
+</script>
+
 <template>
     <li class="relative pr-12 grid grid-cols-5 items-center gap-2 text-primary font-bold text-center">
         <span class="col-span-2">
@@ -36,36 +69,3 @@
         </Modal>
     </li>
 </template>
-
-<script setup>
-import { ref } from "vue";
-import Modal from '../../plugins/Modal.vue';
-import SellIcon from "../../../icons/SellIcon.vue";
-
-defineProps({
-    firstTitle: {
-        type: String,
-        required: true,
-    },
-    secondTitle: {
-        type: String,
-        required: true,
-    },
-    isSell: {
-        type: Boolean,
-        default: true,
-    },
-    confirmationModalText: {
-        type: String,
-        default: 'Ти підтверджуєш свою дію?',
-    },
-});
-
-const emit = defineEmits([ 'sell' ]);
-
-const showModal = ref(false);
-const sell = () => {
-    emit('sell');
-    showModal.value = false;
-};
-</script>

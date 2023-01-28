@@ -1,3 +1,27 @@
+<script setup>
+import { ref } from "vue";
+import Input from '../plugins/Input.vue';
+
+defineProps({
+    rich: {
+        type: Boolean,
+        required: true,
+    },
+});
+
+const emit = defineEmits(['decrement', 'increment']);
+
+const transaction = ref('');
+const decrement = () => {
+    emit('decrement', Number(transaction.value));
+    transaction.value = '';
+};
+const increment = () => {
+    emit('increment', Number(transaction.value));
+    transaction.value = '';
+};
+</script>
+
 <template>
     <button
         class="
@@ -43,27 +67,3 @@
         &#43;
     </button>
 </template>
-
-<script setup>
-import { ref } from "vue";
-import Input from '../plugins/Input.vue';
-
-defineProps({
-    rich: {
-        type: Boolean,
-        required: true,
-    },
-});
-
-const emit = defineEmits(['decrement', 'increment']);
-
-const transaction = ref('');
-const decrement = () => {
-    emit('decrement', Number(transaction.value));
-    transaction.value = '';
-};
-const increment = () => {
-    emit('increment', Number(transaction.value));
-    transaction.value = '';
-};
-</script>

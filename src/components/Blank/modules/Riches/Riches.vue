@@ -1,3 +1,177 @@
+<script setup>
+import { ref, toRef } from "vue";
+import Input from '../../plugins/Input.vue';
+import Add from '../../plugins/Add.vue';
+import Purchased from './Purchased.vue';
+import Modal from '../../plugins/Modal.vue';
+import InfoField from "../../plugins/InfoField.vue";
+
+const props = defineProps({
+    blankProp: {
+        type: Object,
+        required: true,
+    },
+    cashFlow: {
+        type: Number,
+        required: true,
+    },
+});
+
+const blank = toRef(props, 'blankProp');
+
+const emit = defineEmits([
+    'buy:apartment',
+    'credit:apartment',
+    'sell:apartment',
+    'buy:car',
+    'credit:car',
+    'sell:car',
+    'buy:cottage',
+    'sell:cottage',
+    'buy:yacht',
+    'sell:yacht',
+    'buy:plane',
+    'sell:plane',
+]);
+
+const showModal = ref(false);
+const showModalCredit = ref(false);
+const purchase = ref('');
+
+// Квартира
+const apartmentName = ref('');
+const apartmentPrice = ref('');
+const buyApartment = () => {
+    if (blank.value.cash < Number(apartmentPrice.value)) {
+        purchase.value = 'Квартири';
+        showModal.value = true;
+        apartmentName.value = '';
+        apartmentPrice.value = '';
+        return;
+    }
+
+    emit('buy:apartment', new Date().valueOf(), apartmentName.value, Number(apartmentPrice.value));
+    apartmentName.value = '';
+    apartmentPrice.value = '';
+};
+const apartmentPayment = ref('');
+const apartmentTerm = ref('');
+const buyApartmentOnCredit = () => {
+    if (props.cashFlow < Number(apartmentPayment.value)) {
+        showModalCredit.value = true;
+        apartmentName.value = '';
+        apartmentPayment.value = '';
+        apartmentTerm.value = '';
+        return;
+    }
+
+    emit(
+        'credit:apartment',
+        new Date().valueOf(),
+        apartmentName.value,
+        Number(apartmentPayment.value),
+        Number(apartmentTerm.value),
+    );
+    apartmentName.value = '';
+    apartmentPayment.value = '';
+    apartmentTerm.value = '';
+};
+const sellApartment = id => emit('sell:apartment', id);
+
+// Автівка
+const carName = ref('');
+const carPrice = ref('');
+const buyCar = () => {
+    if (blank.value.cash < Number(carPrice.value)) {
+        purchase.value = 'Машини';
+        showModal.value = true;
+        carName.value = '';
+        carPrice.value = '';
+        return;
+    }
+
+    emit('buy:car', new Date().valueOf(), carName.value, Number(carPrice.value));
+    carName.value = '';
+    carPrice.value = '';
+};
+const carPayment = ref('');
+const carTerm = ref('');
+const buyCarOnCredit = () => {
+    if (props.cashFlow < Number(carPayment.value)) {
+        showModalCredit.value = true;
+        carPayment.value = '';
+        carTerm.value = '';
+        return;
+    }
+
+    emit(
+        'credit:car',
+        new Date().valueOf(),
+        carName.value,
+        Number(carPayment.value),
+        Number(carTerm.value),
+    );
+    carName.value = '';
+    carPayment.value = '';
+    carTerm.value = '';
+};
+const sellCar = id => emit('sell:car', id);
+
+// Котедж
+const cottageName = ref('');
+const cottagePrice = ref('');
+const buyCottage = () => {
+    if (blank.value.cash < Number(cottagePrice.value)) {
+        purchase.value = 'Котеджі';
+        showModal.value = true;
+        cottageName.value = '';
+        cottagePrice.value = '';
+        return;
+    }
+
+    emit('buy:cottage', new Date().valueOf(), cottageName.value, Number(cottagePrice.value));
+    cottageName.value = '';
+    cottagePrice.value = '';
+};
+const sellCottage = id => emit('sell:cottage', id);
+
+// Яхта
+const yachtName = ref('');
+const yachtPrice = ref('');
+const buyYacht = () => {
+    if (blank.value.cash < Number(yachtPrice.value)) {
+        purchase.value = 'Яхти';
+        showModal.value = true;
+        yachtName.value = '';
+        yachtPrice.value = '';
+        return;
+    }
+
+    emit('buy:yacht', new Date().valueOf(), yachtName.value, Number(yachtPrice.value));
+    yachtName.value = '';
+    yachtPrice.value = '';
+};
+const sellYacht = id => emit('sell:yacht', id);
+
+// Літак
+const planeName = ref('');
+const planePrice = ref('');
+const buyPlane = () => {
+    if (blank.value.cash < Number(planePrice.value)) {
+        purchase.value = 'Літаки';
+        showModal.value = true;
+        planeName.value = '';
+        planePrice.value = '';
+        return;
+    }
+
+    emit('buy:plane', new Date().valueOf(), planeName.value, Number(planePrice.value));
+    planeName.value = '';
+    planePrice.value = '';
+};
+const sellPlane = id => emit('sell:plane', id);
+</script>
+
 <template>
     <h2 class="px-4 text-xl font-bold text-opposite text-center">Багатство</h2>
 
@@ -254,177 +428,3 @@
         </p>
     </Modal>
 </template>
-
-<script setup>
-import { ref, toRef } from "vue";
-import Input from '../../plugins/Input.vue';
-import Add from '../../plugins/Add.vue';
-import Purchased from './Purchased.vue';
-import Modal from '../../plugins/Modal.vue';
-import InfoField from "../../plugins/InfoField.vue";
-
-const props = defineProps({
-    blankProp: {
-        type: Object,
-        required: true,
-    },
-    cashFlow: {
-        type: Number,
-        required: true,
-    },
-});
-
-const blank = toRef(props, 'blankProp');
-
-const emit = defineEmits([
-    'buy:apartment',
-    'credit:apartment',
-    'sell:apartment',
-    'buy:car',
-    'credit:car',
-    'sell:car',
-    'buy:cottage',
-    'sell:cottage',
-    'buy:yacht',
-    'sell:yacht',
-    'buy:plane',
-    'sell:plane',
-]);
-
-const showModal = ref(false);
-const showModalCredit = ref(false);
-const purchase = ref('');
-
-// Квартира
-const apartmentName = ref('');
-const apartmentPrice = ref('');
-const buyApartment = () => {
-    if (blank.value.cash < Number(apartmentPrice.value)) {
-        purchase.value = 'Квартири';
-        showModal.value = true;
-        apartmentName.value = '';
-        apartmentPrice.value = '';
-        return;
-    }
-
-    emit('buy:apartment', new Date().valueOf(), apartmentName.value, Number(apartmentPrice.value));
-    apartmentName.value = '';
-    apartmentPrice.value = '';
-};
-const apartmentPayment = ref('');
-const apartmentTerm = ref('');
-const buyApartmentOnCredit = () => {
-    if (props.cashFlow < Number(apartmentPayment.value)) {
-        showModalCredit.value = true;
-        apartmentName.value = '';
-        apartmentPayment.value = '';
-        apartmentTerm.value = '';
-        return;
-    }
-
-    emit(
-        'credit:apartment',
-        new Date().valueOf(),
-        apartmentName.value,
-        Number(apartmentPayment.value),
-        Number(apartmentTerm.value),
-    );
-    apartmentName.value = '';
-    apartmentPayment.value = '';
-    apartmentTerm.value = '';
-};
-const sellApartment = id => emit('sell:apartment', id);
-
-// Автівка
-const carName = ref('');
-const carPrice = ref('');
-const buyCar = () => {
-    if (blank.value.cash < Number(carPrice.value)) {
-        purchase.value = 'Машини';
-        showModal.value = true;
-        carName.value = '';
-        carPrice.value = '';
-        return;
-    }
-
-    emit('buy:car', new Date().valueOf(), carName.value, Number(carPrice.value));
-    carName.value = '';
-    carPrice.value = '';
-};
-const carPayment = ref('');
-const carTerm = ref('');
-const buyCarOnCredit = () => {
-    if (props.cashFlow < Number(carPayment.value)) {
-        showModalCredit.value = true;
-        carPayment.value = '';
-        carTerm.value = '';
-        return;
-    }
-
-    emit(
-        'credit:car',
-        new Date().valueOf(),
-        carName.value,
-        Number(carPayment.value),
-        Number(carTerm.value),
-    );
-    carName.value = '';
-    carPayment.value = '';
-    carTerm.value = '';
-};
-const sellCar = id => emit('sell:car', id);
-
-// Котедж
-const cottageName = ref('');
-const cottagePrice = ref('');
-const buyCottage = () => {
-    if (blank.value.cash < Number(cottagePrice.value)) {
-        purchase.value = 'Котеджі';
-        showModal.value = true;
-        cottageName.value = '';
-        cottagePrice.value = '';
-        return;
-    }
-
-    emit('buy:cottage', new Date().valueOf(), cottageName.value, Number(cottagePrice.value));
-    cottageName.value = '';
-    cottagePrice.value = '';
-};
-const sellCottage = id => emit('sell:cottage', id);
-
-// Яхта
-const yachtName = ref('');
-const yachtPrice = ref('');
-const buyYacht = () => {
-    if (blank.value.cash < Number(yachtPrice.value)) {
-        purchase.value = 'Яхти';
-        showModal.value = true;
-        yachtName.value = '';
-        yachtPrice.value = '';
-        return;
-    }
-
-    emit('buy:yacht', new Date().valueOf(), yachtName.value, Number(yachtPrice.value));
-    yachtName.value = '';
-    yachtPrice.value = '';
-};
-const sellYacht = id => emit('sell:yacht', id);
-
-// Літак
-const planeName = ref('');
-const planePrice = ref('');
-const buyPlane = () => {
-    if (blank.value.cash < Number(planePrice.value)) {
-        purchase.value = 'Літаки';
-        showModal.value = true;
-        planeName.value = '';
-        planePrice.value = '';
-        return;
-    }
-
-    emit('buy:plane', new Date().valueOf(), planeName.value, Number(planePrice.value));
-    planeName.value = '';
-    planePrice.value = '';
-};
-const sellPlane = id => emit('sell:plane', id);
-</script>

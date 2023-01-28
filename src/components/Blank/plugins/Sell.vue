@@ -1,3 +1,35 @@
+<script setup>
+import { ref } from "vue";
+import Input from './Input.vue';
+import CheckIcon from "../../icons/CheckIcon.vue";
+import SellIcon from "../../icons/SellIcon.vue";
+import { addingSpaces } from '../../../helpers/formating-values.js';
+
+defineProps({
+    inputId: {
+        type: String,
+        required: true,
+    },
+    secondBg: {
+        type: Boolean,
+        default: false,
+    },
+});
+
+const emit = defineEmits([ 'sell' ]);
+
+const show = ref(false);
+const price = ref('');
+const hid = () => {
+    show.value = false;
+    price.value = '';
+};
+const sell = () => {
+    emit('sell', Number(price.value));
+    hid();
+};
+</script>
+
 <template>
     <slot v-if="!show"></slot>
     <div v-if="show" class="relative col-span-1">
@@ -48,35 +80,3 @@
         <SellIcon width="24px" height="24px" color="fill-primary" />
     </button>
 </template>
-
-<script setup>
-import { ref } from "vue";
-import Input from './Input.vue';
-import CheckIcon from "../../icons/CheckIcon.vue";
-import SellIcon from "../../icons/SellIcon.vue";
-import { addingSpaces } from '../../../helpers/formating-values.js';
-
-defineProps({
-    inputId: {
-        type: String,
-        required: true,
-    },
-    secondBg: {
-        type: Boolean,
-        default: false,
-    },
-});
-
-const emit = defineEmits([ 'sell' ]);
-
-const show = ref(false);
-const price = ref('');
-const hid = () => {
-    show.value = false;
-    price.value = '';
-};
-const sell = () => {
-    emit('sell', Number(price.value));
-    hid();
-};
-</script>

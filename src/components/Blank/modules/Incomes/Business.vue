@@ -1,3 +1,54 @@
+<script setup>
+import { ref } from 'vue';
+import Input from '../../plugins/Input.vue';
+import Modal from '../../plugins/Modal.vue';
+import CheckIcon from '../../../icons/CheckIcon.vue';
+import { addingSpaces } from '../../../../helpers/formating-values.js';
+
+const props = defineProps({
+    id: {
+        type: Number,
+        required: true,
+    },
+    firstValue: {
+        type: Number,
+        required: true,
+    },
+    secondValue: {
+        type: Number,
+        required: true,
+    },
+    lastBusiness: {
+        type: Array,
+        required: true,
+    },
+    incremental: {
+        type: Boolean,
+        default: false,
+    },
+    disabledEdit: {
+        type: Boolean,
+        default: false,
+    },
+});
+
+const emit = defineEmits([ 'increment' ]);
+
+const showIncome = ref(false);
+const addIncome = ref('');
+const hidIncome = () => {
+    showIncome.value = false;
+    addIncome.value = '';
+};
+const increment = () => {
+    showIncome.value = false;
+    emit('increment', props.id, Number(addIncome.value));
+    addIncome.value = '';
+};
+
+const showModal = ref(false);
+</script>
+
 <template>
     <li class="relative pr-12 grid grid-cols-5 items-center gap-2">
         <span class="col-span-2 text-slate-400 text-center whitespace-nowrap">
@@ -87,54 +138,3 @@
         </Modal>
     </li>
 </template>
-
-<script setup>
-import { ref } from 'vue';
-import Input from '../../plugins/Input.vue';
-import Modal from '../../plugins/Modal.vue';
-import CheckIcon from '../../../icons/CheckIcon.vue';
-import { addingSpaces } from '../../../../helpers/formating-values.js';
-
-const props = defineProps({
-    id: {
-        type: Number,
-        required: true,
-    },
-    firstValue: {
-        type: Number,
-        required: true,
-    },
-    secondValue: {
-        type: Number,
-        required: true,
-    },
-    lastBusiness: {
-        type: Array,
-        required: true,
-    },
-    incremental: {
-        type: Boolean,
-        default: false,
-    },
-    disabledEdit: {
-        type: Boolean,
-        default: false,
-    },
-});
-
-const emit = defineEmits([ 'increment' ]);
-
-const showIncome = ref(false);
-const addIncome = ref('');
-const hidIncome = () => {
-    showIncome.value = false;
-    addIncome.value = '';
-};
-const increment = () => {
-    showIncome.value = false;
-    emit('increment', props.id, Number(addIncome.value));
-    addIncome.value = '';
-};
-
-const showModal = ref(false);
-</script>

@@ -1,3 +1,37 @@
+<script setup>
+import { ref } from 'vue';
+import InfoField from '../plugins/InfoField.vue';
+import Input from '../plugins/Input.vue';
+import ReturnIcon from '../../icons/ReturnIcon.vue';
+import CheckIcon from '../../icons/CheckIcon.vue';
+import { addingSpaces } from '../../../helpers/formating-values.js';
+
+const props = defineProps({
+    debt: {
+        type: Number,
+        required: true,
+    },
+    expenses: {
+        type: Number,
+        required: true,
+    },
+});
+
+const emit = defineEmits([ 'repay' ]);
+
+const showRepay = ref(false);
+const repayDebt = ref('');
+const hidRepay = () => {
+    showRepay.value = false;
+    repayDebt.value = '';
+};
+const repay = () => {
+    showRepay.value = false;
+    emit('repay', Number(repayDebt.value));
+    repayDebt.value = '';
+};
+</script>
+
 <template>
     <InfoField labelClasses="text-opposite" label="Борги:">
         <span class="ml-2 text-slate-400 whitespace-nowrap">
@@ -50,37 +84,3 @@
         </span>
     </InfoField>
 </template>
-
-<script setup>
-import { ref } from 'vue';
-import InfoField from '../plugins/InfoField.vue';
-import Input from '../plugins/Input.vue';
-import ReturnIcon from '../../icons/ReturnIcon.vue';
-import CheckIcon from '../../icons/CheckIcon.vue';
-import { addingSpaces } from '../../../helpers/formating-values.js';
-
-const props = defineProps({
-    debt: {
-        type: Number,
-        required: true,
-    },
-    expenses: {
-        type: Number,
-        required: true,
-    },
-});
-
-const emit = defineEmits([ 'repay' ]);
-
-const showRepay = ref(false);
-const repayDebt = ref('');
-const hidRepay = () => {
-    showRepay.value = false;
-    repayDebt.value = '';
-};
-const repay = () => {
-    showRepay.value = false;
-    emit('repay', Number(repayDebt.value));
-    repayDebt.value = '';
-};
-</script>

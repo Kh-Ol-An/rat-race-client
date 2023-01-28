@@ -1,3 +1,20 @@
+<script setup>
+defineProps({
+    width: {
+        type: String,
+        required: true,
+    },
+    height: {
+        type: String,
+        required: true,
+    },
+    classes: {
+        type: String,
+        default: 'fill-slate-400',
+    },
+});
+</script>
+
 <template>
     <svg
         :class="classes"
@@ -22,20 +39,3 @@
         />
     </svg>
 </template>
-
-<script setup>
-defineProps({
-    width: {
-        type: String,
-        required: true,
-    },
-    height: {
-        type: String,
-        required: true,
-    },
-    classes: {
-        type: String,
-        default: 'fill-slate-400',
-    },
-});
-</script>

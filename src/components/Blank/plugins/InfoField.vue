@@ -1,13 +1,3 @@
-<template>
-    <div :class="['flex items-center', wrapClasses]">
-        <span :class="labelClasses">
-            {{ label }}
-        </span>
-
-        <slot></slot>
-    </div>
-</template>
-
 <script setup>
 defineProps({
     wrapClasses: {
@@ -24,3 +14,13 @@ defineProps({
     },
 });
 </script>
+
+<template>
+    <div :class="['flex items-center', wrapClasses]">
+        <span :class="labelClasses">
+            {{ label }}
+        </span>
+
+        <slot></slot>
+    </div>
+</template>

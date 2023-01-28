@@ -1,3 +1,50 @@
+<script setup>
+import { ref, toRef, computed } from 'vue';
+import Input from '../../plugins/Input.vue';
+import Add from '../../plugins/Add.vue';
+import InfoField from '../../plugins/InfoField.vue';
+import InputField from '../../plugins/InputField.vue';
+import BusinessHead from './BusinessHead.vue';
+import Business from './Business.vue';
+import Modal from '../../plugins/Modal.vue';
+import { addingSpaces } from '../../../../helpers/formating-values.js';
+
+const props = defineProps({
+    blankProp: {
+        type: Object,
+        required: true,
+    },
+    firedSalary: {
+        type: Number,
+        required: true,
+    },
+});
+
+const blank = toRef(props, 'blankProp');
+
+const emit = defineEmits([ 'fired:salary', 'quit:salary', 'buy:business', 'increment:income', 'sell' ]);
+
+const salary = ref('');
+const fired = () => {
+    emit('fired:salary');
+    salary.value = '';
+};
+const quit = () => {
+    emit('quit:salary');
+    salary.value = '';
+};
+
+const showModal = ref(false);
+
+const buyBusiness = (id, price, income, subType) => {
+    if (blank.value.cash < price) return showModal.value = true;
+    emit('buy:business', id, price, income, subType);
+};
+const incrementIncomeBusiness = (id, income) => emit('increment:income', id, income);
+const deleteBusiness = (subType, id) => emit('delete:business', subType, id);
+const sellBusiness = subType => emit('sell', subType);
+</script>
+
 <template>
     <h2 class="px-4 text-xl font-bold text-primary text-center">Прибутки</h2>
 
@@ -198,50 +245,3 @@
         </p>
     </Modal>
 </template>
-
-<script setup>
-import { ref, toRef, computed } from 'vue';
-import Input from '../../plugins/Input.vue';
-import Add from '../../plugins/Add.vue';
-import InfoField from '../../plugins/InfoField.vue';
-import InputField from '../../plugins/InputField.vue';
-import BusinessHead from './BusinessHead.vue';
-import Business from './Business.vue';
-import Modal from '../../plugins/Modal.vue';
-import { addingSpaces } from '../../../../helpers/formating-values.js';
-
-const props = defineProps({
-    blankProp: {
-        type: Object,
-        required: true,
-    },
-    firedSalary: {
-        type: Number,
-        required: true,
-    },
-});
-
-const blank = toRef(props, 'blankProp');
-
-const emit = defineEmits([ 'fired:salary', 'quit:salary', 'buy:business', 'increment:income', 'sell' ]);
-
-const salary = ref('');
-const fired = () => {
-    emit('fired:salary');
-    salary.value = '';
-};
-const quit = () => {
-    emit('quit:salary');
-    salary.value = '';
-};
-
-const showModal = ref(false);
-
-const buyBusiness = (id, price, income, subType) => {
-    if (blank.value.cash < price) return showModal.value = true;
-    emit('buy:business', id, price, income, subType);
-};
-const incrementIncomeBusiness = (id, income) => emit('increment:income', id, income);
-const deleteBusiness = (subType, id) => emit('delete:business', subType, id);
-const sellBusiness = subType => emit('sell', subType);
-</script>

@@ -1,3 +1,32 @@
+<script setup>
+import { ref, toRef } from "vue";
+import InputField from '../../plugins/InputField.vue';
+import LandHead from './LandHead.vue';
+import PieceOfLand from './PieceOfLand.vue';
+import Total from './Total.vue';
+import Modal from '../../plugins/Modal.vue';
+
+const props = defineProps({
+    blankProp: {
+        type: Object,
+        required: true,
+    },
+});
+
+const blank = toRef(props, 'blankProp');
+
+const emit = defineEmits([ 'buy:land', 'sell:land', 'sell:acres' ]);
+
+const showModal = ref(false);
+
+const buyLand = (id, price, quantity) => {
+    if (blank.value.cash < price * quantity) return showModal.value = true;
+    emit('buy:land', id, price, quantity);
+};
+const sellLand = (id, price) => emit('sell:land', id, price);
+const sellAcres = (price) => emit('sell:acres', price);
+</script>
+
 <template>
     <InputField
         label="Земля"
@@ -34,32 +63,3 @@
         </p>
     </Modal>
 </template>
-
-<script setup>
-import { ref, toRef } from "vue";
-import InputField from '../../plugins/InputField.vue';
-import LandHead from './LandHead.vue';
-import PieceOfLand from './PieceOfLand.vue';
-import Total from './Total.vue';
-import Modal from '../../plugins/Modal.vue';
-
-const props = defineProps({
-    blankProp: {
-        type: Object,
-        required: true,
-    },
-});
-
-const blank = toRef(props, 'blankProp');
-
-const emit = defineEmits([ 'buy:land', 'sell:land', 'sell:acres' ]);
-
-const showModal = ref(false);
-
-const buyLand = (id, price, quantity) => {
-    if (blank.value.cash < price * quantity) return showModal.value = true;
-    emit('buy:land', id, price, quantity);
-};
-const sellLand = (id, price) => emit('sell:land', id, price);
-const sellAcres = (price) => emit('sell:acres', price);
-</script>

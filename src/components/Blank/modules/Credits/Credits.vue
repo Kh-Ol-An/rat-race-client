@@ -1,3 +1,14 @@
+<script setup>
+import Info from './Info.vue';
+
+defineProps({
+    credits: {
+        type: Array,
+        required: true,
+    },
+});
+</script>
+
 <template>
     <h2 class="px-4 text-xl font-bold text-opposite text-center">Виплати за кредитами</h2>
 
@@ -26,14 +37,3 @@
         />
     </ul>
 </template>
-
-<script setup>
-import Info from './Info.vue';
-
-defineProps({
-    credits: {
-        type: Array,
-        required: true,
-    },
-});
-</script>

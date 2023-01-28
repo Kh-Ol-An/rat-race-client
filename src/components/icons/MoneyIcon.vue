@@ -1,3 +1,20 @@
+<script setup>
+defineProps({
+    width: {
+        type: String,
+        required: true,
+    },
+    height: {
+        type: String,
+        required: true,
+    },
+    color: {
+        type: String,
+        default: 'fill-primary',
+    },
+});
+</script>
+
 <template>
     <svg
         :class="color"
@@ -34,20 +51,3 @@
         />
     </svg>
 </template>
-
-<script setup>
-defineProps({
-    width: {
-        type: String,
-        required: true,
-    },
-    height: {
-        type: String,
-        required: true,
-    },
-    color: {
-        type: String,
-        default: 'fill-primary',
-    },
-});
-</script>

@@ -1,3 +1,42 @@
+<script setup>
+import { ref, toRef, computed } from "vue";
+import Input from '../plugins/Input.vue';
+import Add from '../plugins/Add.vue';
+import InfoField from '../plugins/InfoField.vue';
+import MaleIcon from '../../icons/MaleIcon.vue';
+import FemaleIcon from '../../icons/FemaleIcon.vue';
+import SexIcon from '../../icons/SexIcon.vue';
+import ApartmentIcon from '../../icons/ApartmentIcon.vue';
+import CarIcon from '../../icons/CarIcon.vue';
+import CottageIcon from '../../icons/CottageIcon.vue';
+import YachtIcon from '../../icons/YachtIcon.vue';
+import PlaneIcon from '../../icons/PlaneIcon.vue';
+import TargetIcon from '../../icons/TargetIcon.vue';
+
+const props = defineProps({
+    blankProp: {
+        type: Object,
+        required: true,
+    },
+});
+
+const blank = toRef(props, 'blankProp');
+
+const gender = ref('');
+
+const havingChildren = computed(() => {
+    if (blank.value.gender === 'female') {
+        return !blank.value.marriage && blank.value.children.count > 0;
+    }
+
+    if (blank.value.gender === 'male') {
+        return blank.value.children.count > 0;
+    }
+});
+
+const profession = ref('');
+</script>
+
 <template>
     <div class="flex items-center">
 
@@ -87,42 +126,3 @@
         </span>
     </InfoField>
 </template>
-
-<script setup>
-import { ref, toRef, computed } from "vue";
-import Input from '../plugins/Input.vue';
-import Add from '../plugins/Add.vue';
-import InfoField from '../plugins/InfoField.vue';
-import MaleIcon from '../../icons/MaleIcon.vue';
-import FemaleIcon from '../../icons/FemaleIcon.vue';
-import SexIcon from '../../icons/SexIcon.vue';
-import ApartmentIcon from '../../icons/ApartmentIcon.vue';
-import CarIcon from '../../icons/CarIcon.vue';
-import CottageIcon from '../../icons/CottageIcon.vue';
-import YachtIcon from '../../icons/YachtIcon.vue';
-import PlaneIcon from '../../icons/PlaneIcon.vue';
-import TargetIcon from '../../icons/TargetIcon.vue';
-
-const props = defineProps({
-    blankProp: {
-        type: Object,
-        required: true,
-    },
-});
-
-const blank = toRef(props, 'blankProp');
-
-const gender = ref('');
-
-const havingChildren = computed(() => {
-    if (blank.value.gender === 'female') {
-        return !blank.value.marriage && blank.value.children.count > 0;
-    }
-
-    if (blank.value.gender === 'male') {
-        return blank.value.children.count > 0;
-    }
-});
-
-const profession = ref('');
-</script>

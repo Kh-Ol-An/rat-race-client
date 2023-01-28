@@ -1,3 +1,27 @@
+<script setup>
+import SexIcon from '../../../icons/SexIcon.vue';
+import { addingSpaces } from '../../../../helpers/formating-values.js';
+
+const props = defineProps({
+    label: {
+        type: String,
+        required: true,
+    },
+    count: {
+        type: Number,
+        required: true,
+    },
+    expense: {
+        type: Number,
+        default: null,
+    },
+    disabled: {
+        type: Boolean,
+        default: false,
+    },
+});
+</script>
+
 <template>
     <div :class="[
         'flex items-center justify-between gap-2',
@@ -29,27 +53,3 @@
         </div>
     </div>
 </template>
-
-<script setup>
-import SexIcon from '../../../icons/SexIcon.vue';
-import { addingSpaces } from '../../../../helpers/formating-values.js';
-
-const props = defineProps({
-    label: {
-        type: String,
-        required: true,
-    },
-    count: {
-        type: Number,
-        required: true,
-    },
-    expense: {
-        type: Number,
-        default: null,
-    },
-    disabled: {
-        type: Boolean,
-        default: false,
-    },
-});
-</script>

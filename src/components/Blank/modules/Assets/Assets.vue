@@ -1,16 +1,3 @@
-<template>
-    <h2 class="px-4 text-xl font-bold text-primary text-center">Активи</h2>
-
-    <!-- Будинки -->
-    <Houses :blankProp="blankProp" @buy:house="buyHouse" @sell:house="sellHouse" @sell:houses="sellHouses" />
-
-    <!-- Земля -->
-    <Land :blankProp="blankProp" @buy:land="buyLand" @sell:land="sellLand" @sell:acres="sellAcres" />
-
-    <!-- Корупційна земля -->
-    <CorruptLand :blankProp="blankProp" @buy:land="buyCorruptLand" @sell:land="sellCorruptLand" @sell:acres="sellCorruptAcres" />
-</template>
-
 <script setup>
 import Houses from './Houses.vue';
 import Land from './Land.vue';
@@ -47,3 +34,16 @@ const buyCorruptLand = (id, quantity, cost) => emit('buy:corrupt-land', id, quan
 const sellCorruptLand = (id, price) => emit('sell:corrupt-land', id, price);
 const sellCorruptAcres = (price) => emit('sell:corrupt-acres', price);
 </script>
+
+<template>
+    <h2 class="px-4 text-xl font-bold text-primary text-center">Активи</h2>
+
+    <!-- Будинки -->
+    <Houses :blankProp="blankProp" @buy:house="buyHouse" @sell:house="sellHouse" @sell:houses="sellHouses" />
+
+    <!-- Земля -->
+    <Land :blankProp="blankProp" @buy:land="buyLand" @sell:land="sellLand" @sell:acres="sellAcres" />
+
+    <!-- Корупційна земля -->
+    <CorruptLand :blankProp="blankProp" @buy:land="buyCorruptLand" @sell:land="sellCorruptLand" @sell:acres="sellCorruptAcres" />
+</template>
