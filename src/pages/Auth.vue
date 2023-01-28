@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import Input from '../components/Blank/plugins/Input.vue';
 import { mapActions, mapGetters } from '../store/helpers.js';
 
@@ -9,6 +9,12 @@ const name = ref('');
 const email = ref('');
 const password = ref('');
 const repeatPassword = ref('');
+
+const disabledRegistration =
+    computed(
+        () => email.value.length === 0 || password.value.length === 0 || password.value !== repeatPassword.value,
+    );
+const disabledLogin = computed(() => email.value.length === 0 || password.value.length === 0);
 
 const { registration, login } = mapActions();
 const { getLoading, getError } = mapGetters();
@@ -21,11 +27,11 @@ const { getLoading, getError } = mapGetters();
             <p v-if="getError" class="text-xs text-opposite">{{ getError }}</p>
             <Input v-if="isRegistration" v-model:value="name" type="text" id="name" placeholder="Ім'я" />
             <Input v-model:value="email" type="text" id="email" placeholder="Пошта" />
-            <Input v-model:value="password" type="text" id="password" placeholder="Пароль" />
+            <Input v-model:value="password" type="password" id="password" placeholder="Пароль" />
             <Input
                 v-if="isRegistration"
                 v-model:value="repeatPassword"
-                type="text"
+                type="password"
                 id="password"
                 placeholder="Пароль ще раз"
             />
@@ -37,16 +43,24 @@ const { getLoading, getError } = mapGetters();
             </p>
             <button
                 v-if="isRegistration"
-                class="w-full h-8 rounded bg-gradient-to-b from-primaryLight to-primary text-slate-100"
+                :class="[
+                    'w-full h-8 rounded bg-gradient-to-b text-slate-100 transition-all duration-300',
+                    disabledRegistration ? 'from-gray-300 to-gray-600 cursor-not-allowed' : 'from-primaryLight to-primary',
+                ]"
                 type="button"
+                :disabled="disabledRegistration"
                 @click="registration({ name, email, password })"
             >
                 Зареєструватися
             </button>
             <button
                 v-else
-                class="w-full h-8 rounded bg-gradient-to-b from-primaryLight to-primary text-slate-100"
+                :class="[
+                    'w-full h-8 rounded bg-gradient-to-b text-slate-100 transition-all duration-300',
+                    disabledLogin ? 'from-gray-300 to-gray-600 cursor-not-allowed' : 'from-primaryLight to-primary',
+                ]"
                 type="button"
+                :disabled="disabledLogin"
                 @click="login({ email, password })"
             >
                 Увійти
