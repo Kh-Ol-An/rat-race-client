@@ -23,10 +23,7 @@ api.interceptors.response.use((config) => config, async (error) => {
             localStorage.setItem('token', response.data.accessToken);
             return api.request(originalRequest);
         } catch (err) {
-            useStore().commit('setError', {
-                message: 'Користувач не авторизований...',
-                type: 'auth',
-            });
+            useStore().commit('setError', 'Користувач не авторизований.');
         }
     }
 

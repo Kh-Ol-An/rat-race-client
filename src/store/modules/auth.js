@@ -24,7 +24,7 @@ export default {
                 commit('setUser', response.data.user);
                 await router.push('/blank');
             } catch (err) {
-                commit('setError', err.response?.data);
+                commit('setError', err.response?.data?.message);
             }
         },
         async login({ commit }, { email, password }) {
@@ -34,7 +34,7 @@ export default {
                 commit('setUser', response.data.user);
                 await router.push('/blank');
             } catch (err) {
-                commit('setError', err.response?.data);
+                commit('setError', err.response?.data?.message);
             }
         },
         async logout({ commit }) {
@@ -44,7 +44,7 @@ export default {
                 commit('setUser', {});
                 await router.push('/auth');
             } catch (err) {
-                commit('setError', err.response?.data);
+                commit('setError', err.response?.data?.message);
             }
         },
         async checkAuth({ commit }) {
@@ -54,7 +54,7 @@ export default {
                 localStorage.setItem('token', response.data.accessToken);
                 commit('setUser', response.data.user);
             } catch (err) {
-                commit('setError', err.response?.data);
+                commit('setError', err.response?.data?.message);
                 localStorage.removeItem('token');
                 await router.push('/auth');
             } finally {
