@@ -498,7 +498,7 @@ const showModalWin = computed(
                     </div>
 
                     <!-- Борги та витрати -->
-                    <div class="pb-4 pr-4 pl-8 md:px-2 md:py-4 flex flex-col gap-2">
+                    <div class="pb-4 pr-8 pl-4 md:px-2 md:py-4 flex flex-col gap-2">
                         <ExpenseInfo :debt="blank.debt" :expenses="expenses" @repay="repayDebt" />
                         <Modal :show="showModalRepay" cancel="Зрозумів" @cancel="showModalRepay = false">
                             <h4 class="mx-auto text-2xl font-bold text-opposite text-center">

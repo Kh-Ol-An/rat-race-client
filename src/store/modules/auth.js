@@ -22,7 +22,7 @@ export default {
                 const response = await AuthService.registration(name, email, password);
                 localStorage.setItem('token', response.data.accessToken);
                 commit('setUser', response.data.user);
-                await router.push('/');
+                await router.push('/blank');
             } catch (err) {
                 commit('setError', err.response?.data);
             }
@@ -32,7 +32,7 @@ export default {
                 const response = await AuthService.login(email, password);
                 localStorage.setItem('token', response.data.accessToken);
                 commit('setUser', response.data.user);
-                await router.push('/');
+                await router.push('/blank');
             } catch (err) {
                 commit('setError', err.response?.data);
             }

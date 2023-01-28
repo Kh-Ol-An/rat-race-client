@@ -1,5 +1,6 @@
 <script setup>
 import { ref, toRef, computed } from "vue";
+import { mapGetters } from '../../../store/helpers.js';
 import Input from '../plugins/Input.vue';
 import Add from '../plugins/Add.vue';
 import InfoField from '../plugins/InfoField.vue';
@@ -22,6 +23,8 @@ const props = defineProps({
 
 const blank = toRef(props, 'blankProp');
 
+const { getUser } = mapGetters();
+
 const gender = ref('');
 
 const havingChildren = computed(() => {
@@ -39,6 +42,11 @@ const profession = ref('');
 
 <template>
     <div class="flex items-center">
+        <InfoField labelClasses="text-slate-500" label="Ім'я:">
+            <span class="ml-2 text-slate-400">
+                {{ getUser.name || 'Безіменько' }}
+            </span>
+        </InfoField>
 
         <div v-if="blank.gender.length === 0" class="mx-auto flex items-center gap-3">
             <input class="peer hidden" type="radio" id="male" name="gender" value="male" v-model="gender">
