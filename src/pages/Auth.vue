@@ -1,17 +1,14 @@
 <script setup>
 import { computed, ref } from "vue";
 import Input from '../components/Blank/plugins/Input.vue';
-import InputTest from '../components/plugins/Input.vue';
 import { mapActions, mapGetters } from '../store/helpers.js';
 
 const isRegistration = ref(false);
 
-const num = ref(null);
 const name = ref('');
 const email = ref('');
 const password = ref('');
 const repeatPassword = ref('');
-const testLog = () => console.log('num: ', num.value);
 
 const disabledRegistration =
     computed(
@@ -29,8 +26,6 @@ const { getLoading, getError } = mapGetters();
         <div v-else class="py-6 px-8 flex flex-col items-center justify-center gap-4 shadow-lg rounded-md bg-slate-800">
             <p v-if="getError" class="text-xs text-opposite">{{ getError }}</p>
             <Input v-if="isRegistration" v-model:value="name" type="text" id="name" placeholder="Ім'я" />
-            <InputTest v-model:value="num" type="number" id="test" placeholder="Test" />
-            <button @click="testLog">test</button>
             <Input v-model:value="email" type="text" id="email" placeholder="Пошта" />
             <Input v-model:value="password" type="password" id="password" placeholder="Пароль" />
             <Input

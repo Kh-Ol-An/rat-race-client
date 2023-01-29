@@ -54,8 +54,6 @@ const input = (event) => {
     entered.value = event.target.value;
     emit('update:value', entered.value);
 };
-
-const focused = ref(false);
 </script>
 
 <template>
@@ -68,35 +66,18 @@ const focused = ref(false);
                 shadow
                 rounded-md border-2 border-slate-700
                 bg-transparent
-                text-base text-transparent
+                text-base text-primary
                 placeholder-transparent
                 focus:border-primary focus:outline-none
                 transition-all duration-300
             "
             :id="id"
-            :type="type"
+            :type="type === 'number' ? 'text' : type"
             :placeholder="placeholder"
-            :value="value"
+            :value="type === 'number' ? addingSpaces(value) : value"
             :disabled="disabled"
-            @focus="focused = true"
-            @blur="focused = false"
             @input="input"
         />
-
-        <div
-            v-if="value.length > 0"
-            class="
-                absolute
-                top-1/2 left-3
-                -translate-y-1/2
-                flex items-center gap-px
-                bg-transparent
-                text-base text-primary
-            "
-        >
-            {{ type === 'number' ? addingSpaces(value) : value }}
-            <div :class="['opacity-0 w-px h-4 bg-primary animate-flashing', focused && 'opacity-100']"></div>
-        </div>
 
         <label
             :class="[

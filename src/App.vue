@@ -51,7 +51,7 @@ router.beforeEach((to, from, next) => {
 <style>
 input:-webkit-autofill {
     -webkit-box-shadow: inset 0 0 0 50px #1e293b !important; /* Цвет фона */
-    -webkit-text-fill-color: #000 !important; /* цвет текста */
+    -webkit-text-fill-color: #528D36 !important; /* цвет текста */
 }
 
 /* Chrome, Safari, Edge, Opera */

@@ -8,6 +8,6 @@ export const addingSpaces = (value) => {
     reversedValues.length > 7 && reversedValues.splice(7, 0, ' ');
     reversedValues.length > 11 && reversedValues.splice(11, 0, ' ');
     reversedValues.length > 15 && reversedValues.splice(15, 0, ' ');
-    value = reversedValues.reverse().join('')
+    value = reversedValues.reverse().join('');
     return value;
 };
