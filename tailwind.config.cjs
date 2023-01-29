@@ -23,8 +23,10 @@ module.exports = {
                 primary: '#528D36',
                 primaryLight: '#88C66A',
                 secondary: '#296B59',
+                secondaryLight: '#61B59E',
                 additional: '#859B3B',
                 opposite: '#983A4D',
+                oppositeLight: '#CC6D80',
             },
             keyframes: {
                 flashing: {

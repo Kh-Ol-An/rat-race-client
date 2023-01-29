@@ -15,6 +15,7 @@ import IncomeInfo from '../components/Blank/modules/IncomeInfo.vue';
 import Incomes from '../components/Blank/modules/Incomes/Incomes.vue';
 import Shares from '../components/Blank/modules/Shares/Shares.vue';
 import Assets from '../components/Blank/modules/Assets/Assets.vue';
+import UserActions from '../components/Blank/modules/UserActions.vue';
 import Modal from '../components/Blank/plugins/Modal.vue';
 import SaveIcon from '../components/icons/SaveIcon.vue';
 import MoneyIcon from '../components/icons/MoneyIcon.vue';
@@ -352,8 +353,60 @@ const sellCorruptAcres = (price) => {
     blank.assets.corruptLand= [];
 };
 
+const submit = () => uploadBlank(blank);
 const restart = () => {
-    console.log('restart');
+    uploadBlank({
+        gender: '',
+        profession: '',
+        debt: 0,
+        rent: 0,
+        food: 0,
+        clothes: 0,
+        fare: 0,
+        phone: 0,
+        apartments: [],
+        cars: [],
+        cottages: [],
+        yachts: [],
+        planes: [],
+        whimsAndFancies: [],
+        marriage: false,
+        children: {
+            count: 0,
+            expense: 0,
+        },
+        credits: [],
+        cash: 0,
+        salary: 0,
+        business: {
+            small: [],
+            middle: [],
+            big: [],
+            corrupt: [],
+            last: [],
+        },
+        shares: {
+            gc: [],
+            schp: [],
+            to: [],
+            cst: [],
+        },
+        assets: {
+            houses: [],
+            land: [],
+            corruptLand: [],
+        },
+        rich: false,
+        win: false,
+    });
+    location.reload();
+};
+const showModalSaveInterval = ref(false);
+const timerId = setInterval(() => submit(), 1000 * 60 * 5);
+const disableSubmit = () => {
+    clearInterval(timerId);
+    showModalSaveInterval.value = true;
+    setTimeout(() => showModalSaveInterval.value = false, 1000 * 3);
 };
 
 const showModalRich = computed(
@@ -384,7 +437,7 @@ const showModalWin = computed(
 
         <form
             class="relative md:mt-2 w-full max-w-5xl flex flex-col gap-4 shadow-lg md:shadow-none rounded-md bg-slate-800"
-            @submit.prevent="uploadBlank(blank)"
+            @submit.prevent="submit"
         >
             <div class="pt-6 px-8 md:pt-2 md:px-2 grid grid-cols-2 md:grid-cols-1 gap-4 md:gap-2">
                 <BlankIdentification
@@ -566,24 +619,17 @@ const showModalWin = computed(
                 </div>
             </div>
 
-            <button
-                class="
-                    fixed md:static
-                    right-10 bottom-10
-                    p-4
-                    flex items-center justify-center
-                    md:w-full
-                    shadow hover:shadow-lg
-                    rounded-full md:rounded-md
-                    bg-secondary
-                    outline-0
-                    transition-all duration-300
-                "
-                type="submit"
-                title="Зберегти"
-            >
-                <SaveIcon width="30px" height="30px" color="fill-slate-300" />
-            </button>
+            <div class="md:px-2 md:space-y-2">
+                <UserActions @restart="restart" @disable:submit="disableSubmit" />
+                <Modal :show="showModalSaveInterval" cancel="Зрозумів" @cancel="showModalSaveInterval = false">
+                    <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
+                        Попередження.
+                    </h4>
+                    <p class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center">
+                        Автоматичне зберігання вимкнено.
+                    </p>
+                </Modal>
+            </div>
         </form>
 
         <Modal :show="showModalRich" cancel="Зрозумів" @cancel="blank.rich = true">

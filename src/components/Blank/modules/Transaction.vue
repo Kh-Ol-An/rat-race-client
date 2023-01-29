@@ -28,7 +28,7 @@ const increment = () => {
             py-2 px-24 md:px-10
             shadow hover:shadow-lg
             rounded-md
-            bg-opposite
+            bg-gradient-to-b from-oppositeLight to-opposite
             text-xl text-slate-300 font-bold leading-none
             outline-0
             transition-all duration-300
@@ -55,7 +55,7 @@ const increment = () => {
             py-2 px-24 md:px-10
             shadow hover:shadow-lg
             rounded-md
-            bg-secondary
+            bg-gradient-to-b from-secondaryLight to-secondary
             text-xl text-slate-300 font-bold leading-none
             outline-0
             transition-all duration-300
