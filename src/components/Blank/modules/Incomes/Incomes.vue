@@ -71,7 +71,14 @@ const sellBusiness = subType => emit('sell', subType);
         </span>
 
         <button
-            class="ml-4 px-2 rounded shadow bg-opposite text-sm text-slate-300 font-bold outline-0"
+            class="
+                ml-4 px-2
+                rounded
+                shadow
+                bg-gradient-to-b from-oppositeLight to-opposite
+                text-sm text-slate-300 font-bold
+                outline-0
+            "
             type="button"
             title="Звільнили"
             @click="fired"
@@ -80,7 +87,14 @@ const sellBusiness = subType => emit('sell', subType);
         </button>
 
         <button
-            class="ml-4 px-2 rounded shadow bg-secondary text-sm text-slate-300 font-bold outline-0"
+            class="
+                ml-4 px-2
+                rounded
+                shadow
+                bg-gradient-to-b from-secondaryLight to-secondary
+                text-sm text-slate-300 font-bold
+                outline-0
+            "
             type="button"
             title="Звільнитись"
             @click="quit"

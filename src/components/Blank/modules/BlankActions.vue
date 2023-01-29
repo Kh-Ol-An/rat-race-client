@@ -20,7 +20,7 @@ setTimeout(() => saveInterval.value = false, 1000 * 5);
             md:w-full
             shadow hover:shadow-lg
             rounded-full md:rounded-md
-            bg-secondary
+            bg-gradient-to-b from-secondaryLight to-secondary
             outline-0
             transition-all duration-300
         "
@@ -41,7 +41,7 @@ setTimeout(() => saveInterval.value = false, 1000 * 5);
                 md:w-full
                 shadow hover:shadow-lg
                 rounded-full md:rounded-md
-                bg-opposite
+                bg-gradient-to-b from-oppositeLight to-opposite
                 outline-0
                 transition-all duration-300
             "
@@ -77,7 +77,7 @@ setTimeout(() => saveInterval.value = false, 1000 * 5);
                 md:w-full
                 shadow hover:shadow-lg
                 rounded-full md:rounded-md
-                bg-opposite
+                bg-gradient-to-b from-oppositeLight to-opposite
                 outline-0
                 transition-all duration-300
             "

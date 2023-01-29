@@ -15,7 +15,7 @@ import IncomeInfo from '../components/Blank/modules/IncomeInfo.vue';
 import Incomes from '../components/Blank/modules/Incomes/Incomes.vue';
 import Shares from '../components/Blank/modules/Shares/Shares.vue';
 import Assets from '../components/Blank/modules/Assets/Assets.vue';
-import UserActions from '../components/Blank/modules/UserActions.vue';
+import BlankActions from '../components/Blank/modules/BlankActions.vue';
 import Modal from '../components/Blank/plugins/Modal.vue';
 import SaveIcon from '../components/icons/SaveIcon.vue';
 import MoneyIcon from '../components/icons/MoneyIcon.vue';
@@ -455,7 +455,7 @@ const showModalWin = computed(
                         w-full
                         shadow hover:shadow-lg
                         rounded-md
-                        bg-secondary
+                        bg-gradient-to-b from-secondaryLight to-secondary
                         outline-0
                         transition-all duration-300
                     "
@@ -620,7 +620,7 @@ const showModalWin = computed(
             </div>
 
             <div class="md:px-2 md:space-y-2">
-                <UserActions @restart="restart" @disable:submit="disableSubmit" />
+                <BlankActions @restart="restart" @disable:submit="disableSubmit" />
                 <Modal :show="showModalSaveInterval" cancel="Зрозумів" @cancel="showModalSaveInterval = false">
                     <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
                         Попередження.
