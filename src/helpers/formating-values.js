@@ -1,4 +1,4 @@
-const removingSpaces = value => value.split(' ').join('');
+export const removingSpaces = value => value.split(' ').join('');
 
 export const addingSpaces = (value) => {
     value = String(value);

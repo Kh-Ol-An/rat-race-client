@@ -546,7 +546,7 @@ const showModalWin = computed(
 
                 <div class="flex flex-col">
                     <!-- Загальні прибутки -->
-                    <div class="pb-4 pr-8 pl-4 md:px-2 flex flex-col gap-2">
+                    <div class="py-4 pr-8 pl-4 md:pt-0 md:pb-4 md:px-2 flex flex-col gap-2">
                         <IncomeInfo :blankProp="blank" :passiveIncome="passiveIncome" :income="income" />
                     </div>
 

@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import Input from '../../plugins/Input.vue';
+import { removingSpaces } from '../../../helpers/formating-values.js';
 
 defineProps({
     rich: {
@@ -13,11 +14,11 @@ const emit = defineEmits(['decrement', 'increment']);
 
 const transaction = ref('');
 const decrement = () => {
-    emit('decrement', Number(transaction.value));
+    emit('decrement', Number(removingSpaces(transaction.value)));
     transaction.value = '';
 };
 const increment = () => {
-    emit('increment', Number(transaction.value));
+    emit('increment', Number(removingSpaces(transaction.value)));
     transaction.value = '';
 };
 </script>
