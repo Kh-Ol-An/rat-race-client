@@ -1,9 +1,13 @@
 <script setup>
 import { computed, ref } from "vue";
 import Input from '../components/plugins/Input.vue';
+import CloseEyeIcon from '../components/icons/CloseEyeIcon.vue';
+import OpenEyeIcon from '../components/icons/OpenEyeIcon.vue';
 import { mapActions, mapGetters } from '../store/helpers.js';
 
 const isRegistration = ref(false);
+const showPassword = ref(true);
+const showRepeatPassword = ref(true);
 
 const name = ref('');
 const email = ref('');
@@ -27,14 +31,48 @@ const { getLoading, getError } = mapGetters();
             <p v-if="getError" class="text-xs text-opposite">{{ getError }}</p>
             <Input v-if="isRegistration" v-model:value="name" type="text" id="name" placeholder="Ім'я" />
             <Input v-model:value="email" type="text" id="email" placeholder="Пошта" />
-            <Input v-model:value="password" type="password" id="password" placeholder="Пароль" />
-            <Input
-                v-if="isRegistration"
-                v-model:value="repeatPassword"
-                type="password"
-                id="password"
-                placeholder="Пароль ще раз"
-            />
+            <div class="relative w-full">
+                <Input
+                    v-model:value="password"
+                    :type="showPassword ? 'password' : 'text'"
+                    id="password"
+                    placeholder="Пароль"
+                />
+                <button
+                    class="absolute top-1/2 right-2 -translate-y-1/2 text-white"
+                    type="button"
+                    @click="showPassword = !showPassword"
+                >
+                    <CloseEyeIcon
+                        v-if="showPassword"
+                        width="24px"
+                        height="24px"
+                        :color="password.length > 0 ? 'stroke-primary' : 'stroke-slate-400'"
+                    />
+                    <OpenEyeIcon v-else width="24px" height="24px" color="stroke-primary" />
+                </button>
+            </div>
+            <div v-if="isRegistration" class="relative w-full">
+                <Input
+                    v-model:value="repeatPassword"
+                    :type="showRepeatPassword ? 'password' : 'text'"
+                    id="repeat-password"
+                    placeholder="Пароль ще раз"
+                />
+                <button
+                    class="absolute top-1/2 right-2 -translate-y-1/2 text-white"
+                    type="button"
+                    @click="showRepeatPassword = !showRepeatPassword"
+                >
+                    <CloseEyeIcon
+                        v-if="showRepeatPassword"
+                        width="24px"
+                        height="24px"
+                        :color="repeatPassword.length > 0 ? 'stroke-primary' : 'stroke-slate-400'"
+                    />
+                    <OpenEyeIcon v-else width="24px" height="24px" color="stroke-primary" />
+                </button>
+            </div>
             <p class="text-sm text-slate-400 text-center">
                 {{ isRegistration ? 'В мене вже є обліковий запис.' : 'В мене ще немає облікового запису.' }}<br>Хочу
                 <button class="text-primary font-bold" type="button" @click="isRegistration = !isRegistration">
