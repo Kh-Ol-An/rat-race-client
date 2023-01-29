@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue";
-import Input from './Input.vue';
+import Input from '../../plugins/Input.vue';
 import CheckIcon from "../../icons/CheckIcon.vue";
 import SellIcon from "../../icons/SellIcon.vue";
 import { addingSpaces } from '../../../helpers/formating-values.js';

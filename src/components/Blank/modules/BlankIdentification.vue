@@ -1,7 +1,7 @@
 <script setup>
 import { ref, toRef, computed } from "vue";
 import { mapGetters } from '../../../store/helpers.js';
-import Input from '../plugins/Input.vue';
+import Input from '../../plugins/Input.vue';
 import Add from '../plugins/Add.vue';
 import InfoField from '../plugins/InfoField.vue';
 import MaleIcon from '../../icons/MaleIcon.vue';

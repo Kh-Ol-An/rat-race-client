@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import InfoField from '../plugins/InfoField.vue';
-import Input from '../plugins/Input.vue';
+import Input from '../../plugins/Input.vue';
 import ReturnIcon from '../../icons/ReturnIcon.vue';
 import CheckIcon from '../../icons/CheckIcon.vue';
 import { addingSpaces } from '../../../helpers/formating-values.js';

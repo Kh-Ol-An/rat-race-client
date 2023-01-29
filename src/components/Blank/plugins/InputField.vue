@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import Input from './Input.vue';
+import Input from '../../plugins/Input.vue';
 import Add from './Add.vue';
 
 const props = defineProps({

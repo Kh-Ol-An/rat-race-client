@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import { addingSpaces } from '../../../helpers/formating-values.js';
+import { addingSpaces } from '../../helpers/formating-values.js';
 
 const props = defineProps({
     value: {

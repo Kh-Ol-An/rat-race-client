@@ -1,6 +1,6 @@
 <script setup>
 import { computed, ref } from "vue";
-import Input from '../components/Blank/plugins/Input.vue';
+import Input from '../components/plugins/Input.vue';
 import { mapActions, mapGetters } from '../store/helpers.js';
 
 const isRegistration = ref(false);

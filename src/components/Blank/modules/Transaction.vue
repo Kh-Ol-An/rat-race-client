@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue";
-import Input from '../plugins/Input.vue';
+import Input from '../../plugins/Input.vue';
 
 defineProps({
     rich: {

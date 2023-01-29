@@ -1,6 +1,6 @@
 <script setup>
 import { ref, toRef } from "vue";
-import Input from '../plugins/Input.vue';
+import Input from '../../plugins/Input.vue';
 import Add from '../plugins/Add.vue';
 import InfoField from '../plugins/InfoField.vue';
 import Modal from '../plugins/Modal.vue';
