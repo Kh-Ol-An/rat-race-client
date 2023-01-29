@@ -4,7 +4,7 @@ import InfoField from '../plugins/InfoField.vue';
 import Input from '../../plugins/Input.vue';
 import ReturnIcon from '../../icons/ReturnIcon.vue';
 import CheckIcon from '../../icons/CheckIcon.vue';
-import { addingSpaces } from '../../../helpers/formating-values.js';
+import { removingSpaces, addingSpaces } from '../../../helpers/formating-values.js';
 
 const props = defineProps({
     debt: {
@@ -27,7 +27,7 @@ const hidRepay = () => {
 };
 const repay = () => {
     showRepay.value = false;
-    emit('repay', Number(repayDebt.value));
+    emit('repay', Number(removingSpaces(repayDebt.value)));
     repayDebt.value = '';
 };
 </script>

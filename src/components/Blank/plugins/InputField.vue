@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import Input from '../../plugins/Input.vue';
 import Add from './Add.vue';
+import { removingSpaces } from '../../../helpers/formating-values.js';
 
 const props = defineProps({
     label: {
@@ -40,7 +41,13 @@ const firstValue = ref('');
 const secondValue = ref('');
 
 const add = () => {
-    emit('add', new Date().valueOf(), Number(firstValue.value), Number(secondValue.value), props.subType);
+    emit(
+        'add',
+        new Date().valueOf(),
+        Number(removingSpaces(firstValue.value)),
+        Number(removingSpaces(secondValue.value)),
+        props.subType,
+    );
     firstValue.value = '';
     secondValue.value = '';
 };

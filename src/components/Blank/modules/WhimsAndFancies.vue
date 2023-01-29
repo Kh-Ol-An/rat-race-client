@@ -4,6 +4,7 @@ import Input from '../../plugins/Input.vue';
 import Add from '../plugins/Add.vue';
 import InfoField from '../plugins/InfoField.vue';
 import Modal from '../plugins/Modal.vue';
+import { removingSpaces } from '../../../helpers/formating-values.js';
 
 const props = defineProps({
     blankProp: {
@@ -20,14 +21,14 @@ const showModal = ref(false);
 const name = ref('');
 const price = ref('');
 const buy = () => {
-    if (blank.value.cash < Number(price.value)) {
+    if (blank.value.cash < Number(removingSpaces(price.value))) {
         showModal.value = true;
         name.value = '';
         price.value = '';
         return;
     }
 
-    emit('buy', name.value, Number(price.value));
+    emit('buy', name.value, Number(removingSpaces(price.value)));
     name.value = '';
     price.value = '';
 };

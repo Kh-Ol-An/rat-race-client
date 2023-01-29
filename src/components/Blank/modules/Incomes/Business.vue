@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import Input from '../../../plugins/Input.vue';
 import Modal from '../../plugins/Modal.vue';
 import CheckIcon from '../../../icons/CheckIcon.vue';
-import { addingSpaces } from '../../../../helpers/formating-values.js';
+import { removingSpaces, addingSpaces } from '../../../../helpers/formating-values.js';
 
 const props = defineProps({
     id: {
@@ -42,7 +42,7 @@ const hidIncome = () => {
 };
 const increment = () => {
     showIncome.value = false;
-    emit('increment', props.id, Number(addIncome.value));
+    emit('increment', props.id, Number(removingSpaces(addIncome.value)));
     addIncome.value = '';
 };
 

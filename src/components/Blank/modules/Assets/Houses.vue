@@ -5,7 +5,7 @@ import Add from '../../plugins/Add.vue';
 import Modal from '../../plugins/Modal.vue';
 import House from './House.vue';
 import Sell from '../../plugins/Sell.vue';
-import { addingSpaces } from '../../../../helpers/formating-values.js';
+import { removingSpaces, addingSpaces } from '../../../../helpers/formating-values.js';
 
 const props = defineProps({
     blankProp: {
@@ -22,12 +22,12 @@ const showModal = ref(false);
 
 const price = ref('');
 const buyHouse = () => {
-    if (blank.value.cash < Number(price.value)) {
+    if (blank.value.cash < Number(removingSpaces(price.value))) {
         showModal.value = true;
         return price.value = '';
     }
 
-    emit('buy:house', new Date().valueOf(), Number(price.value));
+    emit('buy:house', new Date().valueOf(), Number(removingSpaces(price.value)));
     price.value = '';
 };
 const sellHouse = (price, id) => emit('sell:house', price, id);

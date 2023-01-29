@@ -3,7 +3,7 @@ import { ref } from "vue";
 import Input from '../../plugins/Input.vue';
 import CheckIcon from "../../icons/CheckIcon.vue";
 import SellIcon from "../../icons/SellIcon.vue";
-import { addingSpaces } from '../../../helpers/formating-values.js';
+import { removingSpaces, addingSpaces } from '../../../helpers/formating-values.js';
 
 defineProps({
     inputId: {
@@ -25,7 +25,7 @@ const hid = () => {
     price.value = '';
 };
 const sell = () => {
-    emit('sell', Number(price.value));
+    emit('sell', Number(removingSpaces(price.value)));
     hid();
 };
 </script>

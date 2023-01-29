@@ -7,7 +7,7 @@ import InputField from '../../plugins/InputField.vue';
 import BusinessHead from './BusinessHead.vue';
 import Business from './Business.vue';
 import Modal from '../../plugins/Modal.vue';
-import { addingSpaces } from '../../../../helpers/formating-values.js';
+import { removingSpaces, addingSpaces } from '../../../../helpers/formating-values.js';
 
 const props = defineProps({
     blankProp: {
@@ -63,7 +63,7 @@ const sellBusiness = subType => emit('sell', subType);
         class="flex items-center gap-3"
     >
         <Input v-model:value="salary" id="salary" placeholder="Зарплата" secondBg />
-        <Add :firstValue="salary" @add="$emit('add:salary', Number(salary))" />
+        <Add :firstValue="salary" @add="$emit('add:salary', Number(removingSpaces(salary)))" />
     </div>
     <InfoField v-if="blank.salary > 0 || firedSalary > 0" labelClasses="text-primary" label="Зарплата:">
         <span class="ml-2 text-slate-400">

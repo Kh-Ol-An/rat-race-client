@@ -5,6 +5,7 @@ import Add from '../../plugins/Add.vue';
 import Purchased from './Purchased.vue';
 import Modal from '../../plugins/Modal.vue';
 import InfoField from "../../plugins/InfoField.vue";
+import { removingSpaces } from '../../../../helpers/formating-values.js';
 
 const props = defineProps({
     blankProp: {
@@ -42,7 +43,7 @@ const purchase = ref('');
 const apartmentName = ref('');
 const apartmentPrice = ref('');
 const buyApartment = () => {
-    if (blank.value.cash < Number(apartmentPrice.value)) {
+    if (blank.value.cash < Number(removingSpaces(apartmentPrice.value))) {
         purchase.value = 'Квартири';
         showModal.value = true;
         apartmentName.value = '';
@@ -50,14 +51,14 @@ const buyApartment = () => {
         return;
     }
 
-    emit('buy:apartment', new Date().valueOf(), apartmentName.value, Number(apartmentPrice.value));
+    emit('buy:apartment', new Date().valueOf(), apartmentName.value, Number(removingSpaces(apartmentPrice.value)));
     apartmentName.value = '';
     apartmentPrice.value = '';
 };
 const apartmentPayment = ref('');
 const apartmentTerm = ref('');
 const buyApartmentOnCredit = () => {
-    if (props.cashFlow < Number(apartmentPayment.value)) {
+    if (props.cashFlow < Number(removingSpaces(apartmentPayment.value))) {
         showModalCredit.value = true;
         apartmentName.value = '';
         apartmentPayment.value = '';
@@ -69,8 +70,8 @@ const buyApartmentOnCredit = () => {
         'credit:apartment',
         new Date().valueOf(),
         apartmentName.value,
-        Number(apartmentPayment.value),
-        Number(apartmentTerm.value),
+        Number(removingSpaces(apartmentPayment.value)),
+        Number(removingSpaces(apartmentTerm.value)),
     );
     apartmentName.value = '';
     apartmentPayment.value = '';
@@ -82,7 +83,7 @@ const sellApartment = id => emit('sell:apartment', id);
 const carName = ref('');
 const carPrice = ref('');
 const buyCar = () => {
-    if (blank.value.cash < Number(carPrice.value)) {
+    if (blank.value.cash < Number(removingSpaces(carPrice.value))) {
         purchase.value = 'Машини';
         showModal.value = true;
         carName.value = '';
@@ -90,14 +91,14 @@ const buyCar = () => {
         return;
     }
 
-    emit('buy:car', new Date().valueOf(), carName.value, Number(carPrice.value));
+    emit('buy:car', new Date().valueOf(), carName.value, Number(removingSpaces(carPrice.value)));
     carName.value = '';
     carPrice.value = '';
 };
 const carPayment = ref('');
 const carTerm = ref('');
 const buyCarOnCredit = () => {
-    if (props.cashFlow < Number(carPayment.value)) {
+    if (props.cashFlow < Number(removingSpaces(carPayment.value))) {
         showModalCredit.value = true;
         carPayment.value = '';
         carTerm.value = '';
@@ -108,8 +109,8 @@ const buyCarOnCredit = () => {
         'credit:car',
         new Date().valueOf(),
         carName.value,
-        Number(carPayment.value),
-        Number(carTerm.value),
+        Number(removingSpaces(carPayment.value)),
+        Number(removingSpaces(carTerm.value)),
     );
     carName.value = '';
     carPayment.value = '';
@@ -121,7 +122,7 @@ const sellCar = id => emit('sell:car', id);
 const cottageName = ref('');
 const cottagePrice = ref('');
 const buyCottage = () => {
-    if (blank.value.cash < Number(cottagePrice.value)) {
+    if (blank.value.cash < Number(removingSpaces(cottagePrice.value))) {
         purchase.value = 'Котеджі';
         showModal.value = true;
         cottageName.value = '';
@@ -129,7 +130,7 @@ const buyCottage = () => {
         return;
     }
 
-    emit('buy:cottage', new Date().valueOf(), cottageName.value, Number(cottagePrice.value));
+    emit('buy:cottage', new Date().valueOf(), cottageName.value, Number(removingSpaces(cottagePrice.value)));
     cottageName.value = '';
     cottagePrice.value = '';
 };
@@ -139,7 +140,7 @@ const sellCottage = id => emit('sell:cottage', id);
 const yachtName = ref('');
 const yachtPrice = ref('');
 const buyYacht = () => {
-    if (blank.value.cash < Number(yachtPrice.value)) {
+    if (blank.value.cash < Number(removingSpaces(yachtPrice.value))) {
         purchase.value = 'Яхти';
         showModal.value = true;
         yachtName.value = '';
@@ -147,7 +148,7 @@ const buyYacht = () => {
         return;
     }
 
-    emit('buy:yacht', new Date().valueOf(), yachtName.value, Number(yachtPrice.value));
+    emit('buy:yacht', new Date().valueOf(), yachtName.value, Number(removingSpaces(yachtPrice.value)));
     yachtName.value = '';
     yachtPrice.value = '';
 };
@@ -157,7 +158,7 @@ const sellYacht = id => emit('sell:yacht', id);
 const planeName = ref('');
 const planePrice = ref('');
 const buyPlane = () => {
-    if (blank.value.cash < Number(planePrice.value)) {
+    if (blank.value.cash < Number(removingSpaces(planePrice.value))) {
         purchase.value = 'Літаки';
         showModal.value = true;
         planeName.value = '';
@@ -165,7 +166,7 @@ const buyPlane = () => {
         return;
     }
 
-    emit('buy:plane', new Date().valueOf(), planeName.value, Number(planePrice.value));
+    emit('buy:plane', new Date().valueOf(), planeName.value, Number(removingSpaces(planePrice.value)));
     planeName.value = '';
     planePrice.value = '';
 };
