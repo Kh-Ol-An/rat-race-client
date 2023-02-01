@@ -73,6 +73,7 @@ const input = (event) => {
             "
             :id="id"
             :type="type === 'number' ? 'text' : type"
+            :inputmode="type === 'number' ? 'numeric' : 'text'"
             :placeholder="placeholder"
             :value="type === 'number' ? addingSpaces(value) : value"
             :disabled="disabled"
