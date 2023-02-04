@@ -37,8 +37,10 @@ router.beforeEach((to, from, next) => {
 </script>
 
 <template>
-    <div v-if="error">{{ error }}</div>
     <notifications />
+    <div v-if="error" class="w-full h-screen flex items-center justify-center">
+        <span class="text-2xl text-opposite font-bold text-center">{{ error }}</span>
+    </div>
     <Suspense>
         <template #default>
             <router-view></router-view>

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useStore } from 'vuex'
+import { notify } from "@kyvg/vue3-notification";
 
 // export const API_URL = 'http://localhost:5000/api';
 export const API_URL = 'https://rate-race.onrender.com/api';
@@ -23,7 +23,11 @@ api.interceptors.response.use((config) => config, async (error) => {
             localStorage.setItem('token', response.data.accessToken);
             return api.request(originalRequest);
         } catch (err) {
-            useStore().commit('setError', 'Користувач не авторизований.');
+            notify({
+                type: 'error',
+                title: 'Авторизація',
+                text: 'Користувач не авторизований.',
+            });
         }
     }
 

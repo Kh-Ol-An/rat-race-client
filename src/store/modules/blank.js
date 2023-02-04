@@ -17,8 +17,8 @@ export default {
                 commit('setBlank', response.data.blank);
                 notify({
                     type: 'success',
-                    title: "Збереження даних",
-                    text: "Ваші дані збережені",
+                    title: 'Збереження даних',
+                    text: 'Ваші дані збережені',
                 });
             } catch (err) {
                 console.log(err)
