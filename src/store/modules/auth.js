@@ -1,7 +1,7 @@
 import axios from "axios";
-import AuthService from "../../services/AuthService.js";
-import { API_URL } from "../../api/index.js";
 import router from '../../router/index.js';
+import { API_URL } from "../../api/index.js";
+import AuthService from "../../services/AuthService.js";
 
 export default {
     state: {

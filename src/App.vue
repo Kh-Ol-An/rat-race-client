@@ -38,6 +38,7 @@ router.beforeEach((to, from, next) => {
 
 <template>
     <div v-if="error">{{ error }}</div>
+    <notifications />
     <Suspense>
         <template #default>
             <router-view></router-view>

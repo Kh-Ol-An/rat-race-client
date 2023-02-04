@@ -1,3 +1,4 @@
+import { notify } from "@kyvg/vue3-notification";
 import BlankService from "../../services/BlankService.js";
 
 export default {
@@ -14,6 +15,11 @@ export default {
             try {
                 const response = await BlankService.saveBlank(blank);
                 commit('setBlank', response.data.blank);
+                notify({
+                    type: 'success',
+                    title: "Збереження даних",
+                    text: "Ваші дані збережені",
+                });
             } catch (err) {
                 console.log(err)
             }

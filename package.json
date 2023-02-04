@@ -9,6 +9,7 @@
         "preview": "vite preview"
     },
     "dependencies": {
+        "@kyvg/vue3-notification": "^2.8.0",
         "axios": "^1.2.2",
         "vue": "^3.2.41",
         "vue-router": "^4.1.6",
