@@ -16,17 +16,17 @@ const show = ref(false);
         <span class="w-8 h-0.5 block bg-slate-300"></span>
         <span class="w-8 h-0.5 block bg-slate-300"></span>
     </button>
-    <nav v-if="show" class="fixed top-14 left-10 flex flex-col gap-4">
-        <router-link class="text-white" to="/">
+    <nav v-if="show" class="">
+        <router-link class="fixed top-2 left-[88px]" to="/">
             <HomeIcon width="24px" height="24px" color="fill-slate-300" />
         </router-link>
-        <router-link class="text-white" to="/blank">
+        <router-link class="fixed top-10 left-[76px]" to="/blank">
             <BlankIcon width="24px" height="24px" color="stroke-slate-300" />
         </router-link>
-        <router-link class="text-white" to="/game">
+        <router-link class="fixed top-16 left-12" to="/game">
             <GameIcon width="24px" height="24px" color="fill-slate-300" />
         </router-link>
-        <button class="text-white" type="button" @click="logout">
+        <button class="fixed top-[72px] left-3" type="button" @click="logout">
             <LogoutIcon width="24px" height="24px" color="fill-slate-300" />
         </button>
     </nav>
