@@ -1,8 +1,8 @@
 <script setup>
 import { ref } from 'vue';
 import Modal from '../plugins/Modal.vue';
-import ResetIcon from '../../icons/ResetIcon.vue';
-import SaveIcon from '../../icons/SaveIcon.vue';
+import ResetIcon from '../../../assets/images/icons/ResetIcon.vue';
+import SaveIcon from '../../../assets/images/icons/SaveIcon.vue';
 
 const showModal = ref(false);
 

@@ -1,10 +1,10 @@
 <script setup>
 import { ref } from 'vue';
 import { mapActions } from '../../store/helpers.js';
-import HomeIcon from '../icons/HomeIcon.vue';
-import BlankIcon from '../icons/BlankIcon.vue';
-import GameIcon from '../icons/GameIcon.vue';
-import LogoutIcon from '../icons/LogoutIcon.vue';
+import HomeIcon from '../../assets/images/icons/HomeIcon.vue';
+import BlankIcon from '../../assets/images/icons/BlankIcon.vue';
+import GameIcon from '../../assets/images/icons/GameIcon.vue';
+import LogoutIcon from '../../assets/images/icons/LogoutIcon.vue';
 
 const { logout } = mapActions();
 const show = ref(false);

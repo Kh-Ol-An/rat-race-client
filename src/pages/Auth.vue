@@ -1,8 +1,8 @@
 <script setup>
 import { computed, ref } from "vue";
 import Input from '../components/plugins/Input.vue';
-import CloseEyeIcon from '../components/icons/CloseEyeIcon.vue';
-import OpenEyeIcon from '../components/icons/OpenEyeIcon.vue';
+import CloseEyeIcon from '../assets/images/icons/CloseEyeIcon.vue';
+import OpenEyeIcon from '../assets/images/icons/OpenEyeIcon.vue';
 import { mapActions, mapGetters } from '../store/helpers.js';
 
 const isRegistration = ref(false);

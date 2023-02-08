@@ -1,0 +1,118 @@
+[
+    {
+        "id": 1,
+        "classes": "",
+        "type": "start",
+        "name": "Старт"
+    },
+    {
+        "id": 2,
+        "type": "target",
+        "name": "Примхи багатіїв"
+    },
+    {
+        "id": 3,
+        "type": "buys",
+        "name": "Великі покупки"
+    },
+    {
+        "id": 4,
+        "type": "business",
+        "name": "Бізнес"
+    },
+    {
+        "id": 5,
+        "type": "target",
+        "name": "Примхи багатіїв"
+    },
+    {
+        "id": 6,
+        "type": "market",
+        "name": "Ринок"
+    },
+    {
+        "id": 7,
+        "type": "chance",
+        "name": "Шанс"
+    },
+    {
+        "id": 8,
+        "type": "target",
+        "name": "Примхи багатіїв"
+    },
+    {
+        "id": 9,
+        "type": "business",
+        "name": "Бізнес"
+    },
+    {
+        "id": 10,
+        "type": "market",
+        "name": "Ринок"
+    },
+    {
+        "id": 11,
+        "type": "bankruptcy",
+        "name": "Банкрутство"
+    },
+    {
+        "id": 12,
+        "type": "chance",
+        "name": "Шанс"
+    },
+    {
+        "id": 13,
+        "type": "target",
+        "name": "Примхи багатіїв"
+    },
+    {
+        "id": 14,
+        "type": "buys",
+        "name": "Великі покупки"
+    },
+    {
+        "id": 15,
+        "type": "target",
+        "name": "Примхи багатіїв"
+    },
+    {
+        "id": 16,
+        "type": "business",
+        "name": "Бізнес"
+    },
+    {
+        "id": 17,
+        "type": "chance",
+        "name": "Шанс"
+    },
+    {
+        "id": 18,
+        "type": "market",
+        "name": "Ринок"
+    },
+    {
+        "id": 19,
+        "type": "target",
+        "name": "Примхи багатіїв"
+    },
+    {
+        "id": 20,
+        "type": "buys",
+        "name": "Великі покупки"
+    },
+    {
+        "id": 21,
+        "type": "target",
+        "name": "Примхи багатіїв"
+    },
+    {
+        "id": 22,
+        "type": "profit",
+        "name": "Прибуток"
+    },
+    {
+        "id": 23,
+        "type": "target",
+        "name": "Примхи багатіїв"
+    }
+]

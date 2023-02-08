@@ -17,8 +17,8 @@ import Shares from '../components/Blank/modules/Shares/Shares.vue';
 import Assets from '../components/Blank/modules/Assets/Assets.vue';
 import BlankActions from '../components/Blank/modules/BlankActions.vue';
 import Modal from '../components/Blank/plugins/Modal.vue';
-import SaveIcon from '../components/icons/SaveIcon.vue';
-import MoneyIcon from '../components/icons/MoneyIcon.vue';
+import SaveIcon from '../assets/images/icons/SaveIcon.vue';
+import MoneyIcon from '../assets/images/icons/MoneyIcon.vue';
 import { addingSpaces } from '../helpers/formating-values.js';
 
 const { uploadBlank, downloadBlank } = mapActions();

@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue';
-import AddIcon from '../../icons/AddIcon.vue';
+import AddIcon from '../../../assets/images/icons/AddIcon.vue';
 
 const props = defineProps({
     name: {

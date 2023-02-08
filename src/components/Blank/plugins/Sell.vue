@@ -1,8 +1,8 @@
 <script setup>
 import { ref } from "vue";
 import Input from '../../plugins/Input.vue';
-import CheckIcon from "../../icons/CheckIcon.vue";
-import SellIcon from "../../icons/SellIcon.vue";
+import CheckIcon from "../../../assets/images/icons/CheckIcon.vue";
+import SellIcon from "../../../assets/images/icons/SellIcon.vue";
 import { removingSpaces, addingSpaces } from '../../../helpers/formating-values.js';
 
 defineProps({

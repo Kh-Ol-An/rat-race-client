@@ -1,5 +1,5 @@
 <script setup>
-import SexIcon from '../../../icons/SexIcon.vue';
+import BabyIcon from '../../../../assets/images/icons/BabyIcon.vue';
 import { addingSpaces } from '../../../../helpers/formating-values.js';
 
 const props = defineProps({
@@ -42,7 +42,7 @@ const props = defineProps({
                     :disabled="disabled"
                     @click="$emit('have:baby')"
                 >
-                    <SexIcon width="16px" height="16px" color="fill-primary" />
+                    <BabyIcon width="16px" height="16px" color="fill-primary" />
                 </button>
             </div>
         </div>

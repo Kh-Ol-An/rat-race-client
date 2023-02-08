@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import Input from '../../../plugins/Input.vue';
 import Modal from '../../plugins/Modal.vue';
-import CheckIcon from '../../../icons/CheckIcon.vue';
+import CheckIcon from '../../../../assets/images/icons/CheckIcon.vue';
 import { removingSpaces, addingSpaces } from '../../../../helpers/formating-values.js';
 
 const props = defineProps({

@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import Modal from '../../plugins/Modal.vue';
-import SellIcon from "../../../icons/SellIcon.vue";
+import SellIcon from "../../../../assets/images/icons/SellIcon.vue";
 
 defineProps({
     firstTitle: {

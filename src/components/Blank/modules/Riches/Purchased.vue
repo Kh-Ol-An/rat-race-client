@@ -1,6 +1,6 @@
 <script setup>
 import InfoField from '../../plugins/InfoField.vue';
-import SellIcon from "../../../icons/SellIcon.vue";
+import SellIcon from "../../../../assets/images/icons/SellIcon.vue";
 import { addingSpaces } from '../../../../helpers/formating-values.js';
 
 const props = defineProps({

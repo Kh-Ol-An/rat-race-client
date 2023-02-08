@@ -4,15 +4,15 @@ import { mapGetters } from '../../../store/helpers.js';
 import Input from '../../plugins/Input.vue';
 import Add from '../plugins/Add.vue';
 import InfoField from '../plugins/InfoField.vue';
-import MaleIcon from '../../icons/MaleIcon.vue';
-import FemaleIcon from '../../icons/FemaleIcon.vue';
-import SexIcon from '../../icons/SexIcon.vue';
-import ApartmentIcon from '../../icons/ApartmentIcon.vue';
-import CarIcon from '../../icons/CarIcon.vue';
-import CottageIcon from '../../icons/CottageIcon.vue';
-import YachtIcon from '../../icons/YachtIcon.vue';
-import PlaneIcon from '../../icons/PlaneIcon.vue';
-import TargetIcon from '../../icons/TargetIcon.vue';
+import MaleIcon from '../../../assets/images/icons/MaleIcon.vue';
+import FemaleIcon from '../../../assets/images/icons/FemaleIcon.vue';
+import BabyIcon from '../../../assets/images/icons/BabyIcon.vue';
+import ApartmentIcon from '../../../assets/images/icons/ApartmentIcon.vue';
+import CarIcon from '../../../assets/images/icons/CarIcon.vue';
+import CottageIcon from '../../../assets/images/icons/CottageIcon.vue';
+import YachtIcon from '../../../assets/images/icons/YachtIcon.vue';
+import PlaneIcon from '../../../assets/images/icons/PlaneIcon.vue';
+import TargetIcon from '../../../assets/images/icons/TargetIcon.vue';
 
 const props = defineProps({
     blankProp: {
@@ -80,7 +80,7 @@ const profession = ref('');
                 height="24px"
                 :classes="(blank.marriage && !blank.rich) ? 'fill-opposite' : 'fill-slate-400'"
             />
-            <SexIcon
+            <BabyIcon
                 v-if="havingChildren && !blank.rich"
                 width="24px"
                 height="24px"
