@@ -406,7 +406,26 @@ const restart = async () => {
     });
 };
 
-watch(blank, () => uploadBlank(blank));
+const historyBlank = reactive([]);
+const historyPeriod = ref(0);
+// const makeHistory = ref(true);
+const historyBack = () => {
+    historyPeriod.value -= 1;
+    console.log('historyBack');
+};
+const historyForward = () => {
+    historyPeriod.value += 1;
+    console.log('historyForward');
+};
+
+watch(blank, () => {
+    historyPeriod.value && historyBlank.push({...blank});
+    historyPeriod.value += 1;
+    historyBlank.length > 10 && historyBlank.shift();
+    console.log('watch: ', historyBlank);
+    uploadBlank(blank);
+    // makeHistory.value = true;
+});
 
 const showModalRich = computed(
     () =>
@@ -607,7 +626,7 @@ const showModalWin = computed(
             </div>
 
             <div class="md:px-2 md:space-y-2">
-                <BlankActions @restart="restart" />
+                <BlankActions @back="historyBack" @forward="historyForward" @restart="restart" />
             </div>
         </div>
 
