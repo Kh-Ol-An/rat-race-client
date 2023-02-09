@@ -19,9 +19,13 @@ export default {
                     type: 'success',
                     title: 'Збереження даних',
                     text: 'Ваші дані збережені',
+                    duration: 1000,
                 });
+
+                return true;
             } catch (err) {
-                console.log(err)
+                console.log(err);
+                return false;
             }
         },
         async downloadBlank({ commit }) {

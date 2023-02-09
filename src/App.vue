@@ -52,18 +52,23 @@ router.beforeEach((to, from, next) => {
 </template>
 
 <style>
-input:-webkit-autofill {
-    -webkit-box-shadow: inset 0 0 0 50px #1e293b !important; /* Цвет фона */
+/* reset autofill for input */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: inset 0 0 0 1000px #1e293b !important; /* Цвет фона */
     -webkit-text-fill-color: #528D36 !important; /* цвет текста */
+    transition: background-color 600000s 0s, color 600000s 0s;
 }
 
+/* Removing arrows for the input number */
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
-
 /* Firefox */
 input[type=number] {
     -moz-appearance: textfield;

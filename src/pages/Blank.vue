@@ -1,5 +1,6 @@
 <script setup>
-import { reactive, ref, computed } from 'vue';
+import { reactive, ref, computed, watch } from 'vue';
+import { notify } from "@kyvg/vue3-notification";
 import { mapActions, mapGetters } from '../store/helpers.js';
 import Menu from '../components/plugins/Menu.vue';
 import BlankIdentification from '../components/Blank/modules/BlankIdentification.vue';
@@ -17,7 +18,6 @@ import Shares from '../components/Blank/modules/Shares/Shares.vue';
 import Assets from '../components/Blank/modules/Assets/Assets.vue';
 import BlankActions from '../components/Blank/modules/BlankActions.vue';
 import Modal from '../components/Blank/plugins/Modal.vue';
-import SaveIcon from '../assets/images/icons/SaveIcon.vue';
 import MoneyIcon from '../assets/images/icons/MoneyIcon.vue';
 import { addingSpaces } from '../helpers/formating-values.js';
 
@@ -353,9 +353,8 @@ const sellCorruptAcres = (price) => {
     blank.assets.corruptLand= [];
 };
 
-const submit = () => uploadBlank(blank);
-const restart = () => {
-    uploadBlank({
+const restart = async () => {
+    const initialBlank = {
         gender: '',
         profession: '',
         debt: 0,
@@ -398,16 +397,16 @@ const restart = () => {
         },
         rich: false,
         win: false,
+    };
+    const uploaded = await uploadBlank(initialBlank);
+    uploaded ? location.reload() : notify({
+        type: 'error',
+        title: 'Перезавантаження',
+        text: 'Почати спочатку не вдалося. Спробуй пізніше.',
     });
-    location.reload();
 };
-const showModalSaveInterval = ref(false);
-const timerId = setInterval(() => submit(), 1000 * 60 * 5);
-const disableSubmit = () => {
-    clearInterval(timerId);
-    showModalSaveInterval.value = true;
-    setTimeout(() => showModalSaveInterval.value = false, 1000 * 3);
-};
+
+watch(blank, () => uploadBlank(blank));
 
 const showModalRich = computed(
     () =>
@@ -435,9 +434,16 @@ const showModalWin = computed(
             Бланк 'Щурячі перегони Ⅱ'
         </h1>
 
-        <form
-            class="relative md:mt-2 w-full max-w-5xl flex flex-col gap-4 shadow-lg md:shadow-none rounded-md bg-slate-800"
-            @submit.prevent="submit"
+        <div
+            class="
+                relative
+                md:mt-2
+                w-full max-w-5xl
+                flex flex-col gap-4
+                shadow-lg md:shadow-none
+                rounded-md
+                bg-slate-800
+            "
         >
             <div class="pt-6 px-8 md:pt-2 md:px-2 grid grid-cols-2 md:grid-cols-1 gap-4 md:gap-2">
                 <BlankIdentification
@@ -445,25 +451,6 @@ const showModalWin = computed(
                     @add:gender="addGender"
                     @add:profession="addProfession"
                 />
-            </div>
-
-            <div class="px-2 hidden md:block">
-                <button
-                    class="
-                        p-4
-                        flex items-center justify-center
-                        w-full
-                        shadow hover:shadow-lg
-                        rounded-md
-                        bg-gradient-to-b from-secondaryLight to-secondary
-                        outline-0
-                        transition-all duration-300
-                    "
-                    type="submit"
-                    title="Зберегти"
-                >
-                    <SaveIcon width="30px" height="30px" color="fill-slate-300" />
-                </button>
             </div>
 
             <div class="px-8 md:px-2 flex items-center gap-4 md:gap-2">
@@ -620,17 +607,9 @@ const showModalWin = computed(
             </div>
 
             <div class="md:px-2 md:space-y-2">
-                <BlankActions @restart="restart" @disable:submit="disableSubmit" />
-                <Modal :show="showModalSaveInterval" cancel="Зрозумів" @cancel="showModalSaveInterval = false">
-                    <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
-                        Попередження.
-                    </h4>
-                    <p class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center">
-                        Автоматичне зберігання вимкнено.
-                    </p>
-                </Modal>
+                <BlankActions @restart="restart" />
             </div>
-        </form>
+        </div>
 
         <Modal :show="showModalRich" cancel="Зрозумів" @cancel="blank.rich = true">
             <h4 class="mx-auto text-2xl font-bold text-primary text-center">
