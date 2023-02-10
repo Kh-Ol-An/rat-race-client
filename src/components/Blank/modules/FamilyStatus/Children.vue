@@ -25,7 +25,7 @@ const props = defineProps({
 <template>
     <div :class="[
         'flex items-center justify-between gap-2',
-        disabled && 'opacity-20',
+        disabled && 'cursor-not-allowed opacity-20',
     ]">
         <div class="flex items-center gap-8">
             <span class="text-slate-500">
@@ -37,7 +37,7 @@ const props = defineProps({
                     {{ count }}
                 </span>
                 <button
-                    class="p-2 font-bold leading-none text-slate-800 outline-0"
+                    :class="['p-2 font-bold leading-none text-slate-800 outline-0', disabled && 'cursor-not-allowed']"
                     type="button"
                     :disabled="disabled"
                     @click="$emit('have:baby')"

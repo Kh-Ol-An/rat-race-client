@@ -8,6 +8,10 @@ const props = defineProps({
         type: Boolean,
         required: true,
     },
+    disabled: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 const emit = defineEmits([ 'change' ]);
@@ -16,13 +20,19 @@ const change = () => emit('change', !props.checked);
 </script>
 
 <template>
-    <label class="flex items-center justify-between gap-2 text-slate-500 cursor-pointer">
+    <label
+        :class="[
+            'flex items-center justify-between gap-2 text-slate-500',
+             disabled ? 'cursor-not-allowed opacity-20' : 'cursor-pointer',
+         ]"
+    >
         {{ label }}
 
         <input
             class="peer hidden"
             type="checkbox"
             :checked="checked"
+            :disabled="disabled"
             @change="change"
         >
         <div

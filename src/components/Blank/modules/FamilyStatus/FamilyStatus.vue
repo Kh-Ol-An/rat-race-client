@@ -1,6 +1,6 @@
 <script setup>
 import { toRef } from "vue";
-import Checkbox from './Marriage.vue';
+import Marriage from './Marriage.vue';
 import Children from './Children.vue';
 
 const props = defineProps({
@@ -19,12 +19,12 @@ const changeMarriage = checked => emit('change:marriage', checked);
 
 <template>
     <h2 class="px-4 text-xl font-bold text-opposite text-center">Сімейний стан</h2>
-    <Checkbox label="Шлюб:" :checked="blank.marriage" @change="changeMarriage" />
+    <Marriage label="Шлюб:" :checked="blank.marriage" :disabled="blank.gender.length === 0" @change="changeMarriage" />
     <Children
         label="Діти:"
         :count="blank.children.count"
         :expense="blank.children.expense"
-        :disabled="blank.gender === 'male' && !blank.marriage"
+        :disabled="blank.gender.length === 0 || (blank.gender === 'male' && !blank.marriage)"
         @have:baby="$emit('have:baby')"
     />
 </template>
