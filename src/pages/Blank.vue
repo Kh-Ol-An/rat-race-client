@@ -20,6 +20,21 @@ import BlankActions from '../components/Blank/modules/BlankActions.vue';
 import Modal from '../components/Blank/plugins/Modal.vue';
 import MoneyIcon from '../assets/images/icons/MoneyIcon.vue';
 import { addingSpaces } from '../helpers/formating-values.js';
+import {
+    TAX,
+    APARTMENT_EXPENSES,
+    CAR_EXPENSES,
+    COTTAGE_EXPENSES,
+    YACHT_EXPENSES,
+    PLANE_EXPENSES,
+    MAX_DEBT,
+    WEDDING_COST,
+    CHILD_EXPENSES,
+    CHILD_ALLOWANCE,
+    MAX_HISTORY,
+    RICH_CASH,
+    RICH_CASH_FLOW,
+} from '../database/variables.js';
 
 const { uploadBlank, downloadBlank } = mapActions();
 const { getBlank } = mapGetters();
@@ -39,7 +54,7 @@ const decrement = (transaction) => {
 
     return blank.cash -= transaction;
 };
-const tax = () => blank.cash -= Math.round(blank.cash * 0.1);
+const tax = () => blank.cash -= Math.round(blank.cash * TAX);
 const increment = (transaction) => blank.cash += transaction;
 
 // PASSIVE
@@ -50,11 +65,11 @@ const expenses = computed(() => {
     sum += blank.clothes;
     sum += blank.fare;
     sum += blank.phone;
-    sum += blank.apartments.length * 200;
-    sum += blank.cars.length * 600;
-    sum += blank.cottages.length * 1000;
-    sum += blank.yachts.length * 1500;
-    sum += blank.planes.length * 5000;
+    sum += blank.apartments.length * APARTMENT_EXPENSES;
+    sum += blank.cars.length * CAR_EXPENSES;
+    sum += blank.cottages.length * COTTAGE_EXPENSES;
+    sum += blank.yachts.length * YACHT_EXPENSES;
+    sum += blank.planes.length * PLANE_EXPENSES;
     sum += blank.children.expense;
     blank.credits.map(credit => sum += credit.payment);
     return sum;
@@ -77,7 +92,7 @@ const repayDebt = (debt) => {
     blank.debt -= debt;
     blank.cash -= debt;
 };
-const showModalDebt = computed(() => blank.debt > 10000);
+const showModalDebt = computed(() => blank.debt > MAX_DEBT);
 
 const addRent = (rent) => blank.rent = rent;
 const addFood = (food) => blank.food = food;
@@ -202,7 +217,7 @@ const buyWhimsAndFancies = (name, price) => {
 
 const changeMarriage = checked => {
     if (checked) {
-        blank.gender === 'male' && decrement(5000);
+        blank.gender === 'male' && decrement(WEDDING_COST);
         blank.gender === 'female' && (blank.children.expense = 0);
     } else {
         if (blank.gender === 'male' ) {
@@ -210,16 +225,16 @@ const changeMarriage = checked => {
             blank.children.count = 0;
             blank.children.expense = 0;
         }
-        blank.gender === 'female' && (blank.children.expense = blank.children.count * 300);
+        blank.gender === 'female' && (blank.children.expense = blank.children.count * CHILD_EXPENSES);
     }
 
     blank.marriage = checked;
 };
 const haveBaby = () => {
     blank.children.count += 1;
-    blank.gender === 'male' && (blank.children.expense = blank.children.count * 300);
-    blank.gender === 'female' && !blank.marriage && (blank.children.expense = blank.children.count * 300);
-    blank.cash += 1000;
+    blank.gender === 'male' && (blank.children.expense = blank.children.count * CHILD_EXPENSES);
+    blank.gender === 'female' && !blank.marriage && (blank.children.expense = blank.children.count * CHILD_EXPENSES);
+    blank.cash += CHILD_ALLOWANCE;
 };
 
 // ACTIVE
@@ -426,19 +441,19 @@ const historyForward = () => {
 
 watch(blank, () => {
     if (makeHistory.value) {
-        historyBlank.splice(historyPeriod.value + 1, 10);
+        historyBlank.splice(historyPeriod.value + 1, MAX_HISTORY);
         historyBlank.push(JSON.parse(JSON.stringify(blank)));
         historyPeriod.value = historyBlank.length - 1;
     }
-    historyBlank.length > 10 && historyBlank.shift();
+    historyBlank.length > MAX_HISTORY && historyBlank.shift();
     uploadBlank(blank);
     makeHistory.value = true;
 });
 
 const showModalRich = computed(
     () =>
-        blank.cash >= 3000000 &&
-        cashFlow.value >= 50000 &&
+        blank.cash >= RICH_CASH &&
+        cashFlow.value >= RICH_CASH_FLOW &&
         blank.debt === 0 &&
         blank.apartments.length > 0 &&
         blank.cars.length > 0 &&
