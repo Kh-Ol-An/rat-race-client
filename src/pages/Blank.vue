@@ -407,24 +407,32 @@ const restart = async () => {
 };
 
 const historyBlank = reactive([]);
-const historyPeriod = ref(0);
-// const makeHistory = ref(true);
+const historyPeriod = ref(-1);
+const makeHistory = ref(true);
 const historyBack = () => {
     historyPeriod.value -= 1;
-    console.log('historyBack');
+    makeHistory.value = false;
+    for (const [key] of Object.entries(blank)) {
+        blank[key] = historyBlank[historyPeriod.value][key];
+    }
 };
 const historyForward = () => {
     historyPeriod.value += 1;
-    console.log('historyForward');
+    makeHistory.value = false;
+    for (const [key] of Object.entries(blank)) {
+        blank[key] = historyBlank[historyPeriod.value][key];
+    }
 };
 
 watch(blank, () => {
-    historyPeriod.value && historyBlank.push({...blank});
-    historyPeriod.value += 1;
+    if (makeHistory.value) {
+        historyBlank.splice(historyPeriod.value + 1, 10);
+        historyBlank.push({...blank});
+        historyPeriod.value = historyBlank.length - 1;
+    }
     historyBlank.length > 10 && historyBlank.shift();
-    console.log('watch: ', historyBlank);
     uploadBlank(blank);
-    // makeHistory.value = true;
+    makeHistory.value = true;
 });
 
 const showModalRich = computed(
@@ -626,7 +634,13 @@ const showModalWin = computed(
             </div>
 
             <div class="md:px-2 md:space-y-2">
-                <BlankActions @back="historyBack" @forward="historyForward" @restart="restart" />
+                <BlankActions
+                    :historyBlank="historyBlank"
+                    :historyPeriod="historyPeriod"
+                    @back="historyBack"
+                    @forward="historyForward"
+                    @restart="restart"
+                />
             </div>
         </div>
 
