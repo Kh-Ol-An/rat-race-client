@@ -409,25 +409,25 @@ const restart = async () => {
 const historyBlank = reactive([]);
 const historyPeriod = ref(-1);
 const makeHistory = ref(true);
-const historyBack = () => {
-    historyPeriod.value -= 1;
+const historyTransition = () => {
     makeHistory.value = false;
     for (const [key] of Object.entries(blank)) {
         blank[key] = historyBlank[historyPeriod.value][key];
     }
 };
+const historyBack = () => {
+    historyPeriod.value -= 1;
+    historyTransition();
+};
 const historyForward = () => {
     historyPeriod.value += 1;
-    makeHistory.value = false;
-    for (const [key] of Object.entries(blank)) {
-        blank[key] = historyBlank[historyPeriod.value][key];
-    }
+    historyTransition();
 };
 
 watch(blank, () => {
     if (makeHistory.value) {
         historyBlank.splice(historyPeriod.value + 1, 10);
-        historyBlank.push({...blank});
+        historyBlank.push(JSON.parse(JSON.stringify(blank)));
         historyPeriod.value = historyBlank.length - 1;
     }
     historyBlank.length > 10 && historyBlank.shift();
