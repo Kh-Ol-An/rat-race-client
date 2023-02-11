@@ -48,7 +48,7 @@ const profession = ref('');
             </span>
         </InfoField>
 
-        <div v-if="blank.gender.length === 0" class="mx-auto flex items-center gap-3">
+        <div v-if="blank.gender.length === 0" class="ml-auto flex items-center gap-3">
             <input class="peer hidden" type="radio" id="male" name="gender" value="male" v-model="gender">
             <label class="cursor-pointer" for="male">
                 <MaleIcon width="24px" height="24px" :classes="gender === 'male' ? 'fill-blue-600' : 'fill-slate-400'" />
