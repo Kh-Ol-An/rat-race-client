@@ -14,7 +14,11 @@ export const RICH_CASH = 3000000;
 export const RICH_CASH_FLOW = 50000;
 
 // Game
-export const CONTAINER_FACTOR = 0.693333333;
-export const FIELDS_COUNT_BY_WIDTH = 25;
+export const OUTER_FACTOR = 0.693333333;
+export const INNER_FACTOR = 0.636363636;
+export const FIELDS_COUNT_BY_WIDTH_IN_OUTER = 25;
+export const FIELDS_COUNT_BY_WIDTH_IN_INNER = 26.4;
 export const FIELDS_COUNT_BY_HEIGHT = 17.3333333;
-export const ASPECT_RATIO = 0.6;
+export const ASPECT_RATIO_OUTER = 0.6;
+export const ASPECT_RATIO_INNER = 0.714285714;
+export const ASPECT_RATIO_INNER_HUGE = 0.625;
