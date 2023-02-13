@@ -1,6 +1,6 @@
 <script setup>
-const props = defineProps({
-    dice: {
+defineProps({
+    numberOnDice: {
         type: Number,
         required: true,
     },
@@ -12,17 +12,18 @@ const props = defineProps({
         class="
             absolute
             top-1/2 left-1/2
+            z-10
             -translate-y-1/2 -translate-x-1/2
             w-12 h-12
             rounded
-            bg-gradient-to-b from-stone-50 to-stone-400
-            dice
+            bg-gradient-to-b from-stone-200 to-stone-400
+            shadow-[0_0_6px_1px_rgb(255,255,255)_inset]
         "
         type="button"
         @click="$emit('rolling')"
     >
         <span
-            v-if="dice === 1 || dice === 3 || dice === 5"
+            v-if="numberOnDice === 1 || numberOnDice === 3 || numberOnDice === 5"
             class="
                absolute
                top-1/2 left-1/2
@@ -33,7 +34,7 @@ const props = defineProps({
             "
         ></span>
         <span
-            v-if="dice === 4 || dice === 5 || dice === 6"
+            v-if="numberOnDice === 4 || numberOnDice === 5 || numberOnDice === 6"
             class="
                absolute
                top-3 left-3
@@ -44,7 +45,7 @@ const props = defineProps({
             "
         ></span>
         <span
-            v-if="dice === 2 || dice === 3 || dice === 4 || dice === 5 || dice === 6"
+            v-if="numberOnDice === 2 || numberOnDice === 3 || numberOnDice === 4 || numberOnDice === 5 || numberOnDice === 6"
             class="
                absolute
                top-3 left-9
@@ -55,7 +56,7 @@ const props = defineProps({
             "
         ></span>
         <span
-            v-if="dice === 6"
+            v-if="numberOnDice === 6"
             class="
                absolute
                top-1/2 left-3
@@ -66,7 +67,7 @@ const props = defineProps({
             "
         ></span>
         <span
-            v-if="dice === 6"
+            v-if="numberOnDice === 6"
             class="
                absolute
                top-1/2 left-9
@@ -77,7 +78,7 @@ const props = defineProps({
             "
         ></span>
         <span
-            v-if="dice === 2 || dice === 3 || dice === 4 || dice === 5 || dice === 6"
+            v-if="numberOnDice === 2 || numberOnDice === 3 || numberOnDice === 4 || numberOnDice === 5 || numberOnDice === 6"
             class="
                absolute
                top-9 left-3
@@ -88,7 +89,7 @@ const props = defineProps({
             "
         ></span>
         <span
-            v-if="dice === 4 || dice === 5 || dice === 6"
+            v-if="numberOnDice === 4 || numberOnDice === 5 || numberOnDice === 6"
             class="
                absolute
                top-9 left-9
@@ -100,9 +101,3 @@ const props = defineProps({
         ></span>
     </button>
 </template>
-
-<style scoped>
-.dice {
-    box-shadow: 0 0 6px 1px rgb(0, 0, 0, 0.9) inset;
-}
-</style>

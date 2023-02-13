@@ -1,7 +1,7 @@
 export default (small, big, huge) => {
     return [
         {
-            id: 101,
+            id: 1,
             styles: {
                 right: big,
                 bottom: 0,
@@ -13,7 +13,7 @@ export default (small, big, huge) => {
             name: "Старт",
         },
         {
-            id: 102,
+            id: 2,
             styles: {
                 right: big + small,
                 bottom: 0,
@@ -25,7 +25,7 @@ export default (small, big, huge) => {
             name: "Бізнес",
         },
         {
-            id: 103,
+            id: 3,
             styles: {
                 right: big + small * 2,
                 bottom: 0,
@@ -37,7 +37,7 @@ export default (small, big, huge) => {
             name: "Покупки",
         },
         {
-            id: 104,
+            id: 4,
             styles: {
                 right: big + small * 3,
                 bottom: 0,
@@ -49,7 +49,7 @@ export default (small, big, huge) => {
             name: "Шанс",
         },
         {
-            id: 105,
+            id: 5,
             styles: {
                 right: big + small * 4,
                 bottom: 0,
@@ -61,7 +61,7 @@ export default (small, big, huge) => {
             name: "Витрати",
         },
         {
-            id: 106,
+            id: 6,
             styles: {
                 right: big + small * 5,
                 bottom: 0,
@@ -73,7 +73,7 @@ export default (small, big, huge) => {
             name: "Ринок",
         },
         {
-            id: 107,
+            id: 7,
             styles: {
                 right: big + small * 6,
                 bottom: 0,
@@ -85,7 +85,7 @@ export default (small, big, huge) => {
             name: "Шанс",
         },
         {
-            id: 108,
+            id: 8,
             styles: {
                 right: big + small * 7,
                 bottom: 0,
@@ -97,7 +97,7 @@ export default (small, big, huge) => {
             name: "Покупки",
         },
         {
-            id: 109,
+            id: 9,
             styles: {
                 right: big + small * 8,
                 bottom: 0,
@@ -109,7 +109,7 @@ export default (small, big, huge) => {
             name: "Витрати",
         },
         {
-            id: 110,
+            id: 10,
             styles: {
                 right: big + small * 9,
                 bottom: 0,
@@ -121,7 +121,7 @@ export default (small, big, huge) => {
             name: "Ринок",
         },
         {
-            id: 111,
+            id: 11,
             styles: {
                 right: big + small * 10,
                 bottom: 0,
@@ -133,7 +133,7 @@ export default (small, big, huge) => {
             name: "Бізнес",
         },
         {
-            id: 112,
+            id: 12,
             styles: {
                 right: big + small * 11,
                 bottom: 0,
@@ -145,7 +145,7 @@ export default (small, big, huge) => {
             name: "Банкрутство",
         },
         {
-            id: 113,
+            id: 13,
             styles: {
                 right: big + huge + small * 11,
                 bottom: 0,
@@ -157,7 +157,7 @@ export default (small, big, huge) => {
             name: "Ринок",
         },
         {
-            id: 114,
+            id: 14,
             styles: {
                 right: big + huge + small * 12,
                 bottom: 0,
@@ -169,7 +169,7 @@ export default (small, big, huge) => {
             name: "Витрати",
         },
         {
-            id: 115,
+            id: 15,
             styles: {
                 right: big + huge + small * 13,
                 bottom: 0,
@@ -181,7 +181,7 @@ export default (small, big, huge) => {
             name: "Бізнес",
         },
         {
-            id: 116,
+            id: 16,
             styles: {
                 right: big + huge + small * 14,
                 bottom: 0,
@@ -193,7 +193,7 @@ export default (small, big, huge) => {
             name: "Шанс",
         },
         {
-            id: 117,
+            id: 17,
             styles: {
                 right: big + huge + small * 15,
                 bottom: 0,
@@ -205,7 +205,7 @@ export default (small, big, huge) => {
             name: "Покупки",
         },
         {
-            id: 118,
+            id: 18,
             styles: {
                 right: big + huge + small * 16,
                 bottom: 0,
@@ -217,7 +217,7 @@ export default (small, big, huge) => {
             name: "Витрати",
         },
         {
-            id: 119,
+            id: 19,
             styles: {
                 right: big + huge + small * 17,
                 bottom: 0,
@@ -229,7 +229,7 @@ export default (small, big, huge) => {
             name: "Ринок",
         },
         {
-            id: 120,
+            id: 20,
             styles: {
                 right: big + huge + small * 18,
                 bottom: 0,
@@ -241,7 +241,7 @@ export default (small, big, huge) => {
             name: "Шанс",
         },
         {
-            id: 121,
+            id: 21,
             styles: {
                 right: big + huge + small * 19,
                 bottom: 0,
@@ -253,7 +253,7 @@ export default (small, big, huge) => {
             name: "Бізнес",
         },
         {
-            id: 122,
+            id: 22,
             styles: {
                 right: big + huge + small * 20,
                 bottom: 0,
@@ -265,7 +265,7 @@ export default (small, big, huge) => {
             name: "Витрати",
         },
         {
-            id: 123,
+            id: 23,
             styles: {
                 right: big + huge + small * 21,
                 bottom: 0,
@@ -277,7 +277,7 @@ export default (small, big, huge) => {
             name: "Ринок",
         },
         {
-            id: 124,
+            id: 24,
             styles: {
                 right: big + huge + small * 22,
                 bottom: 0,
@@ -290,7 +290,7 @@ export default (small, big, huge) => {
         },
 // *************************************************
         {
-            id: 125,
+            id: 25,
             styles: {
                 bottom: big,
                 left: 0,
@@ -301,7 +301,7 @@ export default (small, big, huge) => {
             name: "Шанс",
         },
         {
-            id: 126,
+            id: 26,
             styles: {
                 bottom: big + small,
                 left: 0,
@@ -312,7 +312,7 @@ export default (small, big, huge) => {
             name: "Бізнес",
         },
         {
-            id: 127,
+            id: 27,
             styles: {
                 bottom: big + small * 2,
                 left: 0,
@@ -323,7 +323,7 @@ export default (small, big, huge) => {
             name: "Витрати",
         },
         {
-            id: 128,
+            id: 28,
             styles: {
                 bottom: big + small * 3,
                 left: 0,
@@ -334,7 +334,7 @@ export default (small, big, huge) => {
             name: "Ринок",
         },
         {
-            id: 129,
+            id: 29,
             styles: {
                 bottom: big + small * 4,
                 left: 0,
@@ -345,7 +345,7 @@ export default (small, big, huge) => {
             name: "Весілля",
         },
         {
-            id: 130,
+            id: 30,
             styles: {
                 bottom: big + small * 5,
                 left: 0,
@@ -356,7 +356,7 @@ export default (small, big, huge) => {
             name: "Покупки",
         },
         {
-            id: 131,
+            id: 31,
             styles: {
                 bottom: big + small * 6,
                 left: 0,
@@ -367,7 +367,7 @@ export default (small, big, huge) => {
             name: "Шанс",
         },
         {
-            id: 132,
+            id: 32,
             styles: {
                 bottom: big + small * 7,
                 left: 0,
@@ -378,7 +378,7 @@ export default (small, big, huge) => {
             name: "Витрати",
         },
         {
-            id: 133,
+            id: 33,
             styles: {
                 bottom: big + small * 8,
                 left: 0,
@@ -389,7 +389,7 @@ export default (small, big, huge) => {
             name: "Ринок",
         },
         {
-            id: 134,
+            id: 34,
             styles: {
                 bottom: big + small * 9,
                 left: 0,
@@ -400,7 +400,7 @@ export default (small, big, huge) => {
             name: "Відпустка",
         },
         {
-            id: 135,
+            id: 35,
             styles: {
                 bottom: big + small * 10,
                 left: 0,
@@ -411,7 +411,7 @@ export default (small, big, huge) => {
             name: "Шанс",
         },
         {
-            id: 136,
+            id: 36,
             styles: {
                 bottom: big + small * 11,
                 left: 0,
@@ -422,7 +422,7 @@ export default (small, big, huge) => {
             name: "Бізнес",
         },
         {
-            id: 137,
+            id: 37,
             styles: {
                 bottom: big + small * 12,
                 left: 0,
@@ -433,7 +433,7 @@ export default (small, big, huge) => {
             name: "Витрати",
         },
         {
-            id: 138,
+            id: 38,
             styles: {
                 bottom: big + small * 13,
                 left: 0,
@@ -444,7 +444,7 @@ export default (small, big, huge) => {
             name: "Ринок",
         },
         {
-            id: 139,
+            id: 39,
             styles: {
                 bottom: big + small * 14,
                 left: 0,
@@ -457,7 +457,7 @@ export default (small, big, huge) => {
         },
 // *************************************************
         {
-            id: 140,
+            id: 40,
             styles: {
                 top: 0,
                 left: big,
@@ -469,7 +469,7 @@ export default (small, big, huge) => {
             name: "Покупки",
         },
         {
-            id: 141,
+            id: 41,
             styles: {
                 top: 0,
                 left: big + small,
@@ -481,7 +481,7 @@ export default (small, big, huge) => {
             name: "Шанс",
         },
         {
-            id: 142,
+            id: 42,
             styles: {
                 top: 0,
                 left: big + small * 2,
@@ -493,7 +493,7 @@ export default (small, big, huge) => {
             name: "Витрати",
         },
         {
-            id: 143,
+            id: 43,
             styles: {
                 top: 0,
                 left: big + small * 3,
@@ -505,7 +505,7 @@ export default (small, big, huge) => {
             name: "Ринок",
         },
         {
-            id: 144,
+            id: 44,
             styles: {
                 top: 0,
                 left: big + small * 4,
@@ -517,7 +517,7 @@ export default (small, big, huge) => {
             name: "Шанс",
         },
         {
-            id: 145,
+            id: 45,
             styles: {
                 top: 0,
                 left: big + small * 5,
@@ -529,7 +529,7 @@ export default (small, big, huge) => {
             name: "Бізнес",
         },
         {
-            id: 146,
+            id: 46,
             styles: {
                 top: 0,
                 left: big + small * 6,
@@ -541,7 +541,7 @@ export default (small, big, huge) => {
             name: "Витрати",
         },
         {
-            id: 147,
+            id: 47,
             styles: {
                 top: 0,
                 left: big + small * 7,
@@ -553,7 +553,7 @@ export default (small, big, huge) => {
             name: "Ринок",
         },
         {
-            id: 148,
+            id: 48,
             styles: {
                 top: 0,
                 left: big + small * 8,
@@ -565,7 +565,7 @@ export default (small, big, huge) => {
             name: "Шанс",
         },
         {
-            id: 149,
+            id: 49,
             styles: {
                 top: 0,
                 left: big + small * 9,
@@ -577,7 +577,7 @@ export default (small, big, huge) => {
             name: "Покупки",
         },
         {
-            id: 150,
+            id: 50,
             styles: {
                 top: 0,
                 left: big + small * 10,
@@ -589,7 +589,7 @@ export default (small, big, huge) => {
             name: "Бізнес",
         },
         {
-            id: 151,
+            id: 51,
             styles: {
                 top: 0,
                 left: big + small * 11,
@@ -601,7 +601,7 @@ export default (small, big, huge) => {
             name: "Народження дитини",
         },
         {
-            id: 152,
+            id: 52,
             styles: {
                 top: 0,
                 left: big + huge + small * 11,
@@ -613,7 +613,7 @@ export default (small, big, huge) => {
             name: "Витрати",
         },
         {
-            id: 153,
+            id: 53,
             styles: {
                 top: 0,
                 left: big + huge + small * 12,
@@ -625,7 +625,7 @@ export default (small, big, huge) => {
             name: "Шанс",
         },
         {
-            id: 154,
+            id: 54,
             styles: {
                 top: 0,
                 left: big + huge + small * 13,
@@ -637,7 +637,7 @@ export default (small, big, huge) => {
             name: "Бізнес",
         },
         {
-            id: 155,
+            id: 55,
             styles: {
                 top: 0,
                 left: big + huge + small * 14,
@@ -649,7 +649,7 @@ export default (small, big, huge) => {
             name: "Витрати",
         },
         {
-            id: 156,
+            id: 56,
             styles: {
                 top: 0,
                 left: big + huge + small * 15,
@@ -661,7 +661,7 @@ export default (small, big, huge) => {
             name: "Ринок",
         },
         {
-            id: 157,
+            id: 57,
             styles: {
                 top: 0,
                 left: big + huge + small * 16,
@@ -673,7 +673,7 @@ export default (small, big, huge) => {
             name: "Шанс",
         },
         {
-            id: 158,
+            id: 58,
             styles: {
                 top: 0,
                 left: big + huge + small * 17,
@@ -685,7 +685,7 @@ export default (small, big, huge) => {
             name: "Розлучення",
         },
         {
-            id: 159,
+            id: 59,
             styles: {
                 top: 0,
                 left: big + huge + small * 18,
@@ -697,7 +697,7 @@ export default (small, big, huge) => {
             name: "Покупки",
         },
         {
-            id: 160,
+            id: 60,
             styles: {
                 top: 0,
                 left: big + huge + small * 19,
@@ -709,7 +709,7 @@ export default (small, big, huge) => {
             name: "Витрати",
         },
         {
-            id: 161,
+            id: 61,
             styles: {
                 top: 0,
                 left: big + huge + small * 20,
@@ -721,7 +721,7 @@ export default (small, big, huge) => {
             name: "Ринок",
         },
         {
-            id: 162,
+            id: 62,
             styles: {
                 top: 0,
                 left: big + huge + small * 21,
@@ -733,7 +733,7 @@ export default (small, big, huge) => {
             name: "Витрати",
         },
         {
-            id: 163,
+            id: 63,
             styles: {
                 top: 0,
                 left: big + huge + small * 22,
@@ -746,7 +746,7 @@ export default (small, big, huge) => {
         },
 // *************************************************
         {
-            id: 164,
+            id: 64,
             styles: {
                 top: big,
                 right: 0,
@@ -757,7 +757,7 @@ export default (small, big, huge) => {
             name: "Витрати",
         },
         {
-            id: 165,
+            id: 65,
             styles: {
                 top: big + small,
                 right: 0,
@@ -768,7 +768,7 @@ export default (small, big, huge) => {
             name: "Ринок",
         },
         {
-            id: 166,
+            id: 66,
             styles: {
                 top: big + small * 2,
                 right: 0,
@@ -779,7 +779,7 @@ export default (small, big, huge) => {
             name: "Шанс",
         },
         {
-            id: 167,
+            id: 67,
             styles: {
                 top: big + small * 3,
                 right: 0,
@@ -790,7 +790,7 @@ export default (small, big, huge) => {
             name: "Бізнес",
         },
         {
-            id: 168,
+            id: 68,
             styles: {
                 top: big + small * 4,
                 right: 0,
@@ -801,7 +801,7 @@ export default (small, big, huge) => {
             name: "Звільнення",
         },
         {
-            id: 169,
+            id: 69,
             styles: {
                 top: big + small * 5,
                 right: 0,
@@ -812,7 +812,7 @@ export default (small, big, huge) => {
             name: "Витрати",
         },
         {
-            id: 170,
+            id: 70,
             styles: {
                 top: big + small * 6,
                 right: 0,
@@ -823,7 +823,7 @@ export default (small, big, huge) => {
             name: "Шанс",
         },
         {
-            id: 171,
+            id: 71,
             styles: {
                 top: big + small * 7,
                 right: 0,
@@ -834,7 +834,7 @@ export default (small, big, huge) => {
             name: "Покупки",
         },
         {
-            id: 172,
+            id: 72,
             styles: {
                 top: big + small * 8,
                 right: 0,
@@ -845,7 +845,7 @@ export default (small, big, huge) => {
             name: "Бізнес",
         },
         {
-            id: 173,
+            id: 73,
             styles: {
                 top: big + small * 9,
                 right: 0,
@@ -856,7 +856,7 @@ export default (small, big, huge) => {
             name: "Весілля",
         },
         {
-            id: 174,
+            id: 74,
             styles: {
                 top: big + small * 10,
                 right: 0,
@@ -867,7 +867,7 @@ export default (small, big, huge) => {
             name: "Витрати",
         },
         {
-            id: 175,
+            id: 75,
             styles: {
                 top: big + small * 11,
                 right: 0,
@@ -878,7 +878,7 @@ export default (small, big, huge) => {
             name: "Ринок",
         },
         {
-            id: 176,
+            id: 76,
             styles: {
                 top: big + small * 12,
                 right: 0,
@@ -889,7 +889,7 @@ export default (small, big, huge) => {
             name: "Шанс",
         },
         {
-            id: 177,
+            id: 77,
             styles: {
                 top: big + small * 13,
                 right: 0,
@@ -900,7 +900,7 @@ export default (small, big, huge) => {
             name: "Витрати",
         },
         {
-            id: 178,
+            id: 78,
             styles: {
                 top: big + small * 14,
                 right: 0,

@@ -1,7 +1,7 @@
 export default (small, big) => {
     return [
         {
-            id: 201,
+            id: 1,
             styles: {
                 right: big,
                 bottom: 0,
@@ -13,7 +13,7 @@ export default (small, big) => {
             name: "Старт",
         },
         {
-            id: 202,
+            id: 2,
             styles: {
                 right: big + small,
                 bottom: 0,
@@ -25,7 +25,7 @@ export default (small, big) => {
             name: "Примхи багатіїв",
         },
         {
-            id: 203,
+            id: 3,
             styles: {
                 right: big + small * 2,
                 bottom: 0,
@@ -37,7 +37,7 @@ export default (small, big) => {
             name: "Великі покупки",
         },
         {
-            id: 204,
+            id: 4,
             styles: {
                 right: big + small * 3,
                 bottom: 0,
@@ -49,7 +49,7 @@ export default (small, big) => {
             name: "Бізнес",
         },
         {
-            id: 205,
+            id: 5,
             styles: {
                 right: big + small * 4,
                 bottom: 0,
@@ -61,7 +61,7 @@ export default (small, big) => {
             name: "Примхи багатіїв",
         },
         {
-            id: 206,
+            id: 6,
             styles: {
                 right: big + small * 5,
                 bottom: 0,
@@ -73,7 +73,7 @@ export default (small, big) => {
             name: "Ринок",
         },
         {
-            id: 207,
+            id: 7,
             styles: {
                 right: big + small * 6,
                 bottom: 0,
@@ -85,7 +85,7 @@ export default (small, big) => {
             name: "Шанс",
         },
         {
-            id: 208,
+            id: 8,
             styles: {
                 right: big + small * 7,
                 bottom: 0,
@@ -97,7 +97,7 @@ export default (small, big) => {
             name: "Примхи багатіїв",
         },
         {
-            id: 209,
+            id: 9,
             styles: {
                 right: big + small * 8,
                 bottom: 0,
@@ -109,7 +109,7 @@ export default (small, big) => {
             name: "Бізнес",
         },
         {
-            id: 210,
+            id: 10,
             styles: {
                 right: big + small * 9,
                 bottom: 0,
@@ -121,7 +121,7 @@ export default (small, big) => {
             name: "Ринок",
         },
         {
-            id: 211,
+            id: 11,
             styles: {
                 right: big + small * 10,
                 bottom: 0,
@@ -133,7 +133,7 @@ export default (small, big) => {
             name: "Банкрутство",
         },
         {
-            id: 212,
+            id: 12,
             styles: {
                 right: big * 2 + small * 10,
                 bottom: 0,
@@ -145,7 +145,7 @@ export default (small, big) => {
             name: "Шанс",
         },
         {
-            id: 213,
+            id: 13,
             styles: {
                 right: big * 2 + small * 11,
                 bottom: 0,
@@ -157,7 +157,7 @@ export default (small, big) => {
             name: "Примхи багатіїв",
         },
         {
-            id: 214,
+            id: 14,
             styles: {
                 right: big * 2 + small * 12,
                 bottom: 0,
@@ -169,7 +169,7 @@ export default (small, big) => {
             name: "Великі покупки",
         },
         {
-            id: 215,
+            id: 15,
             styles: {
                 right: big * 2 + small * 13,
                 bottom: 0,
@@ -181,7 +181,7 @@ export default (small, big) => {
             name: "Примхи багатіїв",
         },
         {
-            id: 216,
+            id: 16,
             styles: {
                 right: big * 2 + small * 14,
                 bottom: 0,
@@ -193,7 +193,7 @@ export default (small, big) => {
             name: "Бізнес",
         },
         {
-            id: 217,
+            id: 17,
             styles: {
                 right: big * 2 + small * 15,
                 bottom: 0,
@@ -205,7 +205,7 @@ export default (small, big) => {
             name: "Шанс",
         },
         {
-            id: 218,
+            id: 18,
             styles: {
                 right: big * 2 + small * 16,
                 bottom: 0,
@@ -217,7 +217,7 @@ export default (small, big) => {
             name: "Ринок",
         },
         {
-            id: 219,
+            id: 19,
             styles: {
                 right: big * 2 + small * 17,
                 bottom: 0,
@@ -229,7 +229,7 @@ export default (small, big) => {
             name: "Примхи багатіїв",
         },
         {
-            id: 220,
+            id: 20,
             styles: {
                 right: big * 2 + small * 18,
                 bottom: 0,
@@ -241,7 +241,7 @@ export default (small, big) => {
             name: "Великі покупки",
         },
         {
-            id: 221,
+            id: 21,
             styles: {
                 right: big * 2 + small * 19,
                 bottom: 0,
@@ -253,7 +253,7 @@ export default (small, big) => {
             name: "Примхи багатіїв",
         },
         {
-            id: 222,
+            id: 22,
             styles: {
                 right: big * 2 + small * 20,
                 bottom: 0,
@@ -266,7 +266,7 @@ export default (small, big) => {
         },
 // *************************************************
         {
-            id: 223,
+            id: 23,
             styles: {
                 bottom: big,
                 left: 0,
@@ -277,7 +277,7 @@ export default (small, big) => {
             name: "Примхи багатіїв",
         },
         {
-            id: 224,
+            id: 24,
             styles: {
                 bottom: big + small,
                 left: 0,
@@ -288,7 +288,7 @@ export default (small, big) => {
             name: "Великі покупки",
         },
         {
-            id: 225,
+            id: 25,
             styles: {
                 bottom: big + small * 2,
                 left: 0,
@@ -299,7 +299,7 @@ export default (small, big) => {
             name: "Бізнес",
         },
         {
-            id: 226,
+            id: 26,
             styles: {
                 bottom: big + small * 3,
                 left: 0,
@@ -310,7 +310,7 @@ export default (small, big) => {
             name: "Депутат",
         },
         {
-            id: 227,
+            id: 27,
             styles: {
                 bottom: big + small * 4,
                 left: 0,
@@ -321,7 +321,7 @@ export default (small, big) => {
             name: "Примхи багатіїв",
         },
         {
-            id: 228,
+            id: 28,
             styles: {
                 bottom: big + small * 5,
                 left: 0,
@@ -332,7 +332,7 @@ export default (small, big) => {
             name: "Шанс",
         },
         {
-            id: 229,
+            id: 29,
             styles: {
                 bottom: big + small * 6,
                 left: 0,
@@ -343,7 +343,7 @@ export default (small, big) => {
             name: "Ринок",
         },
         {
-            id: 230,
+            id: 30,
             styles: {
                 bottom: big + small * 7,
                 left: 0,
@@ -354,7 +354,7 @@ export default (small, big) => {
             name: "Примхи багатіїв",
         },
         {
-            id: 231,
+            id: 31,
             styles: {
                 bottom: big + small * 8,
                 left: 0,
@@ -365,7 +365,7 @@ export default (small, big) => {
             name: "Великі покупки",
         },
         {
-            id: 232,
+            id: 32,
             styles: {
                 bottom: big + small * 9,
                 left: 0,
@@ -376,7 +376,7 @@ export default (small, big) => {
             name: "Бізнес",
         },
         {
-            id: 233,
+            id: 33,
             styles: {
                 bottom: big + small * 10,
                 left: 0,
@@ -387,7 +387,7 @@ export default (small, big) => {
             name: "Депутат",
         },
         {
-            id: 234,
+            id: 34,
             styles: {
                 bottom: big + small * 11,
                 left: 0,
@@ -398,7 +398,7 @@ export default (small, big) => {
             name: "Примхи багатіїв",
         },
         {
-            id: 235,
+            id: 35,
             styles: {
                 bottom: big + small * 12,
                 left: 0,
@@ -409,7 +409,7 @@ export default (small, big) => {
             name: "Шанс",
         },
         {
-            id: 236,
+            id: 36,
             styles: {
                 bottom: big + small * 13,
                 left: 0,
@@ -420,7 +420,7 @@ export default (small, big) => {
             name: "Ринок",
         },
         {
-            id: 237,
+            id: 37,
             styles: {
                 bottom: big + small * 14,
                 left: 0,
@@ -433,7 +433,7 @@ export default (small, big) => {
         },
 // *************************************************
         {
-            id: 238,
+            id: 38,
             styles: {
                 top: 0,
                 left: big,
@@ -445,7 +445,7 @@ export default (small, big) => {
             name: "Шанс",
         },
         {
-            id: 239,
+            id: 39,
             styles: {
                 top: 0,
                 left: big + small,
@@ -457,7 +457,7 @@ export default (small, big) => {
             name: "Примхи багатіїв",
         },
         {
-            id: 240,
+            id: 40,
             styles: {
                 top: 0,
                 left: big + small * 2,
@@ -469,7 +469,7 @@ export default (small, big) => {
             name: "Бізнес",
         },
         {
-            id: 241,
+            id: 41,
             styles: {
                 top: 0,
                 left: big + small * 3,
@@ -481,7 +481,7 @@ export default (small, big) => {
             name: "Великі покупки",
         },
         {
-            id: 242,
+            id: 42,
             styles: {
                 top: 0,
                 left: big + small * 4,
@@ -493,7 +493,7 @@ export default (small, big) => {
             name: "Примхи багатіїв",
         },
         {
-            id: 243,
+            id: 43,
             styles: {
                 top: 0,
                 left: big + small * 5,
@@ -505,7 +505,7 @@ export default (small, big) => {
             name: "Ринок",
         },
         {
-            id: 244,
+            id: 44,
             styles: {
                 top: 0,
                 left: big + small * 6,
@@ -517,7 +517,7 @@ export default (small, big) => {
             name: "Шанс",
         },
         {
-            id: 245,
+            id: 45,
             styles: {
                 top: 0,
                 left: big + small * 7,
@@ -529,7 +529,7 @@ export default (small, big) => {
             name: "Примхи багатіїв",
         },
         {
-            id: 246,
+            id: 46,
             styles: {
                 top: 0,
                 left: big + small * 8,
@@ -541,7 +541,7 @@ export default (small, big) => {
             name: "Бізнес",
         },
         {
-            id: 247,
+            id: 47,
             styles: {
                 top: 0,
                 left: big + small * 9,
@@ -553,7 +553,7 @@ export default (small, big) => {
             name: "Шанс",
         },
         {
-            id: 248,
+            id: 48,
             styles: {
                 top: 0,
                 left: big + small * 10,
@@ -565,7 +565,7 @@ export default (small, big) => {
             name: "Податкова перевірка",
         },
         {
-            id: 249,
+            id: 49,
             styles: {
                 top: 0,
                 left: big * 2 + small * 10,
@@ -577,7 +577,7 @@ export default (small, big) => {
             name: "Примхи багатіїв",
         },
         {
-            id: 250,
+            id: 50,
             styles: {
                 top: 0,
                 left: big * 2 + small * 11,
@@ -589,7 +589,7 @@ export default (small, big) => {
             name: "Великі покупки",
         },
         {
-            id: 251,
+            id: 51,
             styles: {
                 top: 0,
                 left: big * 2 + small * 12,
@@ -601,7 +601,7 @@ export default (small, big) => {
             name: "Примхи багатіїв",
         },
         {
-            id: 252,
+            id: 52,
             styles: {
                 top: 0,
                 left: big * 2 + small * 13,
@@ -613,7 +613,7 @@ export default (small, big) => {
             name: "Ринок",
         },
         {
-            id: 253,
+            id: 53,
             styles: {
                 top: 0,
                 left: big * 2 + small * 14,
@@ -625,7 +625,7 @@ export default (small, big) => {
             name: "Бізнес",
         },
         {
-            id: 254,
+            id: 54,
             styles: {
                 top: 0,
                 left: big * 2 + small * 15,
@@ -637,7 +637,7 @@ export default (small, big) => {
             name: "Примхи багатіїв",
         },
         {
-            id: 255,
+            id: 55,
             styles: {
                 top: 0,
                 left: big * 2 + small * 16,
@@ -649,7 +649,7 @@ export default (small, big) => {
             name: "Шанс",
         },
         {
-            id: 256,
+            id: 56,
             styles: {
                 top: 0,
                 left: big * 2 + small * 17,
@@ -661,7 +661,7 @@ export default (small, big) => {
             name: "Великі покупки",
         },
         {
-            id: 257,
+            id: 57,
             styles: {
                 top: 0,
                 left: big * 2 + small * 18,
@@ -673,7 +673,7 @@ export default (small, big) => {
             name: "Примхи багатіїв",
         },
         {
-            id: 258,
+            id: 58,
             styles: {
                 top: 0,
                 left: big * 2 + small * 19,
@@ -685,7 +685,7 @@ export default (small, big) => {
             name: "Ринок",
         },
         {
-            id: 259,
+            id: 59,
             styles: {
                 top: 0,
                 left: big * 2 + small * 20,
@@ -698,7 +698,7 @@ export default (small, big) => {
         },
 // *************************************************
         {
-            id: 260,
+            id: 60,
             styles: {
                 top: big,
                 right: 0,
@@ -709,7 +709,7 @@ export default (small, big) => {
             name: "Примхи багатіїв",
         },
         {
-            id: 261,
+            id: 61,
             styles: {
                 top: big + small,
                 right: 0,
@@ -720,7 +720,7 @@ export default (small, big) => {
             name: "Великі покупки",
         },
         {
-            id: 262,
+            id: 62,
             styles: {
                 top: big + small * 2,
                 right: 0,
@@ -731,7 +731,7 @@ export default (small, big) => {
             name: "Бізнес",
         },
         {
-            id: 263,
+            id: 63,
             styles: {
                 top: big + small * 3,
                 right: 0,
@@ -742,7 +742,7 @@ export default (small, big) => {
             name: "Депутат",
         },
         {
-            id: 264,
+            id: 64,
             styles: {
                 top: big + small * 4,
                 right: 0,
@@ -753,7 +753,7 @@ export default (small, big) => {
             name: "Примхи багатіїв",
         },
         {
-            id: 265,
+            id: 65,
             styles: {
                 top: big + small * 5,
                 right: 0,
@@ -764,7 +764,7 @@ export default (small, big) => {
             name: "Шанс",
         },
         {
-            id: 266,
+            id: 66,
             styles: {
                 top: big + small * 6,
                 right: 0,
@@ -775,7 +775,7 @@ export default (small, big) => {
             name: "Ринок",
         },
         {
-            id: 267,
+            id: 67,
             styles: {
                 top: big + small * 7,
                 right: 0,
@@ -786,7 +786,7 @@ export default (small, big) => {
             name: "Примхи багатіїв",
         },
         {
-            id: 268,
+            id: 68,
             styles: {
                 top: big + small * 8,
                 right: 0,
@@ -797,7 +797,7 @@ export default (small, big) => {
             name: "Великі покупки",
         },
         {
-            id: 269,
+            id: 69,
             styles: {
                 top: big + small * 9,
                 right: 0,
@@ -808,7 +808,7 @@ export default (small, big) => {
             name: "Шанс",
         },
         {
-            id: 270,
+            id: 70,
             styles: {
                 top: big + small * 10,
                 right: 0,
@@ -819,7 +819,7 @@ export default (small, big) => {
             name: "Депутат",
         },
         {
-            id: 271,
+            id: 71,
             styles: {
                 top: big + small * 11,
                 right: 0,
@@ -830,7 +830,7 @@ export default (small, big) => {
             name: "Примхи багатіїв",
         },
         {
-            id: 272,
+            id: 72,
             styles: {
                 top: big + small * 12,
                 right: 0,
@@ -841,7 +841,7 @@ export default (small, big) => {
             name: "Шанс",
         },
         {
-            id: 273,
+            id: 73,
             styles: {
                 top: big + small * 13,
                 right: 0,
@@ -852,7 +852,7 @@ export default (small, big) => {
             name: "Ринок",
         },
         {
-            id: 274,
+            id: 74,
             styles: {
                 top: big + small * 14,
                 right: 0,

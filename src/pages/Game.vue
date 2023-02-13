@@ -2,88 +2,98 @@
 import { onMounted, onUnmounted, ref, reactive, computed } from 'vue';
 import Menu from '../components/plugins/Menu.vue';
 import Dice from '../components/Game/Dice.vue';
+import GameChip from "../components/Game/GameChip.vue";
 import poorCircle from '../database/poor-circle.js';
 import richCircle from '../database/rich-circle.js';
 import {
-    OUTER_FACTOR,
-    INNER_FACTOR,
-    FIELDS_COUNT_BY_WIDTH_IN_OUTER,
-    FIELDS_COUNT_BY_WIDTH_IN_INNER,
-    FIELDS_COUNT_BY_HEIGHT_IN_OUTER,
-    FIELDS_COUNT_BY_HEIGHT_IN_INNER,
-    ASPECT_RATIO_OUTER,
-    ASPECT_RATIO_INNER,
-    ASPECT_RATIO_INNER_HUGE,
+    OUTER_CIRCLE_FACTOR,
+    INNER_CIRCLE_FACTOR,
+    FIELDS_COUNT_BY_WIDTH_IN_OUTER_CIRCLE,
+    FIELDS_COUNT_BY_WIDTH_IN_INNER_CIRCLE,
+    FIELDS_COUNT_BY_HEIGHT_IN_OUTER_CIRCLE,
+    FIELDS_COUNT_BY_HEIGHT_IN_INNER_CIRCLE,
+    ASPECT_RATIO_FIELD_OUTER_CIRCLE,
+    ASPECT_RATIO_FIELD_INNER_CIRCLE,
+    ASPECT_RATIO_HUGE_FIELD_INNER,
+    FIELDS_COUNT_OF_OUTER_CIRCLE,
+    FIELDS_COUNT_OF_INNER_CIRCLE,
 } from '../database/variables.js';
 
-// 78 x 54 || 75 x 52
-// 66 x 42
 const container = ref(null);
 const containerWidth = ref(null);
 const containerHeight = ref(null);
-const richWidth = ref('100%');
-const richHeight = ref('100%');
-const richSmall = ref(null);
-const richBig = ref(null);
-const poorWidth = ref(null);
-const poorHeight = ref(null);
-const poorSmall = ref(null);
-const poorBig = ref(null);
-const poorHuge = ref(null);
+const outerCircleWidth = ref('100%');
+const outerCircleHeight = ref('100%');
+const fieldWidthInOuterCircle = ref(null);
+const fieldHeightInOuterCircle = ref(null);
+const innerCircleWidth = ref(null);
+const innerCircleHeight = ref(null);
+const fieldWidthInInnerCircle = ref(null);
+const fieldHeightInInnerCircle = ref(null);
+const hugeFieldWidthInInnerCircle = ref(null);
 
-const dice = ref(6);
+const numberOnDice = ref(6);
+const gameChip = reactive({
+    id: 1,
+    position: 1,
+    rich: true,
+})
+const gameChipStyles = computed(
+    () =>
+        gameChip.rich
+            ? richCircle(fieldWidthInOuterCircle.value, fieldHeightInOuterCircle.value).find(field =>
+                field.id === gameChip.position)
+            : poorCircle(
+                fieldWidthInInnerCircle.value,
+                fieldHeightInInnerCircle.value,
+                hugeFieldWidthInInnerCircle.value,
+            ).find(field => field.id === gameChip.position)
+);
 const rollingDice = () => {
-    dice.value = Math.floor(1 + Math.random() * 6);
-    playingChipPosition.value += dice.value;
+    numberOnDice.value = Math.floor(1 + Math.random() * 6);
+    gameChip.position += numberOnDice.value;
+    const fieldsCount = gameChip.rich ? FIELDS_COUNT_OF_OUTER_CIRCLE : FIELDS_COUNT_OF_INNER_CIRCLE;
+    gameChip.position > fieldsCount && (gameChip.position = gameChip.position - fieldsCount);
 };
-
-const playingChipPosition = ref(201); // naming
-const playingChip = computed(() => {
-    const test = richCircle(richSmall.value, richBig.value).find(item => item.id === playingChipPosition.value)
-    return {
-        id: 1,
-        position: test.styles,
-    };
-});
 
 const resizeObserver = new ResizeObserver((entries) => {
     for (const entry of entries) {
         containerWidth.value = entry.target.clientWidth;
         containerHeight.value = entry.target.clientHeight;
-        if (containerHeight.value / containerWidth.value > OUTER_FACTOR) {
+        if (containerHeight.value / containerWidth.value > OUTER_CIRCLE_FACTOR) {
             // Outer
-            const outerHeight = containerWidth.value * OUTER_FACTOR;
-            richWidth.value = '100%';
-            richHeight.value = `${outerHeight}px`;
+            const outerHeight = containerWidth.value * OUTER_CIRCLE_FACTOR;
+            outerCircleWidth.value = '100%';
+            outerCircleHeight.value = `${outerHeight}px`;
 
-            richSmall.value = outerHeight / FIELDS_COUNT_BY_HEIGHT_IN_OUTER;
-            richBig.value = richSmall.value / ASPECT_RATIO_OUTER;
+            fieldWidthInOuterCircle.value = outerHeight / FIELDS_COUNT_BY_HEIGHT_IN_OUTER_CIRCLE;
+            fieldHeightInOuterCircle.value = fieldWidthInOuterCircle.value / ASPECT_RATIO_FIELD_OUTER_CIRCLE;
 
             // Inner
-            const innerHeight = outerHeight - richBig.value * 2 - 16;
-            poorWidth.value = `${innerHeight / INNER_FACTOR}px`;
-            poorHeight.value = `${innerHeight}px`;
+            const innerHeight = outerHeight - fieldHeightInOuterCircle.value * 2 - 16;
+            innerCircleWidth.value = `${innerHeight / INNER_CIRCLE_FACTOR}px`;
+            innerCircleHeight.value = `${innerHeight}px`;
 
-            poorSmall.value = innerHeight / FIELDS_COUNT_BY_HEIGHT_IN_INNER;
-            poorBig.value = poorSmall.value / ASPECT_RATIO_INNER;
-            poorHuge.value = poorSmall.value / ASPECT_RATIO_INNER_HUGE;
+            fieldWidthInInnerCircle.value = innerHeight / FIELDS_COUNT_BY_HEIGHT_IN_INNER_CIRCLE;
+            fieldHeightInInnerCircle.value = fieldWidthInInnerCircle.value / ASPECT_RATIO_FIELD_INNER_CIRCLE;
+            hugeFieldWidthInInnerCircle.value = fieldWidthInInnerCircle.value / ASPECT_RATIO_HUGE_FIELD_INNER;
         } else {
             // Outer
-            const outerWidth = containerHeight.value / OUTER_FACTOR;
-            richWidth.value = `${outerWidth}px`;
-            richHeight.value = '100%';
+            const outerWidth = containerHeight.value / OUTER_CIRCLE_FACTOR;
+            outerCircleWidth.value = `${outerWidth}px`;
+            outerCircleHeight.value = '100%';
 
-            richSmall.value = outerWidth / FIELDS_COUNT_BY_WIDTH_IN_OUTER;
-            richBig.value = richSmall.value / ASPECT_RATIO_OUTER;
+            fieldWidthInOuterCircle.value = outerWidth / FIELDS_COUNT_BY_WIDTH_IN_OUTER_CIRCLE;
+            fieldHeightInOuterCircle.value = fieldWidthInOuterCircle.value / ASPECT_RATIO_FIELD_OUTER_CIRCLE;
 
             // Inner
-            const innerWidth = outerWidth - richBig.value * 2 - 16;
-            poorWidth.value = `${innerWidth}px`;
-            poorHeight.value = `${innerWidth * INNER_FACTOR}px`;
+            const innerWidth = outerWidth - fieldHeightInOuterCircle.value * 2 - 16;
+            innerCircleWidth.value = `${innerWidth}px`;
+            innerCircleHeight.value = `${innerWidth * INNER_CIRCLE_FACTOR}px`;
 
-            poorSmall.value = innerWidth / FIELDS_COUNT_BY_WIDTH_IN_INNER;
-            poorBig.value = poorSmall.value / ASPECT_RATIO_INNER;
-            poorHuge.value = poorSmall.value / ASPECT_RATIO_INNER_HUGE;
+            fieldWidthInInnerCircle.value = innerWidth / FIELDS_COUNT_BY_WIDTH_IN_INNER_CIRCLE;
+            fieldHeightInInnerCircle.value = fieldWidthInInnerCircle.value / ASPECT_RATIO_FIELD_INNER_CIRCLE;
+            hugeFieldWidthInInnerCircle.value = fieldWidthInInnerCircle.value / ASPECT_RATIO_HUGE_FIELD_INNER;
         }
     }
 });
@@ -99,39 +109,20 @@ onUnmounted(() => resizeObserver.disconnect());
         <h1 class="text-4xl font-bold text-white text-center">ГРА 'Щурячі перегони Ⅱ'</h1>
 
         <div class="w-full h-full flex items-center justify-center bg-slate-600" ref="container">
-            <div :style="{ width: richWidth, height: richHeight }" class="relative bg-slate-800">
-                <Dice :dice="dice" @rolling="rollingDice" />
+            <div :style="{ width: outerCircleWidth, height: outerCircleHeight }" class="relative bg-slate-800">
+                <Dice :numberOnDice="numberOnDice" @rolling="rollingDice" />
 
                 <div
-                    :style="{
-                            top: playingChip.position.top && `${playingChip.position.top}px`,
-                            right: playingChip.position.right && `${playingChip.position.right}px`,
-                            bottom: playingChip.position.bottom && `${playingChip.position.bottom}px`,
-                            left: playingChip.position.left && `${playingChip.position.left}px`,
-                            width: `${playingChip.position.width}px`,
-                            height: `${playingChip.position.height}px`,
-                        }"
-                    class="absolute z-10 bg-transparent"
-                >
-                    <span
-                        class="
-                            absolute
-                            top-1/2 left-1/2
-                            -translate-y-1/2 -translate-x-1/2
-                            w-6 h-6
-                            rounded-full
-                            bg-red-600
-                        "
-                    ></span>
-                </div>
-
-                <ul
-                    v-if="poorSmall && poorBig"
-                    :style="{ width: poorWidth, height: poorHeight }"
+                    v-if="fieldWidthInInnerCircle && fieldHeightInInnerCircle"
+                    :style="{ width: innerCircleWidth, height: innerCircleHeight }"
                     class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2"
                 >
-                    <li
-                        v-for="{ styles, type, name } in poorCircle(poorSmall, poorBig, poorHuge)"
+                    <div
+                        v-for="{ styles, type, name } in poorCircle(
+                            fieldWidthInInnerCircle,
+                            fieldHeightInInnerCircle,
+                            hugeFieldWidthInInnerCircle,
+                        )"
                         :style="{
                             top: styles.top && `${styles.top}px`,
                             right: styles.right && `${styles.right}px`,
@@ -166,12 +157,14 @@ onUnmounted(() => resizeObserver.disconnect());
                         >
                             {{ name }}
                         </span>
-                    </li>
-                </ul>
+                    </div>
 
-                <ul v-if="richSmall && richBig" class="w-full h-full">
-                    <li
-                        v-for="{ styles, type, name } in richCircle(richSmall, richBig)"
+                    <GameChip v-if="!gameChip.rich" :gameChipStyles="gameChipStyles" />
+                </div>
+
+                <div v-if="fieldWidthInOuterCircle && fieldHeightInOuterCircle" class="w-full h-full">
+                    <div
+                        v-for="{ styles, type, name } in richCircle(fieldWidthInOuterCircle, fieldHeightInOuterCircle)"
                         :style="{
                             top: styles.top && `${styles.top}px`,
                             right: styles.right && `${styles.right}px`,
@@ -204,8 +197,10 @@ onUnmounted(() => resizeObserver.disconnect());
                         >
                             {{ name }}
                         </span>
-                    </li>
-                </ul>
+                    </div>
+
+                    <GameChip v-if="gameChip.rich" :gameChipStyles="gameChipStyles" />
+                </div>
             </div>
         </div>
     </div>
