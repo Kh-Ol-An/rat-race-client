@@ -9,7 +9,8 @@ import {
     INNER_FACTOR,
     FIELDS_COUNT_BY_WIDTH_IN_OUTER,
     FIELDS_COUNT_BY_WIDTH_IN_INNER,
-    FIELDS_COUNT_BY_HEIGHT,
+    FIELDS_COUNT_BY_HEIGHT_IN_OUTER,
+    FIELDS_COUNT_BY_HEIGHT_IN_INNER,
     ASPECT_RATIO_OUTER,
     ASPECT_RATIO_INNER,
     ASPECT_RATIO_INNER_HUGE,
@@ -55,16 +56,17 @@ const resizeObserver = new ResizeObserver((entries) => {
             richWidth.value = '100%';
             richHeight.value = `${outerHeight}px`;
 
-            richSmall.value = outerHeight / FIELDS_COUNT_BY_HEIGHT;
+            richSmall.value = outerHeight / FIELDS_COUNT_BY_HEIGHT_IN_OUTER;
             richBig.value = richSmall.value / ASPECT_RATIO_OUTER;
 
             // Inner
-            const innerHeight = outerHeight - richBig.value * 2 - 8;
+            const innerHeight = outerHeight - richBig.value * 2 - 16;
             poorWidth.value = `${innerHeight / INNER_FACTOR}px`;
             poorHeight.value = `${innerHeight}px`;
 
-            poorSmall.value = innerHeight / FIELDS_COUNT_BY_HEIGHT;
+            poorSmall.value = innerHeight / FIELDS_COUNT_BY_HEIGHT_IN_INNER;
             poorBig.value = poorSmall.value / ASPECT_RATIO_INNER;
+            poorHuge.value = poorSmall.value / ASPECT_RATIO_INNER_HUGE;
         } else {
             // Outer
             const outerWidth = containerHeight.value / OUTER_FACTOR;
