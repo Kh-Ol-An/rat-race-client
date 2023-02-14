@@ -15,6 +15,7 @@ const show = ref(false);
         class="
             fixed md:absolute
             top-6 md:top-2.5 left-6 md:left-2.5
+            z-50
             p-2
             flex flex-col gap-2
             rounded-md

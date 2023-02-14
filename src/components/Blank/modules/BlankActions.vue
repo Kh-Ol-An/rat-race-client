@@ -19,9 +19,9 @@ const showModal = ref(false);
 </script>
 
 <template>
-    <transition>
+    <Transition>
         <div v-if="historyBlank.length > 0" class="flex items-center gap-3">
-            <transition>
+            <Transition>
                 <button
                     v-if="historyPeriod !== 0"
                     class="
@@ -42,8 +42,8 @@ const showModal = ref(false);
                 >
                     <ReturnIcon width="30px" height="30px" color="fill-slate-300" />
                 </button>
-            </transition>
-            <transition>
+            </Transition>
+            <Transition>
                 <button
                     v-if="historyPeriod !== historyBlank.length - 1"
                     class="
@@ -65,9 +65,9 @@ const showModal = ref(false);
                 >
                     <ReturnIcon width="30px" height="30px" color="fill-slate-300" />
                 </button>
-            </transition>
+            </Transition>
         </div>
-    </transition>
+    </Transition>
 
     <button
         class="

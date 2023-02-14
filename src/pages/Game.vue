@@ -101,107 +101,135 @@ const resizeObserver = new ResizeObserver((entries) => {
 onMounted(() => resizeObserver.observe(container.value));
 
 onUnmounted(() => resizeObserver.disconnect());
+
+const development = ref(false);
+setTimeout(() => development.value = true, 3000);
 </script>
 
 <template>
     <Menu />
-    <div class="pt-4 pb-8 px-8 w-full h-screen flex flex-col items-center gap-6">
-        <h1 class="text-4xl font-bold text-white text-center">ГРА 'Щурячі перегони Ⅱ'</h1>
+    <Transition>
+        <div
+            v-if="development"
+            class="fixed top-0 right-0 bottom-0 left-0 z-40 w-full h-screen flex items-center justify-center"
+        >
+            <p class="text-2xl text-slate-300">
+                Цей функціонал у процесі розробки
+            </p>
+        </div>
+    </Transition>
 
-        <div class="w-full h-full flex items-center justify-center bg-slate-600" ref="container">
-            <div :style="{ width: outerCircleWidth, height: outerCircleHeight }" class="relative bg-slate-800">
-                <Dice :numberOnDice="numberOnDice" @rolling="rollingDice" />
+    <Transition>
+        <div v-if="!development" class="pt-4 pb-8 px-8 w-full h-screen flex flex-col items-center gap-6">
+            <h1 class="md:hidden text-4xl font-bold text-white text-center">ГРА 'Щурячі перегони Ⅱ'</h1>
 
-                <div
-                    v-if="fieldWidthInInnerCircle && fieldHeightInInnerCircle"
-                    :style="{ width: innerCircleWidth, height: innerCircleHeight }"
-                    class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2"
-                >
+            <div class="w-full h-full flex items-center justify-center" ref="container">
+                <div :style="{ width: outerCircleWidth, height: outerCircleHeight }" class="relative bg-slate-800">
+                    <Dice :numberOnDice="numberOnDice" @rolling="rollingDice" />
+
                     <div
-                        v-for="{ styles, type, name } in poorCircle(
-                            fieldWidthInInnerCircle,
-                            fieldHeightInInnerCircle,
-                            hugeFieldWidthInInnerCircle,
-                        )"
-                        :style="{
-                            top: styles.top && `${styles.top}px`,
-                            right: styles.right && `${styles.right}px`,
-                            bottom: styles.bottom && `${styles.bottom}px`,
-                            left: styles.left && `${styles.left}px`,
-                            width: `${styles.width}px`,
-                            height: `${styles.height}px`,
-                        }"
-                        :class="[
-                            'absolute',
-                            'flex items-center justify-center',
-                            type === 'start' && 'bg-amber-500',
-                            type === 'business' && 'bg-secondary', // half
-                            type === 'buys' && 'bg-sky-600',
-                            type === 'chance' && 'bg-orange-700',
-                            type === 'expenses' && 'bg-red-600',
-                            type === 'market' && 'bg-blue-700',
-                            type === 'bankruptcy' && 'bg-slate-700',
-                            type === 'profit' && 'bg-primary',
-                            type === 'wedding' && 'bg-fuchsia-600',
-                            // type === 'vacation' && 'bg-gray-700',
-                            // type === 'divorce' && 'bg-gray-700',
-                            // type === 'firing' && 'bg-gray-700',
-                        ]"
+                        v-if="fieldWidthInInnerCircle && fieldHeightInInnerCircle"
+                        :style="{ width: innerCircleWidth, height: innerCircleHeight }"
+                        class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2"
                     >
-                        <span
+                        <div
+                            v-for="{ styles, type, name } in poorCircle(
+                                fieldWidthInInnerCircle,
+                                fieldHeightInInnerCircle,
+                                hugeFieldWidthInInnerCircle,
+                            )"
+                            :style="{
+                                top: styles.top && `${styles.top}px`,
+                                right: styles.right && `${styles.right}px`,
+                                bottom: styles.bottom && `${styles.bottom}px`,
+                                left: styles.left && `${styles.left}px`,
+                                width: `${styles.width}px`,
+                                height: `${styles.height}px`,
+                            }"
                             :class="[
-                                'text-sm font-bold text-slate-100',
-                                'text-center',
-                                styles.rotate,
+                                'absolute',
+                                'flex items-center justify-center',
+                                type === 'start' && 'bg-amber-500',
+                                type === 'business' && 'bg-secondary', // half
+                                type === 'buys' && 'bg-sky-600',
+                                type === 'chance' && 'bg-orange-700',
+                                type === 'expenses' && 'bg-red-600',
+                                type === 'market' && 'bg-blue-700',
+                                type === 'bankruptcy' && 'bg-slate-700',
+                                type === 'profit' && 'bg-primary',
+                                type === 'wedding' && 'bg-fuchsia-600',
+                                // type === 'vacation' && 'bg-gray-700',
+                                // type === 'divorce' && 'bg-gray-700',
+                                // type === 'firing' && 'bg-gray-700',
                             ]"
                         >
-                            {{ name }}
-                        </span>
+                            <span
+                                :class="[
+                                    'text-sm font-bold text-slate-100',
+                                    'text-center',
+                                    styles.rotate,
+                                ]"
+                            >
+                                {{ name }}
+                            </span>
+                        </div>
+
+                        <GameChip v-if="!gameChip.rich" :gameChipStyles="gameChipStyles" />
                     </div>
 
-                    <GameChip v-if="!gameChip.rich" :gameChipStyles="gameChipStyles" />
-                </div>
-
-                <div v-if="fieldWidthInOuterCircle && fieldHeightInOuterCircle" class="w-full h-full">
-                    <div
-                        v-for="{ styles, type, name } in richCircle(fieldWidthInOuterCircle, fieldHeightInOuterCircle)"
-                        :style="{
-                            top: styles.top && `${styles.top}px`,
-                            right: styles.right && `${styles.right}px`,
-                            bottom: styles.bottom && `${styles.bottom}px`,
-                            left: styles.left && `${styles.left}px`,
-                            width: `${styles.width}px`,
-                            height: `${styles.height}px`,
-                        }"
-                        :class="[
-                            'absolute',
-                            'flex items-center justify-center',
-                            type === 'start' && 'bg-amber-500',
-                            type === 'target' && 'bg-fuchsia-700',
-                            type === 'buys' && 'bg-sky-600',
-                            type === 'business' && 'bg-secondary',
-                            type === 'market' && 'bg-blue-700',
-                            type === 'chance' && 'bg-orange-700',
-                            type === 'bankruptcy' && 'bg-slate-700',
-                            type === 'profit' && 'bg-primary',
-                            type === 'deputy' && 'bg-stone-800',
-                            type === 'tax' && 'bg-gray-700',
-                        ]"
-                    >
-                        <span
+                    <div v-if="fieldWidthInOuterCircle && fieldHeightInOuterCircle" class="w-full h-full">
+                        <div
+                            v-for="{ styles, type, name } in richCircle(fieldWidthInOuterCircle, fieldHeightInOuterCircle)"
+                            :style="{
+                                top: styles.top && `${styles.top}px`,
+                                right: styles.right && `${styles.right}px`,
+                                bottom: styles.bottom && `${styles.bottom}px`,
+                                left: styles.left && `${styles.left}px`,
+                                width: `${styles.width}px`,
+                                height: `${styles.height}px`,
+                            }"
                             :class="[
-                                'text-sm font-bold text-slate-100',
-                                'text-center',
-                                styles.rotate,
+                                'absolute',
+                                'flex items-center justify-center',
+                                type === 'start' && 'bg-amber-500',
+                                type === 'target' && 'bg-fuchsia-700',
+                                type === 'buys' && 'bg-sky-600',
+                                type === 'business' && 'bg-secondary',
+                                type === 'market' && 'bg-blue-700',
+                                type === 'chance' && 'bg-orange-700',
+                                type === 'bankruptcy' && 'bg-slate-700',
+                                type === 'profit' && 'bg-primary',
+                                type === 'deputy' && 'bg-stone-800',
+                                type === 'tax' && 'bg-gray-700',
                             ]"
                         >
-                            {{ name }}
-                        </span>
-                    </div>
+                            <span
+                                :class="[
+                                    'text-sm font-bold text-slate-100',
+                                    'text-center',
+                                    styles.rotate,
+                                ]"
+                            >
+                                {{ name }}
+                            </span>
+                        </div>
 
-                    <GameChip v-if="gameChip.rich" :gameChipStyles="gameChipStyles" />
+                        <GameChip v-if="gameChip.rich" :gameChipStyles="gameChipStyles" />
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </Transition>
 </template>
+
+<style scoped>
+.v-enter-active,
+.v-leave-active {
+    transition: opacity 10s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+    opacity: 0;
+}
+</style>
