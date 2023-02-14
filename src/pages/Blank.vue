@@ -443,9 +443,9 @@ watch(blank, () => {
     if (makeHistory.value) {
         historyBlank.splice(historyPeriod.value + 1, MAX_HISTORY);
         historyBlank.push(JSON.parse(JSON.stringify(blank)));
+        historyBlank.length > MAX_HISTORY && historyBlank.shift();
         historyPeriod.value = historyBlank.length - 1;
     }
-    historyBlank.length > MAX_HISTORY && historyBlank.shift();
     uploadBlank(blank);
     makeHistory.value = true;
 });
