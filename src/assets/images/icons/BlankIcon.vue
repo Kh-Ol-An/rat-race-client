@@ -2,11 +2,11 @@
 defineProps({
     width: {
         type: String,
-        required: true,
+        default: '24px',
     },
     height: {
         type: String,
-        required: true,
+        default: '24px',
     },
     color: {
         type: String,

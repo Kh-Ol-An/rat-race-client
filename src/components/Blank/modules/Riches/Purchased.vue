@@ -43,7 +43,7 @@ const sell = () => emit('sell', props.id);
             title="Продати"
             @click="sell"
         >
-            <SellIcon width="24px" height="24px" color="fill-primary" />
+            <SellIcon color="fill-primary" />
         </button>
     </li>
 </template>

@@ -549,7 +549,7 @@ const showModalWin = computed(
                     </div>
 
                     <!-- Капризи та примхи -->
-                    <div class="py-4 pr-4 pl-8 md:px-2 flex flex-col gap-2">
+                    <div v-if="blank.rich" class="py-4 pr-4 pl-8 md:px-2 flex flex-col gap-2">
                         <WhimsAndFancies :blankProp="blank" @buy="buyWhimsAndFancies" />
                     </div>
 

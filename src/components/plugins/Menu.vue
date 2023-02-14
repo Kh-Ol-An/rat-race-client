@@ -33,26 +33,26 @@ const show = ref(false);
             class="fixed md:absolute top-2 left-[88px] z-50 p-2 rounded-md bg-slate-700 md:bg-slate-800"
             to="/"
         >
-            <HomeIcon width="24px" height="24px" color="fill-slate-300" />
+            <HomeIcon color="fill-slate-300" />
         </router-link>
         <router-link
             class="fixed md:absolute top-10 left-[76px] z-50 p-2 rounded-md bg-slate-700 md:bg-slate-800"
             to="/blank"
         >
-            <BlankIcon width="24px" height="24px" color="stroke-slate-300" />
+            <BlankIcon color="stroke-slate-300" />
         </router-link>
         <router-link
             class="fixed md:absolute top-16 left-12 z-50 p-2 rounded-md bg-slate-700 md:bg-slate-800"
             to="/game"
         >
-            <GameIcon width="24px" height="24px" color="fill-slate-300" />
+            <GameIcon color="fill-slate-300" />
         </router-link>
         <button
             class="fixed md:absolute top-[72px] left-3 z-50 p-2 rounded-md bg-slate-700 md:bg-slate-800"
             type="button"
             @click="logout"
         >
-            <LogoutIcon width="24px" height="24px" color="fill-slate-300" />
+            <LogoutIcon color="fill-slate-300" />
         </button>
     </nav>
 </template>

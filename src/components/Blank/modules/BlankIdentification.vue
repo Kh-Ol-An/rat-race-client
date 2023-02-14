@@ -51,16 +51,12 @@ const profession = ref('');
         <div v-if="blank.gender.length === 0" class="ml-auto flex items-center gap-3">
             <input class="peer hidden" type="radio" id="male" name="gender" value="male" v-model="gender">
             <label class="cursor-pointer" for="male">
-                <MaleIcon width="24px" height="24px" :classes="gender === 'male' ? 'fill-blue-600' : 'fill-slate-400'" />
+                <MaleIcon :color="gender === 'male' ? 'fill-blue-600' : 'fill-slate-400'" />
             </label>
 
             <input class="peer hidden" type="radio" id="female" name="gender" value="female" v-model="gender">
             <label class="cursor-pointer" for="female">
-                <FemaleIcon
-                    width="24px"
-                    height="24px"
-                    :classes="gender === 'female' ? 'fill-opposite' : 'fill-slate-400'"
-                />
+                <FemaleIcon :color="gender === 'female' ? 'fill-opposite' : 'fill-slate-400'" />
             </label>
             <Add :firstValue="gender" @add="$emit('add:gender', gender)" />
         </div>
@@ -70,28 +66,14 @@ const profession = ref('');
         >
             <MaleIcon
                 v-if="blank.gender === 'male'"
-                width="24px"
-                height="24px"
-                :classes="(blank.marriage && !blank.rich) ? 'fill-blue-600' : 'fill-slate-400'"
+                :color="(blank.marriage && !blank.rich) ? 'fill-blue-600' : 'fill-slate-400'"
             />
             <FemaleIcon
                 v-if="blank.gender === 'female'"
-                width="24px"
-                height="24px"
-                :classes="(blank.marriage && !blank.rich) ? 'fill-opposite' : 'fill-slate-400'"
+                :color="(blank.marriage && !blank.rich) ? 'fill-opposite' : 'fill-slate-400'"
             />
-            <BabyIcon
-                v-if="havingChildren && !blank.rich"
-                width="24px"
-                height="24px"
-                color="fill-primary"
-            />
-            <ApartmentIcon
-                v-if="blank.apartments.length > 0 && !blank.rich"
-                width="24px"
-                height="24px"
-                color="fill-primary"
-            />
+            <BabyIcon v-if="havingChildren && !blank.rich" color="fill-primary" />
+            <ApartmentIcon v-if="blank.apartments.length > 0 && !blank.rich" color="fill-primary" />
             <CarIcon
                 v-if="blank.cars.length > 0 && !blank.rich"
                 width="32px"
@@ -116,11 +98,7 @@ const profession = ref('');
                 height="32px"
                 color="fill-primary"
             />
-            <TargetIcon
-                v-if="blank.whimsAndFancies.length > 0 && blank.rich"
-                width="28px"
-                height="28px"
-            />
+            <TargetIcon v-if="blank.whimsAndFancies.length > 0 && blank.rich" width="28px" height="28px" />
         </div>
     </div>
 

@@ -2,11 +2,11 @@
 defineProps({
     width: {
         type: String,
-        required: true,
+        default: '24px',
     },
     height: {
         type: String,
-        required: true,
+        default: '24px',
     },
     color: {
         type: String,
@@ -17,9 +17,9 @@ defineProps({
 
 <template>
     <svg
-        :class="color"
         :width="width"
         :height="height"
+        :class="color"
         viewBox="0 0 36 36"
         preserveAspectRatio="xMidYMid meet"
         xmlns="http://www.w3.org/2000/svg"

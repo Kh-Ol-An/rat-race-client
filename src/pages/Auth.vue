@@ -44,11 +44,9 @@ const { getLoading } = mapGetters();
                 >
                     <CloseEyeIcon
                         v-if="showPassword"
-                        width="24px"
-                        height="24px"
                         :color="password.length > 0 ? 'stroke-primary' : 'stroke-slate-400'"
                     />
-                    <OpenEyeIcon v-else width="24px" height="24px" color="stroke-primary" />
+                    <OpenEyeIcon v-else color="stroke-primary" />
                 </button>
             </div>
             <div v-if="isRegistration" class="relative w-full">
@@ -65,11 +63,9 @@ const { getLoading } = mapGetters();
                 >
                     <CloseEyeIcon
                         v-if="showRepeatPassword"
-                        width="24px"
-                        height="24px"
                         :color="repeatPassword.length > 0 ? 'stroke-primary' : 'stroke-slate-400'"
                     />
-                    <OpenEyeIcon v-else width="24px" height="24px" color="stroke-primary" />
+                    <OpenEyeIcon v-else color="stroke-primary" />
                 </button>
             </div>
             <p class="text-sm text-slate-400 text-center">

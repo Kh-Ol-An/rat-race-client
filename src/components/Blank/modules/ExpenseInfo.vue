@@ -56,11 +56,7 @@ const repay = () => {
         </div>
 
         <button v-if="!showRepay" class="ml-4 outline-0" type="button" title="Повернути борг" @click="showRepay = true">
-            <ReturnIcon
-                width="24px"
-                height="24px"
-                :color="debt > 0 ? 'fill-primary' : 'fill-slate-400'"
-            />
+            <ReturnIcon :color="debt > 0 ? 'fill-primary' : 'fill-slate-400'" />
         </button>
         <button
             v-else
@@ -74,7 +70,7 @@ const repay = () => {
             :disabled="repayDebt.length === 0"
             @click="repay"
         >
-            <CheckIcon width="24px" height="24px" :color="repayDebt.length === 0 ? 'fill-slate-400' : 'fill-primary'" />
+            <CheckIcon :color="repayDebt.length === 0 ? 'fill-slate-400' : 'fill-primary'" />
         </button>
     </InfoField>
 

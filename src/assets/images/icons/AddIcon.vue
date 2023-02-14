@@ -2,11 +2,11 @@
 defineProps({
     width: {
         type: String,
-        required: true,
+        default: '24px',
     },
     height: {
         type: String,
-        required: true,
+        default: '24px',
     },
     color: {
         type: String,
@@ -16,7 +16,13 @@ defineProps({
 </script>
 
 <template>
-    <svg :class="color" :width="width" :height="height" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <svg
+        :width="width"
+        :height="height"
+        :class="color"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+    >
         <path
             d="M13.862 6h-8c-.553 0-1-.448-1-1s.447-1 1-1h8c.553 0 1 .448 1 1s-.447 1-1 1zM11.862 10h-6c-.553 0-1-.448-1-1s.447-1 1-1h6c.553 0 1 .448 1 1s-.447 1-1 1zM10.862 13c0 .55-.45 1-1 1h-4c-.55 0-1-.45-1-1s.45-1 1-1h4c.55 0 1 .45 1 1z"
         />

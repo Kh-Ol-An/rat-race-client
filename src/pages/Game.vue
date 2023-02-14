@@ -18,6 +18,7 @@ import {
     FIELDS_COUNT_OF_OUTER_CIRCLE,
     FIELDS_COUNT_OF_INNER_CIRCLE,
 } from '../database/variables.js';
+import StartIcon from "../assets/images/icons/StartIcon.vue";
 
 const container = ref(null);
 const containerWidth = ref(null);
@@ -36,7 +37,7 @@ const numberOnDice = ref(6);
 const gameChip = reactive({
     id: 1,
     position: 1,
-    rich: true,
+    rich: false,
 })
 const gameChipStyles = computed(
     () =>
@@ -163,15 +164,7 @@ setTimeout(() => development.value = true, 3000);
                                 // type === 'firing' && 'bg-gray-700',
                             ]"
                         >
-                            <span
-                                :class="[
-                                    'text-sm font-bold text-slate-100',
-                                    'text-center',
-                                    styles.rotate,
-                                ]"
-                            >
-                                {{ name }}
-                            </span>
+                            <StartIcon v-if="type === 'start'" color="fill-slate-100" />
                         </div>
 
                         <GameChip v-if="!gameChip.rich" :gameChipStyles="gameChipStyles" />

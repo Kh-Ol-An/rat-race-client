@@ -102,7 +102,7 @@ const showModal = ref(false);
                     :disabled="addIncome.length === 0"
                     @click="increment"
                 >
-                    <CheckIcon width="24px" height="24px" :color="addIncome.length === 0 ? 'fill-slate-300' : 'fill-primary'" />
+                    <CheckIcon :color="addIncome.length === 0 ? 'fill-slate-300' : 'fill-primary'" />
                 </button>
             </div>
         </div>

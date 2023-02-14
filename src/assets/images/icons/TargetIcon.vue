@@ -2,18 +2,17 @@
 defineProps({
     width: {
         type: String,
-        required: true,
+        default: '24px',
     },
     height: {
         type: String,
-        required: true,
+        default: '24px',
     },
 });
 </script>
 
 <template>
     <svg
-        :class="color"
         :width="width"
         :height="height"
         viewBox="0 0 24 24"
