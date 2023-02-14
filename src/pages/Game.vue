@@ -19,6 +19,12 @@ import {
     FIELDS_COUNT_OF_INNER_CIRCLE,
 } from '../database/variables.js';
 import StartIcon from "../assets/images/icons/StartIcon.vue";
+import BusinessIcon from "../assets/images/icons/BusinessIcon.vue";
+import CartIcon from "../assets/images/icons/CartIcon.vue";
+import ChanceIcon from "../assets/images/icons/ChanceIcon.vue";
+import ExpenseIcon from "../assets/images/icons/ExpenseIcon.vue";
+import MarketIcon from "../assets/images/icons/MarketIcon.vue";
+import BankruptcyIcon from "../assets/images/icons/BankruptcyIcon.vue";
 
 const container = ref(null);
 const containerWidth = ref(null);
@@ -104,6 +110,7 @@ onMounted(() => resizeObserver.observe(container.value));
 onUnmounted(() => resizeObserver.disconnect());
 
 const development = ref(false);
+// setTimeout(() => development.value = false, 3000);
 setTimeout(() => development.value = true, 3000);
 </script>
 
@@ -163,8 +170,15 @@ setTimeout(() => development.value = true, 3000);
                                 // type === 'divorce' && 'bg-gray-700',
                                 // type === 'firing' && 'bg-gray-700',
                             ]"
+                            :title="name"
                         >
                             <StartIcon v-if="type === 'start'" color="fill-slate-100" />
+                            <BusinessIcon v-if="type === 'business'" color="fill-slate-100" />
+                            <CartIcon v-if="type === 'buys'" color="fill-slate-100" />
+                            <ChanceIcon v-if="type === 'chance'" color="fill-slate-100" />
+                            <ExpenseIcon v-if="type === 'expenses'" color="fill-slate-100" />
+                            <MarketIcon v-if="type === 'market'" color="fill-slate-100" />
+                            <BankruptcyIcon v-if="type === 'bankruptcy'" color="fill-slate-100" />
                         </div>
 
                         <GameChip v-if="!gameChip.rich" :gameChipStyles="gameChipStyles" />
@@ -195,6 +209,7 @@ setTimeout(() => development.value = true, 3000);
                                 type === 'deputy' && 'bg-stone-800',
                                 type === 'tax' && 'bg-gray-700',
                             ]"
+                            :title="name"
                         >
                             <span
                                 :class="[

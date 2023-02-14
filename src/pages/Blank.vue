@@ -555,6 +555,7 @@ const showModalWin = computed(
 
                     <!-- Сімейний стан -->
                     <div
+                        v-if="!blank.rich"
                         :class="[
                             'pt-4 pr-4 pl-8 md:px-2 flex flex-col gap-2 md:bg-slate-900',
                              blank.credits.length === 0 ? 'pb-8' : 'pb-4',
