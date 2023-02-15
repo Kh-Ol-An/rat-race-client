@@ -3,20 +3,12 @@ import { onMounted, onUnmounted, ref, reactive, computed } from 'vue';
 import Menu from '../components/plugins/Menu.vue';
 import Dice from '../components/Game/Dice.vue';
 import GameChip from "../components/Game/GameChip.vue";
-import poorCircle from '../database/poor-circle.js';
-import richCircle from '../database/rich-circle.js';
+import poorCircle from '../database/poor-circle.json';
+// import richCircle from '../database/rich-circle.json';
 import {
-    OUTER_CIRCLE_FACTOR,
-    INNER_CIRCLE_FACTOR,
-    FIELDS_COUNT_BY_WIDTH_IN_OUTER_CIRCLE,
-    FIELDS_COUNT_BY_WIDTH_IN_INNER_CIRCLE,
-    FIELDS_COUNT_BY_HEIGHT_IN_OUTER_CIRCLE,
-    FIELDS_COUNT_BY_HEIGHT_IN_INNER_CIRCLE,
-    ASPECT_RATIO_FIELD_OUTER_CIRCLE,
-    ASPECT_RATIO_FIELD_INNER_CIRCLE,
-    ASPECT_RATIO_HUGE_FIELD_INNER,
-    FIELDS_COUNT_OF_OUTER_CIRCLE,
-    FIELDS_COUNT_OF_INNER_CIRCLE,
+    CIRCLE_FACTOR,
+    CELLS_COUNT_BY_WIDTH,
+    CELLS_COUNT_BY_HEIGHT,
 } from '../database/variables.js';
 import StartIcon from "../assets/images/icons/StartIcon.vue";
 import BusinessIcon from "../assets/images/icons/BusinessIcon.vue";
@@ -31,8 +23,7 @@ const containerWidth = ref(null);
 const containerHeight = ref(null);
 const outerCircleWidth = ref('100%');
 const outerCircleHeight = ref('100%');
-const fieldWidthInOuterCircle = ref(null);
-const fieldHeightInOuterCircle = ref(null);
+const cellSizeInOuterCircle = ref(null);
 const innerCircleWidth = ref(null);
 const innerCircleHeight = ref(null);
 const fieldWidthInInnerCircle = ref(null);
@@ -59,48 +50,26 @@ const gameChipStyles = computed(
 const rollingDice = () => {
     numberOnDice.value = Math.floor(1 + Math.random() * 6);
     gameChip.position += numberOnDice.value;
-    const fieldsCount = gameChip.rich ? FIELDS_COUNT_OF_OUTER_CIRCLE : FIELDS_COUNT_OF_INNER_CIRCLE;
-    gameChip.position > fieldsCount && (gameChip.position = gameChip.position - fieldsCount);
+    // const fieldsCount = gameChip.rich ? FIELDS_COUNT_OF_OUTER_CIRCLE : FIELDS_COUNT_OF_INNER_CIRCLE;
+    // gameChip.position > fieldsCount && (gameChip.position = gameChip.position - fieldsCount);
 };
 
 const resizeObserver = new ResizeObserver((entries) => {
     for (const entry of entries) {
         containerWidth.value = entry.target.clientWidth;
         containerHeight.value = entry.target.clientHeight;
-        if (containerHeight.value / containerWidth.value > OUTER_CIRCLE_FACTOR) {
-            // Outer
-            const outerHeight = containerWidth.value * OUTER_CIRCLE_FACTOR;
+        if (containerHeight.value / containerWidth.value > CIRCLE_FACTOR) {
+            const outerHeight = containerWidth.value * CIRCLE_FACTOR;
             outerCircleWidth.value = '100%';
             outerCircleHeight.value = `${outerHeight}px`;
 
-            fieldWidthInOuterCircle.value = outerHeight / FIELDS_COUNT_BY_HEIGHT_IN_OUTER_CIRCLE;
-            fieldHeightInOuterCircle.value = fieldWidthInOuterCircle.value / ASPECT_RATIO_FIELD_OUTER_CIRCLE;
-
-            // Inner
-            const innerHeight = outerHeight - fieldHeightInOuterCircle.value * 2 - 16;
-            innerCircleWidth.value = `${innerHeight / INNER_CIRCLE_FACTOR}px`;
-            innerCircleHeight.value = `${innerHeight}px`;
-
-            fieldWidthInInnerCircle.value = innerHeight / FIELDS_COUNT_BY_HEIGHT_IN_INNER_CIRCLE;
-            fieldHeightInInnerCircle.value = fieldWidthInInnerCircle.value / ASPECT_RATIO_FIELD_INNER_CIRCLE;
-            hugeFieldWidthInInnerCircle.value = fieldWidthInInnerCircle.value / ASPECT_RATIO_HUGE_FIELD_INNER;
+            cellSizeInOuterCircle.value = outerHeight / CELLS_COUNT_BY_HEIGHT;
         } else {
-            // Outer
-            const outerWidth = containerHeight.value / OUTER_CIRCLE_FACTOR;
+            const outerWidth = containerHeight.value / CIRCLE_FACTOR;
             outerCircleWidth.value = `${outerWidth}px`;
             outerCircleHeight.value = '100%';
 
-            fieldWidthInOuterCircle.value = outerWidth / FIELDS_COUNT_BY_WIDTH_IN_OUTER_CIRCLE;
-            fieldHeightInOuterCircle.value = fieldWidthInOuterCircle.value / ASPECT_RATIO_FIELD_OUTER_CIRCLE;
-
-            // Inner
-            const innerWidth = outerWidth - fieldHeightInOuterCircle.value * 2 - 16;
-            innerCircleWidth.value = `${innerWidth}px`;
-            innerCircleHeight.value = `${innerWidth * INNER_CIRCLE_FACTOR}px`;
-
-            fieldWidthInInnerCircle.value = innerWidth / FIELDS_COUNT_BY_WIDTH_IN_INNER_CIRCLE;
-            fieldHeightInInnerCircle.value = fieldWidthInInnerCircle.value / ASPECT_RATIO_FIELD_INNER_CIRCLE;
-            hugeFieldWidthInInnerCircle.value = fieldWidthInInnerCircle.value / ASPECT_RATIO_HUGE_FIELD_INNER;
+            cellSizeInOuterCircle.value = outerWidth / CELLS_COUNT_BY_WIDTH;
         }
     }
 });
@@ -129,100 +98,43 @@ setTimeout(() => development.value = true, 3000);
 
     <Transition>
         <div v-if="!development" class="pt-4 pb-8 px-8 w-full h-screen flex flex-col items-center gap-6">
-            <h1 class="md:hidden text-4xl font-bold text-white text-center">ГРА 'Щурячі перегони Ⅱ'</h1>
+            <h1 class="md:hidden text-4xl font-bold text-white text-center">ГРА 'Сам склепав'</h1>
 
-            <div class="w-full h-full flex items-center justify-center" ref="container">
-                <div :style="{ width: outerCircleWidth, height: outerCircleHeight }" class="relative bg-slate-800">
+            <div class="w-full h-full flex items-center justify-center bg-slate-900" ref="container">
+                <div :style="{ width: outerCircleWidth, height: outerCircleHeight }" class="w-full h-full bg-slate-600">
                     <Dice :numberOnDice="numberOnDice" @rolling="rollingDice" />
 
-                    <div
-                        v-if="fieldWidthInInnerCircle && fieldHeightInInnerCircle"
-                        :style="{ width: innerCircleWidth, height: innerCircleHeight }"
-                        class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2"
-                    >
+                    <div v-if="cellSizeInOuterCircle" class="relative w-full h-full">
                         <div
-                            v-for="{ styles, type, name } in poorCircle(
-                                fieldWidthInInnerCircle,
-                                fieldHeightInInnerCircle,
-                                hugeFieldWidthInInnerCircle,
-                            )"
+                            v-for="{ styles, type, name } in poorCircle"
                             :style="{
                                 top: styles.top && `${styles.top}px`,
-                                right: styles.right && `${styles.right}px`,
+                                right: styles.right && `${cellSizeInOuterCircle * styles.right}px`,
                                 bottom: styles.bottom && `${styles.bottom}px`,
                                 left: styles.left && `${styles.left}px`,
-                                width: `${styles.width}px`,
-                                height: `${styles.height}px`,
+                                width: `${cellSizeInOuterCircle}px`,
+                                height: `${cellSizeInOuterCircle}px`,
                             }"
                             :class="[
                                 'absolute',
                                 'flex items-center justify-center',
-                                type === 'start' && 'bg-amber-500',
-                                type === 'business' && 'bg-secondary', // half
-                                type === 'buys' && 'bg-sky-600',
-                                type === 'chance' && 'bg-orange-700',
-                                type === 'expenses' && 'bg-red-600',
-                                type === 'market' && 'bg-blue-700',
-                                type === 'bankruptcy' && 'bg-slate-700',
-                                type === 'profit' && 'bg-primary',
-                                type === 'wedding' && 'bg-fuchsia-600',
+                                // type === 'start' && 'bg-amber-500',
+                                // type === 'business' && 'bg-secondary', // half
+                                // type === 'buys' && 'bg-sky-600',
+                                // type === 'chance' && 'bg-orange-700',
+                                // type === 'expenses' && 'bg-red-600',
+                                // type === 'market' && 'bg-blue-700',
+                                // type === 'bankruptcy' && 'bg-slate-700',
+                                // type === 'profit' && 'bg-primary',
+                                // type === 'wedding' && 'bg-fuchsia-600',
                                 // type === 'vacation' && 'bg-gray-700',
                                 // type === 'divorce' && 'bg-gray-700',
                                 // type === 'firing' && 'bg-gray-700',
                             ]"
                             :title="name"
                         >
-                            <StartIcon v-if="type === 'start'" color="fill-slate-100" />
-                            <BusinessIcon v-if="type === 'business'" color="fill-slate-100" />
-                            <CartIcon v-if="type === 'buys'" color="fill-slate-100" />
-                            <ChanceIcon v-if="type === 'chance'" color="fill-slate-100" />
-                            <ExpenseIcon v-if="type === 'expenses'" color="fill-slate-100" />
-                            <MarketIcon v-if="type === 'market'" color="fill-slate-100" />
-                            <BankruptcyIcon v-if="type === 'bankruptcy'" color="fill-slate-100" />
+                            {{ name }}
                         </div>
-
-                        <GameChip v-if="!gameChip.rich" :gameChipStyles="gameChipStyles" />
-                    </div>
-
-                    <div v-if="fieldWidthInOuterCircle && fieldHeightInOuterCircle" class="w-full h-full">
-                        <div
-                            v-for="{ styles, type, name } in richCircle(fieldWidthInOuterCircle, fieldHeightInOuterCircle)"
-                            :style="{
-                                top: styles.top && `${styles.top}px`,
-                                right: styles.right && `${styles.right}px`,
-                                bottom: styles.bottom && `${styles.bottom}px`,
-                                left: styles.left && `${styles.left}px`,
-                                width: `${styles.width}px`,
-                                height: `${styles.height}px`,
-                            }"
-                            :class="[
-                                'absolute',
-                                'flex items-center justify-center',
-                                type === 'start' && 'bg-amber-500',
-                                type === 'target' && 'bg-fuchsia-700',
-                                type === 'buys' && 'bg-sky-600',
-                                type === 'business' && 'bg-secondary',
-                                type === 'market' && 'bg-blue-700',
-                                type === 'chance' && 'bg-orange-700',
-                                type === 'bankruptcy' && 'bg-slate-700',
-                                type === 'profit' && 'bg-primary',
-                                type === 'deputy' && 'bg-stone-800',
-                                type === 'tax' && 'bg-gray-700',
-                            ]"
-                            :title="name"
-                        >
-                            <span
-                                :class="[
-                                    'text-sm font-bold text-slate-100',
-                                    'text-center',
-                                    styles.rotate,
-                                ]"
-                            >
-                                {{ name }}
-                            </span>
-                        </div>
-
-                        <GameChip v-if="gameChip.rich" :gameChipStyles="gameChipStyles" />
                     </div>
                 </div>
             </div>
