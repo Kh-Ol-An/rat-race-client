@@ -25,6 +25,7 @@ import BabyIcon from "../assets/images/icons/BabyIcon.vue";
 import DivorceIcon from "../assets/images/icons/DivorceIcon.vue";
 import VacationIcon from "../assets/images/icons/VacationIcon.vue";
 import BankruptcyIcon from "../assets/images/icons/BankruptcyIcon.vue";
+import sleep from '../helpers/sleep.js';
 
 const container = ref(null);
 const containerWidth = ref(null);
@@ -41,7 +42,7 @@ const numberOnDice = ref(6);
 const gameChip = reactive({
     id: 1,
     position: 1,
-    rich: false,
+    rich: true,
 })
 const gameChipStyles = computed(
     () =>
@@ -49,7 +50,28 @@ const gameChipStyles = computed(
             ? richCircle.find(field => field.id === gameChip.position)
             : poorCircle.find(field => field.id === gameChip.position)
 );
-const rollingDice = () => {
+const animationDice = async () => {
+    numberOnDice.value = Math.floor(1 + Math.random() * 6);
+    await sleep(50);
+    numberOnDice.value = Math.floor(1 + Math.random() * 6);
+    await sleep(100);
+    numberOnDice.value = Math.floor(1 + Math.random() * 6);
+    await sleep(150);
+    numberOnDice.value = Math.floor(1 + Math.random() * 6);
+    await sleep(200);
+    numberOnDice.value = Math.floor(1 + Math.random() * 6);
+    await sleep(250);
+    numberOnDice.value = Math.floor(1 + Math.random() * 6);
+    await sleep(300);
+    numberOnDice.value = Math.floor(1 + Math.random() * 6);
+    await sleep(350);
+    numberOnDice.value = Math.floor(1 + Math.random() * 6);
+    await sleep(400);
+    numberOnDice.value = Math.floor(1 + Math.random() * 6);
+    await sleep(470);
+};
+const rollingDice = async () => {
+    await animationDice();
     numberOnDice.value = Math.floor(1 + Math.random() * 6);
     gameChip.position += numberOnDice.value;
     gameChip.position > FIELDS_COUNT && (gameChip.position = gameChip.position - FIELDS_COUNT);

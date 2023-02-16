@@ -2,8 +2,10 @@
     {
         "id": 1,
         "styles": {
+            "top": 9,
             "right": 0,
-            "bottom": 0
+            "bottom": 0,
+            "left": 18
         },
         "type": "profit",
         "name": "Прибуток"
@@ -11,8 +13,10 @@
     {
         "id": 2,
         "styles": {
+            "top": 9,
             "right": 1,
-            "bottom": 0
+            "bottom": 0,
+            "left": 17
         },
         "type": "business",
         "name": "Бізнес"
@@ -20,8 +24,10 @@
     {
         "id": 3,
         "styles": {
+            "top": 9,
             "right": 2,
-            "bottom": 0
+            "bottom": 0,
+            "left": 16
         },
         "type": "investments",
         "name": "Інвестиції"
@@ -29,8 +35,10 @@
     {
         "id": 4,
         "styles": {
+            "top": 9,
             "right": 3,
-            "bottom": 0
+            "bottom": 0,
+            "left": 15
         },
         "type": "expenses",
         "name": "Витрати"
@@ -38,8 +46,10 @@
     {
         "id": 5,
         "styles": {
+            "top": 9,
             "right": 4,
-            "bottom": 0
+            "bottom": 0,
+            "left": 14
         },
         "type": "business",
         "name": "Бізнес"
@@ -47,8 +57,10 @@
     {
         "id": 6,
         "styles": {
+            "top": 9,
             "right": 5,
-            "bottom": 0
+            "bottom": 0,
+            "left": 13
         },
         "type": "layoff",
         "name": "Звільнення"
@@ -56,8 +68,10 @@
     {
         "id": 7,
         "styles": {
+            "top": 9,
             "right": 6,
-            "bottom": 0
+            "bottom": 0,
+            "left": 12
         },
         "type": "opportunities",
         "name": "Можливості"
@@ -65,8 +79,10 @@
     {
         "id": 8,
         "styles": {
+            "top": 9,
             "right": 7,
-            "bottom": 0
+            "bottom": 0,
+            "left": 11
         },
         "type": "buys",
         "name": "Покупки"
@@ -74,8 +90,10 @@
     {
         "id": 9,
         "styles": {
+            "top": 9,
             "right": 8,
-            "bottom": 0
+            "bottom": 0,
+            "left": 10
         },
         "type": "expenses",
         "name": "Витрати"
@@ -83,8 +101,10 @@
     {
         "id": 10,
         "styles": {
+            "top": 9,
             "right": 9,
-            "bottom": 0
+            "bottom": 0,
+            "left": 9
         },
         "type": "profit",
         "name": "Прибуток"
@@ -92,8 +112,10 @@
     {
         "id": 11,
         "styles": {
+            "top": 9,
             "right": 10,
-            "bottom": 0
+            "bottom": 0,
+            "left": 8
         },
         "type": "business",
         "name": "Бізнес"
@@ -101,8 +123,10 @@
     {
         "id": 12,
         "styles": {
+            "top": 9,
             "right": 11,
-            "bottom": 0
+            "bottom": 0,
+            "left": 7
         },
         "type": "expenses",
         "name": "Витрати"
@@ -110,8 +134,10 @@
     {
         "id": 13,
         "styles": {
+            "top": 9,
             "right": 12,
-            "bottom": 0
+            "bottom": 0,
+            "left": 6
         },
         "type": "investments",
         "name": "Інвестиції"
@@ -119,8 +145,10 @@
     {
         "id": 14,
         "styles": {
+            "top": 9,
             "right": 13,
-            "bottom": 0
+            "bottom": 0,
+            "left": 5
         },
         "type": "opportunities",
         "name": "Можливості"
@@ -128,8 +156,10 @@
     {
         "id": 15,
         "styles": {
+            "top": 9,
             "right": 14,
-            "bottom": 0
+            "bottom": 0,
+            "left": 4
         },
         "type": "wedding",
         "name": "Весілля"
@@ -137,8 +167,10 @@
     {
         "id": 16,
         "styles": {
+            "top": 9,
             "right": 15,
-            "bottom": 0
+            "bottom": 0,
+            "left": 3
         },
         "type": "expenses",
         "name": "Витрати"
@@ -146,8 +178,10 @@
     {
         "id": 17,
         "styles": {
+            "top": 9,
             "right": 16,
-            "bottom": 0
+            "bottom": 0,
+            "left": 2
         },
         "type": "business",
         "name": "Бізнес"
@@ -155,8 +189,10 @@
     {
         "id": 18,
         "styles": {
+            "top": 9,
             "right": 17,
-            "bottom": 0
+            "bottom": 0,
+            "left": 1
         },
         "type": "buys",
         "name": "Покупки"
@@ -164,8 +200,10 @@
     {
         "id": 19,
         "styles": {
+            "top": 9,
             "right": 18,
-            "bottom": 0
+            "bottom": 0,
+            "left": 0
         },
         "type": "profit",
         "name": "Прибуток"
@@ -173,6 +211,8 @@
     {
         "id": 20,
         "styles": {
+            "top": 8,
+            "right": 18,
             "bottom": 1,
             "left": 0
         },
@@ -182,6 +222,8 @@
     {
         "id": 21,
         "styles": {
+            "top": 7,
+            "right": 18,
             "bottom": 2,
             "left": 0
         },
@@ -191,6 +233,8 @@
     {
         "id": 22,
         "styles": {
+            "top": 6,
+            "right": 18,
             "bottom": 3,
             "left": 0
         },
@@ -200,6 +244,8 @@
     {
         "id": 23,
         "styles": {
+            "top": 5,
+            "right": 18,
             "bottom": 4,
             "left": 0
         },
@@ -209,6 +255,8 @@
     {
         "id": 24,
         "styles": {
+            "top": 4,
+            "right": 18,
             "bottom": 5,
             "left": 0
         },
@@ -218,6 +266,8 @@
     {
         "id": 25,
         "styles": {
+            "top": 3,
+            "right": 18,
             "bottom": 6,
             "left": 0
         },
@@ -227,6 +277,8 @@
     {
         "id": 26,
         "styles": {
+            "top": 2,
+            "right": 18,
             "bottom": 7,
             "left": 0
         },
@@ -236,6 +288,8 @@
     {
         "id": 27,
         "styles": {
+            "top": 1,
+            "right": 18,
             "bottom": 8,
             "left": 0
         },
@@ -245,6 +299,8 @@
     {
         "id": 28,
         "styles": {
+            "top": 0,
+            "right": 18,
             "bottom": 9,
             "left": 0
         },
@@ -255,6 +311,8 @@
         "id": 29,
         "styles": {
             "top": 0,
+            "right": 17,
+            "bottom": 9,
             "left": 1
         },
         "type": "opportunities",
@@ -264,6 +322,8 @@
         "id": 30,
         "styles": {
             "top": 0,
+            "right": 16,
+            "bottom": 9,
             "left": 2
         },
         "type": "expenses",
@@ -273,6 +333,8 @@
         "id": 31,
         "styles": {
             "top": 0,
+            "right": 15,
+            "bottom": 9,
             "left": 3
         },
         "type": "business",
@@ -282,6 +344,8 @@
         "id": 32,
         "styles": {
             "top": 0,
+            "right": 14,
+            "bottom": 9,
             "left": 4
         },
         "type": "investments",
@@ -291,6 +355,8 @@
         "id": 33,
         "styles": {
             "top": 0,
+            "right": 13,
+            "bottom": 9,
             "left": 5
         },
         "type": "buys",
@@ -300,6 +366,8 @@
         "id": 34,
         "styles": {
             "top": 0,
+            "right": 12,
+            "bottom": 9,
             "left": 6
         },
         "type": "expenses",
@@ -309,6 +377,8 @@
         "id": 35,
         "styles": {
             "top": 0,
+            "right": 11,
+            "bottom": 9,
             "left": 7
         },
         "type": "business",
@@ -318,6 +388,8 @@
         "id": 36,
         "styles": {
             "top": 0,
+            "right": 10,
+            "bottom": 9,
             "left": 8
         },
         "type": "divorce",
@@ -327,6 +399,8 @@
         "id": 37,
         "styles": {
             "top": 0,
+            "right": 9,
+            "bottom": 9,
             "left": 9
         },
         "type": "profit",
@@ -336,6 +410,8 @@
         "id": 38,
         "styles": {
             "top": 0,
+            "right": 8,
+            "bottom": 9,
             "left": 10
         },
         "type": "investments",
@@ -345,6 +421,8 @@
         "id": 39,
         "styles": {
             "top": 0,
+            "right": 7,
+            "bottom": 9,
             "left": 11
         },
         "type": "expenses",
@@ -354,6 +432,8 @@
         "id": 40,
         "styles": {
             "top": 0,
+            "right": 6,
+            "bottom": 9,
             "left": 12
         },
         "type": "opportunities",
@@ -363,6 +443,8 @@
         "id": 41,
         "styles": {
             "top": 0,
+            "right": 5,
+            "bottom": 9,
             "left": 13
         },
         "type": "business",
@@ -372,6 +454,8 @@
         "id": 42,
         "styles": {
             "top": 0,
+            "right": 4,
+            "bottom": 9,
             "left": 14
         },
         "type": "vacation",
@@ -381,6 +465,8 @@
         "id": 43,
         "styles": {
             "top": 0,
+            "right": 3,
+            "bottom": 9,
             "left": 15
         },
         "type": "buys",
@@ -390,6 +476,8 @@
         "id": 44,
         "styles": {
             "top": 0,
+            "right": 2,
+            "bottom": 9,
             "left": 16
         },
         "type": "expenses",
@@ -399,6 +487,8 @@
         "id": 45,
         "styles": {
             "top": 0,
+            "right": 1,
+            "bottom": 9,
             "left": 17
         },
         "type": "business",
@@ -408,6 +498,8 @@
         "id": 46,
         "styles": {
             "top": 0,
+            "right": 0,
+            "bottom": 9,
             "left": 18
         },
         "type": "profit",
@@ -417,7 +509,9 @@
         "id": 47,
         "styles": {
             "top": 1,
-            "right": 0
+            "right": 0,
+            "bottom": 8,
+            "left": 18
         },
         "type": "opportunities",
         "name": "Можливості"
@@ -426,7 +520,9 @@
         "id": 48,
         "styles": {
             "top": 2,
-            "right": 0
+            "right": 0,
+            "bottom": 7,
+            "left": 18
         },
         "type": "expenses",
         "name": "Витрати"
@@ -435,7 +531,9 @@
         "id": 49,
         "styles": {
             "top": 3,
-            "right": 0
+            "right": 0,
+            "bottom": 6,
+            "left": 18
         },
         "type": "investments",
         "name": "Інвестиції"
@@ -444,7 +542,9 @@
         "id": 50,
         "styles": {
             "top": 4,
-            "right": 0
+            "right": 0,
+            "bottom": 5,
+            "left": 18
         },
         "type": "business",
         "name": "Бізнес"
@@ -453,7 +553,9 @@
         "id": 51,
         "styles": {
             "top": 5,
-            "right": 0
+            "right": 0,
+            "bottom": 4,
+            "left": 18
         },
         "type": "expenses",
         "name": "Витрати"
@@ -462,7 +564,9 @@
         "id": 52,
         "styles": {
             "top": 6,
-            "right": 0
+            "right": 0,
+            "bottom": 3,
+            "left": 18
         },
         "type": "bankruptcy",
         "name": "Банкрутство"
@@ -471,7 +575,9 @@
         "id": 53,
         "styles": {
             "top": 7,
-            "right": 0
+            "right": 0,
+            "bottom": 2,
+            "left": 18
         },
         "type": "business",
         "name": "Бізнес"
@@ -480,7 +586,9 @@
         "id": 54,
         "styles": {
             "top": 8,
-            "right": 0
+            "right": 0,
+            "bottom": 1,
+            "left": 18
         },
         "type": "buys",
         "name": "Покупки"

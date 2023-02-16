@@ -31,7 +31,7 @@ defineProps({
             width: `${cellWidth}px`,
             height: `${cellHeight}px`,
         }"
-        class="absolute z-10 flex items-center justify-center bg-transparent"
+        class="absolute z-10 flex items-center justify-center bg-transparent transition-all duration-700"
     >
         <GameChipIcon :color="gameChipColor" />
     </div>
