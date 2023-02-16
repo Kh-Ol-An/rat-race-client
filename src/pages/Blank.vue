@@ -510,7 +510,7 @@ const showModalWin = computed(
                     title="Отримати"
                     @click="getCashFlow"
                 >
-                    <MoneyIcon width="30px" height="30px" />
+                    <MoneyIcon width="30px" height="30px" color="fill-primary" />
                 </button>
             </InfoField>
 

@@ -13,9 +13,9 @@ export const MAX_HISTORY = 10;
 export const RICH_CASH = 3000000;
 export const RICH_CASH_FLOW = 50000;
 
-// Rate
-export const OUTER_CIRCLE_FACTOR = 0.693333333;
-export const INNER_CIRCLE_FACTOR = 0.636363636;
+// Rat
+export const RAT_OUTER_CIRCLE_FACTOR = 0.693333333;
+export const RAT_INNER_CIRCLE_FACTOR = 0.636363636;
 export const FIELDS_COUNT_BY_WIDTH_IN_OUTER_CIRCLE = 25;
 export const FIELDS_COUNT_BY_WIDTH_IN_INNER_CIRCLE = 26.4;
 export const FIELDS_COUNT_BY_HEIGHT_IN_OUTER_CIRCLE = 17.3333333;
@@ -27,6 +27,9 @@ export const FIELDS_COUNT_OF_OUTER_CIRCLE = 74;
 export const FIELDS_COUNT_OF_INNER_CIRCLE = 78;
 
 // Game
-export const CIRCLE_FACTOR = 0.526315789;
+export const POOR_CIRCLE_FACTOR = 0.465;
+export const RICH_CIRCLE_FACTOR = 0.526315789;
 export const CELLS_COUNT_BY_WIDTH = 19;
 export const CELLS_COUNT_BY_HEIGHT = 10;
+export const FIELDS_COUNT = 54;
+export const FIELDS_GAP = 10;

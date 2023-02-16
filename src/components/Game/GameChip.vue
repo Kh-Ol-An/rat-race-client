@@ -1,7 +1,21 @@
 <script setup>
+import GameChipIcon from "../../assets/images/icons/GameChipIcon.vue";
+
 defineProps({
     gameChipStyles: {
         type: Object,
+        required: true,
+    },
+    cellWidth: {
+        type: Number,
+        required: true,
+    },
+    cellHeight: {
+        type: Number,
+        required: true,
+    },
+    gameChipColor: {
+        type: String,
         required: true,
     },
 });
@@ -10,24 +24,15 @@ defineProps({
 <template>
     <div
         :style="{
-            top: gameChipStyles.styles.top && `${gameChipStyles.styles.top}px`,
-            right: gameChipStyles.styles.right && `${gameChipStyles.styles.right}px`,
-            bottom: gameChipStyles.styles.bottom && `${gameChipStyles.styles.bottom}px`,
-            left: gameChipStyles.styles.left && `${gameChipStyles.styles.left}px`,
-            width: `${gameChipStyles.styles.width}px`,
-            height: `${gameChipStyles.styles.height}px`,
+            top: gameChipStyles.styles.top && `${cellHeight * gameChipStyles.styles.top}px`,
+            right: gameChipStyles.styles.right && `${cellWidth * gameChipStyles.styles.right}px`,
+            bottom: gameChipStyles.styles.bottom && `${cellHeight * gameChipStyles.styles.bottom}px`,
+            left: gameChipStyles.styles.left && `${cellWidth * gameChipStyles.styles.left}px`,
+            width: `${cellWidth}px`,
+            height: `${cellHeight}px`,
         }"
-        class="absolute z-10 bg-transparent"
+        class="absolute z-10 flex items-center justify-center bg-transparent"
     >
-        <span
-            class="
-                absolute
-                top-1/2 left-1/2
-                -translate-y-1/2 -translate-x-1/2
-                w-6 h-6
-                rounded-full
-                bg-red-600
-            "
-        ></span>
+        <GameChipIcon :color="gameChipColor" />
     </div>
 </template>

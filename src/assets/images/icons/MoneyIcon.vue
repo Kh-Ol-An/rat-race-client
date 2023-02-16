@@ -10,7 +10,7 @@ defineProps({
     },
     color: {
         type: String,
-        default: 'fill-primary',
+        default: 'fill-slate-400',
     },
 });
 </script>

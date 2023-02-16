@@ -6,8 +6,8 @@ import GameChip from "../components/Rat/GameChip.vue";
 import poorCircle from '../database/rat-poor-circle.js';
 import richCircle from '../database/rat-rich-circle.js';
 import {
-    OUTER_CIRCLE_FACTOR,
-    INNER_CIRCLE_FACTOR,
+    RAT_OUTER_CIRCLE_FACTOR,
+    RAT_INNER_CIRCLE_FACTOR,
     FIELDS_COUNT_BY_WIDTH_IN_OUTER_CIRCLE,
     FIELDS_COUNT_BY_WIDTH_IN_INNER_CIRCLE,
     FIELDS_COUNT_BY_HEIGHT_IN_OUTER_CIRCLE,
@@ -18,12 +18,9 @@ import {
     FIELDS_COUNT_OF_OUTER_CIRCLE,
     FIELDS_COUNT_OF_INNER_CIRCLE,
 } from '../database/variables.js';
-import StartIcon from "../assets/images/icons/StartIcon.vue";
 import BusinessIcon from "../assets/images/icons/BusinessIcon.vue";
 import CartIcon from "../assets/images/icons/CartIcon.vue";
-import ChanceIcon from "../assets/images/icons/ChanceIcon.vue";
 import ExpenseIcon from "../assets/images/icons/ExpenseIcon.vue";
-import MarketIcon from "../assets/images/icons/MarketIcon.vue";
 import BankruptcyIcon from "../assets/images/icons/BankruptcyIcon.vue";
 
 const container = ref(null);
@@ -67,9 +64,9 @@ const resizeObserver = new ResizeObserver((entries) => {
     for (const entry of entries) {
         containerWidth.value = entry.target.clientWidth;
         containerHeight.value = entry.target.clientHeight;
-        if (containerHeight.value / containerWidth.value > OUTER_CIRCLE_FACTOR) {
+        if (containerHeight.value / containerWidth.value > RAT_OUTER_CIRCLE_FACTOR) {
             // Outer
-            const outerHeight = containerWidth.value * OUTER_CIRCLE_FACTOR;
+            const outerHeight = containerWidth.value * RAT_OUTER_CIRCLE_FACTOR;
             outerCircleWidth.value = '100%';
             outerCircleHeight.value = `${outerHeight}px`;
 
@@ -78,7 +75,7 @@ const resizeObserver = new ResizeObserver((entries) => {
 
             // Inner
             const innerHeight = outerHeight - fieldHeightInOuterCircle.value * 2 - 16;
-            innerCircleWidth.value = `${innerHeight / INNER_CIRCLE_FACTOR}px`;
+            innerCircleWidth.value = `${innerHeight / RAT_INNER_CIRCLE_FACTOR}px`;
             innerCircleHeight.value = `${innerHeight}px`;
 
             fieldWidthInInnerCircle.value = innerHeight / FIELDS_COUNT_BY_HEIGHT_IN_INNER_CIRCLE;
@@ -86,7 +83,7 @@ const resizeObserver = new ResizeObserver((entries) => {
             hugeFieldWidthInInnerCircle.value = fieldWidthInInnerCircle.value / ASPECT_RATIO_HUGE_FIELD_INNER;
         } else {
             // Outer
-            const outerWidth = containerHeight.value / OUTER_CIRCLE_FACTOR;
+            const outerWidth = containerHeight.value / RAT_OUTER_CIRCLE_FACTOR;
             outerCircleWidth.value = `${outerWidth}px`;
             outerCircleHeight.value = '100%';
 
@@ -96,7 +93,7 @@ const resizeObserver = new ResizeObserver((entries) => {
             // Inner
             const innerWidth = outerWidth - fieldHeightInOuterCircle.value * 2 - 16;
             innerCircleWidth.value = `${innerWidth}px`;
-            innerCircleHeight.value = `${innerWidth * INNER_CIRCLE_FACTOR}px`;
+            innerCircleHeight.value = `${innerWidth * RAT_INNER_CIRCLE_FACTOR}px`;
 
             fieldWidthInInnerCircle.value = innerWidth / FIELDS_COUNT_BY_WIDTH_IN_INNER_CIRCLE;
             fieldHeightInInnerCircle.value = fieldWidthInInnerCircle.value / ASPECT_RATIO_FIELD_INNER_CIRCLE;
@@ -172,12 +169,9 @@ setTimeout(() => development.value = true, 3000);
                             ]"
                             :title="name"
                         >
-                            <StartIcon v-if="type === 'start'" color="fill-slate-100" />
                             <BusinessIcon v-if="type === 'business'" color="fill-slate-100" />
                             <CartIcon v-if="type === 'buys'" color="fill-slate-100" />
-                            <ChanceIcon v-if="type === 'chance'" color="fill-slate-100" />
                             <ExpenseIcon v-if="type === 'expenses'" color="fill-slate-100" />
-                            <MarketIcon v-if="type === 'market'" color="fill-slate-100" />
                             <BankruptcyIcon v-if="type === 'bankruptcy'" color="fill-slate-100" />
                         </div>
 

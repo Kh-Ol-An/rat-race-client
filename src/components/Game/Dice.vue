@@ -17,7 +17,7 @@ defineProps({
             w-12 h-12
             rounded
             bg-gradient-to-b from-stone-200 to-stone-400
-            shadow-[0_0_6px_1px_rgb(255,255,255)_inset]
+            shadow-[0_0_4px_1px_rgb(50,50,50)_inset]
         "
         type="button"
         @click="$emit('rolling')"
