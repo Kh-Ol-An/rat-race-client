@@ -1,10 +1,35 @@
 <script setup>
-defineProps({
-    numberOnDice: {
-        type: Number,
-        required: true,
-    },
-});
+import { ref } from "vue";
+import sleep from "../../helpers/sleep.js";
+
+const emit = defineEmits([ 'rolling' ]);
+
+const numberOnDice = ref(6);
+const animationDice = async () => {
+    numberOnDice.value = Math.floor(1 + Math.random() * 6);
+    await sleep(50);
+    numberOnDice.value = Math.floor(1 + Math.random() * 6);
+    await sleep(100);
+    numberOnDice.value = Math.floor(1 + Math.random() * 6);
+    await sleep(150);
+    numberOnDice.value = Math.floor(1 + Math.random() * 6);
+    await sleep(200);
+    numberOnDice.value = Math.floor(1 + Math.random() * 6);
+    await sleep(250);
+    numberOnDice.value = Math.floor(1 + Math.random() * 6);
+    await sleep(300);
+    numberOnDice.value = Math.floor(1 + Math.random() * 6);
+    await sleep(350);
+    numberOnDice.value = Math.floor(1 + Math.random() * 6);
+    await sleep(400);
+    numberOnDice.value = Math.floor(1 + Math.random() * 6);
+    await sleep(470);
+};
+const rollingDice = async () => {
+    await animationDice();
+    numberOnDice.value = Math.floor(1 + Math.random() * 6);
+    return emit('rolling', numberOnDice.value);
+};
 </script>
 
 <template>
@@ -20,7 +45,7 @@ defineProps({
             shadow-[0_0_4px_1px_rgb(50,50,50)_inset]
         "
         type="button"
-        @click="$emit('rolling')"
+        @click="rollingDice"
     >
         <Transition>
             <span

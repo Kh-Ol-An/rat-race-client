@@ -1,8 +1,8 @@
 <script setup>
 import { onMounted, onUnmounted, ref, reactive, computed } from 'vue';
 import Menu from '../components/plugins/Menu.vue';
+import Circle from "../components/Game/Circle.vue";
 import Dice from '../components/Game/Dice.vue';
-import GameChip from "../components/Game/GameChip.vue";
 import poorCircle from '../database/poor-circle.json';
 import richCircle from '../database/rich-circle.json';
 import {
@@ -12,20 +12,9 @@ import {
     CELLS_COUNT_BY_HEIGHT,
     FIELDS_COUNT,
     FIELDS_GAP,
+    BALANCE_X_GAP,
+    BALANCE_Y_GAP,
 } from '../database/variables.js';
-import MoneyIcon from "../assets/images/icons/MoneyIcon.vue";
-import BusinessIcon from "../assets/images/icons/BusinessIcon.vue";
-import InvestmentsIcon from "../assets/images/icons/InvestmentsIcon.vue";
-import ExpenseIcon from "../assets/images/icons/ExpenseIcon.vue";
-import LayoffIcon from "../assets/images/icons/LayoffIcon.vue";
-import OpportunitiesIcon from "../assets/images/icons/OpportunitiesIcon.vue";
-import CartIcon from "../assets/images/icons/CartIcon.vue";
-import WeddingIcon from "../assets/images/icons/WeddingIcon.vue";
-import BabyIcon from "../assets/images/icons/BabyIcon.vue";
-import DivorceIcon from "../assets/images/icons/DivorceIcon.vue";
-import VacationIcon from "../assets/images/icons/VacationIcon.vue";
-import BankruptcyIcon from "../assets/images/icons/BankruptcyIcon.vue";
-import sleep from '../helpers/sleep.js';
 
 const container = ref(null);
 const containerWidth = ref(null);
@@ -37,78 +26,65 @@ const poorCircleWidth = ref(null);
 const poorCircleHeight = ref(null);
 const cellWidthInPoorCircle = ref(null);
 const cellHeightInPoorCircle = ref(null);
+const balancePosition = ref(null);
+const balanceSide = ref(null);
 
-const numberOnDice = ref(6);
 const gameChip = reactive({
     id: 1,
     position: 1,
-    rich: true,
+    rich: false,
 })
+const rollingDice = (numberOnDice) => {
+    gameChip.position += numberOnDice;
+    gameChip.position > FIELDS_COUNT && (gameChip.position = gameChip.position - FIELDS_COUNT);
+};
 const gameChipStyles = computed(
     () =>
         gameChip.rich
             ? richCircle.find(field => field.id === gameChip.position)
             : poorCircle.find(field => field.id === gameChip.position)
 );
-const animationDice = async () => {
-    numberOnDice.value = Math.floor(1 + Math.random() * 6);
-    await sleep(50);
-    numberOnDice.value = Math.floor(1 + Math.random() * 6);
-    await sleep(100);
-    numberOnDice.value = Math.floor(1 + Math.random() * 6);
-    await sleep(150);
-    numberOnDice.value = Math.floor(1 + Math.random() * 6);
-    await sleep(200);
-    numberOnDice.value = Math.floor(1 + Math.random() * 6);
-    await sleep(250);
-    numberOnDice.value = Math.floor(1 + Math.random() * 6);
-    await sleep(300);
-    numberOnDice.value = Math.floor(1 + Math.random() * 6);
-    await sleep(350);
-    numberOnDice.value = Math.floor(1 + Math.random() * 6);
-    await sleep(400);
-    numberOnDice.value = Math.floor(1 + Math.random() * 6);
-    await sleep(470);
-};
-const rollingDice = async () => {
-    await animationDice();
-    numberOnDice.value = Math.floor(1 + Math.random() * 6);
-    gameChip.position += numberOnDice.value;
-    gameChip.position > FIELDS_COUNT && (gameChip.position = gameChip.position - FIELDS_COUNT);
-};
 
 const resizeObserver = new ResizeObserver((entries) => {
     for (const entry of entries) {
         containerWidth.value = entry.target.clientWidth;
         containerHeight.value = entry.target.clientHeight;
         if (containerHeight.value / containerWidth.value > RICH_CIRCLE_FACTOR) {
-            // Outer
-            const outerHeight = containerWidth.value * RICH_CIRCLE_FACTOR;
-            richCircleHeight.value = `${outerHeight}px`;
+            // Rich
+            const richHeight = containerWidth.value * RICH_CIRCLE_FACTOR;
+            richCircleHeight.value = `${richHeight}px`;
             richCircleWidth.value = '100%';
-            cellSizeInRichCircle.value = outerHeight / CELLS_COUNT_BY_HEIGHT;
+            cellSizeInRichCircle.value = richHeight / CELLS_COUNT_BY_HEIGHT;
 
-            // Inner
-            const innerHeight = outerHeight - cellSizeInRichCircle.value * 2 - FIELDS_GAP;
-            const innerWidth = innerHeight / POOR_CIRCLE_FACTOR;
-            poorCircleHeight.value = `${innerHeight}px`;
-            poorCircleWidth.value = `${innerWidth}px`;
-            cellHeightInPoorCircle.value = innerHeight / CELLS_COUNT_BY_HEIGHT;
-            cellWidthInPoorCircle.value = innerWidth / CELLS_COUNT_BY_WIDTH;
+            // Poor
+            const poorHeight = richHeight - cellSizeInRichCircle.value * 2 - FIELDS_GAP;
+            const poorWidth = poorHeight / POOR_CIRCLE_FACTOR;
+            poorCircleHeight.value = `${poorHeight}px`;
+            poorCircleWidth.value = `${poorWidth}px`;
+            cellHeightInPoorCircle.value = poorHeight / CELLS_COUNT_BY_HEIGHT;
+            cellWidthInPoorCircle.value = poorWidth / CELLS_COUNT_BY_WIDTH;
+
+            // Balance
+            balancePosition.value = cellWidthInPoorCircle.value + BALANCE_X_GAP;
+            balanceSide.value = poorHeight - cellHeightInPoorCircle.value * 2 - BALANCE_Y_GAP;
         } else {
-            // Outer
-            const outerWidth = containerHeight.value / RICH_CIRCLE_FACTOR;
-            richCircleWidth.value = `${outerWidth}px`;
+            // Rich
+            const richWidth = containerHeight.value / RICH_CIRCLE_FACTOR;
+            richCircleWidth.value = `${richWidth}px`;
             richCircleHeight.value = '100%';
-            cellSizeInRichCircle.value = outerWidth / CELLS_COUNT_BY_WIDTH;
+            cellSizeInRichCircle.value = richWidth / CELLS_COUNT_BY_WIDTH;
 
-            // Inner
-            const innerWidth = outerWidth - cellSizeInRichCircle.value * 2 - FIELDS_GAP;
-            const innerHeight = innerWidth * POOR_CIRCLE_FACTOR;
-            poorCircleWidth.value = `${innerWidth}px`;
-            poorCircleHeight.value = `${innerHeight}px`;
-            cellWidthInPoorCircle.value = innerWidth / CELLS_COUNT_BY_WIDTH;
-            cellHeightInPoorCircle.value = innerHeight / CELLS_COUNT_BY_HEIGHT;
+            // Poor
+            const poorWidth = richWidth - cellSizeInRichCircle.value * 2 - FIELDS_GAP;
+            const poorHeight = poorWidth * POOR_CIRCLE_FACTOR;
+            poorCircleWidth.value = `${poorWidth}px`;
+            poorCircleHeight.value = `${poorHeight}px`;
+            cellWidthInPoorCircle.value = poorWidth / CELLS_COUNT_BY_WIDTH;
+            cellHeightInPoorCircle.value = poorHeight / CELLS_COUNT_BY_HEIGHT;
+
+            // Balance
+            balancePosition.value = cellWidthInPoorCircle.value + BALANCE_X_GAP;
+            balanceSide.value = poorHeight - cellHeightInPoorCircle.value * 2 - BALANCE_Y_GAP;
         }
     }
 });
@@ -136,123 +112,37 @@ setTimeout(() => development.value = true, 3000);
     </Transition>
 
     <Transition>
-        <div v-if="!development" class="pt-4 pb-8 px-8 w-full h-screen flex flex-col items-center gap-6">
-            <h1 class="md:hidden text-4xl font-bold text-white text-center">ГРА 'Сам склепав'</h1>
+        <div v-if="!development" class="pt-4 pb-6 px-6 w-full h-screen flex flex-col items-center gap-4">
+            <h1 class="md:hidden text-4xl font-bold text-white text-center">ГРА 'Гроші є'</h1>
 
             <div class="relative w-full h-full flex items-center justify-center" ref="container">
-                <Dice :numberOnDice="numberOnDice" @rolling="rollingDice" />
+                <!-- Rich -->
+                <Circle
+                    :width="richCircleWidth"
+                    :height="richCircleHeight"
+                    classes="relative"
+                    :circle="richCircle"
+                    :cellWidth="cellSizeInRichCircle && cellSizeInRichCircle"
+                    :cellHeight="cellSizeInRichCircle && cellSizeInRichCircle"
+                    :gameChipStyles="gameChipStyles"
+                    :gameChipHere="gameChip.rich"
+                />
 
-                <!-- Outer -->
-                <div
-                    :style="{ width: richCircleWidth, height: richCircleHeight }"
-                    class="relative"
-                >
-                    <div
-                        v-for="{ styles, type, name } in poorCircle"
-                        :style="{
-                            top: styles.top && `${cellSizeInRichCircle * styles.top}px`,
-                            right: styles.right && `${cellSizeInRichCircle * styles.right}px`,
-                            bottom: styles.bottom && `${cellSizeInRichCircle * styles.bottom}px`,
-                            left: styles.left && `${cellSizeInRichCircle * styles.left}px`,
-                            width: `${cellSizeInRichCircle}px`,
-                            height: `${cellSizeInRichCircle}px`,
-                        }"
-                        :class="[
-                            'absolute',
-                            'flex items-center justify-center',
-                            type === 'profit' && 'bg-primary',
-                            type === 'business' && 'bg-secondary', // half
-                            type === 'investments' && 'bg-sky-600',
-                            type === 'expenses' && 'bg-red-600',
-                            type === 'layoff' && 'bg-gray-700',
-                            type === 'opportunities' && 'bg-orange-600',
-                            type === 'buys' && 'bg-sky-400',
-                            type === 'wedding' && 'bg-fuchsia-600',
-                            type === 'baby' && 'bg-yellow-400',
-                            type === 'divorce' && 'bg-gray-600',
-                            type === 'vacation' && 'bg-teal-600',
-                            type === 'bankruptcy' && 'bg-gray-900',
-                        ]"
-                        :title="name"
-                    >
-                        <MoneyIcon v-if="type === 'profit'" />
-                        <BusinessIcon v-if="type === 'business'" />
-                        <InvestmentsIcon v-if="type === 'investments'" width="30px" height="30px" />
-                        <ExpenseIcon v-if="type === 'expenses'" width="30px" height="30px" />
-                        <LayoffIcon v-if="type === 'layoff'" />
-                        <OpportunitiesIcon v-if="type === 'opportunities'" width="30px" height="30px" />
-                        <CartIcon v-if="type === 'buys'" width="30px" height="30px" />
-                        <WeddingIcon v-if="type === 'wedding'" width="30px" height="30px" />
-                        <BabyIcon v-if="type === 'baby'" width="30px" height="30px" />
-                        <DivorceIcon v-if="type === 'divorce'" width="30px" height="30px" />
-                        <VacationIcon v-if="type === 'vacation'" width="30px" height="30px" />
-                        <BankruptcyIcon v-if="type === 'bankruptcy'" width="30px" height="30px" />
-                    </div>
+                <!-- Poor -->
+                <Circle
+                    :width="poorCircleWidth && poorCircleWidth"
+                    :height="poorCircleHeight && poorCircleHeight"
+                    classes="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2"
+                    :circle="poorCircle"
+                    :cellWidth="cellWidthInPoorCircle && cellWidthInPoorCircle"
+                    :cellHeight="cellHeightInPoorCircle && cellHeightInPoorCircle"
+                    :gameChipStyles="gameChipStyles"
+                    :gameChipHere="!gameChip.rich"
+                    :balancePosition="balancePosition && balancePosition"
+                    :balanceSide="balanceSide && balanceSide"
+                />
 
-                    <GameChip
-                        v-if="gameChip.rich"
-                        :gameChipStyles="gameChipStyles"
-                        :cellWidth="cellSizeInRichCircle && cellSizeInRichCircle"
-                        :cellHeight="cellSizeInRichCircle && cellSizeInRichCircle"
-                        gameChipColor="fill-red-600"
-                    />
-                </div>
-
-                <!-- Inner -->
-                <div
-                    :style="{ width: poorCircleWidth, height: poorCircleHeight }"
-                    class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2"
-                >
-                    <div
-                        v-for="{ styles, type, name } in richCircle"
-                        :style="{
-                            top: styles.top && `${cellHeightInPoorCircle * styles.top}px`,
-                            right: styles.right && `${cellWidthInPoorCircle * styles.right}px`,
-                            bottom: styles.bottom && `${cellHeightInPoorCircle * styles.bottom}px`,
-                            left: styles.left && `${cellWidthInPoorCircle * styles.left}px`,
-                            width: `${cellWidthInPoorCircle}px`,
-                            height: `${cellHeightInPoorCircle}px`,
-                        }"
-                        :class="[
-                            'absolute',
-                            'flex items-center justify-center',
-                            type === 'profit' && 'bg-primary',
-                            type === 'business' && 'bg-secondary', // half
-                            type === 'investments' && 'bg-sky-600',
-                            type === 'expenses' && 'bg-red-600',
-                            type === 'layoff' && 'bg-gray-700',
-                            type === 'opportunities' && 'bg-orange-600',
-                            type === 'buys' && 'bg-sky-400',
-                            type === 'wedding' && 'bg-fuchsia-600',
-                            type === 'baby' && 'bg-yellow-400',
-                            type === 'divorce' && 'bg-gray-600',
-                            type === 'vacation' && 'bg-teal-600',
-                            type === 'bankruptcy' && 'bg-gray-900',
-                        ]"
-                        :title="name"
-                    >
-                        <MoneyIcon v-if="type === 'profit'" />
-                        <BusinessIcon v-if="type === 'business'" />
-                        <InvestmentsIcon v-if="type === 'investments'" width="30px" height="30px" />
-                        <ExpenseIcon v-if="type === 'expenses'" width="30px" height="30px" />
-                        <LayoffIcon v-if="type === 'layoff'" />
-                        <OpportunitiesIcon v-if="type === 'opportunities'" width="30px" height="30px" />
-                        <CartIcon v-if="type === 'buys'" width="30px" height="30px" />
-                        <WeddingIcon v-if="type === 'wedding'" width="30px" height="30px" />
-                        <BabyIcon v-if="type === 'baby'" width="30px" height="30px" />
-                        <DivorceIcon v-if="type === 'divorce'" width="30px" height="30px" />
-                        <VacationIcon v-if="type === 'vacation'" width="30px" height="30px" />
-                        <BankruptcyIcon v-if="type === 'bankruptcy'" width="30px" height="30px" />
-                    </div>
-
-                    <GameChip
-                        v-if="!gameChip.rich"
-                        :gameChipStyles="gameChipStyles"
-                        :cellWidth="cellWidthInPoorCircle && cellWidthInPoorCircle"
-                        :cellHeight="cellHeightInPoorCircle && cellHeightInPoorCircle"
-                        gameChipColor="fill-red-600"
-                    />
-                </div>
+                <Dice @rolling="rollingDice" />
             </div>
         </div>
     </Transition>

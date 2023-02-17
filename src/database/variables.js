@@ -27,9 +27,11 @@ export const FIELDS_COUNT_OF_OUTER_CIRCLE = 74;
 export const FIELDS_COUNT_OF_INNER_CIRCLE = 78;
 
 // Game
-export const POOR_CIRCLE_FACTOR = 0.465;
+export const POOR_CIRCLE_FACTOR = 0.467;
 export const RICH_CIRCLE_FACTOR = 0.526315789;
 export const CELLS_COUNT_BY_WIDTH = 19;
 export const CELLS_COUNT_BY_HEIGHT = 10;
 export const FIELDS_COUNT = 54;
 export const FIELDS_GAP = 10;
+export const BALANCE_X_GAP = 38;
+export const BALANCE_Y_GAP = 24;
