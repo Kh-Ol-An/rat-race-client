@@ -5,6 +5,8 @@ import Circle from "../components/Game/Circle.vue";
 import Dice from '../components/Game/Dice.vue';
 import poorCircle from '../database/poor-circle.json';
 import richCircle from '../database/rich-circle.json';
+import maleProfessions from '../database/male-professions.json';
+import femaleProfessions from '../database/female-professions.json';
 import {
     POOR_CIRCLE_FACTOR,
     RICH_CIRCLE_FACTOR,
@@ -28,23 +30,6 @@ const cellWidthInPoorCircle = ref(null);
 const cellHeightInPoorCircle = ref(null);
 const balancePosition = ref(null);
 const balanceSide = ref(null);
-
-const gameChip = reactive({
-    id: 1,
-    position: 1,
-    rich: false,
-})
-const rollingDice = (numberOnDice) => {
-    gameChip.position += numberOnDice;
-    gameChip.position > FIELDS_COUNT && (gameChip.position = gameChip.position - FIELDS_COUNT);
-};
-const gameChipStyles = computed(
-    () =>
-        gameChip.rich
-            ? richCircle.find(field => field.id === gameChip.position)
-            : poorCircle.find(field => field.id === gameChip.position)
-);
-
 const resizeObserver = new ResizeObserver((entries) => {
     for (const entry of entries) {
         containerWidth.value = entry.target.clientWidth;
@@ -88,10 +73,46 @@ const resizeObserver = new ResizeObserver((entries) => {
         }
     }
 });
-
 onMounted(() => resizeObserver.observe(container.value));
-
 onUnmounted(() => resizeObserver.disconnect());
+
+const user = reactive({
+    id: 1,
+    position: 1,
+    rich: false,
+    gender: '',
+    profession: '',
+    salary: 0,
+    rent: 0,
+    food: 0,
+    clothes: 0,
+    fare: 0,
+    utilities: 0,
+})
+const rollingDice = (numberOnDice) => {
+    user.position += numberOnDice;
+    user.position > FIELDS_COUNT && (user.position = user.position - FIELDS_COUNT);
+};
+const userPosition = computed(
+    () =>
+        user.rich
+            ? richCircle.find((field) => field.id === user.position).styles
+            : poorCircle.find((field) => field.id === user.position).styles
+);
+const choiceGender = (gender) => {
+    const randomId = Math.floor(1 + Math.random() * 4);
+    let genderCard = {};
+    gender === 'male' && (genderCard = maleProfessions.find((profession) => profession.id === randomId));
+    gender === 'female' && (genderCard = femaleProfessions.find((profession) => profession.id === randomId));
+    user.gender = gender;
+    user.profession = genderCard.profession;
+    user.salary = genderCard.salary;
+    user.rent = genderCard.rent;
+    user.food = genderCard.food;
+    user.clothes = genderCard.clothes;
+    user.fare = genderCard.fare;
+    user.utilities = genderCard.utilities;
+};
 
 const development = ref(false);
 // setTimeout(() => development.value = false, 3000);
@@ -124,8 +145,9 @@ setTimeout(() => development.value = true, 3000);
                     :circle="richCircle"
                     :cellWidth="cellSizeInRichCircle && cellSizeInRichCircle"
                     :cellHeight="cellSizeInRichCircle && cellSizeInRichCircle"
-                    :gameChipStyles="gameChipStyles"
-                    :gameChipHere="gameChip.rich"
+                    :userPosition="userPosition"
+                    :gameChipHere="user.rich"
+                    :user="user"
                 />
 
                 <!-- Poor -->
@@ -136,13 +158,15 @@ setTimeout(() => development.value = true, 3000);
                     :circle="poorCircle"
                     :cellWidth="cellWidthInPoorCircle && cellWidthInPoorCircle"
                     :cellHeight="cellHeightInPoorCircle && cellHeightInPoorCircle"
-                    :gameChipStyles="gameChipStyles"
-                    :gameChipHere="!gameChip.rich"
+                    :userPosition="userPosition"
+                    :gameChipHere="!user.rich"
                     :balancePosition="balancePosition && balancePosition"
                     :balanceSide="balanceSide && balanceSide"
+                    :user="user"
+                    @choice:gender="choiceGender"
                 />
 
-                <Dice @rolling="rollingDice" />
+                <Dice v-if="user.gender.length" @rolling="rollingDice" />
             </div>
         </div>
     </Transition>

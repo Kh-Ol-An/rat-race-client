@@ -40,7 +40,7 @@ defineProps({
         type: Number,
         required: true,
     },
-    gameChipStyles: {
+    userPosition: {
         type: Object,
         required: true,
     },
@@ -54,6 +54,10 @@ defineProps({
     },
     balanceSide: {
         type: String,
+        required: true,
+    },
+    user: {
+        type: Object,
         required: true,
     },
 });
@@ -105,7 +109,7 @@ defineProps({
 
         <GameChip
             v-if="gameChipHere"
-            :gameChipStyles="gameChipStyles"
+            :userPosition="userPosition"
             :cellWidth="cellWidth"
             :cellHeight="cellHeight"
             gameChipColor="fill-red-600"
@@ -116,6 +120,8 @@ defineProps({
             :left="`${balancePosition}px`"
             :width="`${balanceSide}px`"
             :height="`${balanceSide}px`"
+            :user="user"
+            @choice:gender="$emit('choice:gender', 'male')"
         />
 
         <IncreaseBalance
@@ -123,6 +129,8 @@ defineProps({
             :right="`${balancePosition}px`"
             :width="`${balanceSide}px`"
             :height="`${balanceSide}px`"
+            :user="user"
+            @choice:gender="$emit('choice:gender', 'female')"
         />
     </div>
 </template>

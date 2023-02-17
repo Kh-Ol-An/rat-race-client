@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "profession": "Фотограф",
+        "salary": 2000,
+        "rent": 700,
+        "food": 500,
+        "clothes": 450,
+        "fare": 100,
+        "utilities": 50
+    },
+    {
+        "id": 2,
+        "profession": "Дизайнер",
+        "salary": 1800,
+        "rent": 650,
+        "food": 450,
+        "clothes": 500,
+        "fare": 50,
+        "utilities": 50
+    },
+    {
+        "id": 3,
+        "profession": "Модель",
+        "salary": 1800,
+        "rent": 650,
+        "food": 450,
+        "clothes": 500,
+        "fare": 50,
+        "utilities": 50
+    },
+    {
+        "id": 4,
+        "profession": "Секретар",
+        "salary": 1800,
+        "rent": 650,
+        "food": 450,
+        "clothes": 500,
+        "fare": 50,
+        "utilities": 50
+    }
+]

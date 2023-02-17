@@ -3,8 +3,8 @@ import { onMounted, onUnmounted, ref, reactive, computed } from 'vue';
 import Menu from '../components/plugins/Menu.vue';
 import Dice from '../components/Rat/Dice.vue';
 import GameChip from "../components/Rat/GameChip.vue";
-import poorCircle from '../database/rat-poor-circle.js';
-import richCircle from '../database/rat-rich-circle.js';
+import poorCircle from '../database/rat/rat-poor-circle.js';
+import richCircle from '../database/rat/rat-rich-circle.js';
 import {
     RAT_OUTER_CIRCLE_FACTOR,
     RAT_INNER_CIRCLE_FACTOR,

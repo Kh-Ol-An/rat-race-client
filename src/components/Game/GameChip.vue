@@ -2,7 +2,7 @@
 import GameChipIcon from "../../assets/images/icons/GameChipIcon.vue";
 
 defineProps({
-    gameChipStyles: {
+    userPosition: {
         type: Object,
         required: true,
     },
@@ -24,10 +24,10 @@ defineProps({
 <template>
     <div
         :style="{
-            top: gameChipStyles.styles.top && `${cellHeight * gameChipStyles.styles.top}px`,
-            right: gameChipStyles.styles.right && `${cellWidth * gameChipStyles.styles.right}px`,
-            bottom: gameChipStyles.styles.bottom && `${cellHeight * gameChipStyles.styles.bottom}px`,
-            left: gameChipStyles.styles.left && `${cellWidth * gameChipStyles.styles.left}px`,
+            top: userPosition.top && `${cellHeight * userPosition.top}px`,
+            right: userPosition.right && `${cellWidth * userPosition.right}px`,
+            bottom: userPosition.bottom && `${cellHeight * userPosition.bottom}px`,
+            left: userPosition.left && `${cellWidth * userPosition.left}px`,
             width: `${cellWidth}px`,
             height: `${cellHeight}px`,
         }"
