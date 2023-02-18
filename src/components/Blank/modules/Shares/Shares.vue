@@ -36,8 +36,8 @@ const sellAll = (subType, price) => emit('sell:all', subType, price);
         label="GC"
         type="shares"
         subType="gc"
-        placeholderWorth="Ціна"
-        placeholderValue="Кількість"
+        firstPlaceholder="Ціна"
+        secondPlaceholder="Кількість"
         @add="buy"
     />
     <ul v-if="blank.shares.gc.length > 0" class="flex flex-col gap-2">
@@ -64,8 +64,8 @@ const sellAll = (subType, price) => emit('sell:all', subType, price);
         label="ЩГП"
         type="shares"
         subType="schp"
-        placeholderWorth="Ціна"
-        placeholderValue="Кількість"
+        firstPlaceholder="Ціна"
+        secondPlaceholder="Кількість"
         @add="buy"
     />
     <ul v-if="blank.shares.schp.length > 0" class="flex flex-col gap-2">
@@ -92,8 +92,8 @@ const sellAll = (subType, price) => emit('sell:all', subType, price);
         label="TO"
         type="shares"
         subType="to"
-        placeholderWorth="Ціна"
-        placeholderValue="Кількість"
+        firstPlaceholder="Ціна"
+        secondPlaceholder="Кількість"
         @add="buy"
     />
     <ul v-if="blank.shares.to.length > 0" class="flex flex-col gap-2">
@@ -120,8 +120,8 @@ const sellAll = (subType, price) => emit('sell:all', subType, price);
         label="CST"
         type="shares"
         subType="cst"
-        placeholderWorth="Ціна"
-        placeholderValue="Кількість"
+        firstPlaceholder="Ціна"
+        secondPlaceholder="Кількість"
         @add="buy"
     />
     <ul v-if="blank.shares.cst.length > 0" class="flex flex-col gap-2">

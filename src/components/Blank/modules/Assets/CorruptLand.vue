@@ -19,9 +19,9 @@ const emit = defineEmits([ 'buy:land', 'sell:land', 'sell:acres' ]);
 
 const showModal = ref(false);
 
-const buyLand = (id, quantity, cost) => {
-    if (blank.value.cash < cost) return showModal.value = true;
-    emit('buy:land', id, quantity, cost);
+const buyLand = (id, quantity, cost, subType, deputies) => {
+    if (blank.value.cash < cost || blank.value.deputies < deputies) return showModal.value = true;
+    emit('buy:land', id, quantity, cost, deputies);
 };
 const sellLand = (id, price) => emit('sell:land', id, price);
 const sellAcres = (price) => emit('sell:acres', price);
@@ -32,8 +32,9 @@ const sellAcres = (price) => emit('sell:acres', price);
         label="Корупційна земля"
         type="assets"
         subType="corruptLand"
-        placeholderWorth="Кількість соток"
-        placeholderValue="Вартість"
+        firstPlaceholder="Кількість соток"
+        thirdPlaceholder="Депутати"
+        secondPlaceholder="Вартість"
         secondBg
         @add="buyLand"
     />

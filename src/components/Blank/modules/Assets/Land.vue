@@ -32,8 +32,8 @@ const sellAcres = (price) => emit('sell:acres', price);
         label="Земля"
         type="assets"
         subType="land"
-        placeholderWorth="Ціна за сотку"
-        placeholderValue="Кількість соток"
+        firstPlaceholder="Ціна за сотку"
+        secondPlaceholder="Кількість соток"
         secondBg
         @add="buyLand"
     />

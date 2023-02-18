@@ -4,7 +4,7 @@ import Input from '../../plugins/Input.vue';
 import Add from '../plugins/Add.vue';
 import InfoField from '../../plugins/InfoField.vue';
 import Modal from '../plugins/Modal.vue';
-import { removingSpaces } from '../../../helpers/formating-values.js';
+import { removingSpaces, addingSpaces } from '../../../helpers/formating-values.js';
 
 const props = defineProps({
     blankProp: {
@@ -38,8 +38,8 @@ const buy = () => {
     <h2 class="px-4 text-xl font-bold text-opposite text-center">Капризи та примхи</h2>
 
     <div class="mt-2 flex items-center gap-3">
-        <Input v-model:value="name" id="whim-and-fancies" type="text" :maxLength="15" placeholder="Назва" />
-        <Input v-model:value="price" id="whim-and-fancies" placeholder="Ціна" />
+        <Input v-model:value="name" id="whim-and-fancies-name" type="text" :maxLength="15" placeholder="Назва" />
+        <Input v-model:value="price" id="whim-and-fancies-price" placeholder="Ціна" />
         <Add :firstValue="price" @add="buy" />
     </div>
     <ul v-if="blank.whimsAndFancies.length > 0" class="flex flex-col gap-2">
@@ -50,7 +50,7 @@ const buy = () => {
                 :label="name.length > 0 ? `${name}:` : 'Капризи та примхи:'"
             >
                 <span class="text-slate-400">
-                    {{ price }}
+                    {{ addingSpaces(price) }}
                 </span>
             </InfoField>
         </li>

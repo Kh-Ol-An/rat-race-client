@@ -36,9 +36,9 @@ const quit = () => {
 
 const showModal = ref(false);
 
-const buyBusiness = (id, price, income, subType) => {
-    if (blank.value.cash < price) return showModal.value = true;
-    emit('buy:business', id, price, income, subType);
+const buyBusiness = (id, price, income, subType, deputies) => {
+    if (blank.value.cash < price || blank.value.deputies < deputies) return showModal.value = true;
+    emit('buy:business', id, price, income, subType, deputies);
 };
 const incrementIncomeBusiness = (id, income) => emit('increment:income', id, income);
 const deleteBusiness = (subType, id) => emit('delete:business', subType, id);
@@ -113,8 +113,8 @@ const sellBusiness = subType => emit('sell', subType);
         label="Малий бізнес"
         type="business"
         subType="small"
-        placeholderWorth="Вартість"
-        placeholderValue="Прибутки"
+        firstPlaceholder="Вартість"
+        secondPlaceholder="Прибутки"
         :disabled="
             ((blank.salary > 0 || firedSalary > 0) && blank.business.small.length > 0) ||
             blank.business.middle.length > 0 ||
@@ -155,8 +155,8 @@ const sellBusiness = subType => emit('sell', subType);
         label="Середній бізнес"
         type="business"
         subType="middle"
-        placeholderWorth="Вартість"
-        placeholderValue="Прибутки"
+        firstPlaceholder="Вартість"
+        secondPlaceholder="Прибутки"
         :disabled="
             ((blank.salary > 0 || firedSalary > 0) && blank.business.middle.length > 0) ||
             blank.business.small.length > 0 ||
@@ -193,8 +193,8 @@ const sellBusiness = subType => emit('sell', subType);
         label="Великий бізнес"
         type="business"
         subType="big"
-        placeholderWorth="Вартість"
-        placeholderValue="Прибутки"
+        firstPlaceholder="Вартість"
+        secondPlaceholder="Прибутки"
         :disabled="
             (blank.salary > 0 && blank.business.big.length > 0) ||
             (blank.salary > 0 && blank.business.corrupt.length > 0) ||
@@ -226,8 +226,9 @@ const sellBusiness = subType => emit('sell', subType);
         label="Корупційний бізнес"
         type="business"
         subType="corrupt"
-        placeholderWorth="Вартість"
-        placeholderValue="Прибутки"
+        firstPlaceholder="Вартість"
+        secondPlaceholder="Прибутки"
+        thirdPlaceholder="Депутати"
         :disabled="
             (blank.salary > 0 && blank.business.big.length > 0) ||
             (blank.salary > 0 && blank.business.corrupt.length > 0) ||

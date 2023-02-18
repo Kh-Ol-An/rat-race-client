@@ -1,10 +1,9 @@
 <script setup>
-import { toRef } from "vue";
 import InfoField from '../../plugins/InfoField.vue';
 import { addingSpaces } from '../../../helpers/formating-values.js';
 
 const props = defineProps({
-    blankProp: {
+    blank: {
         type: Object,
         required: true,
     },
@@ -17,8 +16,6 @@ const props = defineProps({
         required: true,
     },
 });
-
-const blank = toRef(props, 'blankProp');
 </script>
 
 <template>
@@ -40,6 +37,11 @@ const blank = toRef(props, 'blankProp');
     <InfoField labelClasses="text-primary" label="Загальний дохід:">
         <span class="ml-2 text-slate-400">
             {{ addingSpaces(income) }}
+        </span>
+    </InfoField>
+    <InfoField v-if="blank.deputies" labelClasses="text-primary" label="Кількість депутатів:">
+        <span class="ml-2 text-slate-400">
+            {{ addingSpaces(blank.deputies) }}
         </span>
     </InfoField>
 </template>

@@ -3,15 +3,15 @@ import { computed } from 'vue';
 import AddIcon from '../../../assets/images/icons/AddIcon.vue';
 
 const props = defineProps({
-    name: {
-        type: String,
-        default: 'true',
-    },
     firstValue: {
         type: String,
         required: true,
     },
     secondValue: {
+        type: String,
+        default: 'true',
+    },
+    thirdValue: {
         type: String,
         default: 'true',
     },
@@ -22,7 +22,10 @@ const props = defineProps({
 });
 
 const disabled = computed(() =>
-    props.name.length === 0 || props.firstValue.length === 0 || props.secondValue.length === 0);
+    props.firstValue.length === 0 ||
+    props.secondValue.length === 0 ||
+    props.thirdValue.length === 0
+);
 </script>
 
 <template>

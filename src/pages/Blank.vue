@@ -16,6 +16,7 @@ import IncomeInfo from '../components/Blank/modules/IncomeInfo.vue';
 import Incomes from '../components/Blank/modules/Incomes/Incomes.vue';
 import Shares from '../components/Blank/modules/Shares/Shares.vue';
 import Assets from '../components/Blank/modules/Assets/Assets.vue';
+import Deputies from '../components/Blank/modules/Deputies.vue';
 import BlankActions from '../components/Blank/modules/BlankActions.vue';
 import Modal from '../components/Blank/plugins/Modal.vue';
 import MoneyIcon from '../assets/images/icons/MoneyIcon.vue';
@@ -292,9 +293,10 @@ const quit = () => {
     }
     blank.salary = 0;
 };
-const buyBusiness = (id, price, income, subType) => {
+const buyBusiness = (id, price, income, subType, deputies) => {
     blank.business[subType].push({id, price, income});
     blank.cash -= price;
+    blank.deputies -= deputies;
     blank.business.last.push(id);
 };
 const incrementIncomeBusiness = (id, income) => blank.business.small.find(business => {
@@ -354,10 +356,11 @@ const sellAcres = (price) => {
     increment(price);
     blank.assets.land= [];
 };
-const buyCorruptLand = (id, quantity, cost) => {
+const buyCorruptLand = (id, quantity, cost, deputies) => {
     const price = cost / quantity;
     blank.assets.corruptLand.push({id, price, quantity, cost});
     blank.cash -= cost;
+    blank.deputies -= deputies;
 };
 const sellCorruptLand = (id, price) => {
     increment(price);
@@ -366,6 +369,13 @@ const sellCorruptLand = (id, price) => {
 const sellCorruptAcres = (price) => {
     increment(price);
     blank.assets.corruptLand= [];
+};
+
+const buyDeputies = (cost) => {
+    blank.cash -= cost;
+};
+const addDeputies = (quantity) => {
+    blank.deputies += quantity;
 };
 
 const restart = async () => {
@@ -410,6 +420,7 @@ const restart = async () => {
             land: [],
             corruptLand: [],
         },
+        deputies: 0,
         rich: false,
         win: false,
     };
@@ -499,18 +510,22 @@ const showModalWin = computed(
                 <Transaction :rich="blank.rich" @decrement="decrement" @tax="tax" @increment="increment" />
             </div>
 
-            <InfoField wrapClasses="mx-auto px-8 md:px-2" labelClasses="font-bold text-primary" label="Грошовий потік:">
+            <InfoField
+                wrapClasses="mx-auto px-8 md:px-2 pt-4"
+                labelClasses="font-bold text-primary"
+                label="Грошовий потік:"
+            >
                 <span class="ml-2 font-bold text-slate-300">
                     {{ addingSpaces(cashFlow) }}
                 </span>
 
                 <button
-                    class="ml-4 outline-0"
+                    class="ml-8 outline-0"
                     type="button"
                     title="Отримати"
                     @click="getCashFlow"
                 >
-                    <MoneyIcon width="30px" height="30px" color="fill-primary" />
+                    <MoneyIcon width="40px" height="40px" color="fill-primary" />
                 </button>
             </InfoField>
 
@@ -577,7 +592,7 @@ const showModalWin = computed(
                 <div class="flex flex-col">
                     <!-- Загальні прибутки -->
                     <div class="py-4 pr-8 pl-4 md:pt-0 md:pb-4 md:px-2 flex flex-col gap-2">
-                        <IncomeInfo :blankProp="blank" :passiveIncome="passiveIncome" :income="income" />
+                        <IncomeInfo :blank="blank" :passiveIncome="passiveIncome" :income="income" />
                     </div>
 
                     <!-- Борги та витрати -->
@@ -632,7 +647,7 @@ const showModalWin = computed(
                     </div>
 
                     <!-- Активи -->
-                    <div class="pt-4 pr-8 pl-4 pb-8 md:px-2 flex flex-col gap-2 md:bg-slate-900">
+                    <div class="py-4 pr-8 pl-4 md:px-2 flex flex-col gap-2 md:bg-slate-900">
                         <Assets
                             :blankProp="blank"
                             @buy:house="buyHouse"
@@ -645,6 +660,11 @@ const showModalWin = computed(
                             @sell:corrupt-land="sellCorruptLand"
                             @sell:corrupt-acres="sellCorruptAcres"
                         />
+                    </div>
+
+                    <!-- Депутати -->
+                    <div v-if="blank.rich" class="pt-4 pr-8 pl-4 pb-8 md:px-2 flex flex-col gap-2">
+                        <Deputies :blankProp="blank" @buy="buyDeputies" @add="addDeputies" />
                     </div>
                 </div>
             </div>

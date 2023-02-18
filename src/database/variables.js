@@ -9,6 +9,7 @@ export const MAX_DEBT = 10000;
 export const WEDDING_COST = 5000;
 export const CHILD_EXPENSES = 300;
 export const CHILD_ALLOWANCE = 1000;
+export const DEPUTY_PRICE = 100000;
 export const MAX_HISTORY = 10;
 export const RICH_CASH = 3000000;
 export const RICH_CASH_FLOW = 50000;
