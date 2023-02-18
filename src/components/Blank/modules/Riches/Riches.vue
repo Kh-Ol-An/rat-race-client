@@ -5,7 +5,14 @@ import Add from '../../plugins/Add.vue';
 import Purchased from './Purchased.vue';
 import Modal from '../../plugins/Modal.vue';
 import InfoField from "../../../plugins/InfoField.vue";
-import { removingSpaces } from '../../../../helpers/formating-values.js';
+import { removingSpaces, addingSpaces } from '../../../../helpers/formating-values.js';
+import {
+    APARTMENT_EXPENSES,
+    CAR_EXPENSES,
+    COTTAGE_EXPENSES,
+    YACHT_EXPENSES,
+    PLANE_EXPENSES,
+} from '../../../../database/variables.js';
 
 const props = defineProps({
     blankProp: {
@@ -209,7 +216,7 @@ const sellPlane = id => emit('sell:plane', id);
                 <li>
                     <InfoField wrapClasses="gap-2" labelClasses="text-opposite" label="Витрати:">
                         <span class="text-slate-400">
-                            {{ blank.apartments.length * 200 }}
+                            {{ addingSpaces(blank.apartments.length * APARTMENT_EXPENSES) }}
                         </span>
                     </InfoField>
                 </li>
@@ -266,7 +273,7 @@ const sellPlane = id => emit('sell:plane', id);
                 <li>
                     <InfoField wrapClasses="gap-2" labelClasses="text-opposite" label="Витрати:">
                         <span class="text-slate-400">
-                            {{ blank.cars.length * 600 }}
+                            {{ addingSpaces(blank.cars.length * CAR_EXPENSES) }}
                         </span>
                     </InfoField>
                 </li>
@@ -320,7 +327,7 @@ const sellPlane = id => emit('sell:plane', id);
                 <li>
                     <InfoField wrapClasses="gap-2" labelClasses="text-opposite" label="Витрати:">
                         <span class="text-slate-400">
-                            {{ blank.apartments.length * 1000 }}
+                            {{ addingSpaces(blank.cottages.length * COTTAGE_EXPENSES) }}
                         </span>
                     </InfoField>
                 </li>
@@ -356,7 +363,7 @@ const sellPlane = id => emit('sell:plane', id);
                 <li>
                     <InfoField wrapClasses="gap-2" labelClasses="text-opposite" label="Витрати:">
                         <span class="text-slate-400">
-                            {{ blank.apartments.length * 1500 }}
+                            {{ addingSpaces(blank.yachts.length * YACHT_EXPENSES) }}
                         </span>
                     </InfoField>
                 </li>
@@ -392,7 +399,7 @@ const sellPlane = id => emit('sell:plane', id);
                 <li>
                     <InfoField wrapClasses="gap-2" labelClasses="text-opposite" label="Витрати:">
                         <span class="text-slate-400">
-                            {{ blank.apartments.length * 5000 }}
+                            {{ addingSpaces(blank.planes.length * PLANE_EXPENSES) }}
                         </span>
                     </InfoField>
                 </li>

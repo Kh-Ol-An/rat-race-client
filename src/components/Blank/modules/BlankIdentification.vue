@@ -66,39 +66,39 @@ const profession = ref('');
         >
             <MaleIcon
                 v-if="blank.gender === 'male'"
-                :color="(blank.marriage && !blank.rich) ? 'fill-blue-600' : 'fill-slate-400'"
+                :color="blank.marriage ? 'fill-blue-600' : 'fill-slate-400'"
             />
             <FemaleIcon
                 v-if="blank.gender === 'female'"
-                :color="(blank.marriage && !blank.rich) ? 'fill-opposite' : 'fill-slate-400'"
+                :color="blank.marriage ? 'fill-opposite' : 'fill-slate-400'"
             />
-            <BabyIcon v-if="havingChildren && !blank.rich" color="fill-primary" />
-            <ApartmentIcon v-if="blank.apartments.length > 0 && !blank.rich" color="fill-primary" />
+            <BabyIcon v-if="havingChildren" color="fill-primary" />
+            <ApartmentIcon v-if="blank.apartments.length > 0" color="fill-primary" />
             <CarIcon
-                v-if="blank.cars.length > 0 && !blank.rich"
+                v-if="blank.cars.length > 0"
                 width="32px"
                 height="32px"
                 color="fill-primary"
             />
             <CottageIcon
-                v-if="blank.cottages.length > 0 && blank.rich"
+                v-if="blank.cottages.length > 0"
                 width="32px"
                 height="32px"
                 color="fill-primary"
             />
             <YachtIcon
-                v-if="blank.yachts.length > 0 && blank.rich"
+                v-if="blank.yachts.length > 0"
                 width="26px"
                 height="26px"
                 color="fill-primary"
             />
             <PlaneIcon
-                v-if="blank.planes.length > 0 && blank.rich"
+                v-if="blank.planes.length > 0"
                 width="32px"
                 height="32px"
                 color="fill-primary"
             />
-            <TargetIcon v-if="blank.whimsAndFancies.length > 0 && blank.rich" width="28px" height="28px" />
+            <TargetIcon v-if="blank.whimsAndFancies.length > 0" width="28px" height="28px" />
         </div>
     </div>
 
