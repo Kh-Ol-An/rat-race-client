@@ -43,7 +43,7 @@ const emit = defineEmits(['add']);
 
 const firstValue = ref('');
 const secondValue = ref('');
-const thirdValue = ref(props.thirdPlaceholder.length ? '' : 'true');
+const thirdValue = ref('');
 
 const add = () => {
     emit(
@@ -67,11 +67,7 @@ const add = () => {
     ]">
         <span class="text-slate-500">{{ label }}</span>
         <div
-            :class="[
-                'flex items-center gap-3',
-                thirdPlaceholder.length && 'md:flex-col',
-            ]"
-        >
+            :class="['flex items-center gap-3', thirdPlaceholder.length && 'md:flex-col']">
             <Input
                 :id="`${subType}-${type}-value`"
                 :placeholder="firstPlaceholder"
@@ -86,15 +82,17 @@ const add = () => {
                 :secondBg="secondBg"
                 v-model:value="secondValue"
             />
-            <Input
-                v-if="thirdPlaceholder.length"
-                :id="`${subType}-${type}-deputies`"
-                :placeholder="thirdPlaceholder"
-                smallLabel
-                :secondBg="secondBg"
-                v-model:value="thirdValue"
-            />
-            <Add :firstValue="firstValue" :secondValue="secondValue" :thirdValue="thirdValue" @add="add" />
+            <div v-if="thirdPlaceholder.length" class="w-full flex items-center gap-3">
+                <Input
+                    :id="`${subType}-${type}-deputies`"
+                    :placeholder="thirdPlaceholder"
+                    smallLabel
+                    :secondBg="secondBg"
+                    v-model:value="thirdValue"
+                />
+                <Add :firstValue="firstValue" :secondValue="secondValue" :thirdValue="thirdValue" @add="add" />
+            </div>
+            <Add v-else :firstValue="firstValue" :secondValue="secondValue" @add="add" />
         </div>
     </div>
 </template>

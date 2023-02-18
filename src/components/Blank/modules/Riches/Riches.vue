@@ -188,7 +188,6 @@ const sellPlane = id => emit('sell:plane', id);
                     id="apartment-name"
                     type="text"
                     placeholder="Назва"
-                    secondBg
                     :maxLength="15"
                 />
                 <Input
@@ -196,7 +195,6 @@ const sellPlane = id => emit('sell:plane', id);
                     id="apartment-price"
                     placeholder="Ціна"
                     :disabled="apartmentPayment.length > 0 || apartmentTerm.length > 0"
-                    secondBg
                 />
                 <Add :firstValue="apartmentPrice" @add="buyApartment" />
             </div>
@@ -225,14 +223,12 @@ const sellPlane = id => emit('sell:plane', id);
                     id="apartment-payment"
                     placeholder="Платіж"
                     :disabled="apartmentPrice.length > 0"
-                    secondBg
                 />
                 <Input
                     v-model:value="apartmentTerm"
                     id="apartment-term"
                     placeholder="Термін"
                     :disabled="apartmentPrice.length > 0"
-                    secondBg
                 />
                 <Add :firstValue="apartmentPayment" :secondValue="apartmentTerm" @add="buyApartmentOnCredit" />
             </div>
@@ -249,7 +245,6 @@ const sellPlane = id => emit('sell:plane', id);
                     id="car-name"
                     type="text"
                     placeholder="Назва"
-                    secondBg
                     :maxLength="15"
                 />
                 <Input
@@ -257,7 +252,6 @@ const sellPlane = id => emit('sell:plane', id);
                     id="car-price"
                     placeholder="Ціна"
                     :disabled="carPayment.length > 0 || carTerm.length > 0"
-                    secondBg
                 />
                 <Add :firstValue="carPrice" @add="buyCar" />
             </div>
@@ -286,14 +280,12 @@ const sellPlane = id => emit('sell:plane', id);
                     id="car-payment"
                     placeholder="Платіж"
                     :disabled="carPrice.length > 0"
-                    secondBg
                 />
                 <Input
                     v-model:value="carTerm"
                     id="car-term"
                     placeholder="Термін"
                     :disabled="carPrice.length > 0"
-                    secondBg
                 />
                 <Add :firstValue="carPayment" :secondValue="carTerm" @add="buyCarOnCredit" />
             </div>
@@ -311,10 +303,9 @@ const sellPlane = id => emit('sell:plane', id);
                         id="plane"
                         type="text"
                         placeholder="Назва"
-                        secondBg
                         :maxLength="15"
                     />
-                    <Input v-model:value="cottagePrice" id="cottage" placeholder="Ціна" secondBg />
+                    <Input v-model:value="cottagePrice" id="cottage" placeholder="Ціна" />
                     <Add :firstValue="cottagePrice" @add="buyCottage" />
                 </div>
             </div>
@@ -348,10 +339,9 @@ const sellPlane = id => emit('sell:plane', id);
                         id="plane"
                         type="text"
                         placeholder="Назва"
-                        secondBg
                         :maxLength="15"
                     />
-                    <Input v-model:value="yachtPrice" id="yacht" placeholder="Ціна" secondBg />
+                    <Input v-model:value="yachtPrice" id="yacht" placeholder="Ціна" />
                     <Add :firstValue="yachtPrice" @add="buyYacht" />
                 </div>
             </div>
@@ -385,10 +375,9 @@ const sellPlane = id => emit('sell:plane', id);
                         id="plane"
                         type="text"
                         placeholder="Назва"
-                        secondBg
                         :maxLength="15"
                     />
-                    <Input v-model:value="planePrice" id="plane" placeholder="Ціна" secondBg />
+                    <Input v-model:value="planePrice" id="plane" placeholder="Ціна" />
                     <Add :firstValue="planePrice" @add="buyPlane" />
                 </div>
             </div>

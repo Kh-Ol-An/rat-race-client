@@ -532,7 +532,7 @@ const showModalWin = computed(
             <div class="grid grid-cols-2 md:grid-cols-1">
                 <div class="flex flex-col md:order-last">
                     <!-- Витрати -->
-                    <div class="py-4 pr-4 pl-8 md:px-2 flex flex-col gap-2">
+                    <div class="py-4 pr-4 pl-8 md:px-2 flex flex-col gap-2 md:bg-slate-900">
                         <Costs
                             :blankProp="blank"
                             @add:rent="addRent"
@@ -544,7 +544,7 @@ const showModalWin = computed(
                     </div>
 
                     <!-- Багатство -->
-                    <div class="py-4 pr-4 pl-8 md:px-2 flex flex-col gap-2 md:bg-slate-900">
+                    <div class="py-4 pr-4 pl-8 md:px-2 flex flex-col gap-2">
                         <Riches
                             :blankProp="blank"
                             :cashFlow="cashFlow"
@@ -564,7 +564,7 @@ const showModalWin = computed(
                     </div>
 
                     <!-- Капризи та примхи -->
-                    <div v-if="blank.rich" class="py-4 pr-4 pl-8 md:px-2 flex flex-col gap-2">
+                    <div v-if="blank.rich" class="py-4 pr-4 pl-8 md:px-2 flex flex-col gap-2 md:bg-slate-900">
                         <WhimsAndFancies :blankProp="blank" @buy="buyWhimsAndFancies" />
                     </div>
 
@@ -572,7 +572,7 @@ const showModalWin = computed(
                     <div
                         v-if="!blank.rich"
                         :class="[
-                            'pt-4 pr-4 pl-8 md:px-2 flex flex-col gap-2 md:bg-slate-900',
+                            'pt-4 pr-4 pl-8 md:px-2 flex flex-col gap-2',
                              blank.credits.length === 0 ? 'pb-8' : 'pb-4',
                         ]"
                     >
@@ -584,7 +584,10 @@ const showModalWin = computed(
                     </div>
 
                     <!-- Виплати за кредитами -->
-                    <div v-if="blank.credits.length > 0" class="pt-4 pr-4 pb-8 pl-8 md:px-2 flex flex-col gap-2">
+                    <div
+                        v-if="blank.credits.length > 0"
+                        class="pt-4 pr-4 pb-8 pl-8 md:px-2 flex flex-col gap-2 md:bg-slate-900"
+                    >
                         <Credits :credits="blank.credits" />
                     </div>
                 </div>
