@@ -1,8 +1,9 @@
 <script setup>
-import MaleIcon from '../../assets/images/icons/MaleIcon.vue';
+import InfoField from '../plugins/InfoField.vue';
+import FemaleIcon from '../../assets/images/icons/FemaleIcon.vue';
 
 defineProps({
-    left: {
+    right: {
         type: String,
         required: true,
     },
@@ -22,18 +23,41 @@ defineProps({
 </script>
 
 <template>
-    <div
-        :style="{ left, width, height }"
-        class="absolute top-1/2 -translate-y-1/2 p-4 flex items-center justify-center"
-    >
+    <div :style="{ right, width, height }" class="absolute top-1/2 -translate-y-1/2">
         <button
             v-if="user.gender.length === 0"
-            class="w-1/2 h-1/2"
+            class="w-full h-full flex items-center"
             type="button"
             @click="$emit('choice:gender')"
         >
-            <MaleIcon width="100%" height="100%" />
+            <FemaleIcon width="50%" height="37.5%" />
         </button>
-        <p v-else>{{ user }}</p>
+        <div v-else class="p-4 shadow-[0_5px_15px_rgba(0,0,0,0.35)]">
+            <InfoField labelClasses="text-opposite" label="Оренда житла:">
+                <span class="ml-2 text-slate-400">
+                    {{ user.rent }}
+                </span>
+            </InfoField>
+            <InfoField labelClasses="text-opposite" label="Витрати на харчування:">
+                <span class="ml-2 text-slate-400">
+                    {{ user.food }}
+                </span>
+            </InfoField>
+            <InfoField labelClasses="text-opposite" label="Витрати на одяг:">
+                <span class="ml-2 text-slate-400">
+                    {{ user.clothes }}
+                </span>
+            </InfoField>
+            <InfoField labelClasses="text-opposite" label="Витрати на проїзд:">
+                <span class="ml-2 text-slate-400">
+                    {{ user.fare }}
+                </span>
+            </InfoField>
+            <InfoField labelClasses="text-opposite" label="Комунальні платежі:">
+                <span class="ml-2 text-slate-400">
+                    {{ user.utilities }}
+                </span>
+            </InfoField>
+        </div>
     </div>
 </template>

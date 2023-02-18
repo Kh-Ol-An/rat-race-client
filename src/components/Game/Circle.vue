@@ -2,6 +2,7 @@
 import GameChip from "../../components/Game/GameChip.vue";
 import ReductionBalance from "../../components/Game/ReductionBalance.vue";
 import IncreaseBalance from "../../components/Game/IncreaseBalance.vue";
+import EventCard from "../../components/Game/EventCard.vue";
 import MoneyIcon from "../../assets/images/icons/MoneyIcon.vue";
 import BusinessIcon from "../../assets/images/icons/BusinessIcon.vue";
 import InvestmentsIcon from "../../assets/images/icons/InvestmentsIcon.vue";
@@ -48,16 +49,24 @@ defineProps({
         type: Boolean,
         required: true,
     },
-    balancePosition: {
+    blankPosition: {
         type: String,
         required: true,
     },
-    balanceSide: {
+    blankWidth: {
+        type: String,
+        required: true,
+    },
+    blankHeight: {
         type: String,
         required: true,
     },
     user: {
         type: Object,
+        required: true,
+    },
+    showEventCard: {
+        type: Boolean,
         required: true,
     },
 });
@@ -115,22 +124,28 @@ defineProps({
             gameChipColor="fill-red-600"
         />
 
-        <ReductionBalance
-            v-if="balancePosition && balanceSide"
-            :left="`${balancePosition}px`"
-            :width="`${balanceSide}px`"
-            :height="`${balanceSide}px`"
+        <IncreaseBalance
+            v-if="blankPosition && blankWidth && blankHeight"
+            :left="`${blankPosition}px`"
+            :width="`${blankWidth}px`"
+            :height="`${blankHeight}px`"
             :user="user"
             @choice:gender="$emit('choice:gender', 'male')"
         />
 
-        <IncreaseBalance
-            v-if="balancePosition && balanceSide"
-            :right="`${balancePosition}px`"
-            :width="`${balanceSide}px`"
-            :height="`${balanceSide}px`"
+        <ReductionBalance
+            v-if="blankPosition && blankWidth && blankHeight"
+            :right="`${blankPosition}px`"
+            :width="`${blankWidth}px`"
+            :height="`${blankHeight}px`"
             :user="user"
             @choice:gender="$emit('choice:gender', 'female')"
+        />
+
+        <EventCard
+            v-if="blankWidth && blankHeight && showEventCard"
+            :width="`${blankWidth}px`"
+            :height="`${blankHeight}px`"
         />
     </div>
 </template>

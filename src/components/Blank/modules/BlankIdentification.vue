@@ -3,7 +3,7 @@ import { ref, toRef, computed } from "vue";
 import { mapGetters } from '../../../store/helpers.js';
 import Input from '../../plugins/Input.vue';
 import Add from '../plugins/Add.vue';
-import InfoField from '../plugins/InfoField.vue';
+import InfoField from '../../plugins/InfoField.vue';
 import MaleIcon from '../../../assets/images/icons/MaleIcon.vue';
 import FemaleIcon from '../../../assets/images/icons/FemaleIcon.vue';
 import BabyIcon from '../../../assets/images/icons/BabyIcon.vue';

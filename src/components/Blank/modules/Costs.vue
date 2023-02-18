@@ -2,7 +2,7 @@
 import { ref, toRef } from "vue";
 import Input from '../../plugins/Input.vue';
 import Add from '../plugins/Add.vue';
-import InfoField from '../plugins/InfoField.vue';
+import InfoField from '../../plugins/InfoField.vue';
 import { removingSpaces, addingSpaces } from '../../../helpers/formating-values.js';
 
 const props = defineProps({

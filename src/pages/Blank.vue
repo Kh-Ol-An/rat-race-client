@@ -5,7 +5,7 @@ import { mapActions, mapGetters } from '../store/helpers.js';
 import Menu from '../components/plugins/Menu.vue';
 import BlankIdentification from '../components/Blank/modules/BlankIdentification.vue';
 import Transaction from '../components/Blank/modules/Transaction.vue';
-import InfoField from '../components/Blank/plugins/InfoField.vue';
+import InfoField from '../components/plugins/InfoField.vue';
 import ExpenseInfo from '../components/Blank/modules/ExpenseInfo.vue';
 import Costs from '../components/Blank/modules/Costs.vue';
 import Riches from '../components/Blank/modules/Riches/Riches.vue';

@@ -1,6 +1,6 @@
 <script setup>
 import { toRef } from "vue";
-import InfoField from '../plugins/InfoField.vue';
+import InfoField from '../../plugins/InfoField.vue';
 import { addingSpaces } from '../../../helpers/formating-values.js';
 
 const props = defineProps({

@@ -1,0 +1,86 @@
+{
+    "male": [
+        {
+            "id": 1,
+            "profession": "Програміст",
+            "salary": 5000,
+            "rent": 1500,
+            "food": 800,
+            "clothes": 700,
+            "fare": 150,
+            "utilities": 70
+        },
+        {
+            "id": 2,
+            "profession": "Тестувальник QA",
+            "salary": 3500,
+            "rent": 900,
+            "food": 700,
+            "clothes": 600,
+            "fare": 130,
+            "utilities": 60
+        },
+        {
+            "id": 3,
+            "profession": "Таксист",
+            "salary": 5000,
+            "rent": 1500,
+            "food": 800,
+            "clothes": 700,
+            "fare": 150,
+            "utilities": 70
+        },
+        {
+            "id": 4,
+            "profession": "Охоронець",
+            "salary": 3500,
+            "rent": 900,
+            "food": 700,
+            "clothes": 600,
+            "fare": 130,
+            "utilities": 60
+        }
+    ],
+    "female": [
+        {
+            "id": 1,
+            "profession": "Фотограф",
+            "salary": 2000,
+            "rent": 700,
+            "food": 500,
+            "clothes": 450,
+            "fare": 100,
+            "utilities": 50
+        },
+        {
+            "id": 2,
+            "profession": "Дизайнер",
+            "salary": 1800,
+            "rent": 650,
+            "food": 450,
+            "clothes": 500,
+            "fare": 50,
+            "utilities": 50
+        },
+        {
+            "id": 3,
+            "profession": "Модель",
+            "salary": 1800,
+            "rent": 650,
+            "food": 450,
+            "clothes": 500,
+            "fare": 50,
+            "utilities": 50
+        },
+        {
+            "id": 4,
+            "profession": "Секретар",
+            "salary": 1800,
+            "rent": 650,
+            "food": 450,
+            "clothes": 500,
+            "fare": 50,
+            "utilities": 50
+        }
+    ]
+}

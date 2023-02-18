@@ -1,5 +1,5 @@
 <script setup>
-import InfoField from '../../plugins/InfoField.vue';
+import InfoField from '../../../plugins/InfoField.vue';
 import Sell from '../../plugins/Sell.vue';
 import { addingSpaces } from '../../../../helpers/formating-values.js';
 

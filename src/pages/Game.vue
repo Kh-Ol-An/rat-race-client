@@ -5,8 +5,7 @@ import Circle from "../components/Game/Circle.vue";
 import Dice from '../components/Game/Dice.vue';
 import poorCircle from '../database/poor-circle.json';
 import richCircle from '../database/rich-circle.json';
-import maleProfessions from '../database/male-professions.json';
-import femaleProfessions from '../database/female-professions.json';
+import professions from '../database/professions.json';
 import {
     POOR_CIRCLE_FACTOR,
     RICH_CIRCLE_FACTOR,
@@ -14,8 +13,9 @@ import {
     CELLS_COUNT_BY_HEIGHT,
     FIELDS_COUNT,
     FIELDS_GAP,
-    BALANCE_X_GAP,
-    BALANCE_Y_GAP,
+    BLANK_X_GAP,
+    BLANK_Y_GAP,
+    BLANK_FACTOR,
 } from '../database/variables.js';
 
 const container = ref(null);
@@ -28,8 +28,9 @@ const poorCircleWidth = ref(null);
 const poorCircleHeight = ref(null);
 const cellWidthInPoorCircle = ref(null);
 const cellHeightInPoorCircle = ref(null);
-const balancePosition = ref(null);
-const balanceSide = ref(null);
+const blankPosition = ref(null);
+const blankWidth = ref(null);
+const blankHeight = ref(null);
 const resizeObserver = new ResizeObserver((entries) => {
     for (const entry of entries) {
         containerWidth.value = entry.target.clientWidth;
@@ -49,9 +50,10 @@ const resizeObserver = new ResizeObserver((entries) => {
             cellHeightInPoorCircle.value = poorHeight / CELLS_COUNT_BY_HEIGHT;
             cellWidthInPoorCircle.value = poorWidth / CELLS_COUNT_BY_WIDTH;
 
-            // Balance
-            balancePosition.value = cellWidthInPoorCircle.value + BALANCE_X_GAP;
-            balanceSide.value = poorHeight - cellHeightInPoorCircle.value * 2 - BALANCE_Y_GAP;
+            // Blank
+            blankPosition.value = cellWidthInPoorCircle.value + BLANK_X_GAP;
+            blankHeight.value = poorHeight - cellHeightInPoorCircle.value * 2 - BLANK_Y_GAP;
+            blankWidth.value = blankHeight.value * BLANK_FACTOR;
         } else {
             // Rich
             const richWidth = containerHeight.value / RICH_CIRCLE_FACTOR;
@@ -67,14 +69,17 @@ const resizeObserver = new ResizeObserver((entries) => {
             cellWidthInPoorCircle.value = poorWidth / CELLS_COUNT_BY_WIDTH;
             cellHeightInPoorCircle.value = poorHeight / CELLS_COUNT_BY_HEIGHT;
 
-            // Balance
-            balancePosition.value = cellWidthInPoorCircle.value + BALANCE_X_GAP;
-            balanceSide.value = poorHeight - cellHeightInPoorCircle.value * 2 - BALANCE_Y_GAP;
+            // Blank
+            blankPosition.value = cellWidthInPoorCircle.value + BLANK_X_GAP;
+            blankHeight.value = poorHeight - cellHeightInPoorCircle.value * 2 - BLANK_Y_GAP;
+            blankWidth.value = blankHeight.value * BLANK_FACTOR;
         }
     }
 });
 onMounted(() => resizeObserver.observe(container.value));
 onUnmounted(() => resizeObserver.disconnect());
+
+const showEventCard = ref(false);
 
 const user = reactive({
     id: 1,
@@ -92,6 +97,7 @@ const user = reactive({
 const rollingDice = (numberOnDice) => {
     user.position += numberOnDice;
     user.position > FIELDS_COUNT && (user.position = user.position - FIELDS_COUNT);
+    setTimeout(() => showEventCard.value = true, 700);
 };
 const userPosition = computed(
     () =>
@@ -101,17 +107,12 @@ const userPosition = computed(
 );
 const choiceGender = (gender) => {
     const randomId = Math.floor(1 + Math.random() * 4);
-    let genderCard = {};
-    gender === 'male' && (genderCard = maleProfessions.find((profession) => profession.id === randomId));
-    gender === 'female' && (genderCard = femaleProfessions.find((profession) => profession.id === randomId));
+    const genderCard = professions[gender].find((profession) => profession.id === randomId);
+    delete genderCard.id;
+    for (const [key] of Object.entries(genderCard)) {
+        user[key] = genderCard[key];
+    }
     user.gender = gender;
-    user.profession = genderCard.profession;
-    user.salary = genderCard.salary;
-    user.rent = genderCard.rent;
-    user.food = genderCard.food;
-    user.clothes = genderCard.clothes;
-    user.fare = genderCard.fare;
-    user.utilities = genderCard.utilities;
 };
 
 const development = ref(false);
@@ -160,13 +161,15 @@ setTimeout(() => development.value = true, 3000);
                     :cellHeight="cellHeightInPoorCircle && cellHeightInPoorCircle"
                     :userPosition="userPosition"
                     :gameChipHere="!user.rich"
-                    :balancePosition="balancePosition && balancePosition"
-                    :balanceSide="balanceSide && balanceSide"
+                    :blankPosition="blankPosition && blankPosition"
+                    :blankWidth="blankWidth && blankWidth"
+                    :blankHeight="blankHeight && blankHeight"
                     :user="user"
+                    :showEventCard="showEventCard"
                     @choice:gender="choiceGender"
                 />
 
-                <Dice v-if="user.gender.length" @rolling="rollingDice" />
+                <Dice v-if="user.gender.length && !showEventCard" @rolling="rollingDice" />
             </div>
         </div>
     </Transition>

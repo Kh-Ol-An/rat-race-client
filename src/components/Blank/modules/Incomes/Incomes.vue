@@ -2,7 +2,7 @@
 import { ref, toRef, computed } from 'vue';
 import Input from '../../../plugins/Input.vue';
 import Add from '../../plugins/Add.vue';
-import InfoField from '../../plugins/InfoField.vue';
+import InfoField from '../../../plugins/InfoField.vue';
 import InputField from '../../plugins/InputField.vue';
 import BusinessHead from './BusinessHead.vue';
 import Business from './Business.vue';

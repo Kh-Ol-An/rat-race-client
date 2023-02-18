@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import InfoField from '../plugins/InfoField.vue';
+import InfoField from '../../plugins/InfoField.vue';
 import Input from '../../plugins/Input.vue';
 import ReturnIcon from '../../../assets/images/icons/ReturnIcon.vue';
 import CheckIcon from '../../../assets/images/icons/CheckIcon.vue';

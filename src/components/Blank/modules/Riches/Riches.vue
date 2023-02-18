@@ -4,7 +4,7 @@ import Input from '../../../plugins/Input.vue';
 import Add from '../../plugins/Add.vue';
 import Purchased from './Purchased.vue';
 import Modal from '../../plugins/Modal.vue';
-import InfoField from "../../plugins/InfoField.vue";
+import InfoField from "../../../plugins/InfoField.vue";
 import { removingSpaces } from '../../../../helpers/formating-values.js';
 
 const props = defineProps({

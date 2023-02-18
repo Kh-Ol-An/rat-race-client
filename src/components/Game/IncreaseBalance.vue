@@ -1,8 +1,10 @@
 <script setup>
+import InfoField from '../plugins/InfoField.vue';
+import MaleIcon from '../../assets/images/icons/MaleIcon.vue';
 import FemaleIcon from '../../assets/images/icons/FemaleIcon.vue';
 
 defineProps({
-    right: {
+    left: {
         type: String,
         required: true,
     },
@@ -23,17 +25,39 @@ defineProps({
 
 <template>
     <div
-        :style="{ right, width, height }"
-        class="absolute top-1/2 -translate-y-1/2 p-4 flex items-center justify-center"
+        :style="{ left, width, height }"
+        class="absolute top-1/2 -translate-y-1/2"
     >
         <button
             v-if="user.gender.length === 0"
-            class="w-1/2 h-1/2"
+            class="w-full h-full flex items-center justify-end"
             type="button"
             @click="$emit('choice:gender')"
         >
-            <FemaleIcon width="100%" height="100%" />
+            <MaleIcon width="50%" height="37.5%" />
         </button>
-        <p v-else>{{ user.gender }}</p>
+        <div v-else class="p-4 shadow-[0_5px_15px_rgba(0,0,0,0.35)]">
+            <div class="flex items-center gap-3">
+                <InfoField labelClasses="text-slate-500" label="Ім'я:">
+                    <span class="ml-2 text-slate-400">
+                        {{ user.name || 'Безіменько' }}
+                    </span>
+                </InfoField>
+                <InfoField labelClasses="mr-2 text-slate-500" label="Стать:">
+                    <MaleIcon v-if="user.gender === 'male'" width="24px" height="24px" />
+                    <FemaleIcon v-if="user.gender === 'female'" width="24px" height="24px" />
+                </InfoField>
+            </div>
+            <InfoField labelClasses="text-slate-500" label="Професія:">
+                <span class="ml-2 text-slate-400">
+                    {{ user.profession }}
+                </span>
+            </InfoField>
+            <InfoField labelClasses="text-primary" label="Зарплата:">
+                <span class="ml-2 text-slate-400">
+                    {{ user.salary }}
+                </span>
+            </InfoField>
+        </div>
     </div>
 </template>
