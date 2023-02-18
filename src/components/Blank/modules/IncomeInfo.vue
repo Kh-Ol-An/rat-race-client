@@ -1,5 +1,7 @@
 <script setup>
+import { ref } from 'vue';
 import InfoField from '../../plugins/InfoField.vue';
+import Modal from '../plugins/Modal.vue';
 import { addingSpaces } from '../../../helpers/formating-values.js';
 
 const props = defineProps({
@@ -16,6 +18,8 @@ const props = defineProps({
         required: true,
     },
 });
+
+const showModal = ref(false);
 </script>
 
 <template>
@@ -51,9 +55,23 @@ const props = defineProps({
             class="rotate-45 ml-4 px-2 text-3xl text-opposite font-bold leading-none outline-0"
             type="button"
             title="Вибори :)"
-            @click="$emit('remove:deputies')"
+            @click="showModal = true"
         >
             &#43;
         </button>
+
+        <Modal
+            :show="showModal"
+            confirm="Видалити"
+            @confirm="$emit('remove:deputies')"
+            @cancel="showModal = false"
+        >
+            <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
+                Увага!!!
+            </h4>
+            <p class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center">
+                Ти впевнений що хочешь видалити всіх своїх депутатів?
+            </p>
+        </Modal>
     </InfoField>
 </template>

@@ -133,7 +133,7 @@ const showModal = ref(false);
                 Увага!!!
             </h4>
             <p class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center">
-                Ти впевнений шо хочешь видалити останній відкритий бізнес?
+                Ти впевнений що хочешь видалити останній відкритий бізнес?
             </p>
         </Modal>
     </li>
