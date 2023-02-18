@@ -62,7 +62,7 @@ const profession = ref('');
         </div>
         <div
             v-if="blank.gender.length > 0"
-            class="ml-4 flex items-center gap-4"
+            class="ml-4 flex items-center gap-4 md:gap-2"
         >
             <MaleIcon
                 v-if="blank.gender === 'male'"
