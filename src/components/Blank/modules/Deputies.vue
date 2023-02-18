@@ -49,6 +49,8 @@ const add = () => {
     gainedDeputies.value = '';
     showDeputiesPrice.value = true;
 };
+
+const placeholder = '"Чесні" депутати';
 </script>
 
 <template>
@@ -59,7 +61,7 @@ const add = () => {
         <Add :firstValue="potentialDeputies" @add="buy" />
     </div>
     <div v-else class="mt-2 flex items-center gap-3">
-        <Input v-model:value="gainedDeputies" id="gained-deputies" placeholder="Чесні депутати" />
+        <Input v-model:value="gainedDeputies" id="gained-deputies" :placeholder="placeholder" />
         <Add :firstValue="gainedDeputies" @add="add" />
     </div>
 
