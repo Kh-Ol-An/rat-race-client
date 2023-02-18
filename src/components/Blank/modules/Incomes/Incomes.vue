@@ -22,7 +22,14 @@ const props = defineProps({
 
 const blank = toRef(props, 'blankProp');
 
-const emit = defineEmits([ 'fired:salary', 'quit:salary', 'buy:business', 'increment:income', 'sell' ]);
+const emit = defineEmits([
+    'fired:salary',
+    'quit:salary',
+    'buy:business',
+    'increment:income',
+    'sell',
+    'one-time:income',
+]);
 
 const salary = ref('');
 const fired = () => {
@@ -43,6 +50,11 @@ const buyBusiness = (id, price, income, subType, deputies) => {
 const incrementIncomeBusiness = (id, income) => emit('increment:income', id, income);
 const deleteBusiness = (subType, id) => emit('delete:business', subType, id);
 const sellBusiness = subType => emit('sell', subType);
+
+const oneTimeIncome = (id, price, income, subType, deputies) => {
+    if (blank.value.cash < price || blank.value.deputies < deputies) return showModal.value = true;
+    emit('one-time:income', income - price, deputies);
+};
 </script>
 
 <template>
@@ -221,7 +233,8 @@ const sellBusiness = subType => emit('sell', subType);
     <InputField
         v-if="
             blank.business.small.length === 0 &&
-            blank.business.middle.length === 0
+            blank.business.middle.length === 0 &&
+            blank.rich
         "
         label="Корупційний бізнес"
         type="business"
@@ -250,6 +263,19 @@ const sellBusiness = subType => emit('sell', subType);
             @delete="deleteBusiness('corrupt', id)"
         />
     </ul>
+
+    <!-- Разовий дохід -->
+    <InputField
+        v-if="blank.rich"
+        label="Разовий дохід"
+        type="one-time"
+        subType="corrupt"
+        firstPlaceholder="Вартість"
+        secondPlaceholder="Прибуток"
+        thirdPlaceholder="Депутати"
+        secondBg
+        @add="oneTimeIncome"
+    />
 
     <Modal :show="showModal" cancel="Зрозумів" @cancel="showModal = false">
         <h4 class="mx-auto text-2xl font-bold text-opposite text-center">

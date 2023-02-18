@@ -95,12 +95,14 @@ const repayDebt = (debt) => {
 };
 const showModalDebt = computed(() => blank.debt > MAX_DEBT);
 
+// Витрати
 const addRent = (rent) => blank.rent = rent;
 const addFood = (food) => blank.food = food;
 const addClothes = (clothes) => blank.clothes = clothes;
 const addFare = (fare) => blank.fare = fare;
 const addPhone = (phone) => blank.phone = phone;
 
+// Багатство
 const savedRent = ref(0);
 const buyApartment = (id, name, price) => {
     blank.apartments.push({ id, name, price });
@@ -211,11 +213,13 @@ const sellPlane = id => {
     blank.planes = blank.planes.filter(plane => plane.id !== id);
 };
 
+// Капризи та примхи
 const buyWhimsAndFancies = (name, price) => {
     blank.whimsAndFancies.push({ name, price });
     blank.cash -= price;
 };
 
+// Сімейний стан
 const changeMarriage = checked => {
     if (checked) {
         blank.gender === 'male' && decrement(WEDDING_COST);
@@ -276,6 +280,7 @@ const getCashFlow = () => {
     return blank.cash = result;
 };
 
+// Прибутки
 const addSalary = (salary) => blank.salary = salary;
 const fired = () => {
     firedSalary.value = blank.salary;
@@ -312,11 +317,16 @@ const deleteBusiness = (subType, id) => {
 
     quitSalary.value > 0 && income.value === 0 && (blank.salary = quitSalary.value);
 };
-const sellBusiness = subType => {
+const sellBusiness = (subType) => {
     blank.cash = blank.business[subType].reduce((total, business) => total += business.price, blank.cash);
     blank.business[subType] = [];
 };
+const oneTimeIncome = (income, deputies) => {
+    increment(income);
+    blank.deputies -= deputies;
+};
 
+// Акції
 const buyShares = (id, price, quantity, subType) => {
     const cost = price * quantity;
     blank.shares[subType].push({id, price, quantity, cost});
@@ -331,6 +341,7 @@ const sellAllShares = (subType, price) => {
     blank.shares[subType] = [];
 };
 
+// Активи
 const buyHouse = (id, price) => {
     blank.assets.houses.push({ id, price });
     blank.cash -= price;
@@ -371,6 +382,7 @@ const sellCorruptAcres = (price) => {
     blank.assets.corruptLand= [];
 };
 
+// Депутати
 const buyDeputies = (cost) => {
     blank.cash -= cost;
 };
@@ -636,6 +648,7 @@ const showModalWin = computed(
                             @increment:income="incrementIncomeBusiness"
                             @delete:business="deleteBusiness"
                             @sell="sellBusiness"
+                            @one-time:income="oneTimeIncome"
                         />
                     </div>
 

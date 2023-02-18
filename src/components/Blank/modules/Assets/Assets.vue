@@ -45,5 +45,11 @@ const sellCorruptAcres = (price) => emit('sell:corrupt-acres', price);
     <Land :blankProp="blankProp" @buy:land="buyLand" @sell:land="sellLand" @sell:acres="sellAcres" />
 
     <!-- Корупційна земля -->
-    <CorruptLand :blankProp="blankProp" @buy:land="buyCorruptLand" @sell:land="sellCorruptLand" @sell:acres="sellCorruptAcres" />
+    <CorruptLand
+        v-if="blankProp.rich"
+        :blankProp="blankProp"
+        @buy:land="buyCorruptLand"
+        @sell:land="sellCorruptLand"
+        @sell:acres="sellCorruptAcres"
+    />
 </template>
