@@ -19,6 +19,10 @@ defineProps({
         type: Object,
         required: true,
     },
+    expenses: {
+        type: Number,
+        required: true,
+    },
 });
 </script>
 
@@ -56,6 +60,11 @@ defineProps({
             <InfoField labelClasses="text-opposite" label="Комунальні платежі:">
                 <span class="ml-2 text-slate-400">
                     {{ user.utilities }}
+                </span>
+            </InfoField>
+            <InfoField labelClasses="text-opposite" label="Загальні витрати:">
+                <span class="ml-2 text-slate-400">
+                    {{ expenses }}
                 </span>
             </InfoField>
         </div>

@@ -2,85 +2,404 @@
     "male": [
         {
             "id": 1,
-            "profession": "Програміст",
-            "salary": 5000,
-            "rent": 1500,
-            "food": 800,
-            "clothes": 700,
-            "fare": 150,
-            "utilities": 70
+            "profession": "Кур'єр",
+            "salary": 200,
+            "rent": 50,
+            "food": 50,
+            "clothes": 20,
+            "fare": 10,
+            "utilities": 30
         },
         {
             "id": 2,
-            "profession": "Тестувальник QA",
-            "salary": 3500,
-            "rent": 900,
+            "profession": "Охоронець",
+            "salary": 4500,
+            "rent": 1400,
             "food": 700,
-            "clothes": 600,
-            "fare": 130,
-            "utilities": 60
+            "clothes": 300,
+            "fare": 120,
+            "utilities": 80
         },
         {
             "id": 3,
-            "profession": "Таксист",
-            "salary": 5000,
-            "rent": 1500,
-            "food": 800,
-            "clothes": 700,
-            "fare": 150,
-            "utilities": 70
+            "profession": "Фермер",
+            "salary": 1750,
+            "rent": 600,
+            "food": 400,
+            "clothes": 300,
+            "fare": 60,
+            "utilities": 60
         },
         {
             "id": 4,
-            "profession": "Охоронець",
-            "salary": 3500,
+            "profession": "Будівельник",
+            "salary": 4550,
+            "rent": 1000,
+            "food": 520,
+            "clothes": 470,
+            "fare": 100,
+            "utilities": 80
+        },
+        {
+            "id": 5,
+            "profession": "Інженер-електрик",
+            "salary": 1500,
+            "rent": 400,
+            "food": 300,
+            "clothes": 200,
+            "fare": 60,
+            "utilities": 40
+        },
+        {
+            "id": 6,
+            "profession": "Водій-експедитор",
+            "salary": 1250,
+            "rent": 400,
+            "food": 250,
+            "clothes": 150,
+            "fare": 50,
+            "utilities": 50
+        },
+        {
+            "id": 7,
+            "profession": "Адвокат",
+            "salary": 2000,
+            "rent": 600,
+            "food": 450,
+            "clothes": 300,
+            "fare": 70,
+            "utilities": 70
+        },
+        {
+            "id": 8,
+            "profession": "Адміністратор готелю",
+            "salary": 1000,
+            "rent": 300,
+            "food": 200,
+            "clothes": 150,
+            "fare": 40,
+            "utilities": 30
+        },
+        {
+            "id": 9,
+            "profession": "Таксист",
+            "salary": 3000,
             "rent": 900,
-            "food": 700,
-            "clothes": 600,
-            "fare": 130,
+            "food": 600,
+            "clothes": 350,
+            "fare": 90,
+            "utilities": 90
+        },
+        {
+            "id": 10,
+            "profession": "Архітектор",
+            "salary": 2250,
+            "rent": 750,
+            "food": 450,
+            "clothes": 300,
+            "fare": 80,
+            "utilities": 70
+        },
+        {
+            "id": 11,
+            "profession": "Менеджер з продажу",
+            "salary": 2750,
+            "rent": 850,
+            "food": 500,
+            "clothes": 400,
+            "fare": 80,
+            "utilities": 80
+        },
+        {
+            "id": 12,
+            "profession": "Лікар",
+            "salary": 4750,
+            "rent": 1250,
+            "food": 750,
+            "clothes": 400,
+            "fare": 100,
+            "utilities": 80
+        },
+        {
+            "id": 13,
+            "profession": "Стоматолог",
+            "salary": 4050,
+            "rent": 1300,
+            "food": 440,
+            "clothes": 500,
+            "fare": 70,
             "utilities": 60
+        },
+        {
+            "id": 14,
+            "profession": "Слідчий",
+            "salary": 3250,
+            "rent": 750,
+            "food": 380,
+            "clothes": 400,
+            "fare": 60,
+            "utilities": 50
+        },
+        {
+            "id": 15,
+            "profession": "Пожежник",
+            "salary": 2950,
+            "rent": 800,
+            "food": 330,
+            "clothes": 300,
+            "fare": 50,
+            "utilities": 40
+        },
+        {
+            "id": 16,
+            "profession": "Маркетолог",
+            "salary": 2700,
+            "rent": 550,
+            "food": 270,
+            "clothes": 300,
+            "fare": 40,
+            "utilities": 50
+        },
+        {
+            "id": 17,
+            "profession": "Фотограф",
+            "salary": 3550,
+            "rent": 950,
+            "food": 420,
+            "clothes": 450,
+            "fare": 70,
+            "utilities": 70
+        },
+        {
+            "id": 18,
+            "profession": "Музикант",
+            "salary": 2250,
+            "rent": 500,
+            "food": 230,
+            "clothes": 250,
+            "fare": 40,
+            "utilities": 40
+        },
+        {
+            "id": 19,
+            "profession": "Артист",
+            "salary": 3900,
+            "rent": 1100,
+            "food": 460,
+            "clothes": 500,
+            "fare": 80,
+            "utilities": 70
+        },
+        {
+            "id": 20,
+            "profession": "Програміст",
+            "salary": 3750,
+            "rent": 1250,
+            "food": 550,
+            "clothes": 400,
+            "fare": 100,
+            "utilities": 100
         }
     ],
     "female": [
         {
             "id": 1,
-            "profession": "Фотограф",
-            "salary": 2000,
-            "rent": 700,
-            "food": 500,
-            "clothes": 450,
-            "fare": 100,
-            "utilities": 50
+            "profession": "Медична сестра",
+            "salary": 4700,
+            "rent": 1450,
+            "food": 820,
+            "clothes": 700,
+            "fare": 150,
+            "utilities": 80
         },
         {
             "id": 2,
-            "profession": "Дизайнер",
-            "salary": 1800,
-            "rent": 650,
-            "food": 450,
-            "clothes": 500,
-            "fare": 50,
-            "utilities": 50
+            "profession": "Викладач",
+            "salary": 3150,
+            "rent": 900,
+            "food": 690,
+            "clothes": 600,
+            "fare": 130,
+            "utilities": 60
         },
         {
             "id": 3,
-            "profession": "Модель",
-            "salary": 1800,
-            "rent": 650,
-            "food": 450,
-            "clothes": 500,
-            "fare": 50,
-            "utilities": 50
+            "profession": "Дизайнер інтер'єру",
+            "salary": 950,
+            "rent": 350,
+            "food": 320,
+            "clothes": 200,
+            "fare": 40,
+            "utilities": 40
         },
         {
             "id": 4,
+            "profession": "Бібліотекар",
+            "salary": 400,
+            "rent": 50,
+            "food": 60,
+            "clothes": 50,
+            "fare": 20,
+            "utilities": 30
+        },
+        {
+            "id": 5,
             "profession": "Секретар",
-            "salary": 1800,
-            "rent": 650,
+            "salary": 2100,
+            "rent": 750,
+            "food": 500,
+            "clothes": 350,
+            "fare": 90,
+            "utilities": 60
+        },
+        {
+            "id": 6,
+            "profession": "Вихователь",
+            "salary": 3900,
+            "rent": 1200,
+            "food": 700,
+            "clothes": 600,
+            "fare": 120,
+            "utilities": 70
+        },
+        {
+            "id": 7,
+            "profession": "Фотомодель",
+            "salary": 1500,
+            "rent": 500,
+            "food": 380,
+            "clothes": 300,
+            "fare": 70,
+            "utilities": 50
+        },
+        {
+            "id": 8,
+            "profession": "Юрист",
+            "salary": 800,
+            "rent": 300,
+            "food": 220,
+            "clothes": 150,
+            "fare": 30,
+            "utilities": 30
+        },
+        {
+            "id": 9,
+            "profession": "Журналіст",
+            "salary": 4800,
+            "rent": 1450,
+            "food": 900,
+            "clothes": 800,
+            "fare": 140,
+            "utilities": 90
+        },
+        {
+            "id": 10,
+            "profession": "Рекрутер",
+            "salary": 4400,
+            "rent": 1350,
+            "food": 750,
+            "clothes": 700,
+            "fare": 140,
+            "utilities": 60
+        },
+        {
+            "id": 11,
+            "profession": "Фармацевт",
+            "salary": 4450,
+            "rent": 1400,
+            "food": 500,
+            "clothes": 550,
+            "fare": 80,
+            "utilities": 70
+        },
+        {
+            "id": 12,
+            "profession": "Веб-дизайнер",
+            "salary": 4050,
+            "rent": 1200,
+            "food": 440,
+            "clothes": 500,
+            "fare": 70,
+            "utilities": 60
+        },
+        {
+            "id": 13,
+            "profession": "Бухгалтер",
+            "salary": 1400,
+            "rent": 400,
+            "food": 320,
+            "clothes": 250,
+            "fare": 70,
+            "utilities": 50
+        },{
+            "id": 14,
+            "profession": "Вчитель",
+            "salary": 1300,
+            "rent": 300,
+            "food": 220,
+            "clothes": 200,
+            "fare": 40,
+            "utilities": 50
+        },
+        {
+            "id": 15,
+            "profession": "Касир",
+            "salary": 2000,
+            "rent": 500,
+            "food": 300,
+            "clothes": 250,
+            "fare": 50,
+            "utilities": 70
+        },
+        {
+            "id": 16,
+            "profession": "Перекладач",
+            "salary": 2800,
+            "rent": 800,
+            "food": 350,
+            "clothes": 400,
+            "fare": 60,
+            "utilities": 80
+        },
+        {
+            "id": 17,
+            "profession": "Кухар",
+            "salary": 3500,
+            "rent": 700,
+            "food": 400,
+            "clothes": 450,
+            "fare": 60,
+            "utilities": 70
+        },
+        {
+            "id": 18,
+            "profession": "Психолог",
+            "salary": 4000,
+            "rent": 1000,
             "food": 450,
             "clothes": 500,
-            "fare": 50,
-            "utilities": 50
+            "fare": 80,
+            "utilities": 100
+        },
+        {
+            "id": 19,
+            "profession": "Косметолог",
+            "salary": 4500,
+            "rent": 1200,
+            "food": 500,
+            "clothes": 600,
+            "fare": 80,
+            "utilities": 120
+        },
+        {
+            "id": 20,
+            "profession": "Фітнес-тренер",
+            "salary": 5000,
+            "rent": 1500,
+            "food": 600,
+            "clothes": 700,
+            "fare": 100,
+            "utilities": 120
         }
     ]
 }

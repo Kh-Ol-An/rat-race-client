@@ -1,0 +1,52 @@
+{
+    "business": [
+        {
+            "id": 1,
+            "type": "small",
+            "price": 500,
+            "profit": 200,
+            "name": "Start",
+            "description": "Прогуглить разные виды бизнесов"
+        },
+        {
+            "id": 2,
+            "type": "middle",
+            "price": 50000,
+            "profit": 5000,
+            "name": "Different",
+            "description": "От мелких до крупнейших"
+        },
+        {
+            "id": 3,
+            "type": "big",
+            "price": 500000,
+            "profit": 50000,
+            "name": "Rules",
+            "description": "Добавить класификацию по сложности управления"
+        }
+    ],
+    "investments": [
+        {
+            "id": 1,
+            "type": "cryptocurrency",
+            "price": 30,
+            "max": 1000,
+            "name": "Minima",
+            "description": "Прогуглить разные виды инвестиций"
+        },
+        {
+            "id": 2,
+            "type": "shares",
+            "price": 50,
+            "profit": 1500,
+            "description": "А так же акций"
+        },
+        {
+            "id": 3,
+            "type": "deposit",
+            "price": 1500,
+            "profit": 500,
+            "description": "Добавить класификацию по сложности управления"
+        }
+    ]
+}

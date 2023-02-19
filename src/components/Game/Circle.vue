@@ -69,6 +69,10 @@ defineProps({
         type: Boolean,
         required: true,
     },
+    expenses: {
+        type: Number,
+        required: true,
+    },
 });
 </script>
 
@@ -139,6 +143,7 @@ defineProps({
             :width="`${blankWidth}px`"
             :height="`${blankHeight}px`"
             :user="user"
+            :expenses="expenses"
             @choice:gender="$emit('choice:gender', 'female')"
         />
 

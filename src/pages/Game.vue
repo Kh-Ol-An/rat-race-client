@@ -115,9 +115,19 @@ const choiceGender = (gender) => {
     user.gender = gender;
 };
 
+const expenses = computed(() => {
+    let sum = 0;
+    sum += user.rent;
+    sum += user.food;
+    sum += user.clothes;
+    sum += user.fare;
+    sum += user.utilities;
+    return sum;
+});
+
 const development = ref(false);
-// setTimeout(() => development.value = false, 3000);
-setTimeout(() => development.value = true, 3000);
+setTimeout(() => development.value = false, 3000);
+// setTimeout(() => development.value = true, 3000);
 </script>
 
 <template>
@@ -166,6 +176,7 @@ setTimeout(() => development.value = true, 3000);
                     :blankHeight="blankHeight && blankHeight"
                     :user="user"
                     :showEventCard="showEventCard"
+                    :expenses="expenses"
                     @choice:gender="choiceGender"
                 />
 
