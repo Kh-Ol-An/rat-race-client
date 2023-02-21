@@ -26,7 +26,7 @@ const animationDice = async () => {
     await sleep(470);
 };
 const rollingDice = async () => {
-    await animationDice();
+    // await animationDice();
     numberOnDice.value = Math.floor(1 + Math.random() * 6);
     return emit('rolling', numberOnDice.value);
 };

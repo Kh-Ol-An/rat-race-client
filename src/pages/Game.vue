@@ -102,8 +102,8 @@ const rollingDice = (numberOnDice) => {
 const userPosition = computed(
     () =>
         user.rich
-            ? richCircle.find((field) => field.id === user.position).styles
-            : poorCircle.find((field) => field.id === user.position).styles
+            ? richCircle.find((field) => field.position === user.position)
+            : poorCircle.find((field) => field.position === user.position)
 );
 const choiceGender = (gender) => {
     const randomId = Math.floor(1 + Math.random() * 4);

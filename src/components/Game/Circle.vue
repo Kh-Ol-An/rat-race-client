@@ -122,7 +122,7 @@ defineProps({
 
         <GameChip
             v-if="gameChipHere"
-            :userPosition="userPosition"
+            :userStyles="userPosition.styles"
             :cellWidth="cellWidth"
             :cellHeight="cellHeight"
             gameChipColor="fill-red-600"
@@ -151,6 +151,7 @@ defineProps({
             v-if="blankWidth && blankHeight && showEventCard"
             :width="`${blankWidth}px`"
             :height="`${blankHeight}px`"
+            :userPosition="userPosition"
         />
     </div>
 </template>

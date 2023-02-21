@@ -3,24 +3,24 @@
         {
             "id": 1,
             "type": "small",
-            "price": 500,
             "profit": 200,
+            "price": 500,
             "name": "Start",
             "description": "Прогуглить разные виды бизнесов"
         },
         {
             "id": 2,
             "type": "middle",
-            "price": 50000,
             "profit": 5000,
+            "price": 50000,
             "name": "Different",
             "description": "От мелких до крупнейших"
         },
         {
             "id": 3,
             "type": "big",
-            "price": 500000,
             "profit": 50000,
+            "price": 500000,
             "name": "Rules",
             "description": "Добавить класификацию по сложности управления"
         }
@@ -29,24 +29,80 @@
         {
             "id": 1,
             "type": "cryptocurrency",
-            "price": 30,
-            "max": 1000,
             "name": "Minima",
             "description": "Прогуглить разные виды инвестиций"
         },
         {
             "id": 2,
             "type": "shares",
-            "price": 50,
-            "profit": 1500,
+            "name": "Apple",
             "description": "А так же акций"
         },
         {
             "id": 3,
             "type": "deposit",
-            "price": 1500,
-            "profit": 500,
+            "name": "Mono",
             "description": "Добавить класификацию по сложности управления"
+        }
+    ],
+    "expenses": [
+        {
+            "id": 1,
+            "type": "men",
+            "price": 100,
+            "description": "Свидание"
+        },
+        {
+            "id": 2,
+            "type": "all",
+            "price": 500,
+            "description": "Новый телефон"
+        },
+        {
+            "id": 3,
+            "type": "baby",
+            "price": 50,
+            "description": "Поход в цирк"
+        }
+    ],
+    "opportunities": [
+        {
+            "id": 1,
+            "type": "qualification",
+            "price": 200,
+            "description": "Повышение квалификации"
+        },
+        {
+            "id": 2,
+            "type": "changing-careers",
+            "price": 500,
+            "description": "Изменение профессии"
+        },
+        {
+            "id": 3,
+            "type": "new-employee",
+            "price": 200,
+            "description": "Нанять нового сотрудника"
+        }
+    ],
+    "buys": [
+        {
+            "id": 1,
+            "type": "car",
+            "price": 50000,
+            "description": "Новенькая БМВ 5ка с салона"
+        },
+        {
+            "id": 2,
+            "type": "apartment",
+            "price": 100000,
+            "description": "3 комнатнаяя в новостройке"
+        },
+        {
+            "id": 3,
+            "type": "house",
+            "price": 150000,
+            "description": "Родовое поместье"
         }
     ]
 }

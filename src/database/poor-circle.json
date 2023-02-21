@@ -1,6 +1,6 @@
 [
     {
-        "id": 1,
+        "position": 1,
         "styles": {
             "top": 9,
             "right": 0,
@@ -11,7 +11,7 @@
         "name": "Прибуток"
     },
     {
-        "id": 2,
+        "position": 2,
         "styles": {
             "top": 9,
             "right": 1,
@@ -22,7 +22,7 @@
         "name": "Бізнес"
     },
     {
-        "id": 3,
+        "position": 3,
         "styles": {
             "top": 9,
             "right": 2,
@@ -33,7 +33,7 @@
         "name": "Інвестиції"
     },
     {
-        "id": 4,
+        "position": 4,
         "styles": {
             "top": 9,
             "right": 3,
@@ -44,7 +44,7 @@
         "name": "Витрати"
     },
     {
-        "id": 5,
+        "position": 5,
         "styles": {
             "top": 9,
             "right": 4,
@@ -55,7 +55,7 @@
         "name": "Бізнес"
     },
     {
-        "id": 6,
+        "position": 6,
         "styles": {
             "top": 9,
             "right": 5,
@@ -66,7 +66,7 @@
         "name": "Звільнення"
     },
     {
-        "id": 7,
+        "position": 7,
         "styles": {
             "top": 9,
             "right": 6,
@@ -77,7 +77,7 @@
         "name": "Можливості"
     },
     {
-        "id": 8,
+        "position": 8,
         "styles": {
             "top": 9,
             "right": 7,
@@ -88,7 +88,7 @@
         "name": "Покупки"
     },
     {
-        "id": 9,
+        "position": 9,
         "styles": {
             "top": 9,
             "right": 8,
@@ -99,7 +99,7 @@
         "name": "Витрати"
     },
     {
-        "id": 10,
+        "position": 10,
         "styles": {
             "top": 9,
             "right": 9,
@@ -110,7 +110,7 @@
         "name": "Прибуток"
     },
     {
-        "id": 11,
+        "position": 11,
         "styles": {
             "top": 9,
             "right": 10,
@@ -121,7 +121,7 @@
         "name": "Бізнес"
     },
     {
-        "id": 12,
+        "position": 12,
         "styles": {
             "top": 9,
             "right": 11,
@@ -132,7 +132,7 @@
         "name": "Витрати"
     },
     {
-        "id": 13,
+        "position": 13,
         "styles": {
             "top": 9,
             "right": 12,
@@ -143,7 +143,7 @@
         "name": "Інвестиції"
     },
     {
-        "id": 14,
+        "position": 14,
         "styles": {
             "top": 9,
             "right": 13,
@@ -154,7 +154,7 @@
         "name": "Можливості"
     },
     {
-        "id": 15,
+        "position": 15,
         "styles": {
             "top": 9,
             "right": 14,
@@ -165,7 +165,7 @@
         "name": "Весілля"
     },
     {
-        "id": 16,
+        "position": 16,
         "styles": {
             "top": 9,
             "right": 15,
@@ -176,7 +176,7 @@
         "name": "Витрати"
     },
     {
-        "id": 17,
+        "position": 17,
         "styles": {
             "top": 9,
             "right": 16,
@@ -187,7 +187,7 @@
         "name": "Бізнес"
     },
     {
-        "id": 18,
+        "position": 18,
         "styles": {
             "top": 9,
             "right": 17,
@@ -198,7 +198,7 @@
         "name": "Покупки"
     },
     {
-        "id": 19,
+        "position": 19,
         "styles": {
             "top": 9,
             "right": 18,
@@ -209,7 +209,7 @@
         "name": "Прибуток"
     },
     {
-        "id": 20,
+        "position": 20,
         "styles": {
             "top": 8,
             "right": 18,
@@ -220,7 +220,7 @@
         "name": "Інвестиції"
     },
     {
-        "id": 21,
+        "position": 21,
         "styles": {
             "top": 7,
             "right": 18,
@@ -231,7 +231,7 @@
         "name": "Витрати"
     },
     {
-        "id": 22,
+        "position": 22,
         "styles": {
             "top": 6,
             "right": 18,
@@ -242,7 +242,7 @@
         "name": "Бізнес"
     },
     {
-        "id": 23,
+        "position": 23,
         "styles": {
             "top": 5,
             "right": 18,
@@ -253,7 +253,7 @@
         "name": "Дитина"
     },
     {
-        "id": 24,
+        "position": 24,
         "styles": {
             "top": 4,
             "right": 18,
@@ -264,7 +264,7 @@
         "name": "Можливості"
     },
     {
-        "id": 25,
+        "position": 25,
         "styles": {
             "top": 3,
             "right": 18,
@@ -275,7 +275,7 @@
         "name": "Витрати"
     },
     {
-        "id": 26,
+        "position": 26,
         "styles": {
             "top": 2,
             "right": 18,
@@ -286,7 +286,7 @@
         "name": "Бізнес"
     },
     {
-        "id": 27,
+        "position": 27,
         "styles": {
             "top": 1,
             "right": 18,
@@ -297,7 +297,7 @@
         "name": "Покупки"
     },
     {
-        "id": 28,
+        "position": 28,
         "styles": {
             "top": 0,
             "right": 18,
@@ -308,7 +308,7 @@
         "name": "Прибуток"
     },
     {
-        "id": 29,
+        "position": 29,
         "styles": {
             "top": 0,
             "right": 17,
@@ -319,7 +319,7 @@
         "name": "Можливості"
     },
     {
-        "id": 30,
+        "position": 30,
         "styles": {
             "top": 0,
             "right": 16,
@@ -330,7 +330,7 @@
         "name": "Витрати"
     },
     {
-        "id": 31,
+        "position": 31,
         "styles": {
             "top": 0,
             "right": 15,
@@ -341,7 +341,7 @@
         "name": "Бізнес"
     },
     {
-        "id": 32,
+        "position": 32,
         "styles": {
             "top": 0,
             "right": 14,
@@ -352,7 +352,7 @@
         "name": "Інвестиції"
     },
     {
-        "id": 33,
+        "position": 33,
         "styles": {
             "top": 0,
             "right": 13,
@@ -363,7 +363,7 @@
         "name": "Покупки"
     },
     {
-        "id": 34,
+        "position": 34,
         "styles": {
             "top": 0,
             "right": 12,
@@ -374,7 +374,7 @@
         "name": "Витрати"
     },
     {
-        "id": 35,
+        "position": 35,
         "styles": {
             "top": 0,
             "right": 11,
@@ -385,7 +385,7 @@
         "name": "Бізнес"
     },
     {
-        "id": 36,
+        "position": 36,
         "styles": {
             "top": 0,
             "right": 10,
@@ -396,7 +396,7 @@
         "name": "Розлучення"
     },
     {
-        "id": 37,
+        "position": 37,
         "styles": {
             "top": 0,
             "right": 9,
@@ -407,7 +407,7 @@
         "name": "Прибуток"
     },
     {
-        "id": 38,
+        "position": 38,
         "styles": {
             "top": 0,
             "right": 8,
@@ -418,7 +418,7 @@
         "name": "Інвестиції"
     },
     {
-        "id": 39,
+        "position": 39,
         "styles": {
             "top": 0,
             "right": 7,
@@ -429,7 +429,7 @@
         "name": "Витрати"
     },
     {
-        "id": 40,
+        "position": 40,
         "styles": {
             "top": 0,
             "right": 6,
@@ -440,7 +440,7 @@
         "name": "Можливості"
     },
     {
-        "id": 41,
+        "position": 41,
         "styles": {
             "top": 0,
             "right": 5,
@@ -451,7 +451,7 @@
         "name": "Бізнес"
     },
     {
-        "id": 42,
+        "position": 42,
         "styles": {
             "top": 0,
             "right": 4,
@@ -462,7 +462,7 @@
         "name": "Відпустка"
     },
     {
-        "id": 43,
+        "position": 43,
         "styles": {
             "top": 0,
             "right": 3,
@@ -473,7 +473,7 @@
         "name": "Покупки"
     },
     {
-        "id": 44,
+        "position": 44,
         "styles": {
             "top": 0,
             "right": 2,
@@ -484,7 +484,7 @@
         "name": "Витрати"
     },
     {
-        "id": 45,
+        "position": 45,
         "styles": {
             "top": 0,
             "right": 1,
@@ -495,7 +495,7 @@
         "name": "Бізнес"
     },
     {
-        "id": 46,
+        "position": 46,
         "styles": {
             "top": 0,
             "right": 0,
@@ -506,7 +506,7 @@
         "name": "Прибуток"
     },
     {
-        "id": 47,
+        "position": 47,
         "styles": {
             "top": 1,
             "right": 0,
@@ -517,7 +517,7 @@
         "name": "Можливості"
     },
     {
-        "id": 48,
+        "position": 48,
         "styles": {
             "top": 2,
             "right": 0,
@@ -528,7 +528,7 @@
         "name": "Витрати"
     },
     {
-        "id": 49,
+        "position": 49,
         "styles": {
             "top": 3,
             "right": 0,
@@ -539,7 +539,7 @@
         "name": "Інвестиції"
     },
     {
-        "id": 50,
+        "position": 50,
         "styles": {
             "top": 4,
             "right": 0,
@@ -550,7 +550,7 @@
         "name": "Бізнес"
     },
     {
-        "id": 51,
+        "position": 51,
         "styles": {
             "top": 5,
             "right": 0,
@@ -561,7 +561,7 @@
         "name": "Витрати"
     },
     {
-        "id": 52,
+        "position": 52,
         "styles": {
             "top": 6,
             "right": 0,
@@ -572,7 +572,7 @@
         "name": "Банкрутство"
     },
     {
-        "id": 53,
+        "position": 53,
         "styles": {
             "top": 7,
             "right": 0,
@@ -583,7 +583,7 @@
         "name": "Бізнес"
     },
     {
-        "id": 54,
+        "position": 54,
         "styles": {
             "top": 8,
             "right": 0,
