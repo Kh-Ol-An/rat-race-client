@@ -1,33 +1,34 @@
 <script setup>
-import { ref } from "vue";
-import sleep from "../../helpers/sleep.js";
+import { ref } from 'vue';
+import sleep from '../../helpers/sleep.js';
+import randomInteger from '../../helpers/random-integer.js';
 
 const emit = defineEmits([ 'rolling' ]);
 
 const numberOnDice = ref(6);
 const animationDice = async () => {
-    numberOnDice.value = Math.floor(1 + Math.random() * 6);
+    numberOnDice.value = randomInteger();
     await sleep(50);
-    numberOnDice.value = Math.floor(1 + Math.random() * 6);
+    numberOnDice.value = randomInteger();
     await sleep(100);
-    numberOnDice.value = Math.floor(1 + Math.random() * 6);
+    numberOnDice.value = randomInteger();
     await sleep(150);
-    numberOnDice.value = Math.floor(1 + Math.random() * 6);
+    numberOnDice.value = randomInteger();
     await sleep(200);
-    numberOnDice.value = Math.floor(1 + Math.random() * 6);
+    numberOnDice.value = randomInteger();
     await sleep(250);
-    numberOnDice.value = Math.floor(1 + Math.random() * 6);
+    numberOnDice.value = randomInteger();
     await sleep(300);
-    numberOnDice.value = Math.floor(1 + Math.random() * 6);
+    numberOnDice.value = randomInteger();
     await sleep(350);
-    numberOnDice.value = Math.floor(1 + Math.random() * 6);
+    numberOnDice.value = randomInteger();
     await sleep(400);
-    numberOnDice.value = Math.floor(1 + Math.random() * 6);
+    numberOnDice.value = randomInteger();
     await sleep(470);
 };
 const rollingDice = async () => {
     // await animationDice();
-    numberOnDice.value = Math.floor(1 + Math.random() * 6);
+    numberOnDice.value = randomInteger();
     return emit('rolling', numberOnDice.value);
 };
 </script>

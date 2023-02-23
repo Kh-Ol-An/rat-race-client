@@ -74,6 +74,49 @@ defineProps({
         required: true,
     },
 });
+
+const emit = defineEmits([ 'confirm:event' ]);
+
+const bgColor = (type) => {
+    if (type === 'profit') {
+        return 'bg-primary';
+    }
+    if (type === 'business') {
+        return 'bg-secondary';
+    }
+    if (type === 'investments') {
+        return 'bg-sky-600';
+    }
+    if (type === 'expenses') {
+        return 'bg-red-600';
+    }
+    if (type === 'layoff') {
+        return 'bg-gray-700';
+    }
+    if (type === 'opportunities') {
+        return 'bg-orange-600';
+    }
+    if (type === 'buys') {
+        return 'bg-sky-400';
+    }
+    if (type === 'wedding') {
+        return 'bg-fuchsia-600';
+    }
+    if (type === 'baby') {
+        return 'bg-yellow-400';
+    }
+    if (type === 'divorce') {
+        return 'bg-gray-600';
+    }
+    if (type === 'vacation') {
+        return 'bg-teal-600';
+    }
+    if (type === 'bankruptcy') {
+        return 'bg-gray-900';
+    }
+};
+
+const confirmEvent = (eventCard) => emit('confirm:event', eventCard);
 </script>
 
 <template>
@@ -91,18 +134,7 @@ defineProps({
             :class="[
                 'absolute',
                 'flex items-center justify-center',
-                type === 'profit' && 'bg-primary',
-                type === 'business' && 'bg-secondary',
-                type === 'investments' && 'bg-sky-600',
-                type === 'expenses' && 'bg-red-600',
-                type === 'layoff' && 'bg-gray-700',
-                type === 'opportunities' && 'bg-orange-600',
-                type === 'buys' && 'bg-sky-400',
-                type === 'wedding' && 'bg-fuchsia-600',
-                type === 'baby' && 'bg-yellow-400',
-                type === 'divorce' && 'bg-gray-600',
-                type === 'vacation' && 'bg-teal-600',
-                type === 'bankruptcy' && 'bg-gray-900',
+                bgColor(type),
             ]"
             :title="name"
         >
@@ -152,6 +184,8 @@ defineProps({
             :width="`${blankWidth}px`"
             :height="`${blankHeight}px`"
             :userPosition="userPosition"
+            @confirm="confirmEvent"
+            @cancel="$emit('cancel:event')"
         />
     </div>
 </template>

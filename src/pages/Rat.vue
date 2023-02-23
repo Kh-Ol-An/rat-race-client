@@ -22,6 +22,7 @@ import BusinessIcon from "../assets/images/icons/BusinessIcon.vue";
 import CartIcon from "../assets/images/icons/CartIcon.vue";
 import ExpenseIcon from "../assets/images/icons/ExpenseIcon.vue";
 import BankruptcyIcon from "../assets/images/icons/BankruptcyIcon.vue";
+import randomInteger from '../helpers/random-integer.js';
 
 const container = ref(null);
 const containerWidth = ref(null);
@@ -54,7 +55,7 @@ const gameChipStyles = computed(
             ).find(field => field.id === gameChip.position)
 );
 const rollingDice = () => {
-    numberOnDice.value = Math.floor(1 + Math.random() * 6);
+    numberOnDice.value = randomInteger();
     gameChip.position += numberOnDice.value;
     const fieldsCount = gameChip.rich ? FIELDS_COUNT_OF_OUTER_CIRCLE : FIELDS_COUNT_OF_INNER_CIRCLE;
     gameChip.position > fieldsCount && (gameChip.position = gameChip.position - fieldsCount);

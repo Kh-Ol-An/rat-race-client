@@ -1,6 +1,7 @@
 <script setup>
-import {computed} from "vue";
+import { computed } from 'vue';
 import eventCards from '../../database/event-cards.json';
+import randomInteger from '../../helpers/random-integer.js';
 
 const props = defineProps({
     width: {
@@ -17,8 +18,20 @@ const props = defineProps({
     },
 });
 
+const emit = defineEmits([ 'confirm' ]);
+
 const eventCard = computed(() => {
-    return eventCards[props.userPosition.type].find((item) => item.id === Math.floor(1 + Math.random() * 3));
+    if (
+        props.userPosition.type === 'business' ||
+        props.userPosition.type === 'investments' ||
+        props.userPosition.type === 'expenses' ||
+        props.userPosition.type === 'opportunities' ||
+        props.userPosition.type === 'buys'
+    ) {
+        return eventCards[props.userPosition.type].find((item) => item.id === randomInteger(1, 3));
+    }
+
+    return props.userPosition;
 });
 
 const bgColor = computed(() => {
@@ -98,6 +111,15 @@ const yes = computed(() => {
         return 'Втратити';
     }
 });
+
+const confirm = () => emit('confirm', eventCard.value);
+
+const isCancel = computed(() =>
+    props.userPosition.type === 'business' ||
+    props.userPosition.type === 'investments' ||
+    props.userPosition.type === 'opportunities' ||
+    props.userPosition.type === 'buys'
+);
 </script>
 
 <template>
@@ -116,7 +138,7 @@ const yes = computed(() => {
         <h4 v-if="eventCard.name" class="text-2xl text-slate-400 font-bold text-center">
             {{ eventCard.name }}
         </h4>
-        <p class="text-slate-400 text-center">
+        <p v-if="eventCard.description" class="text-slate-400 text-center">
             {{ eventCard.description }}
         </p>
         <span v-if="eventCard.profit" class="text-xl text-slate-400 font-bold text-center">
@@ -125,14 +147,8 @@ const yes = computed(() => {
         <span v-if="eventCard.price" class="text-xl text-slate-400 font-bold text-center">
             {{ eventCard.price }}
         </span>
-        <div class="grid grid-cols-2 gap-3">
+        <div :class="['grid', isCancel && 'grid-cols-2 gap-3']">
             <button
-                v-if="
-                    userPosition.type === 'business' ||
-                    userPosition.type === 'investments' ||
-                    userPosition.type === 'opportunities' ||
-                    userPosition.type === 'buys'
-                "
                 class="
                     px-4 py-3
                     rounded
@@ -142,16 +158,12 @@ const yes = computed(() => {
                     outline-0
                 "
                 type="button"
+                @click="confirm"
             >
                 {{ yes }}
             </button>
             <button
-                v-if="
-                    userPosition.type === 'business' ||
-                    userPosition.type === 'investments' ||
-                    userPosition.type === 'opportunities' ||
-                    userPosition.type === 'buys'
-                "
+                v-if="isCancel"
                 class="
                     px-4 py-3
                     rounded
@@ -161,6 +173,7 @@ const yes = computed(() => {
                     outline-0
                 "
                 type="button"
+                @click="$emit('cancel')"
             >
                 Заощадити
             </button>
