@@ -37,7 +37,7 @@ const props = defineProps({
     },
 })
 
-const emit = defineEmits(['input'])
+const emit = defineEmits(['update:value'])
 
 const entered = ref('')
 const input = (event) => {

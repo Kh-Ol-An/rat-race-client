@@ -1,9 +1,10 @@
 <script setup>
-import Menu from '../components/plugins/Menu.vue'
+import NavMenu from '../components/plugins/NavMenu.vue'
 </script>
 
 <template>
-    <Menu />
+    <NavMenu />
+
     <div
         class="w-full h-screen flex flex-col items-center justify-center gap-10"
     >

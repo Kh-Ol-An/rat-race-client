@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, onUnmounted, ref, reactive, computed } from 'vue'
-import Menu from '../components/plugins/Menu.vue'
+import NavMenu from '../components/plugins/NavMenu.vue'
 import GameDice from '../components/Rat/GameDice.vue'
 import GameChip from '../components/Rat/GameChip.vue'
 import poorCircle from '../database/rat/rat-poor-circle.js'
@@ -136,7 +136,8 @@ setTimeout(() => (development.value = true), 3000)
 </script>
 
 <template>
-    <Menu />
+    <NavMenu />
+
     <Transition>
         <div
             v-if="development"

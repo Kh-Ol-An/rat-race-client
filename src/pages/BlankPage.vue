@@ -2,7 +2,7 @@
 import { reactive, ref, computed, watch } from 'vue'
 import { notify } from '@kyvg/vue3-notification'
 import { mapActions, mapGetters } from '../store/helpers.js'
-import Menu from '../components/plugins/Menu.vue'
+import NavMenu from '../components/plugins/NavMenu.vue'
 import BlankIdentification from '../components/Blank/modules/BlankIdentification.vue'
 import TransactionAction from '../components/Blank/modules/TransactionAction.vue'
 import InfoField from '../components/plugins/InfoField.vue'
@@ -527,7 +527,8 @@ const showModalWin = computed(
 </script>
 
 <template>
-    <Menu />
+    <NavMenu />
+
     <div
         class="pt-4 pb-8 px-8 md:py-2 md:px-0 md:w-screen max-w-full flex flex-col items-center justify-center"
     >
