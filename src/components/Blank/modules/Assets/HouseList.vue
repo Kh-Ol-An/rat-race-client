@@ -4,7 +4,7 @@ import Input from '../../../plugins/Input.vue'
 import ActionAdd from '../../plugins/ActionAdd.vue'
 import Modal from '../../plugins/Modal.vue'
 import HouseItem from './HouseItem.vue'
-import Sell from '../../plugins/Sell.vue'
+import ActionSell from '../../plugins/ActionSell.vue'
 import {
     removingSpaces,
     addingSpaces,
@@ -90,7 +90,7 @@ const sellHouses = (price) => emit('sell:houses', price)
                     blank.assets.houses.length
                 }}</span>
                 {{ blank.assets.houses.length > 4 ? 'будинків' : 'будинки' }}
-                <Sell input-id="sell-price-houses" second-bg @sell="sellHouses">
+                <ActionSell input-id="sell-price-houses" second-bg @sell="sellHouses">
                     на суму
                     <span class="text-slate-400">
                         {{
@@ -102,7 +102,7 @@ const sellHouses = (price) => emit('sell:houses', price)
                             )
                         }}
                     </span>
-                </Sell>
+                </ActionSell>
             </span>
         </li>
     </ul>

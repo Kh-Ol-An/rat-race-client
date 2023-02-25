@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue'
-import Sell from '../../plugins/Sell.vue'
+import ActionSell from '../../plugins/ActionSell.vue'
 import { addingSpaces } from '../../../../helpers/formating-values.js'
 
 const props = defineProps({
@@ -40,11 +40,11 @@ const sell = (price) => emit('sell', props.subType, quantity.value * price)
         class="relative py-2 pr-12 grid grid-cols-12 items-center gap-2 border-t-2 border-slate-700 font-bold text-center"
     >
         <div class="col-span-6 flex items-center justify-center">
-            <Sell input-id="sell-all-shares" @sell="sell">
+            <ActionSell input-id="sell-all-shares" @sell="sell">
                 <span class="text-slate-500">
                     {{ addingSpaces(price) }}
                 </span>
-            </Sell>
+            </ActionSell>
         </div>
 
         <span class="col-span-3 text-slate-500">

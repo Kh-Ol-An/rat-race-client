@@ -1,5 +1,5 @@
 <script setup>
-import Sell from '../../plugins/Sell.vue'
+import ActionSell from '../../plugins/ActionSell.vue'
 import { addingSpaces } from '../../../../helpers/formating-values.js'
 
 const props = defineProps({
@@ -34,13 +34,13 @@ const sell = (price) =>
 <template>
     <li class="relative pr-12 grid grid-cols-12 items-center gap-2">
         <div class="col-span-6 flex items-center justify-center">
-            <Sell input-id="sell-shares" @sell="sell">
+            <ActionSell input-id="sell-shares" @sell="sell">
                 <span
                     class="col-span-5 text-slate-400 text-center whitespace-nowrap"
                 >
                     {{ addingSpaces(price) }}
                 </span>
-            </Sell>
+            </ActionSell>
         </div>
 
         <span class="col-span-3 text-slate-400 text-center whitespace-nowrap">

@@ -1,6 +1,6 @@
 <script setup>
 import InfoField from '../../../plugins/InfoField.vue'
-import Sell from '../../plugins/Sell.vue'
+import ActionSell from '../../plugins/ActionSell.vue'
 import { addingSpaces } from '../../../../helpers/formating-values.js'
 
 const props = defineProps({
@@ -26,7 +26,7 @@ const sell = (price) => emit('sell', price, props.id)
             label-classes="text-primary"
             label="Будинок:"
         >
-            <Sell
+            <ActionSell
                 :value="addingSpaces(price)"
                 input-id="sell-price-house"
                 second-bg
@@ -35,7 +35,7 @@ const sell = (price) => emit('sell', price, props.id)
                 <span class="ml-2 text-slate-400">
                     {{ addingSpaces(price) }}
                 </span>
-            </Sell>
+            </ActionSell>
         </InfoField>
     </li>
 </template>
