@@ -16,7 +16,6 @@ const routes = [
         name: 'Blank',
         component: () => import('../pages/BlankPage.vue'),
     },
-    { path: '/rat', name: 'Rat', component: () => import('../pages/Rat.vue') },
     {
         path: '/game',
         name: 'Game',
