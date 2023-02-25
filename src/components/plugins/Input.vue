@@ -1,6 +1,6 @@
 <script setup>
-import { ref } from 'vue';
-import { addingSpaces } from '../../helpers/formating-values.js';
+import { ref } from 'vue'
+import { addingSpaces } from '../../helpers/formating-values.js'
 
 const props = defineProps({
     value: {
@@ -35,43 +35,32 @@ const props = defineProps({
         type: Number,
         default: 35,
     },
-});
+})
 
-const emit = defineEmits(['input']);
+const emit = defineEmits(['input'])
 
-const entered = ref('');
+const entered = ref('')
 const input = (event) => {
-    const regExp = /\d|null/;
+    const regExp = /\d|null/
     if (
         (props.type === 'number' &&
-        (!regExp.test(event.data) ||
-        event.target.value === '0' ||
-        event.target.value.length > 15)) ||
+            (!regExp.test(event.data) ||
+                event.target.value === '0' ||
+                event.target.value.length > 15)) ||
         (props.type === 'text' && event.target.value.length > props.maxLength)
     ) {
-        return event.target.value = entered.value;
+        return (event.target.value = entered.value)
     }
-    entered.value = event.target.value;
-    emit('update:value', entered.value);
-};
+    entered.value = event.target.value
+    emit('update:value', entered.value)
+}
 </script>
 
 <template>
     <div :class="['relative w-full', disabled && 'opacity-20']">
         <input
-            class="
-                peer
-                py-1 px-3 md:px-2
-                w-full
-                shadow
-                rounded-md border-2 border-slate-700
-                bg-transparent
-                text-base text-primary
-                placeholder-transparent
-                focus:border-primary focus:outline-none
-                transition-all duration-300
-            "
             :id="id"
+            class="peer py-1 px-3 md:px-2 w-full shadow rounded-md border-2 border-slate-700 bg-transparent text-base text-primary placeholder-transparent focus:border-primary focus:outline-none transition-all duration-300"
             :type="type === 'number' ? 'text' : type"
             :inputmode="type === 'number' ? 'numeric' : 'text'"
             :placeholder="placeholder"
@@ -92,7 +81,9 @@ const input = (event) => {
                 'cursor-text',
                 'transition-all duration-300',
                 secondBg && 'md:bg-slate-900',
-                smallLabel ? 'peer-placeholder-shown:text-sm' : 'peer-placeholder-shown:text-base',
+                smallLabel
+                    ? 'peer-placeholder-shown:text-sm'
+                    : 'peer-placeholder-shown:text-base',
             ]"
             :for="id"
         >

@@ -1,6 +1,6 @@
 <script setup>
-import { computed } from 'vue';
-import AddIcon from '../../../assets/images/icons/AddIcon.vue';
+import { computed } from 'vue'
+import AddIcon from '../../../assets/images/icons/AddIcon.vue'
 
 const props = defineProps({
     firstValue: {
@@ -19,13 +19,16 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
-});
+})
 
-const disabled = computed(() =>
-    props.firstValue.length === 0 ||
-    props.secondValue.length === 0 ||
-    props.thirdValue.length === 0
-);
+defineEmits(['add'])
+
+const disabled = computed(
+    () =>
+        props.firstValue.length === 0 ||
+        props.secondValue.length === 0 ||
+        props.thirdValue.length === 0
+)
 </script>
 
 <template>
@@ -36,6 +39,10 @@ const disabled = computed(() =>
         :disabled="disabled"
         @click="$emit('add')"
     >
-        <AddIcon width="30px" height="30px" :color="disabled ? 'fill-slate-400' : 'fill-primary'" />
+        <AddIcon
+            width="30px"
+            height="30px"
+            :color="disabled ? 'fill-slate-400' : 'fill-primary'"
+        />
     </button>
 </template>

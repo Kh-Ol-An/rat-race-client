@@ -1,20 +1,20 @@
 <script setup>
-import GameChip from "../../components/Game/GameChip.vue";
-import ReductionBalance from "../../components/Game/ReductionBalance.vue";
-import IncreaseBalance from "../../components/Game/IncreaseBalance.vue";
-import EventCard from "../../components/Game/EventCard.vue";
-import MoneyIcon from "../../assets/images/icons/MoneyIcon.vue";
-import BusinessIcon from "../../assets/images/icons/BusinessIcon.vue";
-import InvestmentsIcon from "../../assets/images/icons/InvestmentsIcon.vue";
-import ExpenseIcon from "../../assets/images/icons/ExpenseIcon.vue";
-import LayoffIcon from "../../assets/images/icons/LayoffIcon.vue";
-import OpportunitiesIcon from "../../assets/images/icons/OpportunitiesIcon.vue";
-import CartIcon from "../../assets/images/icons/CartIcon.vue";
-import WeddingIcon from "../../assets/images/icons/WeddingIcon.vue";
-import BabyIcon from "../../assets/images/icons/BabyIcon.vue";
-import DivorceIcon from "../../assets/images/icons/DivorceIcon.vue";
-import VacationIcon from "../../assets/images/icons/VacationIcon.vue";
-import BankruptcyIcon from "../../assets/images/icons/BankruptcyIcon.vue";
+import GameChip from '../../components/Game/GameChip.vue'
+import ReductionBalance from '../../components/Game/ReductionBalance.vue'
+import IncreaseBalance from '../../components/Game/IncreaseBalance.vue'
+import EventCard from '../../components/Game/EventCard.vue'
+import MoneyIcon from '../../assets/images/icons/MoneyIcon.vue'
+import BusinessIcon from '../../assets/images/icons/BusinessIcon.vue'
+import InvestmentsIcon from '../../assets/images/icons/InvestmentsIcon.vue'
+import ExpenseIcon from '../../assets/images/icons/ExpenseIcon.vue'
+import LayoffIcon from '../../assets/images/icons/LayoffIcon.vue'
+import OpportunitiesIcon from '../../assets/images/icons/OpportunitiesIcon.vue'
+import CartIcon from '../../assets/images/icons/CartIcon.vue'
+import WeddingIcon from '../../assets/images/icons/WeddingIcon.vue'
+import BabyIcon from '../../assets/images/icons/BabyIcon.vue'
+import DivorceIcon from '../../assets/images/icons/DivorceIcon.vue'
+import VacationIcon from '../../assets/images/icons/VacationIcon.vue'
+import BankruptcyIcon from '../../assets/images/icons/BankruptcyIcon.vue'
 
 defineProps({
     width: {
@@ -73,50 +73,50 @@ defineProps({
         type: Number,
         required: true,
     },
-});
+})
 
-const emit = defineEmits([ 'confirm:event' ]);
+const emit = defineEmits(['confirm:event'])
 
 const bgColor = (type) => {
     if (type === 'profit') {
-        return 'bg-primary';
+        return 'bg-primary'
     }
     if (type === 'business') {
-        return 'bg-secondary';
+        return 'bg-secondary'
     }
     if (type === 'investments') {
-        return 'bg-sky-600';
+        return 'bg-sky-600'
     }
     if (type === 'expenses') {
-        return 'bg-red-600';
+        return 'bg-red-600'
     }
     if (type === 'layoff') {
-        return 'bg-gray-700';
+        return 'bg-gray-700'
     }
     if (type === 'opportunities') {
-        return 'bg-orange-600';
+        return 'bg-orange-600'
     }
     if (type === 'buys') {
-        return 'bg-sky-400';
+        return 'bg-sky-400'
     }
     if (type === 'wedding') {
-        return 'bg-fuchsia-600';
+        return 'bg-fuchsia-600'
     }
     if (type === 'baby') {
-        return 'bg-yellow-400';
+        return 'bg-yellow-400'
     }
     if (type === 'divorce') {
-        return 'bg-gray-600';
+        return 'bg-gray-600'
     }
     if (type === 'vacation') {
-        return 'bg-teal-600';
+        return 'bg-teal-600'
     }
     if (type === 'bankruptcy') {
-        return 'bg-gray-900';
+        return 'bg-gray-900'
     }
-};
+}
 
-const confirmEvent = (eventCard) => emit('confirm:event', eventCard);
+const confirmEvent = (eventCard) => emit('confirm:event', eventCard)
 </script>
 
 <template>
@@ -140,24 +140,44 @@ const confirmEvent = (eventCard) => emit('confirm:event', eventCard);
         >
             <MoneyIcon v-if="type === 'profit'" />
             <BusinessIcon v-if="type === 'business'" />
-            <InvestmentsIcon v-if="type === 'investments'" width="30px" height="30px" />
-            <ExpenseIcon v-if="type === 'expenses'" width="30px" height="30px" />
+            <InvestmentsIcon
+                v-if="type === 'investments'"
+                width="30px"
+                height="30px"
+            />
+            <ExpenseIcon
+                v-if="type === 'expenses'"
+                width="30px"
+                height="30px"
+            />
             <LayoffIcon v-if="type === 'layoff'" />
-            <OpportunitiesIcon v-if="type === 'opportunities'" width="30px" height="30px" />
+            <OpportunitiesIcon
+                v-if="type === 'opportunities'"
+                width="30px"
+                height="30px"
+            />
             <CartIcon v-if="type === 'buys'" width="30px" height="30px" />
             <WeddingIcon v-if="type === 'wedding'" width="30px" height="30px" />
             <BabyIcon v-if="type === 'baby'" width="30px" height="30px" />
             <DivorceIcon v-if="type === 'divorce'" width="30px" height="30px" />
-            <VacationIcon v-if="type === 'vacation'" width="30px" height="30px" />
-            <BankruptcyIcon v-if="type === 'bankruptcy'" width="30px" height="30px" />
+            <VacationIcon
+                v-if="type === 'vacation'"
+                width="30px"
+                height="30px"
+            />
+            <BankruptcyIcon
+                v-if="type === 'bankruptcy'"
+                width="30px"
+                height="30px"
+            />
         </div>
 
         <GameChip
             v-if="gameChipHere"
-            :userStyles="userPosition.styles"
-            :cellWidth="cellWidth"
-            :cellHeight="cellHeight"
-            gameChipColor="fill-red-600"
+            :user-styles="userPosition.styles"
+            :cell-width="cellWidth"
+            :cell-height="cellHeight"
+            game-chip-color="fill-red-600"
         />
 
         <IncreaseBalance
@@ -183,7 +203,7 @@ const confirmEvent = (eventCard) => emit('confirm:event', eventCard);
             v-if="blankWidth && blankHeight && showEventCard"
             :width="`${blankWidth}px`"
             :height="`${blankHeight}px`"
-            :userPosition="userPosition"
+            :user-position="userPosition"
             @confirm="confirmEvent"
             @cancel="$emit('cancel:event')"
         />

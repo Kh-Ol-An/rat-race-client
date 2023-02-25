@@ -1,11 +1,11 @@
 <script setup>
-import { onMounted, onUnmounted, ref, reactive, computed } from 'vue';
-import Menu from '../components/plugins/Menu.vue';
-import Circle from '../components/Game/Circle.vue';
-import Dice from '../components/Game/Dice.vue';
-import poorCircle from '../database/poor-circle.json';
-import richCircle from '../database/rich-circle.json';
-import professions from '../database/professions.json';
+import { onMounted, onUnmounted, ref, reactive, computed } from 'vue'
+import Menu from '../components/plugins/Menu.vue'
+import Circle from '../components/Game/Circle.vue'
+import Dice from '../components/Game/Dice.vue'
+import poorCircle from '../database/poor-circle.json'
+import richCircle from '../database/rich-circle.json'
+import professions from '../database/professions.json'
 import {
     POOR_CIRCLE_FACTOR,
     RICH_CIRCLE_FACTOR,
@@ -16,70 +16,74 @@ import {
     BLANK_X_GAP,
     BLANK_Y_GAP,
     BLANK_FACTOR,
-} from '../database/variables.js';
+} from '../database/variables.js'
 
-const container = ref(null);
-const containerWidth = ref(null);
-const containerHeight = ref(null);
-const richCircleWidth = ref('100%');
-const richCircleHeight = ref('100%');
-const cellSizeInRichCircle = ref(null);
-const poorCircleWidth = ref(null);
-const poorCircleHeight = ref(null);
-const cellWidthInPoorCircle = ref(null);
-const cellHeightInPoorCircle = ref(null);
-const blankPosition = ref(null);
-const blankWidth = ref(null);
-const blankHeight = ref(null);
+const container = ref(null)
+const containerWidth = ref(null)
+const containerHeight = ref(null)
+const richCircleWidth = ref('100%')
+const richCircleHeight = ref('100%')
+const cellSizeInRichCircle = ref(null)
+const poorCircleWidth = ref(null)
+const poorCircleHeight = ref(null)
+const cellWidthInPoorCircle = ref(null)
+const cellHeightInPoorCircle = ref(null)
+const blankPosition = ref(null)
+const blankWidth = ref(null)
+const blankHeight = ref(null)
 const resizeObserver = new ResizeObserver((entries) => {
     for (const entry of entries) {
-        containerWidth.value = entry.target.clientWidth;
-        containerHeight.value = entry.target.clientHeight;
+        containerWidth.value = entry.target.clientWidth
+        containerHeight.value = entry.target.clientHeight
         if (containerHeight.value / containerWidth.value > RICH_CIRCLE_FACTOR) {
             // Rich
-            const richHeight = containerWidth.value * RICH_CIRCLE_FACTOR;
-            richCircleHeight.value = `${richHeight}px`;
-            richCircleWidth.value = '100%';
-            cellSizeInRichCircle.value = richHeight / CELLS_COUNT_BY_HEIGHT;
+            const richHeight = containerWidth.value * RICH_CIRCLE_FACTOR
+            richCircleHeight.value = `${richHeight}px`
+            richCircleWidth.value = '100%'
+            cellSizeInRichCircle.value = richHeight / CELLS_COUNT_BY_HEIGHT
 
             // Poor
-            const poorHeight = richHeight - cellSizeInRichCircle.value * 2 - FIELDS_GAP;
-            const poorWidth = poorHeight / POOR_CIRCLE_FACTOR;
-            poorCircleHeight.value = `${poorHeight}px`;
-            poorCircleWidth.value = `${poorWidth}px`;
-            cellHeightInPoorCircle.value = poorHeight / CELLS_COUNT_BY_HEIGHT;
-            cellWidthInPoorCircle.value = poorWidth / CELLS_COUNT_BY_WIDTH;
+            const poorHeight =
+                richHeight - cellSizeInRichCircle.value * 2 - FIELDS_GAP
+            const poorWidth = poorHeight / POOR_CIRCLE_FACTOR
+            poorCircleHeight.value = `${poorHeight}px`
+            poorCircleWidth.value = `${poorWidth}px`
+            cellHeightInPoorCircle.value = poorHeight / CELLS_COUNT_BY_HEIGHT
+            cellWidthInPoorCircle.value = poorWidth / CELLS_COUNT_BY_WIDTH
 
             // Blank
-            blankPosition.value = cellWidthInPoorCircle.value + BLANK_X_GAP;
-            blankHeight.value = poorHeight - cellHeightInPoorCircle.value * 2 - BLANK_Y_GAP;
-            blankWidth.value = blankHeight.value * BLANK_FACTOR;
+            blankPosition.value = cellWidthInPoorCircle.value + BLANK_X_GAP
+            blankHeight.value =
+                poorHeight - cellHeightInPoorCircle.value * 2 - BLANK_Y_GAP
+            blankWidth.value = blankHeight.value * BLANK_FACTOR
         } else {
             // Rich
-            const richWidth = containerHeight.value / RICH_CIRCLE_FACTOR;
-            richCircleWidth.value = `${richWidth}px`;
-            richCircleHeight.value = '100%';
-            cellSizeInRichCircle.value = richWidth / CELLS_COUNT_BY_WIDTH;
+            const richWidth = containerHeight.value / RICH_CIRCLE_FACTOR
+            richCircleWidth.value = `${richWidth}px`
+            richCircleHeight.value = '100%'
+            cellSizeInRichCircle.value = richWidth / CELLS_COUNT_BY_WIDTH
 
             // Poor
-            const poorWidth = richWidth - cellSizeInRichCircle.value * 2 - FIELDS_GAP;
-            const poorHeight = poorWidth * POOR_CIRCLE_FACTOR;
-            poorCircleWidth.value = `${poorWidth}px`;
-            poorCircleHeight.value = `${poorHeight}px`;
-            cellWidthInPoorCircle.value = poorWidth / CELLS_COUNT_BY_WIDTH;
-            cellHeightInPoorCircle.value = poorHeight / CELLS_COUNT_BY_HEIGHT;
+            const poorWidth =
+                richWidth - cellSizeInRichCircle.value * 2 - FIELDS_GAP
+            const poorHeight = poorWidth * POOR_CIRCLE_FACTOR
+            poorCircleWidth.value = `${poorWidth}px`
+            poorCircleHeight.value = `${poorHeight}px`
+            cellWidthInPoorCircle.value = poorWidth / CELLS_COUNT_BY_WIDTH
+            cellHeightInPoorCircle.value = poorHeight / CELLS_COUNT_BY_HEIGHT
 
             // Blank
-            blankPosition.value = cellWidthInPoorCircle.value + BLANK_X_GAP;
-            blankHeight.value = poorHeight - cellHeightInPoorCircle.value * 2 - BLANK_Y_GAP;
-            blankWidth.value = blankHeight.value * BLANK_FACTOR;
+            blankPosition.value = cellWidthInPoorCircle.value + BLANK_X_GAP
+            blankHeight.value =
+                poorHeight - cellHeightInPoorCircle.value * 2 - BLANK_Y_GAP
+            blankWidth.value = blankHeight.value * BLANK_FACTOR
         }
     }
-});
-onMounted(() => resizeObserver.observe(container.value));
-onUnmounted(() => resizeObserver.disconnect());
+})
+onMounted(() => resizeObserver.observe(container.value))
+onUnmounted(() => resizeObserver.disconnect())
 
-const showEventCard = ref(false);
+const showEventCard = ref(false)
 
 const user = reactive({
     id: 1,
@@ -95,43 +99,45 @@ const user = reactive({
     utilities: 0,
 })
 const rollingDice = (numberOnDice) => {
-    user.position += numberOnDice;
-    user.position > FIELDS_COUNT && (user.position = user.position - FIELDS_COUNT);
-    setTimeout(() => showEventCard.value = true, 700);
-};
-const userPosition = computed(
-    () =>
-        user.rich
-            ? richCircle.find((field) => field.position === user.position)
-            : poorCircle.find((field) => field.position === user.position)
-);
+    user.position += numberOnDice
+    user.position > FIELDS_COUNT &&
+        (user.position = user.position - FIELDS_COUNT)
+    setTimeout(() => (showEventCard.value = true), 700)
+}
+const userPosition = computed(() =>
+    user.rich
+        ? richCircle.find((field) => field.position === user.position)
+        : poorCircle.find((field) => field.position === user.position)
+)
 const choiceGender = (gender) => {
-    const randomId = Math.floor(1 + Math.random() * 4);
-    const genderCard = professions[gender].find((profession) => profession.id === randomId);
-    delete genderCard.id;
+    const randomId = Math.floor(1 + Math.random() * 4)
+    const genderCard = professions[gender].find(
+        (profession) => profession.id === randomId
+    )
+    delete genderCard.id
     for (const [key] of Object.entries(genderCard)) {
-        user[key] = genderCard[key];
+        user[key] = genderCard[key]
     }
-    user.gender = gender;
-};
+    user.gender = gender
+}
 
 const expenses = computed(() => {
-    let sum = 0;
-    sum += user.rent;
-    sum += user.food;
-    sum += user.clothes;
-    sum += user.fare;
-    sum += user.utilities;
-    return sum;
-});
+    let sum = 0
+    sum += user.rent
+    sum += user.food
+    sum += user.clothes
+    sum += user.fare
+    sum += user.utilities
+    return sum
+})
 
 const confirmEvent = (eventCard) => {
-    console.log(eventCard);
-    showEventCard.value = false;
-};
+    console.log(eventCard)
+    showEventCard.value = false
+}
 
-const development = ref(false);
-setTimeout(() => development.value = false, 3000);
+const development = ref(false)
+setTimeout(() => (development.value = false), 3000)
 // setTimeout(() => development.value = true, 3000);
 </script>
 
@@ -149,20 +155,28 @@ setTimeout(() => development.value = false, 3000);
     </Transition>
 
     <Transition>
-        <div v-if="!development" class="pt-4 pb-6 px-6 w-full h-screen flex flex-col items-center gap-4">
-            <h1 class="md:hidden text-4xl font-bold text-white text-center">ГРА 'Гроші є'</h1>
+        <div
+            v-if="!development"
+            class="pt-4 pb-6 px-6 w-full h-screen flex flex-col items-center gap-4"
+        >
+            <h1 class="md:hidden text-4xl font-bold text-white text-center">
+                ГРА 'Гроші є'
+            </h1>
 
-            <div class="relative w-full h-full flex items-center justify-center" ref="container">
+            <div
+                ref="container"
+                class="relative w-full h-full flex items-center justify-center"
+            >
                 <!-- Rich -->
                 <Circle
                     :width="richCircleWidth"
                     :height="richCircleHeight"
                     classes="relative"
                     :circle="richCircle"
-                    :cellWidth="cellSizeInRichCircle && cellSizeInRichCircle"
-                    :cellHeight="cellSizeInRichCircle && cellSizeInRichCircle"
-                    :userPosition="userPosition"
-                    :gameChipHere="user.rich"
+                    :cell-width="cellSizeInRichCircle && cellSizeInRichCircle"
+                    :cell-height="cellSizeInRichCircle && cellSizeInRichCircle"
+                    :user-position="userPosition"
+                    :game-chip-here="user.rich"
                     :user="user"
                 />
 
@@ -172,22 +186,27 @@ setTimeout(() => development.value = false, 3000);
                     :height="poorCircleHeight && poorCircleHeight"
                     classes="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2"
                     :circle="poorCircle"
-                    :cellWidth="cellWidthInPoorCircle && cellWidthInPoorCircle"
-                    :cellHeight="cellHeightInPoorCircle && cellHeightInPoorCircle"
-                    :userPosition="userPosition"
-                    :gameChipHere="!user.rich"
-                    :blankPosition="blankPosition && blankPosition"
-                    :blankWidth="blankWidth && blankWidth"
-                    :blankHeight="blankHeight && blankHeight"
+                    :cell-width="cellWidthInPoorCircle && cellWidthInPoorCircle"
+                    :cell-height="
+                        cellHeightInPoorCircle && cellHeightInPoorCircle
+                    "
+                    :user-position="userPosition"
+                    :game-chip-here="!user.rich"
+                    :blank-position="blankPosition && blankPosition"
+                    :blank-width="blankWidth && blankWidth"
+                    :blank-height="blankHeight && blankHeight"
                     :user="user"
-                    :showEventCard="showEventCard"
+                    :show-event-card="showEventCard"
                     :expenses="expenses"
                     @choice:gender="choiceGender"
                     @confirm:event="confirmEvent"
                     @cancel:event="showEventCard = false"
                 />
 
-                <Dice v-if="user.gender.length && !showEventCard" @rolling="rollingDice" />
+                <Dice
+                    v-if="user.gender.length && !showEventCard"
+                    @rolling="rollingDice"
+                />
             </div>
         </div>
     </Transition>

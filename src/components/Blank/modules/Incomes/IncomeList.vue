@@ -1,13 +1,16 @@
 <script setup>
-import { ref, toRef, computed } from 'vue';
-import Input from '../../../plugins/Input.vue';
-import Add from '../../plugins/Add.vue';
-import InfoField from '../../../plugins/InfoField.vue';
-import InputField from '../../plugins/InputField.vue';
-import BusinessHead from './BusinessHead.vue';
-import Business from './Business.vue';
-import Modal from '../../plugins/Modal.vue';
-import { removingSpaces, addingSpaces } from '../../../../helpers/formating-values.js';
+import { ref, toRef } from 'vue'
+import Input from '../../../plugins/Input.vue'
+import Add from '../../plugins/Add.vue'
+import InfoField from '../../../plugins/InfoField.vue'
+import InputField from '../../plugins/InputField.vue'
+import BusinessHead from './BusinessHead.vue'
+import BusinessItem from './BusinessItem.vue'
+import Modal from '../../plugins/Modal.vue'
+import {
+    removingSpaces,
+    addingSpaces,
+} from '../../../../helpers/formating-values.js'
 
 const props = defineProps({
     blankProp: {
@@ -18,43 +21,48 @@ const props = defineProps({
         type: Number,
         required: true,
     },
-});
+})
 
-const blank = toRef(props, 'blankProp');
+const blank = toRef(props, 'blankProp')
 
 const emit = defineEmits([
+    'add:salary',
     'fired:salary',
     'quit:salary',
     'buy:business',
     'increment:income',
+    'delete:business',
     'sell',
     'one-time:income',
-]);
+])
 
-const salary = ref('');
+const salary = ref('')
 const fired = () => {
-    emit('fired:salary');
-    salary.value = '';
-};
+    emit('fired:salary')
+    salary.value = ''
+}
 const quit = () => {
-    emit('quit:salary');
-    salary.value = '';
-};
+    emit('quit:salary')
+    salary.value = ''
+}
 
-const showModal = ref(false);
+const showModal = ref(false)
 
 const buyBusiness = (id, price, income, subType, deputies) => {
-    if (blank.value.cash < price || blank.value.deputies < deputies) return showModal.value = true;
-    emit('buy:business', id, price, income, subType, deputies);
-};
-const incrementIncomeBusiness = (id, income) => emit('increment:income', id, income);
-const deleteBusiness = (subType, id) => emit('delete:business', subType, id);
-const sellBusiness = subType => emit('sell', subType);
+    if (blank.value.cash < price || blank.value.deputies < deputies)
+        return (showModal.value = true)
+    emit('buy:business', id, price, income, subType, deputies)
+}
+const incrementIncomeBusiness = (id, income) =>
+    emit('increment:income', id, income)
+const deleteBusiness = (subType, id) => emit('delete:business', subType, id)
+const sellBusiness = (subType) => emit('sell', subType)
 
 const oneTimeIncome = (id, price, income, subType, deputies) => {
-    if (blank.value.cash < price || blank.value.deputies < deputies) return showModal.value = true;
-    emit('one-time:income', income - price, deputies);
-};
+    if (blank.value.cash < price || blank.value.deputies < deputies)
+        return (showModal.value = true)
+    emit('one-time:income', income - price, deputies)
+}
 </script>
 
 <template>
@@ -74,23 +82,28 @@ const oneTimeIncome = (id, price, income, subType, deputies) => {
         "
         class="flex items-center gap-3"
     >
-        <Input v-model:value="salary" id="salary" placeholder="Зарплата" secondBg />
-        <Add :firstValue="salary" @add="$emit('add:salary', Number(removingSpaces(salary)))" />
+        <Input
+            id="salary"
+            v-model:value="salary"
+            placeholder="Зарплата"
+            second-bg
+        />
+        <Add
+            :first-value="salary"
+            @add="$emit('add:salary', Number(removingSpaces(salary)))"
+        />
     </div>
-    <InfoField v-if="blank.salary > 0 || firedSalary > 0" labelClasses="text-primary" label="Зарплата:">
+    <InfoField
+        v-if="blank.salary > 0 || firedSalary > 0"
+        label-classes="text-primary"
+        label="Зарплата:"
+    >
         <span class="ml-2 text-slate-400">
             {{ addingSpaces(blank.salary) }}
         </span>
 
         <button
-            class="
-                ml-4 px-2
-                rounded
-                shadow
-                bg-gradient-to-b from-oppositeLight to-opposite
-                text-sm text-slate-300 font-bold
-                outline-0
-            "
+            class="ml-4 px-2 rounded shadow bg-gradient-to-b from-oppositeLight to-opposite text-sm text-slate-300 font-bold outline-0"
             type="button"
             title="Звільнили"
             @click="fired"
@@ -99,14 +112,7 @@ const oneTimeIncome = (id, price, income, subType, deputies) => {
         </button>
 
         <button
-            class="
-                ml-4 px-2
-                rounded
-                shadow
-                bg-gradient-to-b from-secondaryLight to-secondary
-                text-sm text-slate-300 font-bold
-                outline-0
-            "
+            class="ml-4 px-2 rounded shadow bg-gradient-to-b from-secondaryLight to-secondary text-sm text-slate-300 font-bold outline-0"
             type="button"
             title="Звільнитись"
             @click="quit"
@@ -124,34 +130,35 @@ const oneTimeIncome = (id, price, income, subType, deputies) => {
         "
         label="Малий бізнес"
         type="business"
-        subType="small"
-        firstPlaceholder="Вартість"
-        secondPlaceholder="Прибутки"
+        sub-type="small"
+        first-placeholder="Вартість"
+        second-placeholder="Прибутки"
         :disabled="
-            ((blank.salary > 0 || firedSalary > 0) && blank.business.small.length > 0) ||
+            ((blank.salary > 0 || firedSalary > 0) &&
+                blank.business.small.length > 0) ||
             blank.business.middle.length > 0 ||
             blank.business.big.length > 0 ||
             blank.business.corrupt.length > 0
         "
-        secondBg
+        second-bg
         @add="buyBusiness"
     />
     <ul v-if="blank.business.small.length > 0" class="flex flex-col gap-2">
         <BusinessHead
-            firstTitle="Вартість"
-            secondTitle="Прибутки"
-            confirmationModalText="Ти впевнений що хочешь продати всі свої малі бізнеси?"
+            first-title="Вартість"
+            second-title="Прибутки"
+            confirmation-modal-text="Ти впевнений що хочешь продати всі свої малі бізнеси?"
             @sell="sellBusiness('small')"
         />
-        <Business
-            v-for="({ id, price, income }) in blank.business.small"
-            :key="id"
+        <BusinessItem
+            v-for="{ id, price, income } in blank.business.small"
             :id="id"
-            :firstValue="price"
-            :secondValue="income"
-            :lastBusiness="blank.business.last"
+            :key="id"
+            :first-value="price"
+            :second-value="income"
+            :last-business="blank.business.last"
             incremental
-            :disabledEdit="blank.salary > 0 || firedSalary > 0"
+            :disabled-edit="blank.salary > 0 || firedSalary > 0"
             @increment="incrementIncomeBusiness"
             @delete="deleteBusiness('small', id)"
         />
@@ -166,32 +173,33 @@ const oneTimeIncome = (id, price, income, subType, deputies) => {
         "
         label="Середній бізнес"
         type="business"
-        subType="middle"
-        firstPlaceholder="Вартість"
-        secondPlaceholder="Прибутки"
+        sub-type="middle"
+        first-placeholder="Вартість"
+        second-placeholder="Прибутки"
         :disabled="
-            ((blank.salary > 0 || firedSalary > 0) && blank.business.middle.length > 0) ||
+            ((blank.salary > 0 || firedSalary > 0) &&
+                blank.business.middle.length > 0) ||
             blank.business.small.length > 0 ||
             blank.business.big.length > 0 ||
             blank.business.corrupt.length > 0
         "
-        secondBg
+        second-bg
         @add="buyBusiness"
     />
     <ul v-if="blank.business.middle.length > 0" class="flex flex-col gap-2">
         <BusinessHead
-            firstTitle="Вартість"
-            secondTitle="Прибутки"
-            confirmationModalText="Ти впевнений що хочешь продати всі свої середні бізнеси?"
+            first-title="Вартість"
+            second-title="Прибутки"
+            confirmation-modal-text="Ти впевнений що хочешь продати всі свої середні бізнеси?"
             @sell="sellBusiness('middle')"
         />
-        <Business
-            v-for="({ id, price, income })  in blank.business.middle"
-            :key="id"
+        <BusinessItem
+            v-for="{ id, price, income } in blank.business.middle"
             :id="id"
-            :firstValue="price"
-            :secondValue="income"
-            :lastBusiness="blank.business.last"
+            :key="id"
+            :first-value="price"
+            :second-value="income"
+            :last-business="blank.business.last"
             @delete="deleteBusiness('middle', id)"
         />
     </ul>
@@ -204,27 +212,31 @@ const oneTimeIncome = (id, price, income, subType, deputies) => {
         "
         label="Великий бізнес"
         type="business"
-        subType="big"
-        firstPlaceholder="Вартість"
-        secondPlaceholder="Прибутки"
+        sub-type="big"
+        first-placeholder="Вартість"
+        second-placeholder="Прибутки"
         :disabled="
             (blank.salary > 0 && blank.business.big.length > 0) ||
             (blank.salary > 0 && blank.business.corrupt.length > 0) ||
             blank.business.small.length > 0 ||
             blank.business.middle.length > 0
         "
-        secondBg
+        second-bg
         @add="buyBusiness"
     />
     <ul v-if="blank.business.big.length > 0" class="flex flex-col gap-2">
-        <BusinessHead firstTitle="Вартість" secondTitle="Прибутки" :isSell="false" />
-        <Business
-            v-for="({ id, price, income })  in blank.business.big"
-            :key="id"
+        <BusinessHead
+            first-title="Вартість"
+            second-title="Прибутки"
+            :is-sell="false"
+        />
+        <BusinessItem
+            v-for="{ id, price, income } in blank.business.big"
             :id="id"
-            :firstValue="price"
-            :secondValue="income"
-            :lastBusiness="blank.business.last"
+            :key="id"
+            :first-value="price"
+            :second-value="income"
+            :last-business="blank.business.last"
             @delete="deleteBusiness('big', id)"
         />
     </ul>
@@ -238,28 +250,32 @@ const oneTimeIncome = (id, price, income, subType, deputies) => {
         "
         label="Корупційний бізнес"
         type="business"
-        subType="corrupt"
-        firstPlaceholder="Вартість"
-        secondPlaceholder="Прибутки"
-        thirdPlaceholder="Депутати"
+        sub-type="corrupt"
+        first-placeholder="Вартість"
+        second-placeholder="Прибутки"
+        third-placeholder="Депутати"
         :disabled="
             (blank.salary > 0 && blank.business.big.length > 0) ||
             (blank.salary > 0 && blank.business.corrupt.length > 0) ||
             blank.business.small.length > 0 ||
             blank.business.middle.length > 0
         "
-        secondBg
+        second-bg
         @add="buyBusiness"
     />
     <ul v-if="blank.business.corrupt.length > 0" class="flex flex-col gap-2">
-        <BusinessHead firstTitle="Вартість" secondTitle="Прибутки" :isSell="false" />
-        <Business
-            v-for="({ id, price, income }) in blank.business.corrupt"
-            :key="id"
+        <BusinessHead
+            first-title="Вартість"
+            second-title="Прибутки"
+            :is-sell="false"
+        />
+        <BusinessItem
+            v-for="{ id, price, income } in blank.business.corrupt"
             :id="id"
-            :firstValue="price"
-            :secondValue="income"
-            :lastBusiness="blank.business.last"
+            :key="id"
+            :first-value="price"
+            :second-value="income"
+            :last-business="blank.business.last"
             @delete="deleteBusiness('corrupt', id)"
         />
     </ul>
@@ -269,11 +285,11 @@ const oneTimeIncome = (id, price, income, subType, deputies) => {
         v-if="blank.rich"
         label="Разовий дохід"
         type="one-time"
-        subType="corrupt"
-        firstPlaceholder="Вартість"
-        secondPlaceholder="Прибуток"
-        thirdPlaceholder="Депутати"
-        secondBg
+        sub-type="corrupt"
+        first-placeholder="Вартість"
+        second-placeholder="Прибуток"
+        third-placeholder="Депутати"
+        second-bg
         @add="oneTimeIncome"
     />
 
@@ -282,7 +298,8 @@ const oneTimeIncome = (id, price, income, subType, deputies) => {
             Це не можливо!
         </h4>
         <p class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center">
-            Куди ти сунешся жебрак? Бізнес він зібрався купляти... Іди гроші заробляй!
+            Куди ти сунешся жебрак? Бізнес він зібрався купляти... Іди гроші
+            заробляй!
         </p>
     </Modal>
 </template>

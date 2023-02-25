@@ -1,31 +1,32 @@
 <script setup>
-import { ref, toRef } from "vue";
-import InputField from '../../plugins/InputField.vue';
-import PackagesHead from './PackagesHead.vue';
-import Package from './Package.vue';
-import PackagesTotal from './PackagesTotal.vue';
-import Modal from '../../plugins/Modal.vue';
+import { ref, toRef } from 'vue'
+import InputField from '../../plugins/InputField.vue'
+import PackagesHead from './PackagesHead.vue'
+import SharesPackage from './SharesPackage.vue'
+import PackagesTotal from './PackagesTotal.vue'
+import Modal from '../../plugins/Modal.vue'
 
 const props = defineProps({
     blankProp: {
         type: Object,
         required: true,
     },
-});
+})
 
-const blank = toRef(props, 'blankProp');
+const blank = toRef(props, 'blankProp')
 
-const emit = defineEmits([ 'buy', 'sell:package', 'sell:all' ]);
+const emit = defineEmits(['buy', 'sell:package', 'sell:all'])
 
-const showModal = ref(false);
+const showModal = ref(false)
 
 const buy = (id, price, quantity, subType) => {
-    if (blank.value.cash < price * quantity) return showModal.value = true;
-    emit('buy', id, price, quantity, subType);
-};
+    if (blank.value.cash < price * quantity) return (showModal.value = true)
+    emit('buy', id, price, quantity, subType)
+}
 
-const sellPackage = (id, subType, price) => emit('sell:package', id, subType, price);
-const sellAll = (subType, price) => emit('sell:all', subType, price);
+const sellPackage = (id, subType, price) =>
+    emit('sell:package', id, subType, price)
+const sellAll = (subType, price) => emit('sell:all', subType, price)
 </script>
 
 <template>
@@ -35,26 +36,26 @@ const sellAll = (subType, price) => emit('sell:all', subType, price);
     <InputField
         label="GC"
         type="shares"
-        subType="gc"
-        firstPlaceholder="Ціна"
-        secondPlaceholder="Кількість"
+        sub-type="gc"
+        first-placeholder="Ціна"
+        second-placeholder="Кількість"
         @add="buy"
     />
     <ul v-if="blank.shares.gc.length > 0" class="flex flex-col gap-2">
         <PackagesHead />
-        <Package
-            v-for="{id, price, quantity, cost} in blank.shares.gc"
-            :key="id"
+        <SharesPackage
+            v-for="{ id, price, quantity, cost } in blank.shares.gc"
             :id="id"
-            subType="gc"
+            :key="id"
+            sub-type="gc"
             :price="price"
             :quantity="quantity"
             :cost="cost"
             @sell="sellPackage"
         />
         <PackagesTotal
-            :blankShare="blank.shares.gc"
-            subType="gc"
+            :blank-share="blank.shares.gc"
+            sub-type="gc"
             @sell="sellAll"
         />
     </ul>
@@ -63,26 +64,26 @@ const sellAll = (subType, price) => emit('sell:all', subType, price);
     <InputField
         label="ЩГП"
         type="shares"
-        subType="schp"
-        firstPlaceholder="Ціна"
-        secondPlaceholder="Кількість"
+        sub-type="schp"
+        first-placeholder="Ціна"
+        second-placeholder="Кількість"
         @add="buy"
     />
     <ul v-if="blank.shares.schp.length > 0" class="flex flex-col gap-2">
         <PackagesHead />
-        <Package
-            v-for="{id, price, quantity, cost} in blank.shares.schp"
-            :key="id"
+        <SharesPackage
+            v-for="{ id, price, quantity, cost } in blank.shares.schp"
             :id="id"
-            subType="schp"
+            :key="id"
+            sub-type="schp"
             :price="price"
             :quantity="quantity"
             :cost="cost"
             @sell="sellPackage"
         />
         <PackagesTotal
-            :blankShare="blank.shares.schp"
-            subType="schp"
+            :blank-share="blank.shares.schp"
+            sub-type="schp"
             @sell="sellAll"
         />
     </ul>
@@ -91,26 +92,26 @@ const sellAll = (subType, price) => emit('sell:all', subType, price);
     <InputField
         label="TO"
         type="shares"
-        subType="to"
-        firstPlaceholder="Ціна"
-        secondPlaceholder="Кількість"
+        sub-type="to"
+        first-placeholder="Ціна"
+        second-placeholder="Кількість"
         @add="buy"
     />
     <ul v-if="blank.shares.to.length > 0" class="flex flex-col gap-2">
         <PackagesHead />
-        <Package
-            v-for="{id, price, quantity, cost} in blank.shares.to"
-            :key="id"
+        <SharesPackage
+            v-for="{ id, price, quantity, cost } in blank.shares.to"
             :id="id"
-            subType="to"
+            :key="id"
+            sub-type="to"
             :price="price"
             :quantity="quantity"
             :cost="cost"
             @sell="sellPackage"
         />
         <PackagesTotal
-            :blankShare="blank.shares.to"
-            subType="to"
+            :blank-share="blank.shares.to"
+            sub-type="to"
             @sell="sellAll"
         />
     </ul>
@@ -119,26 +120,26 @@ const sellAll = (subType, price) => emit('sell:all', subType, price);
     <InputField
         label="CST"
         type="shares"
-        subType="cst"
-        firstPlaceholder="Ціна"
-        secondPlaceholder="Кількість"
+        sub-type="cst"
+        first-placeholder="Ціна"
+        second-placeholder="Кількість"
         @add="buy"
     />
     <ul v-if="blank.shares.cst.length > 0" class="flex flex-col gap-2">
         <PackagesHead />
-        <Package
-            v-for="{id, price, quantity, cost} in blank.shares.cst"
-            :key="id"
+        <SharesPackage
+            v-for="{ id, price, quantity, cost } in blank.shares.cst"
             :id="id"
-            subType="cst"
+            :key="id"
+            sub-type="cst"
             :price="price"
             :quantity="quantity"
             :cost="cost"
             @sell="sellPackage"
         />
         <PackagesTotal
-            :blankShare="blank.shares.cst"
-            subType="cst"
+            :blank-share="blank.shares.cst"
+            sub-type="cst"
             @sell="sellAll"
         />
     </ul>
@@ -148,7 +149,8 @@ const sellAll = (subType, price) => emit('sell:all', subType, price);
             Це не можливо!
         </h4>
         <p class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center">
-            Куди ти сунешся жебрак? Акції він зібрався купляти... Іди гроші заробляй!
+            Куди ти сунешся жебрак? Акції він зібрався купляти... Іди гроші
+            заробляй!
         </p>
     </Modal>
 </template>

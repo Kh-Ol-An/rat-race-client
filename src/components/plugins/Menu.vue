@@ -1,27 +1,19 @@
 <script setup>
-import { ref } from 'vue';
-import { mapActions } from '../../store/helpers.js';
-import HomeIcon from '../../assets/images/icons/HomeIcon.vue';
-import BlankIcon from '../../assets/images/icons/BlankIcon.vue';
-import RatIcon from '../../assets/images/icons/RatIcon.vue';
-import GameIcon from '../../assets/images/icons/GameIcon.vue';
-import LogoutIcon from '../../assets/images/icons/LogoutIcon.vue';
+import { ref } from 'vue'
+import { mapActions } from '../../store/helpers.js'
+import HomeIcon from '../../assets/images/icons/HomeIcon.vue'
+import BlankIcon from '../../assets/images/icons/BlankIcon.vue'
+import RatIcon from '../../assets/images/icons/RatIcon.vue'
+import GameIcon from '../../assets/images/icons/GameIcon.vue'
+import LogoutIcon from '../../assets/images/icons/LogoutIcon.vue'
 
-const { logout } = mapActions();
-const show = ref(false);
+const { logout } = mapActions()
+const show = ref(false)
 </script>
 
 <template>
     <button
-        class="
-            fixed md:absolute
-            top-6 md:top-2.5 left-6 md:left-2.5
-            z-50
-            p-2
-            flex flex-col gap-2
-            rounded-md
-            bg-slate-700 md:bg-slate-800
-        "
+        class="fixed md:absolute top-6 md:top-2.5 left-6 md:left-2.5 z-50 p-2 flex flex-col gap-2 rounded-md bg-slate-700 md:bg-slate-800"
         type="button"
         @click="show = !show"
     >

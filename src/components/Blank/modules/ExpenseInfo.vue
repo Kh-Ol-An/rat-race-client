@@ -1,12 +1,15 @@
 <script setup>
-import { ref } from 'vue';
-import InfoField from '../../plugins/InfoField.vue';
-import Input from '../../plugins/Input.vue';
-import ReturnIcon from '../../../assets/images/icons/ReturnIcon.vue';
-import CheckIcon from '../../../assets/images/icons/CheckIcon.vue';
-import { removingSpaces, addingSpaces } from '../../../helpers/formating-values.js';
+import { ref } from 'vue'
+import InfoField from '../../plugins/InfoField.vue'
+import Input from '../../plugins/Input.vue'
+import ReturnIcon from '../../../assets/images/icons/ReturnIcon.vue'
+import CheckIcon from '../../../assets/images/icons/CheckIcon.vue'
+import {
+    removingSpaces,
+    addingSpaces,
+} from '../../../helpers/formating-values.js'
 
-const props = defineProps({
+defineProps({
     debt: {
         type: Number,
         required: true,
@@ -15,25 +18,25 @@ const props = defineProps({
         type: Number,
         required: true,
     },
-});
+})
 
-const emit = defineEmits([ 'repay' ]);
+const emit = defineEmits(['repay'])
 
-const showRepay = ref(false);
-const repayDebt = ref('');
+const showRepay = ref(false)
+const repayDebt = ref('')
 const hidRepay = () => {
-    showRepay.value = false;
-    repayDebt.value = '';
-};
+    showRepay.value = false
+    repayDebt.value = ''
+}
 const repay = () => {
-    showRepay.value = false;
-    emit('repay', Number(removingSpaces(repayDebt.value)));
-    repayDebt.value = '';
-};
+    showRepay.value = false
+    emit('repay', Number(removingSpaces(repayDebt.value)))
+    repayDebt.value = ''
+}
 </script>
 
 <template>
-    <InfoField labelClasses="text-opposite" label="Борги:">
+    <InfoField label-classes="text-opposite" label="Борги:">
         <span class="ml-2 text-slate-400 whitespace-nowrap">
             {{ addingSpaces(debt) }}
         </span>
@@ -41,9 +44,9 @@ const repay = () => {
         <div v-if="showRepay" class="relative ml-6">
             <Input
                 id="repay-debt"
-                placeholder="Повернути борг"
-                smallLabel
                 v-model:value="repayDebt"
+                placeholder="Повернути борг"
+                small-label
             />
             <button
                 class="absolute top-1/2 right-3 -translate-y-1/2 rotate-45 text-2xl font-bold text-opposite"
@@ -55,7 +58,13 @@ const repay = () => {
             </button>
         </div>
 
-        <button v-if="!showRepay" class="ml-4 outline-0" type="button" title="Повернути борг" @click="showRepay = true">
+        <button
+            v-if="!showRepay"
+            class="ml-4 outline-0"
+            type="button"
+            title="Повернути борг"
+            @click="showRepay = true"
+        >
             <ReturnIcon :color="debt > 0 ? 'fill-primary' : 'fill-slate-400'" />
         </button>
         <button
@@ -70,11 +79,15 @@ const repay = () => {
             :disabled="repayDebt.length === 0"
             @click="repay"
         >
-            <CheckIcon :color="repayDebt.length === 0 ? 'fill-slate-400' : 'fill-primary'" />
+            <CheckIcon
+                :color="
+                    repayDebt.length === 0 ? 'fill-slate-400' : 'fill-primary'
+                "
+            />
         </button>
     </InfoField>
 
-    <InfoField labelClasses="text-opposite" label="Загальні витрати:">
+    <InfoField label-classes="text-opposite" label="Загальні витрати:">
         <span class="ml-2 text-slate-400">
             {{ addingSpaces(expenses) }}
         </span>

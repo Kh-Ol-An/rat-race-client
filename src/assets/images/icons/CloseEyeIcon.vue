@@ -12,7 +12,7 @@ defineProps({
         type: String,
         default: 'stroke-slate-400',
     },
-});
+})
 </script>
 
 <template>

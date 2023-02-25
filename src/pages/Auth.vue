@@ -1,40 +1,58 @@
 <script setup>
-import { computed, ref } from "vue";
-import Input from '../components/plugins/Input.vue';
-import CloseEyeIcon from '../assets/images/icons/CloseEyeIcon.vue';
-import OpenEyeIcon from '../assets/images/icons/OpenEyeIcon.vue';
-import { mapActions, mapGetters } from '../store/helpers.js';
+import { computed, ref } from 'vue'
+import Input from '../components/plugins/Input.vue'
+import CloseEyeIcon from '../assets/images/icons/CloseEyeIcon.vue'
+import OpenEyeIcon from '../assets/images/icons/OpenEyeIcon.vue'
+import { mapActions, mapGetters } from '../store/helpers.js'
 
-const isRegistration = ref(false);
-const showPassword = ref(true);
-const showRepeatPassword = ref(true);
+const isRegistration = ref(false)
+const showPassword = ref(true)
+const showRepeatPassword = ref(true)
 
-const name = ref('');
-const email = ref('');
-const password = ref('');
-const repeatPassword = ref('');
+const name = ref('')
+const email = ref('')
+const password = ref('')
+const repeatPassword = ref('')
 
-const disabledRegistration =
-    computed(
-        () => email.value.length === 0 || password.value.length === 0 || password.value !== repeatPassword.value,
-    );
-const disabledLogin = computed(() => email.value.length === 0 || password.value.length === 0);
+const disabledRegistration = computed(
+    () =>
+        email.value.length === 0 ||
+        password.value.length === 0 ||
+        password.value !== repeatPassword.value
+)
+const disabledLogin = computed(
+    () => email.value.length === 0 || password.value.length === 0
+)
 
-const { registration, login } = mapActions();
-const { getLoading } = mapGetters();
+const { registration, login } = mapActions()
+const { getLoading } = mapGetters()
 </script>
 
 <template>
     <div class="w-full h-screen flex flex-col items-center justify-center">
         <div v-if="getLoading">getLoading...</div>
-        <div v-else class="py-6 px-8 flex flex-col items-center justify-center gap-4 shadow-lg rounded-md bg-slate-800">
-            <Input v-if="isRegistration" v-model:value="name" type="text" id="name" placeholder="Ім'я" />
-            <Input v-model:value="email" type="text" id="email" placeholder="Пошта" />
+        <div
+            v-else
+            class="py-6 px-8 flex flex-col items-center justify-center gap-4 shadow-lg rounded-md bg-slate-800"
+        >
+            <Input
+                v-if="isRegistration"
+                id="name"
+                v-model:value="name"
+                type="text"
+                placeholder="Ім'я"
+            />
+            <Input
+                id="email"
+                v-model:value="email"
+                type="text"
+                placeholder="Пошта"
+            />
             <div class="relative w-full">
                 <Input
+                    id="password"
                     v-model:value="password"
                     :type="showPassword ? 'password' : 'text'"
-                    id="password"
                     placeholder="Пароль"
                 />
                 <button
@@ -44,16 +62,20 @@ const { getLoading } = mapGetters();
                 >
                     <CloseEyeIcon
                         v-if="showPassword"
-                        :color="password.length > 0 ? 'stroke-primary' : 'stroke-slate-400'"
+                        :color="
+                            password.length > 0
+                                ? 'stroke-primary'
+                                : 'stroke-slate-400'
+                        "
                     />
                     <OpenEyeIcon v-else color="stroke-primary" />
                 </button>
             </div>
             <div v-if="isRegistration" class="relative w-full">
                 <Input
+                    id="repeat-password"
                     v-model:value="repeatPassword"
                     :type="showRepeatPassword ? 'password' : 'text'"
-                    id="repeat-password"
                     placeholder="Пароль ще раз"
                 />
                 <button
@@ -63,14 +85,26 @@ const { getLoading } = mapGetters();
                 >
                     <CloseEyeIcon
                         v-if="showRepeatPassword"
-                        :color="repeatPassword.length > 0 ? 'stroke-primary' : 'stroke-slate-400'"
+                        :color="
+                            repeatPassword.length > 0
+                                ? 'stroke-primary'
+                                : 'stroke-slate-400'
+                        "
                     />
                     <OpenEyeIcon v-else color="stroke-primary" />
                 </button>
             </div>
             <p class="text-sm text-slate-400 text-center">
-                {{ isRegistration ? 'В мене вже є обліковий запис.' : 'В мене ще немає облікового запису.' }}<br>Хочу
-                <button class="text-primary font-bold" type="button" @click="isRegistration = !isRegistration">
+                {{
+                    isRegistration
+                        ? 'В мене вже є обліковий запис.'
+                        : 'В мене ще немає облікового запису.'
+                }}<br />Хочу
+                <button
+                    class="text-primary font-bold"
+                    type="button"
+                    @click="isRegistration = !isRegistration"
+                >
                     {{ isRegistration ? 'увійти' : 'зареєструватися' }}
                 </button>
             </p>
@@ -78,7 +112,9 @@ const { getLoading } = mapGetters();
                 v-if="isRegistration"
                 :class="[
                     'w-full h-8 rounded bg-gradient-to-b text-slate-100 transition-all duration-300',
-                    disabledRegistration ? 'from-gray-300 to-gray-600 cursor-not-allowed' : 'from-primaryLight to-primary',
+                    disabledRegistration
+                        ? 'from-gray-300 to-gray-600 cursor-not-allowed'
+                        : 'from-primaryLight to-primary',
                 ]"
                 type="button"
                 :disabled="disabledRegistration"
@@ -90,7 +126,9 @@ const { getLoading } = mapGetters();
                 v-else
                 :class="[
                     'w-full h-8 rounded bg-gradient-to-b text-slate-100 transition-all duration-300',
-                    disabledLogin ? 'from-gray-300 to-gray-600 cursor-not-allowed' : 'from-primaryLight to-primary',
+                    disabledLogin
+                        ? 'from-gray-300 to-gray-600 cursor-not-allowed'
+                        : 'from-primaryLight to-primary',
                 ]"
                 type="button"
                 :disabled="disabledLogin"

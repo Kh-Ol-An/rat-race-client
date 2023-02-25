@@ -1,7 +1,7 @@
 <script setup>
-import { computed } from 'vue';
-import eventCards from '../../database/event-cards.json';
-import randomInteger from '../../helpers/random-integer.js';
+import { computed } from 'vue'
+import eventCards from '../../database/event-cards.json'
+import randomInteger from '../../helpers/random-integer.js'
 
 const props = defineProps({
     width: {
@@ -16,9 +16,9 @@ const props = defineProps({
         type: Object,
         required: true,
     },
-});
+})
 
-const emit = defineEmits([ 'confirm' ]);
+const emit = defineEmits(['confirm'])
 
 const eventCard = computed(() => {
     if (
@@ -28,98 +28,101 @@ const eventCard = computed(() => {
         props.userPosition.type === 'opportunities' ||
         props.userPosition.type === 'buys'
     ) {
-        return eventCards[props.userPosition.type].find((item) => item.id === randomInteger(1, 3));
+        return eventCards[props.userPosition.type].find(
+            (item) => item.id === randomInteger(1, 3)
+        )
     }
 
-    return props.userPosition;
-});
+    return props.userPosition
+})
 
 const bgColor = computed(() => {
     if (props.userPosition.type === 'profit') {
-        return 'bg-primary';
+        return 'bg-primary'
     }
     if (props.userPosition.type === 'business') {
-        return 'bg-secondary';
+        return 'bg-secondary'
     }
     if (props.userPosition.type === 'investments') {
-        return 'bg-sky-600';
+        return 'bg-sky-600'
     }
     if (props.userPosition.type === 'expenses') {
-        return 'bg-red-600';
+        return 'bg-red-600'
     }
     if (props.userPosition.type === 'layoff') {
-        return 'bg-gray-700';
+        return 'bg-gray-700'
     }
     if (props.userPosition.type === 'opportunities') {
-        return 'bg-orange-600';
+        return 'bg-orange-600'
     }
     if (props.userPosition.type === 'buys') {
-        return 'bg-sky-400';
+        return 'bg-sky-400'
     }
     if (props.userPosition.type === 'wedding') {
-        return 'bg-fuchsia-600';
+        return 'bg-fuchsia-600'
     }
     if (props.userPosition.type === 'baby') {
-        return 'bg-yellow-400';
+        return 'bg-yellow-400'
     }
     if (props.userPosition.type === 'divorce') {
-        return 'bg-gray-600';
+        return 'bg-gray-600'
     }
     if (props.userPosition.type === 'vacation') {
-        return 'bg-teal-600';
+        return 'bg-teal-600'
     }
     if (props.userPosition.type === 'bankruptcy') {
-        return 'bg-gray-900';
+        return 'bg-gray-900'
     }
-});
+})
 
 const yes = computed(() => {
     if (props.userPosition.type === 'profit') {
-        return 'Отримати';
+        return 'Отримати'
     }
     if (props.userPosition.type === 'business') {
-        return 'Відкрити';
+        return 'Відкрити'
     }
     if (props.userPosition.type === 'investments') {
-        return 'Вкласти';
+        return 'Вкласти'
     }
     if (props.userPosition.type === 'expenses') {
-        return 'Заплатити';
+        return 'Заплатити'
     }
     if (props.userPosition.type === 'layoff') {
-        return 'Звільнитись';
+        return 'Звільнитись'
     }
     if (props.userPosition.type === 'opportunities') {
-        return 'Погодитись';
+        return 'Погодитись'
     }
     if (props.userPosition.type === 'buys') {
-        return 'Купити';
+        return 'Купити'
     }
     if (props.userPosition.type === 'wedding') {
-        return 'Одружитись';
+        return 'Одружитись'
     }
     if (props.userPosition.type === 'baby') {
-        return 'Завести дитину';
+        return 'Завести дитину'
     }
     if (props.userPosition.type === 'divorce') {
-        return 'Розлучитись';
+        return 'Розлучитись'
     }
     if (props.userPosition.type === 'vacation') {
-        return 'Відпочити';
+        return 'Відпочити'
     }
     if (props.userPosition.type === 'bankruptcy') {
-        return 'Втратити';
+        return 'Втратити'
     }
-});
+})
 
-const confirm = () => emit('confirm', eventCard.value);
+const confirm = () => emit('confirm', eventCard.value)
 
-const isCancel = computed(() =>
-    props.userPosition.type === 'business' ||
-    props.userPosition.type === 'investments' ||
-    props.userPosition.type === 'opportunities' ||
-    props.userPosition.type === 'buys'
-);
+const isCancel = computed(
+    () =>
+        props.userPosition.type === 'business' ||
+        props.userPosition.type === 'investments' ||
+        props.userPosition.type === 'opportunities' ||
+        props.userPosition.type === 'buys'
+)
 </script>
 
 <template>
@@ -135,28 +138,30 @@ const isCancel = computed(() =>
             bgColor,
         ]"
     >
-        <h4 v-if="eventCard.name" class="text-2xl text-slate-400 font-bold text-center">
+        <h4
+            v-if="eventCard.name"
+            class="text-2xl text-slate-400 font-bold text-center"
+        >
             {{ eventCard.name }}
         </h4>
         <p v-if="eventCard.description" class="text-slate-400 text-center">
             {{ eventCard.description }}
         </p>
-        <span v-if="eventCard.profit" class="text-xl text-slate-400 font-bold text-center">
+        <span
+            v-if="eventCard.profit"
+            class="text-xl text-slate-400 font-bold text-center"
+        >
             {{ eventCard.profit }}
         </span>
-        <span v-if="eventCard.price" class="text-xl text-slate-400 font-bold text-center">
+        <span
+            v-if="eventCard.price"
+            class="text-xl text-slate-400 font-bold text-center"
+        >
             {{ eventCard.price }}
         </span>
         <div :class="['grid', isCancel && 'grid-cols-2 gap-3']">
             <button
-                class="
-                    px-4 py-3
-                    rounded
-                    shadow-[0_5px_15px_rgba(0,0,0,0.35)]
-                    bg-gradient-to-b from-oppositeLight to-opposite
-                    text-xl text-slate-200 font-bold
-                    outline-0
-                "
+                class="px-4 py-3 rounded shadow-[0_5px_15px_rgba(0,0,0,0.35)] bg-gradient-to-b from-oppositeLight to-opposite text-xl text-slate-200 font-bold outline-0"
                 type="button"
                 @click="confirm"
             >
@@ -164,14 +169,7 @@ const isCancel = computed(() =>
             </button>
             <button
                 v-if="isCancel"
-                class="
-                    px-4 py-3
-                    rounded
-                    shadow-[0_5px_15px_rgba(0,0,0,0.35)]
-                    bg-gradient-to-b from-primaryLight to-primary
-                    text-xl text-slate-200 font-bold
-                    outline-0
-                "
+                class="px-4 py-3 rounded shadow-[0_5px_15px_rgba(0,0,0,0.35)] bg-gradient-to-b from-primaryLight to-primary text-xl text-slate-200 font-bold outline-0"
                 type="button"
                 @click="$emit('cancel')"
             >

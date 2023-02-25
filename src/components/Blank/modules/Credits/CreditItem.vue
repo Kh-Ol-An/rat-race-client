@@ -1,5 +1,5 @@
 <script setup>
-import { addingSpaces } from '../../../../helpers/formating-values.js';
+import { addingSpaces } from '../../../../helpers/formating-values.js'
 
 defineProps({
     name: {
@@ -18,7 +18,7 @@ defineProps({
         type: Number,
         required: true,
     },
-});
+})
 </script>
 
 <template>

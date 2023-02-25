@@ -1,7 +1,7 @@
 <script setup>
-import { ref } from "vue";
-import Modal from '../../plugins/Modal.vue';
-import SellIcon from "../../../../assets/images/icons/SellIcon.vue";
+import { ref } from 'vue'
+import Modal from '../../plugins/Modal.vue'
+import SellIcon from '../../../../assets/images/icons/SellIcon.vue'
 
 defineProps({
     firstTitle: {
@@ -20,19 +20,21 @@ defineProps({
         type: String,
         default: 'Ти підтверджуєш свою дію?',
     },
-});
+})
 
-const emit = defineEmits([ 'sell' ]);
+const emit = defineEmits(['sell'])
 
-const showModal = ref(false);
+const showModal = ref(false)
 const sell = () => {
-    emit('sell');
-    showModal.value = false;
-};
+    emit('sell')
+    showModal.value = false
+}
 </script>
 
 <template>
-    <li class="relative pr-12 grid grid-cols-5 items-center gap-2 text-primary font-bold text-center">
+    <li
+        class="relative pr-12 grid grid-cols-5 items-center gap-2 text-primary font-bold text-center"
+    >
         <span class="col-span-2">
             {{ firstTitle }}
         </span>
@@ -41,13 +43,7 @@ const sell = () => {
         </span>
         <button
             v-if="isSell"
-            class="
-                absolute
-                top-1/2 right-0
-                -translate-y-1/2
-                px-2
-                outline-0
-            "
+            class="absolute top-1/2 right-0 -translate-y-1/2 px-2 outline-0"
             type="button"
             title="Продати все"
             @click="showModal = true"
@@ -63,7 +59,9 @@ const sell = () => {
             <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
                 Увага!!!
             </h4>
-            <p class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center">
+            <p
+                class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center"
+            >
                 {{ confirmationModalText }}
             </p>
         </Modal>

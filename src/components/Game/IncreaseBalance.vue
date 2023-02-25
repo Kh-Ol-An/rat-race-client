@@ -1,7 +1,7 @@
 <script setup>
-import InfoField from '../plugins/InfoField.vue';
-import MaleIcon from '../../assets/images/icons/MaleIcon.vue';
-import FemaleIcon from '../../assets/images/icons/FemaleIcon.vue';
+import InfoField from '../plugins/InfoField.vue'
+import MaleIcon from '../../assets/images/icons/MaleIcon.vue'
+import FemaleIcon from '../../assets/images/icons/FemaleIcon.vue'
 
 defineProps({
     left: {
@@ -20,7 +20,7 @@ defineProps({
         type: Object,
         required: true,
     },
-});
+})
 </script>
 
 <template>
@@ -38,22 +38,30 @@ defineProps({
         </button>
         <div v-else class="p-4 shadow-[0_5px_15px_rgba(0,0,0,0.35)]">
             <div class="flex items-center gap-3">
-                <InfoField labelClasses="text-slate-500" label="Ім'я:">
+                <InfoField label-classes="text-slate-500" label="Ім'я:">
                     <span class="ml-2 text-slate-400">
                         {{ user.name || 'Безіменько' }}
                     </span>
                 </InfoField>
-                <InfoField labelClasses="mr-2 text-slate-500" label="Стать:">
-                    <MaleIcon v-if="user.gender === 'male'" width="24px" height="24px" />
-                    <FemaleIcon v-if="user.gender === 'female'" width="24px" height="24px" />
+                <InfoField label-classes="mr-2 text-slate-500" label="Стать:">
+                    <MaleIcon
+                        v-if="user.gender === 'male'"
+                        width="24px"
+                        height="24px"
+                    />
+                    <FemaleIcon
+                        v-if="user.gender === 'female'"
+                        width="24px"
+                        height="24px"
+                    />
                 </InfoField>
             </div>
-            <InfoField labelClasses="text-slate-500" label="Професія:">
+            <InfoField label-classes="text-slate-500" label="Професія:">
                 <span class="ml-2 text-slate-400">
                     {{ user.profession }}
                 </span>
             </InfoField>
-            <InfoField labelClasses="text-primary" label="Зарплата:">
+            <InfoField label-classes="text-primary" label="Зарплата:">
                 <span class="ml-2 text-slate-400">
                     {{ user.salary }}
                 </span>

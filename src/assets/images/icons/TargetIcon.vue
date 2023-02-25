@@ -8,7 +8,7 @@ defineProps({
         type: String,
         default: '24px',
     },
-});
+})
 </script>
 
 <template>

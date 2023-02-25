@@ -1,9 +1,12 @@
 <script setup>
-import { ref } from 'vue';
-import Input from '../../../plugins/Input.vue';
-import Modal from '../../plugins/Modal.vue';
-import CheckIcon from '../../../../assets/images/icons/CheckIcon.vue';
-import { removingSpaces, addingSpaces } from '../../../../helpers/formating-values.js';
+import { ref } from 'vue'
+import Input from '../../../plugins/Input.vue'
+import Modal from '../../plugins/Modal.vue'
+import CheckIcon from '../../../../assets/images/icons/CheckIcon.vue'
+import {
+    removingSpaces,
+    addingSpaces,
+} from '../../../../helpers/formating-values.js'
 
 const props = defineProps({
     id: {
@@ -30,23 +33,23 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
-});
+})
 
-const emit = defineEmits([ 'increment' ]);
+const emit = defineEmits(['increment', 'delete'])
 
-const showIncome = ref(false);
-const addIncome = ref('');
+const showIncome = ref(false)
+const addIncome = ref('')
 const hidIncome = () => {
-    showIncome.value = false;
-    addIncome.value = '';
-};
+    showIncome.value = false
+    addIncome.value = ''
+}
 const increment = () => {
-    showIncome.value = false;
-    emit('increment', props.id, Number(removingSpaces(addIncome.value)));
-    addIncome.value = '';
-};
+    showIncome.value = false
+    emit('increment', props.id, Number(removingSpaces(addIncome.value)))
+    addIncome.value = ''
+}
 
-const showModal = ref(false);
+const showModal = ref(false)
 </script>
 
 <template>
@@ -62,10 +65,10 @@ const showModal = ref(false);
             <div v-if="showIncome" class="relative">
                 <Input
                     id="edit-value"
-                    placeholder="Прибутки"
-                    smallLabel
-                    secondBg
                     v-model:value="addIncome"
+                    placeholder="Прибутки"
+                    small-label
+                    second-bg
                 />
                 <button
                     class="absolute top-1/2 right-3 -translate-y-1/2 rotate-45 text-2xl font-bold text-opposite"
@@ -81,7 +84,9 @@ const showModal = ref(false);
                     v-if="!showIncome"
                     :class="[
                         'font-bold text-2xl outline-0',
-                         disabledEdit ? 'text-slate-700 cursor-not-allowed' : 'text-primary',
+                        disabledEdit
+                            ? 'text-slate-700 cursor-not-allowed'
+                            : 'text-primary',
                     ]"
                     type="button"
                     title="Збільшити дохід"
@@ -102,21 +107,20 @@ const showModal = ref(false);
                     :disabled="addIncome.length === 0"
                     @click="increment"
                 >
-                    <CheckIcon :color="addIncome.length === 0 ? 'fill-slate-300' : 'fill-primary'" />
+                    <CheckIcon
+                        :color="
+                            addIncome.length === 0
+                                ? 'fill-slate-300'
+                                : 'fill-primary'
+                        "
+                    />
                 </button>
             </div>
         </div>
 
         <button
             v-if="lastBusiness[lastBusiness.length - 1] === id"
-            class="
-                absolute
-                top-1/2 right-0
-                -translate-y-1/2 rotate-45
-                px-2
-                text-3xl text-opposite font-bold leading-none
-                outline-0
-            "
+            class="absolute top-1/2 right-0 -translate-y-1/2 rotate-45 px-2 text-3xl text-opposite font-bold leading-none outline-0"
             type="button"
             title="Банкротство"
             @click="showModal = true"
@@ -132,7 +136,9 @@ const showModal = ref(false);
             <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
                 Увага!!!
             </h4>
-            <p class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center">
+            <p
+                class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center"
+            >
                 Ти впевнений що хочешь видалити останній відкритий бізнес?
             </p>
         </Modal>

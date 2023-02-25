@@ -1,5 +1,5 @@
-import { notify } from "@kyvg/vue3-notification";
-import BlankService from "../../services/BlankService.js";
+import { notify } from '@kyvg/vue3-notification'
+import BlankService from '../../services/BlankService.js'
 
 export default {
     state: {
@@ -7,31 +7,31 @@ export default {
     },
     mutations: {
         setBlank(state, blank) {
-            state.blank = blank;
+            state.blank = blank
         },
     },
     actions: {
         async uploadBlank({ commit }, blank) {
             try {
-                const response = await BlankService.saveBlank(blank);
-                commit('setBlank', response.data.blank);
+                const response = await BlankService.saveBlank(blank)
+                commit('setBlank', response.data.blank)
                 notify({
                     type: 'success',
                     title: 'Збереження даних',
                     text: 'Ваші дані збережені',
                     duration: 1000,
-                });
+                })
 
-                return true;
+                return true
             } catch (err) {
-                console.log(err);
-                return false;
+                console.log(err)
+                return false
             }
         },
         async downloadBlank({ commit }) {
             try {
-                const response = await BlankService.getBlank();
-                commit('setBlank', response.data);
+                const response = await BlankService.getBlank()
+                commit('setBlank', response.data)
             } catch (err) {
                 console.log(err)
             }
@@ -39,7 +39,7 @@ export default {
     },
     getters: {
         getBlank(state) {
-            return state.blank;
+            return state.blank
         },
     },
-};
+}

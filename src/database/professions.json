@@ -331,7 +331,8 @@
             "clothes": 250,
             "fare": 70,
             "utilities": 50
-        },{
+        },
+        {
             "id": 14,
             "profession": "Вчитель",
             "salary": 1300,

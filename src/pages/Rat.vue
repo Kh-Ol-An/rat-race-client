@@ -1,10 +1,10 @@
 <script setup>
-import { onMounted, onUnmounted, ref, reactive, computed } from 'vue';
-import Menu from '../components/plugins/Menu.vue';
-import Dice from '../components/Rat/Dice.vue';
-import GameChip from "../components/Rat/GameChip.vue";
-import poorCircle from '../database/rat/rat-poor-circle.js';
-import richCircle from '../database/rat/rat-rich-circle.js';
+import { onMounted, onUnmounted, ref, reactive, computed } from 'vue'
+import Menu from '../components/plugins/Menu.vue'
+import Dice from '../components/Rat/Dice.vue'
+import GameChip from '../components/Rat/GameChip.vue'
+import poorCircle from '../database/rat/rat-poor-circle.js'
+import richCircle from '../database/rat/rat-rich-circle.js'
 import {
     RAT_OUTER_CIRCLE_FACTOR,
     RAT_INNER_CIRCLE_FACTOR,
@@ -17,99 +17,122 @@ import {
     ASPECT_RATIO_HUGE_FIELD_INNER,
     FIELDS_COUNT_OF_OUTER_CIRCLE,
     FIELDS_COUNT_OF_INNER_CIRCLE,
-} from '../database/variables.js';
-import BusinessIcon from "../assets/images/icons/BusinessIcon.vue";
-import CartIcon from "../assets/images/icons/CartIcon.vue";
-import ExpenseIcon from "../assets/images/icons/ExpenseIcon.vue";
-import BankruptcyIcon from "../assets/images/icons/BankruptcyIcon.vue";
-import randomInteger from '../helpers/random-integer.js';
+} from '../database/variables.js'
+import BusinessIcon from '../assets/images/icons/BusinessIcon.vue'
+import CartIcon from '../assets/images/icons/CartIcon.vue'
+import ExpenseIcon from '../assets/images/icons/ExpenseIcon.vue'
+import BankruptcyIcon from '../assets/images/icons/BankruptcyIcon.vue'
+import randomInteger from '../helpers/random-integer.js'
 
-const container = ref(null);
-const containerWidth = ref(null);
-const containerHeight = ref(null);
-const outerCircleWidth = ref('100%');
-const outerCircleHeight = ref('100%');
-const fieldWidthInOuterCircle = ref(null);
-const fieldHeightInOuterCircle = ref(null);
-const innerCircleWidth = ref(null);
-const innerCircleHeight = ref(null);
-const fieldWidthInInnerCircle = ref(null);
-const fieldHeightInInnerCircle = ref(null);
-const hugeFieldWidthInInnerCircle = ref(null);
+const container = ref(null)
+const containerWidth = ref(null)
+const containerHeight = ref(null)
+const outerCircleWidth = ref('100%')
+const outerCircleHeight = ref('100%')
+const fieldWidthInOuterCircle = ref(null)
+const fieldHeightInOuterCircle = ref(null)
+const innerCircleWidth = ref(null)
+const innerCircleHeight = ref(null)
+const fieldWidthInInnerCircle = ref(null)
+const fieldHeightInInnerCircle = ref(null)
+const hugeFieldWidthInInnerCircle = ref(null)
 
-const numberOnDice = ref(6);
+const numberOnDice = ref(6)
 const gameChip = reactive({
     id: 1,
     position: 1,
     rich: false,
 })
-const gameChipStyles = computed(
-    () =>
-        gameChip.rich
-            ? richCircle(fieldWidthInOuterCircle.value, fieldHeightInOuterCircle.value).find(field =>
-                field.id === gameChip.position)
-            : poorCircle(
-                fieldWidthInInnerCircle.value,
-                fieldHeightInInnerCircle.value,
-                hugeFieldWidthInInnerCircle.value,
-            ).find(field => field.id === gameChip.position)
-);
+const gameChipStyles = computed(() =>
+    gameChip.rich
+        ? richCircle(
+              fieldWidthInOuterCircle.value,
+              fieldHeightInOuterCircle.value
+          ).find((field) => field.id === gameChip.position)
+        : poorCircle(
+              fieldWidthInInnerCircle.value,
+              fieldHeightInInnerCircle.value,
+              hugeFieldWidthInInnerCircle.value
+          ).find((field) => field.id === gameChip.position)
+)
 const rollingDice = () => {
-    numberOnDice.value = randomInteger();
-    gameChip.position += numberOnDice.value;
-    const fieldsCount = gameChip.rich ? FIELDS_COUNT_OF_OUTER_CIRCLE : FIELDS_COUNT_OF_INNER_CIRCLE;
-    gameChip.position > fieldsCount && (gameChip.position = gameChip.position - fieldsCount);
-};
+    numberOnDice.value = randomInteger()
+    gameChip.position += numberOnDice.value
+    const fieldsCount = gameChip.rich
+        ? FIELDS_COUNT_OF_OUTER_CIRCLE
+        : FIELDS_COUNT_OF_INNER_CIRCLE
+    gameChip.position > fieldsCount &&
+        (gameChip.position = gameChip.position - fieldsCount)
+}
 
 const resizeObserver = new ResizeObserver((entries) => {
     for (const entry of entries) {
-        containerWidth.value = entry.target.clientWidth;
-        containerHeight.value = entry.target.clientHeight;
-        if (containerHeight.value / containerWidth.value > RAT_OUTER_CIRCLE_FACTOR) {
+        containerWidth.value = entry.target.clientWidth
+        containerHeight.value = entry.target.clientHeight
+        if (
+            containerHeight.value / containerWidth.value >
+            RAT_OUTER_CIRCLE_FACTOR
+        ) {
             // Outer
-            const outerHeight = containerWidth.value * RAT_OUTER_CIRCLE_FACTOR;
-            outerCircleWidth.value = '100%';
-            outerCircleHeight.value = `${outerHeight}px`;
+            const outerHeight = containerWidth.value * RAT_OUTER_CIRCLE_FACTOR
+            outerCircleWidth.value = '100%'
+            outerCircleHeight.value = `${outerHeight}px`
 
-            fieldWidthInOuterCircle.value = outerHeight / FIELDS_COUNT_BY_HEIGHT_IN_OUTER_CIRCLE;
-            fieldHeightInOuterCircle.value = fieldWidthInOuterCircle.value / ASPECT_RATIO_FIELD_OUTER_CIRCLE;
+            fieldWidthInOuterCircle.value =
+                outerHeight / FIELDS_COUNT_BY_HEIGHT_IN_OUTER_CIRCLE
+            fieldHeightInOuterCircle.value =
+                fieldWidthInOuterCircle.value / ASPECT_RATIO_FIELD_OUTER_CIRCLE
 
             // Inner
-            const innerHeight = outerHeight - fieldHeightInOuterCircle.value * 2 - 16;
-            innerCircleWidth.value = `${innerHeight / RAT_INNER_CIRCLE_FACTOR}px`;
-            innerCircleHeight.value = `${innerHeight}px`;
+            const innerHeight =
+                outerHeight - fieldHeightInOuterCircle.value * 2 - 16
+            innerCircleWidth.value = `${
+                innerHeight / RAT_INNER_CIRCLE_FACTOR
+            }px`
+            innerCircleHeight.value = `${innerHeight}px`
 
-            fieldWidthInInnerCircle.value = innerHeight / FIELDS_COUNT_BY_HEIGHT_IN_INNER_CIRCLE;
-            fieldHeightInInnerCircle.value = fieldWidthInInnerCircle.value / ASPECT_RATIO_FIELD_INNER_CIRCLE;
-            hugeFieldWidthInInnerCircle.value = fieldWidthInInnerCircle.value / ASPECT_RATIO_HUGE_FIELD_INNER;
+            fieldWidthInInnerCircle.value =
+                innerHeight / FIELDS_COUNT_BY_HEIGHT_IN_INNER_CIRCLE
+            fieldHeightInInnerCircle.value =
+                fieldWidthInInnerCircle.value / ASPECT_RATIO_FIELD_INNER_CIRCLE
+            hugeFieldWidthInInnerCircle.value =
+                fieldWidthInInnerCircle.value / ASPECT_RATIO_HUGE_FIELD_INNER
         } else {
             // Outer
-            const outerWidth = containerHeight.value / RAT_OUTER_CIRCLE_FACTOR;
-            outerCircleWidth.value = `${outerWidth}px`;
-            outerCircleHeight.value = '100%';
+            const outerWidth = containerHeight.value / RAT_OUTER_CIRCLE_FACTOR
+            outerCircleWidth.value = `${outerWidth}px`
+            outerCircleHeight.value = '100%'
 
-            fieldWidthInOuterCircle.value = outerWidth / FIELDS_COUNT_BY_WIDTH_IN_OUTER_CIRCLE;
-            fieldHeightInOuterCircle.value = fieldWidthInOuterCircle.value / ASPECT_RATIO_FIELD_OUTER_CIRCLE;
+            fieldWidthInOuterCircle.value =
+                outerWidth / FIELDS_COUNT_BY_WIDTH_IN_OUTER_CIRCLE
+            fieldHeightInOuterCircle.value =
+                fieldWidthInOuterCircle.value / ASPECT_RATIO_FIELD_OUTER_CIRCLE
 
             // Inner
-            const innerWidth = outerWidth - fieldHeightInOuterCircle.value * 2 - 16;
-            innerCircleWidth.value = `${innerWidth}px`;
-            innerCircleHeight.value = `${innerWidth * RAT_INNER_CIRCLE_FACTOR}px`;
+            const innerWidth =
+                outerWidth - fieldHeightInOuterCircle.value * 2 - 16
+            innerCircleWidth.value = `${innerWidth}px`
+            innerCircleHeight.value = `${
+                innerWidth * RAT_INNER_CIRCLE_FACTOR
+            }px`
 
-            fieldWidthInInnerCircle.value = innerWidth / FIELDS_COUNT_BY_WIDTH_IN_INNER_CIRCLE;
-            fieldHeightInInnerCircle.value = fieldWidthInInnerCircle.value / ASPECT_RATIO_FIELD_INNER_CIRCLE;
-            hugeFieldWidthInInnerCircle.value = fieldWidthInInnerCircle.value / ASPECT_RATIO_HUGE_FIELD_INNER;
+            fieldWidthInInnerCircle.value =
+                innerWidth / FIELDS_COUNT_BY_WIDTH_IN_INNER_CIRCLE
+            fieldHeightInInnerCircle.value =
+                fieldWidthInInnerCircle.value / ASPECT_RATIO_FIELD_INNER_CIRCLE
+            hugeFieldWidthInInnerCircle.value =
+                fieldWidthInInnerCircle.value / ASPECT_RATIO_HUGE_FIELD_INNER
         }
     }
-});
+})
 
-onMounted(() => resizeObserver.observe(container.value));
+onMounted(() => resizeObserver.observe(container.value))
 
-onUnmounted(() => resizeObserver.disconnect());
+onUnmounted(() => resizeObserver.disconnect())
 
-const development = ref(false);
+const development = ref(false)
 // setTimeout(() => development.value = false, 3000);
-setTimeout(() => development.value = true, 3000);
+setTimeout(() => (development.value = true), 3000)
 </script>
 
 <template>
@@ -126,23 +149,45 @@ setTimeout(() => development.value = true, 3000);
     </Transition>
 
     <Transition>
-        <div v-if="!development" class="pt-4 pb-8 px-8 w-full h-screen flex flex-col items-center gap-6">
-            <h1 class="md:hidden text-4xl font-bold text-white text-center">ГРА 'Щурячі перегони Ⅱ'</h1>
+        <div
+            v-if="!development"
+            class="pt-4 pb-8 px-8 w-full h-screen flex flex-col items-center gap-6"
+        >
+            <h1 class="md:hidden text-4xl font-bold text-white text-center">
+                ГРА 'Щурячі перегони Ⅱ'
+            </h1>
 
-            <div class="w-full h-full flex items-center justify-center" ref="container">
-                <div :style="{ width: outerCircleWidth, height: outerCircleHeight }" class="relative bg-slate-800">
-                    <Dice :numberOnDice="numberOnDice" @rolling="rollingDice" />
+            <div
+                ref="container"
+                class="w-full h-full flex items-center justify-center"
+            >
+                <div
+                    :style="{
+                        width: outerCircleWidth,
+                        height: outerCircleHeight,
+                    }"
+                    class="relative bg-slate-800"
+                >
+                    <Dice
+                        :number-on-dice="numberOnDice"
+                        @rolling="rollingDice"
+                    />
 
                     <div
-                        v-if="fieldWidthInInnerCircle && fieldHeightInInnerCircle"
-                        :style="{ width: innerCircleWidth, height: innerCircleHeight }"
+                        v-if="
+                            fieldWidthInInnerCircle && fieldHeightInInnerCircle
+                        "
+                        :style="{
+                            width: innerCircleWidth,
+                            height: innerCircleHeight,
+                        }"
                         class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2"
                     >
                         <div
                             v-for="{ styles, type, name } in poorCircle(
                                 fieldWidthInInnerCircle,
                                 fieldHeightInInnerCircle,
-                                hugeFieldWidthInInnerCircle,
+                                hugeFieldWidthInInnerCircle
                             )"
                             :style="{
                                 top: styles.top && `${styles.top}px`,
@@ -170,18 +215,41 @@ setTimeout(() => development.value = true, 3000);
                             ]"
                             :title="name"
                         >
-                            <BusinessIcon v-if="type === 'business'" color="fill-slate-100" />
-                            <CartIcon v-if="type === 'buys'" color="fill-slate-100" />
-                            <ExpenseIcon v-if="type === 'expenses'" color="fill-slate-100" />
-                            <BankruptcyIcon v-if="type === 'bankruptcy'" color="fill-slate-100" />
+                            <BusinessIcon
+                                v-if="type === 'business'"
+                                color="fill-slate-100"
+                            />
+                            <CartIcon
+                                v-if="type === 'buys'"
+                                color="fill-slate-100"
+                            />
+                            <ExpenseIcon
+                                v-if="type === 'expenses'"
+                                color="fill-slate-100"
+                            />
+                            <BankruptcyIcon
+                                v-if="type === 'bankruptcy'"
+                                color="fill-slate-100"
+                            />
                         </div>
 
-                        <GameChip v-if="!gameChip.rich" :gameChipStyles="gameChipStyles" />
+                        <GameChip
+                            v-if="!gameChip.rich"
+                            :game-chip-styles="gameChipStyles"
+                        />
                     </div>
 
-                    <div v-if="fieldWidthInOuterCircle && fieldHeightInOuterCircle" class="w-full h-full">
+                    <div
+                        v-if="
+                            fieldWidthInOuterCircle && fieldHeightInOuterCircle
+                        "
+                        class="w-full h-full"
+                    >
                         <div
-                            v-for="{ styles, type, name } in richCircle(fieldWidthInOuterCircle, fieldHeightInOuterCircle)"
+                            v-for="{ styles, type, name } in richCircle(
+                                fieldWidthInOuterCircle,
+                                fieldHeightInOuterCircle
+                            )"
                             :style="{
                                 top: styles.top && `${styles.top}px`,
                                 right: styles.right && `${styles.right}px`,
@@ -217,7 +285,10 @@ setTimeout(() => development.value = true, 3000);
                             </span>
                         </div>
 
-                        <GameChip v-if="gameChip.rich" :gameChipStyles="gameChipStyles" />
+                        <GameChip
+                            v-if="gameChip.rich"
+                            :game-chip-styles="gameChipStyles"
+                        />
                     </div>
                 </div>
             </div>

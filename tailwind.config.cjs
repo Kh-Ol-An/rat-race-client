@@ -1,22 +1,22 @@
-const defaultTheme = require('tailwindcss/defaultTheme');
+const defaultTheme = require('tailwindcss/defaultTheme')
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-    content: [
-        "./index.html",
-        "./src/**/*.{vue,js,ts,jsx,tsx}",
-    ],
+    content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
     theme: {
         fontFamily: {
-            "MacPawFixelText": ["MacPawFixelText", ...defaultTheme.fontFamily.sans],
+            MacPawFixelText: [
+                'MacPawFixelText',
+                ...defaultTheme.fontFamily.sans,
+            ],
         },
         screens: {
-            '3xl': {'max': '1919px'},
-            '2xl': {'max': '1535px'},
-            'xl': {'max': '1365px'},
-            'lg': {'max': '1023px'},
-            'md': {'max': '767px'},
-            'sm': {'max': '639px'},
+            '3xl': { max: '1919px' },
+            '2xl': { max: '1535px' },
+            xl: { max: '1365px' },
+            lg: { max: '1023px' },
+            md: { max: '767px' },
+            sm: { max: '639px' },
         },
         extend: {
             colors: {

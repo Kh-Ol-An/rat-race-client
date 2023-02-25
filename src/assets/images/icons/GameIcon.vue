@@ -12,7 +12,7 @@ defineProps({
         type: String,
         default: 'fill-slate-400',
     },
-});
+})
 </script>
 
 <template>

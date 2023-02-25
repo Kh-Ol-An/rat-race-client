@@ -1,45 +1,47 @@
 <script setup>
-import { onMounted, ref, onErrorCaptured } from "vue";
-import { mapActions } from './store/helpers.js';
-import router from "./router/index.js";
+import { onMounted, ref, onErrorCaptured } from 'vue'
+import { mapActions } from './store/helpers.js'
+import router from './router/index.js'
 
-const { checkAuth } = mapActions();
+const { checkAuth } = mapActions()
 
-const error = ref(null);
+const error = ref(null)
 
 onErrorCaptured(() => {
-    error.value = "Ой-йо-йой!!! Щось пішло не так...";
-});
+    error.value = 'Ой-йо-йой!!! Щось пішло не так...'
+})
 
 onMounted(() => {
     if (localStorage.getItem('token')) {
-        checkAuth();
+        checkAuth()
     }
-});
+})
 
 router.beforeEach((to, from, next) => {
     if (to.name !== 'Auth' && !localStorage.getItem('token')) {
         next({
             path: 'auth',
-            replace: true
+            replace: true,
         })
     }
 
     if (to.name === 'Auth' && localStorage.getItem('token')) {
         next({
             path: '/',
-            replace: true
+            replace: true,
         })
     }
 
-    next();
+    next()
 })
 </script>
 
 <template>
     <notifications />
     <div v-if="error" class="w-full h-screen flex items-center justify-center">
-        <span class="text-2xl text-opposite font-bold text-center">{{ error }}</span>
+        <span class="text-2xl text-opposite font-bold text-center">{{
+            error
+        }}</span>
     </div>
     <Suspense>
         <template #default>
@@ -58,7 +60,7 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
     -webkit-box-shadow: inset 0 0 0 1000px #1e293b !important; /* Цвет фона */
-    -webkit-text-fill-color: #528D36 !important; /* цвет текста */
+    -webkit-text-fill-color: #528d36 !important; /* цвет текста */
     transition: background-color 600000s 0s, color 600000s 0s;
 }
 
@@ -70,7 +72,7 @@ input::-webkit-inner-spin-button {
     margin: 0;
 }
 /* Firefox */
-input[type=number] {
+input[type='number'] {
     -moz-appearance: textfield;
 }
 

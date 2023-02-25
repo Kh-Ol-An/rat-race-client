@@ -1,5 +1,5 @@
 <script setup>
-import GameChipIcon from "../../assets/images/icons/GameChipIcon.vue";
+import GameChipIcon from '../../assets/images/icons/GameChipIcon.vue'
 
 defineProps({
     userStyles: {
@@ -18,7 +18,7 @@ defineProps({
         type: String,
         required: true,
     },
-});
+})
 </script>
 
 <template>
