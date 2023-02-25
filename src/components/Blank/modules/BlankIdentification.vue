@@ -1,5 +1,5 @@
 <script setup>
-import { ref, toRef, computed } from 'vue'
+import { ref, toRef, watchEffect } from 'vue'
 import { mapGetters } from '../../../store/helpers.js'
 import Input from '../../plugins/Input.vue'
 import ActionAdd from '../plugins/ActionAdd.vue'
@@ -29,15 +29,18 @@ const { getUser } = mapGetters()
 
 const gender = ref('')
 
-const havingChildren = computed(() => {
-    if (blank.value.gender === 'female') {
-        return !blank.value.marriage && blank.value.children.count > 0
-    }
+const havingChildren = ref(false)
+watchEffect(
+    () => {
+        if (blank.value.gender === 'female') {
+            havingChildren.value = !blank.value.marriage && blank.value.children.count > 0
+        }
 
-    if (blank.value.gender === 'male') {
-        return blank.value.children.count > 0
+        if (blank.value.gender === 'male') {
+            havingChildren.value = blank.value.children.count > 0
+        }
     }
-})
+)
 
 const profession = ref('')
 </script>

@@ -543,7 +543,7 @@ const showModalWin = computed(
                 class="grid grid-cols-2 gap-4 px-8 pt-6 md:grid-cols-1 md:gap-2 md:px-2 md:pt-2"
             >
                 <BlankIdentification
-                    :blankProp="blank"
+                    :blank-prop="blank"
                     @add:gender="addGender"
                     @add:profession="addProfession"
                 />
@@ -559,8 +559,8 @@ const showModalWin = computed(
             </div>
 
             <InfoField
-                wrapClasses="mx-auto px-8 md:px-2 pt-4"
-                labelClasses="font-bold text-primary"
+                wrap-classes="mx-auto px-8 md:px-2 pt-4"
+                label-classes="font-bold text-primary"
                 label="Грошовий потік:"
             >
                 <span class="ml-2 font-bold text-slate-300">
@@ -588,7 +588,7 @@ const showModalWin = computed(
                         class="flex flex-col gap-2 py-4 pr-4 pl-8 md:bg-slate-900 md:px-2"
                     >
                         <CostList
-                            :blankProp="blank"
+                            :blank-prop="blank"
                             @add:rent="addRent"
                             @add:food="addFood"
                             @add:clothes="addClothes"
@@ -600,8 +600,8 @@ const showModalWin = computed(
                     <!-- Багатство -->
                     <div class="flex flex-col gap-2 py-4 pr-4 pl-8 md:px-2">
                         <LuxuryItems
-                            :blankProp="blank"
-                            :cashFlow="cashFlow"
+                            :blank-prop="blank"
+                            :cash-flow="cashFlow"
                             @buy:apartment="buyApartment"
                             @credit:apartment="creditApartment"
                             @sell:apartment="sellApartment"
@@ -623,7 +623,7 @@ const showModalWin = computed(
                         class="flex flex-col gap-2 py-4 pr-4 pl-8 md:bg-slate-900 md:px-2"
                     >
                         <WhimsAndFancies
-                            :blankProp="blank"
+                            :blank-prop="blank"
                             @buy="buyWhimsAndFancies"
                         />
                     </div>
@@ -637,7 +637,7 @@ const showModalWin = computed(
                         ]"
                     >
                         <FamilyStatus
-                            :blankProp="blank"
+                            :blank-prop="blank"
                             @change:marriage="changeMarriage"
                             @have:baby="haveBaby"
                         />
@@ -659,7 +659,7 @@ const showModalWin = computed(
                     >
                         <IncomeInfo
                             :blank="blank"
-                            :passiveIncome="passiveIncome"
+                            :passive-income="passiveIncome"
                             :income="income"
                             @remove:deputies="blank.deputies = 0"
                         />
@@ -693,7 +693,7 @@ const showModalWin = computed(
                         <Modal
                             :show="showModalDebt"
                             cancel="Спочатку"
-                            onlyCancelAction
+                            only-cancel-action
                             @cancel="restart"
                         >
                             <h4
@@ -715,8 +715,8 @@ const showModalWin = computed(
                         class="flex flex-col gap-2 py-4 pr-8 pl-4 md:bg-slate-900 md:px-2"
                     >
                         <IncomeList
-                            :blankProp="blank"
-                            :firedSalary="firedSalary"
+                            :blank-prop="blank"
+                            :fired-salary="firedSalary"
                             @add:salary="addSalary"
                             @fired:salary="fired"
                             @quit:salary="quit"
@@ -731,7 +731,7 @@ const showModalWin = computed(
                     <!-- Акції -->
                     <div class="flex flex-col gap-2 py-4 pr-8 pl-4 md:px-2">
                         <SharesList
-                            :blankProp="blank"
+                            :blank-prop="blank"
                             @buy="buyShares"
                             @sell:package="sellSharesPackage"
                             @sell:all="sellAllShares"
@@ -743,7 +743,7 @@ const showModalWin = computed(
                         class="flex flex-col gap-2 py-4 pr-8 pl-4 md:bg-slate-900 md:px-2"
                     >
                         <AssetList
-                            :blankProp="blank"
+                            :blank-prop="blank"
                             @buy:house="buyHouse"
                             @sell:house="sellHouse"
                             @sell:houses="sellHouses"
@@ -762,7 +762,7 @@ const showModalWin = computed(
                         class="flex flex-col gap-2 pt-4 pr-8 pl-4 pb-8 md:px-2"
                     >
                         <DeputyList
-                            :blankProp="blank"
+                            :blank-prop="blank"
                             @buy="buyDeputies"
                             @add="addDeputies"
                         />
@@ -772,8 +772,8 @@ const showModalWin = computed(
 
             <div class="md:space-y-2 md:px-2">
                 <BlankActions
-                    :historyBlank="historyBlank"
-                    :historyPeriod="historyPeriod"
+                    :history-blank="historyBlank"
+                    :history-period="historyPeriod"
                     @back="historyBack"
                     @forward="historyForward"
                     @restart="restart"
