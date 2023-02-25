@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted, onUnmounted, ref, reactive, computed } from 'vue'
 import Menu from '../components/plugins/Menu.vue'
-import Dice from '../components/Rat/Dice.vue'
+import GameDice from '../components/Rat/GameDice.vue'
 import GameChip from '../components/Rat/GameChip.vue'
 import poorCircle from '../database/rat/rat-poor-circle.js'
 import richCircle from '../database/rat/rat-rich-circle.js'
@@ -168,7 +168,7 @@ setTimeout(() => (development.value = true), 3000)
                     }"
                     class="relative bg-slate-800"
                 >
-                    <Dice
+                    <GameDice
                         :number-on-dice="numberOnDice"
                         @rolling="rollingDice"
                     />

@@ -24,6 +24,8 @@ defineProps({
         required: true,
     },
 })
+
+defineEmits(['choice:gender'])
 </script>
 
 <template>

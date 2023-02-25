@@ -1,8 +1,8 @@
 <script setup>
 import { onMounted, onUnmounted, ref, reactive, computed } from 'vue'
 import Menu from '../components/plugins/Menu.vue'
-import Circle from '../components/Game/Circle.vue'
-import Dice from '../components/Game/Dice.vue'
+import GameCircle from '../components/Game/GameCircle.vue'
+import GameDice from '../components/Game/GameDice.vue'
 import poorCircle from '../database/poor-circle.json'
 import richCircle from '../database/rich-circle.json'
 import professions from '../database/professions.json'
@@ -168,7 +168,7 @@ setTimeout(() => (development.value = false), 3000)
                 class="relative w-full h-full flex items-center justify-center"
             >
                 <!-- Rich -->
-                <Circle
+                <GameCircle
                     :width="richCircleWidth"
                     :height="richCircleHeight"
                     classes="relative"
@@ -181,7 +181,7 @@ setTimeout(() => (development.value = false), 3000)
                 />
 
                 <!-- Poor -->
-                <Circle
+                <GameCircle
                     :width="poorCircleWidth && poorCircleWidth"
                     :height="poorCircleHeight && poorCircleHeight"
                     classes="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2"
@@ -203,7 +203,7 @@ setTimeout(() => (development.value = false), 3000)
                     @cancel:event="showEventCard = false"
                 />
 
-                <Dice
+                <GameDice
                     v-if="user.gender.length && !showEventCard"
                     @rolling="rollingDice"
                 />

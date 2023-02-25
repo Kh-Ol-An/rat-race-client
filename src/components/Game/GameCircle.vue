@@ -75,7 +75,7 @@ defineProps({
     },
 })
 
-const emit = defineEmits(['confirm:event'])
+const emit = defineEmits(['confirm:event', 'choice:gender', 'cancel:event'])
 
 const bgColor = (type) => {
     if (type === 'profit') {
@@ -122,7 +122,8 @@ const confirmEvent = (eventCard) => emit('confirm:event', eventCard)
 <template>
     <div :style="{ width, height }" :class="classes">
         <div
-            v-for="{ styles, type, name } in circle"
+            v-for="{ position, styles, type, name } in circle"
+            :key="position"
             :style="{
                 top: styles.top && `${cellHeight * styles.top}px`,
                 right: styles.right && `${cellWidth * styles.right}px`,

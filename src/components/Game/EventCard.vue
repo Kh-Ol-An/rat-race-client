@@ -18,7 +18,7 @@ const props = defineProps({
     },
 })
 
-const emit = defineEmits(['confirm'])
+const emit = defineEmits(['confirm', 'cancel'])
 
 const eventCard = computed(() => {
     if (
