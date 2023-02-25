@@ -30,7 +30,11 @@ const buyHouse = () => {
         return (housePrice.value = '')
     }
 
-    emit('buy:house', new Date().valueOf(), Number(removingSpaces(housePrice.value)))
+    emit(
+        'buy:house',
+        new Date().valueOf(),
+        Number(removingSpaces(housePrice.value))
+    )
     housePrice.value = ''
 }
 const sellHouse = (price, id) => emit('sell:house', price, id)

@@ -30,17 +30,16 @@ const { getUser } = mapGetters()
 const gender = ref('')
 
 const havingChildren = ref(false)
-watchEffect(
-    () => {
-        if (blank.value.gender === 'female') {
-            havingChildren.value = !blank.value.marriage && blank.value.children.count > 0
-        }
-
-        if (blank.value.gender === 'male') {
-            havingChildren.value = blank.value.children.count > 0
-        }
+watchEffect(() => {
+    if (blank.value.gender === 'female') {
+        havingChildren.value =
+            !blank.value.marriage && blank.value.children.count > 0
     }
-)
+
+    if (blank.value.gender === 'male') {
+        havingChildren.value = blank.value.children.count > 0
+    }
+})
 
 const profession = ref('')
 </script>
