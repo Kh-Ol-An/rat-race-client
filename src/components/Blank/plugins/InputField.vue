@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import Input from '../../plugins/Input.vue'
-import Add from './Add.vue'
+import ActionAdd from './ActionAdd.vue'
 import { removingSpaces } from '../../../helpers/formating-values.js'
 
 const props = defineProps({
@@ -99,14 +99,14 @@ const add = () => {
                     small-label
                     :second-bg="secondBg"
                 />
-                <Add
+                <ActionAdd
                     :first-value="firstValue"
                     :second-value="secondValue"
                     :third-value="thirdValue"
                     @add="add"
                 />
             </div>
-            <Add
+            <ActionAdd
                 v-else
                 :first-value="firstValue"
                 :second-value="secondValue"

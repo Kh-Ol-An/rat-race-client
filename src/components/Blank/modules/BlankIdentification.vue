@@ -2,7 +2,7 @@
 import { ref, toRef, computed } from 'vue'
 import { mapGetters } from '../../../store/helpers.js'
 import Input from '../../plugins/Input.vue'
-import Add from '../plugins/Add.vue'
+import ActionAdd from '../plugins/ActionAdd.vue'
 import InfoField from '../../plugins/InfoField.vue'
 import MaleIcon from '../../../assets/images/icons/MaleIcon.vue'
 import FemaleIcon from '../../../assets/images/icons/FemaleIcon.vue'
@@ -85,7 +85,7 @@ const profession = ref('')
                     "
                 />
             </label>
-            <Add :first-value="gender" @add="$emit('add:gender', gender)" />
+            <ActionAdd :first-value="gender" @add="$emit('add:gender', gender)" />
         </div>
         <div
             v-if="blank.gender.length > 0"
@@ -143,7 +143,7 @@ const profession = ref('')
             type="text"
             placeholder="Професія"
         />
-        <Add
+        <ActionAdd
             :first-value="profession"
             @add="$emit('add:profession', profession)"
         />

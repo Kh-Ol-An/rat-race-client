@@ -1,7 +1,7 @@
 <script setup>
 import { ref, toRef } from 'vue'
 import Input from '../../plugins/Input.vue'
-import Add from '../plugins/Add.vue'
+import ActionAdd from '../plugins/ActionAdd.vue'
 import InfoField from '../../plugins/InfoField.vue'
 import {
     removingSpaces,
@@ -39,7 +39,7 @@ const phone = ref('')
             placeholder="Оренда житла"
             second-bg
         />
-        <Add
+        <ActionAdd
             :first-value="rent"
             opposite
             @add="$emit('add:rent', Number(removingSpaces(rent)))"
@@ -58,7 +58,7 @@ const phone = ref('')
             placeholder="Витрати на харчування"
             second-bg
         />
-        <Add
+        <ActionAdd
             :first-value="food"
             opposite
             @add="$emit('add:food', Number(removingSpaces(food)))"
@@ -81,7 +81,7 @@ const phone = ref('')
             placeholder="Витрати на одяг"
             second-bg
         />
-        <Add
+        <ActionAdd
             :first-value="clothes"
             opposite
             @add="$emit('add:clothes', Number(removingSpaces(clothes)))"
@@ -103,7 +103,7 @@ const phone = ref('')
             placeholder="Витрати на проїзд"
             second-bg
         />
-        <Add
+        <ActionAdd
             :first-value="fare"
             opposite
             @add="$emit('add:fare', Number(removingSpaces(fare)))"
@@ -122,7 +122,7 @@ const phone = ref('')
             placeholder="Витрати на телефонні розмови"
             second-bg
         />
-        <Add
+        <ActionAdd
             :first-value="phone"
             opposite
             @add="$emit('add:phone', Number(removingSpaces(phone)))"

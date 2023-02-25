@@ -1,7 +1,7 @@
 <script setup>
 import { ref, toRef } from 'vue'
 import Input from '../../../plugins/Input.vue'
-import Add from '../../plugins/Add.vue'
+import ActionAdd from '../../plugins/ActionAdd.vue'
 import Modal from '../../plugins/Modal.vue'
 import HouseItem from './HouseItem.vue'
 import Sell from '../../plugins/Sell.vue'
@@ -48,7 +48,7 @@ const sellHouses = (price) => emit('sell:houses', price)
                 placeholder="Ціна будинка"
                 second-bg
             />
-            <Add :first-value="price" @add="buyHouse" />
+            <ActionAdd :first-value="price" @add="buyHouse" />
 
             <Modal
                 :show="showModal"

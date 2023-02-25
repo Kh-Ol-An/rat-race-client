@@ -1,7 +1,7 @@
 <script setup>
 import { ref, toRef } from 'vue'
 import Input from '../../plugins/Input.vue'
-import Add from '../plugins/Add.vue'
+import ActionAdd from '../plugins/ActionAdd.vue'
 import InfoField from '../../plugins/InfoField.vue'
 import Modal from '../plugins/Modal.vue'
 import {
@@ -62,7 +62,7 @@ const buy = () => {
             placeholder="Ціна"
             second-bg
         />
-        <Add :first-value="price" @add="buy" />
+        <ActionAdd :first-value="price" @add="buy" />
     </div>
     <ul v-if="blank.whimsAndFancies.length > 0" class="flex flex-col gap-2">
         <li v-for="{ id, name, price } in blank.whimsAndFancies" :key="id">

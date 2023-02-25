@@ -1,7 +1,7 @@
 <script setup>
 import { ref, toRef } from 'vue'
 import Input from '../../plugins/Input.vue'
-import Add from '../plugins/Add.vue'
+import ActionAdd from '../plugins/ActionAdd.vue'
 import Modal from '../plugins/Modal.vue'
 import { removingSpaces } from '../../../helpers/formating-values.js'
 import { DEPUTY_PRICE } from '../../../database/variables.js'
@@ -68,7 +68,7 @@ const placeholder = '"Чесні" депутати'
             v-model:value="potentialDeputies"
             placeholder="Потенційні депутати"
         />
-        <Add :first-value="potentialDeputies" @add="buy" />
+        <ActionAdd :first-value="potentialDeputies" @add="buy" />
     </div>
     <div v-else class="mt-2 flex items-center gap-3">
         <Input
@@ -76,7 +76,7 @@ const placeholder = '"Чесні" депутати'
             v-model:value="gainedDeputies"
             :placeholder="placeholder"
         />
-        <Add :first-value="gainedDeputies" @add="add" />
+        <ActionAdd :first-value="gainedDeputies" @add="add" />
     </div>
 
     <Modal :show="showModal" cancel="Зрозумів" @cancel="showModal = false">

@@ -1,7 +1,7 @@
 <script setup>
 import { ref, toRef } from 'vue'
 import Input from '../../../plugins/Input.vue'
-import Add from '../../plugins/Add.vue'
+import ActionAdd from '../../plugins/ActionAdd.vue'
 import InfoField from '../../../plugins/InfoField.vue'
 import InputField from '../../plugins/InputField.vue'
 import BusinessHead from './BusinessHead.vue'
@@ -88,7 +88,7 @@ const oneTimeIncome = (id, price, income, subType, deputies) => {
             placeholder="Зарплата"
             second-bg
         />
-        <Add
+        <ActionAdd
             :first-value="salary"
             @add="$emit('add:salary', Number(removingSpaces(salary)))"
         />

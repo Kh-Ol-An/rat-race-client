@@ -1,7 +1,7 @@
 <script setup>
 import { ref, toRef } from 'vue'
 import Input from '../../../plugins/Input.vue'
-import Add from '../../plugins/Add.vue'
+import ActionAdd from '../../plugins/ActionAdd.vue'
 import LuxuryItemPurchased from './LuxuryItemPurchased.vue'
 import Modal from '../../plugins/Modal.vue'
 import InfoField from '../../../plugins/InfoField.vue'
@@ -231,7 +231,7 @@ const sellPlane = (id) => emit('sell:plane', id)
                         apartmentPayment.length > 0 || apartmentTerm.length > 0
                     "
                 />
-                <Add :first-value="apartmentPrice" @add="buyApartment" />
+                <ActionAdd :first-value="apartmentPrice" @add="buyApartment" />
             </div>
             <ul v-if="blank.apartments.length > 0" class="flex flex-col gap-1">
                 <LuxuryItemPurchased
@@ -299,7 +299,7 @@ const sellPlane = (id) => emit('sell:plane', id)
                     placeholder="Ціна"
                     :disabled="carPayment.length > 0 || carTerm.length > 0"
                 />
-                <Add :first-value="carPrice" @add="buyCar" />
+                <ActionAdd :first-value="carPrice" @add="buyCar" />
             </div>
             <ul v-if="blank.cars.length > 0" class="flex flex-col gap-1">
                 <LuxuryItemPurchased
@@ -336,7 +336,7 @@ const sellPlane = (id) => emit('sell:plane', id)
                     placeholder="Термін"
                     :disabled="carPrice.length > 0"
                 />
-                <Add
+                <ActionAdd
                     :first-value="carPayment"
                     :second-value="carTerm"
                     @add="buyCarOnCredit"
@@ -361,7 +361,7 @@ const sellPlane = (id) => emit('sell:plane', id)
                         v-model:value="cottagePrice"
                         placeholder="Ціна"
                     />
-                    <Add :first-value="cottagePrice" @add="buyCottage" />
+                    <ActionAdd :first-value="cottagePrice" @add="buyCottage" />
                 </div>
             </div>
             <ul v-if="blank.cottages.length > 0" class="flex flex-col gap-2">
@@ -408,7 +408,7 @@ const sellPlane = (id) => emit('sell:plane', id)
                         v-model:value="yachtPrice"
                         placeholder="Ціна"
                     />
-                    <Add :first-value="yachtPrice" @add="buyYacht" />
+                    <ActionAdd :first-value="yachtPrice" @add="buyYacht" />
                 </div>
             </div>
             <ul v-if="blank.yachts.length > 0" class="flex flex-col gap-2">
@@ -455,7 +455,7 @@ const sellPlane = (id) => emit('sell:plane', id)
                         v-model:value="planePrice"
                         placeholder="Ціна"
                     />
-                    <Add :first-value="planePrice" @add="buyPlane" />
+                    <ActionAdd :first-value="planePrice" @add="buyPlane" />
                 </div>
             </div>
             <ul v-if="blank.planes.length > 0" class="flex flex-col gap-2">
