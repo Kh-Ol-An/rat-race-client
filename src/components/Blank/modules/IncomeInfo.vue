@@ -58,7 +58,7 @@ const showModal = ref(false)
             {{ addingSpaces(blank.deputies) }}
         </span>
         <button
-            class="rotate-45 ml-4 px-2 text-3xl text-opposite font-bold leading-none outline-0"
+            class="ml-4 rotate-45 px-2 text-3xl font-bold leading-none text-opposite outline-0"
             type="button"
             title="Вибори :)"
             @click="showModal = true"
@@ -72,11 +72,11 @@ const showModal = ref(false)
             @confirm="$emit('remove:deputies')"
             @cancel="showModal = false"
         >
-            <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
+            <h4 class="mx-auto text-center text-2xl font-bold text-opposite">
                 Увага!!!
             </h4>
             <p
-                class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center"
+                class="mx-auto mt-4 text-center text-lg font-normal text-slate-400"
             >
                 Ти впевнений що хочешь видалити всіх своїх депутатів?
             </p>

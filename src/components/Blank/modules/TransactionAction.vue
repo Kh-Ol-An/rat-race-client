@@ -25,7 +25,7 @@ const increment = () => {
 
 <template>
     <button
-        class="py-2 px-24 md:px-10 shadow hover:shadow-lg rounded-md bg-gradient-to-b from-oppositeLight to-opposite text-xl text-slate-300 font-bold leading-none outline-0 transition-all duration-300"
+        class="rounded-md bg-gradient-to-b from-oppositeLight to-opposite py-2 px-24 text-xl font-bold leading-none text-slate-300 shadow outline-0 transition-all duration-300 hover:shadow-lg md:px-10"
         type="button"
         title="Заплатити"
         @click="decrement"
@@ -48,7 +48,7 @@ const increment = () => {
         </button>
     </div>
     <button
-        class="py-2 px-24 md:px-10 shadow hover:shadow-lg rounded-md bg-gradient-to-b from-secondaryLight to-secondary text-xl text-slate-300 font-bold leading-none outline-0 transition-all duration-300"
+        class="rounded-md bg-gradient-to-b from-secondaryLight to-secondary py-2 px-24 text-xl font-bold leading-none text-slate-300 shadow outline-0 transition-all duration-300 hover:shadow-lg md:px-10"
         type="button"
         title="Отримати"
         @click="increment"

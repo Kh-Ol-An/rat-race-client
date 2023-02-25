@@ -38,7 +38,7 @@ defineEmits(['have:baby'])
 
             <div class="flex items-center gap-2">
                 <span
-                    class="w-5 flex items-center justify-center text-slate-400 cursor-default"
+                    class="flex w-5 cursor-default items-center justify-center text-slate-400"
                 >
                     {{ count }}
                 </span>

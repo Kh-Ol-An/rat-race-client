@@ -43,7 +43,7 @@ const buy = () => {
 </script>
 
 <template>
-    <h2 class="px-4 text-xl font-bold text-opposite text-center">
+    <h2 class="px-4 text-center text-xl font-bold text-opposite">
         Капризи та примхи
     </h2>
 
@@ -79,10 +79,10 @@ const buy = () => {
     </ul>
 
     <Modal :show="showModal" cancel="Зрозумів" @cancel="showModal = false">
-        <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
+        <h4 class="mx-auto text-center text-2xl font-bold text-opposite">
             Це не можливо!
         </h4>
-        <p class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center">
+        <p class="mx-auto mt-4 text-center text-lg font-normal text-slate-400">
             Не поспішай. Все в тебе буде. Ти вже багатий. Піднакопи ще трохи і
             приходь.
         </p>

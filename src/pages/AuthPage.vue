@@ -29,11 +29,11 @@ const { getLoading } = mapGetters()
 </script>
 
 <template>
-    <div class="w-full h-screen flex flex-col items-center justify-center">
+    <div class="flex h-screen w-full flex-col items-center justify-center">
         <div v-if="getLoading">getLoading...</div>
         <div
             v-else
-            class="py-6 px-8 flex flex-col items-center justify-center gap-4 shadow-lg rounded-md bg-slate-800"
+            class="flex flex-col items-center justify-center gap-4 rounded-md bg-slate-800 py-6 px-8 shadow-lg"
         >
             <Input
                 v-if="isRegistration"
@@ -94,14 +94,14 @@ const { getLoading } = mapGetters()
                     <OpenEyeIcon v-else color="stroke-primary" />
                 </button>
             </div>
-            <p class="text-sm text-slate-400 text-center">
+            <p class="text-center text-sm text-slate-400">
                 {{
                     isRegistration
                         ? 'В мене вже є обліковий запис.'
                         : 'В мене ще немає облікового запису.'
                 }}<br />Хочу
                 <button
-                    class="text-primary font-bold"
+                    class="font-bold text-primary"
                     type="button"
                     @click="isRegistration = !isRegistration"
                 >
@@ -111,9 +111,9 @@ const { getLoading } = mapGetters()
             <button
                 v-if="isRegistration"
                 :class="[
-                    'w-full h-8 rounded bg-gradient-to-b text-slate-100 transition-all duration-300',
+                    'h-8 w-full rounded bg-gradient-to-b text-slate-100 transition-all duration-300',
                     disabledRegistration
-                        ? 'from-gray-300 to-gray-600 cursor-not-allowed'
+                        ? 'cursor-not-allowed from-gray-300 to-gray-600'
                         : 'from-primaryLight to-primary',
                 ]"
                 type="button"
@@ -125,9 +125,9 @@ const { getLoading } = mapGetters()
             <button
                 v-else
                 :class="[
-                    'w-full h-8 rounded bg-gradient-to-b text-slate-100 transition-all duration-300',
+                    'h-8 w-full rounded bg-gradient-to-b text-slate-100 transition-all duration-300',
                     disabledLogin
-                        ? 'from-gray-300 to-gray-600 cursor-not-allowed'
+                        ? 'cursor-not-allowed from-gray-300 to-gray-600'
                         : 'from-primaryLight to-primary',
                 ]"
                 type="button"

@@ -37,7 +37,7 @@ const repay = () => {
 
 <template>
     <InfoField label-classes="text-opposite" label="Борги:">
-        <span class="ml-2 text-slate-400 whitespace-nowrap">
+        <span class="ml-2 whitespace-nowrap text-slate-400">
             {{ addingSpaces(debt) }}
         </span>
 

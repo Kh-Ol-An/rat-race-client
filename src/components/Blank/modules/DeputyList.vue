@@ -60,7 +60,7 @@ const placeholder = '"Чесні" депутати'
 </script>
 
 <template>
-    <h2 class="px-4 text-xl font-bold text-primary text-center">Депутати</h2>
+    <h2 class="px-4 text-center text-xl font-bold text-primary">Депутати</h2>
 
     <div v-if="showDeputiesPrice" class="mt-2 flex items-center gap-3">
         <Input
@@ -80,10 +80,10 @@ const placeholder = '"Чесні" депутати'
     </div>
 
     <Modal :show="showModal" cancel="Зрозумів" @cancel="showModal = false">
-        <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
+        <h4 class="mx-auto text-center text-2xl font-bold text-opposite">
             Це не можливо!
         </h4>
-        <p class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center">
+        <p class="mx-auto mt-4 text-center text-lg font-normal text-slate-400">
             {{ modalText }}
         </p>
     </Modal>

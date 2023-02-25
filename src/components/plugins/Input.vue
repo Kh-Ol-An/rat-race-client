@@ -60,7 +60,7 @@ const input = (event) => {
     <div :class="['relative w-full', disabled && 'opacity-20']">
         <input
             :id="id"
-            class="peer py-1 px-3 md:px-2 w-full shadow rounded-md border-2 border-slate-700 bg-transparent text-base text-primary placeholder-transparent focus:border-primary focus:outline-none transition-all duration-300"
+            class="peer w-full rounded-md border-2 border-slate-700 bg-transparent py-1 px-3 text-base text-primary placeholder-transparent shadow transition-all duration-300 focus:border-primary focus:outline-none md:px-2"
             :type="type === 'number' ? 'text' : type"
             :inputmode="type === 'number' ? 'numeric' : 'text'"
             :placeholder="placeholder"

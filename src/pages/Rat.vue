@@ -141,7 +141,7 @@ setTimeout(() => (development.value = true), 3000)
     <Transition>
         <div
             v-if="development"
-            class="fixed top-0 right-0 bottom-0 left-0 z-40 w-full h-screen flex items-center justify-center"
+            class="fixed top-0 right-0 bottom-0 left-0 z-40 flex h-screen w-full items-center justify-center"
         >
             <p class="text-2xl text-slate-300">
                 Цей функціонал у процесі розробки
@@ -152,15 +152,15 @@ setTimeout(() => (development.value = true), 3000)
     <Transition>
         <div
             v-if="!development"
-            class="pt-4 pb-8 px-8 w-full h-screen flex flex-col items-center gap-6"
+            class="flex h-screen w-full flex-col items-center gap-6 px-8 pt-4 pb-8"
         >
-            <h1 class="md:hidden text-4xl font-bold text-white text-center">
+            <h1 class="text-center text-4xl font-bold text-white md:hidden">
                 ГРА 'Щурячі перегони Ⅱ'
             </h1>
 
             <div
                 ref="container"
-                class="w-full h-full flex items-center justify-center"
+                class="flex h-full w-full items-center justify-center"
             >
                 <div
                     :style="{
@@ -244,7 +244,7 @@ setTimeout(() => (development.value = true), 3000)
                         v-if="
                             fieldWidthInOuterCircle && fieldHeightInOuterCircle
                         "
-                        class="w-full h-full"
+                        class="h-full w-full"
                     >
                         <div
                             v-for="{ styles, type, name } in richCircle(

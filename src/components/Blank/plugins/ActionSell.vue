@@ -44,7 +44,7 @@ const sell = () => {
             :second-bg="secondBg"
         />
         <button
-            class="absolute top-1/2 right-3 md:right-2 -translate-y-1/2 rotate-45 text-2xl font-bold text-opposite"
+            class="absolute top-1/2 right-3 -translate-y-1/2 rotate-45 text-2xl font-bold text-opposite md:right-2"
             type="button"
             title="Скасувати"
             @click="hid"

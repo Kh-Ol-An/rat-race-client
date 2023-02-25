@@ -33,7 +33,7 @@ const sell = () => {
 
 <template>
     <li
-        class="relative pr-12 grid grid-cols-5 items-center gap-2 text-primary font-bold text-center"
+        class="relative grid grid-cols-5 items-center gap-2 pr-12 text-center font-bold text-primary"
     >
         <span class="col-span-2">
             {{ firstTitle }}
@@ -56,11 +56,11 @@ const sell = () => {
             @confirm="sell"
             @cancel="showModal = false"
         >
-            <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
+            <h4 class="mx-auto text-center text-2xl font-bold text-opposite">
                 Увага!!!
             </h4>
             <p
-                class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center"
+                class="mx-auto mt-4 text-center text-lg font-normal text-slate-400"
             >
                 {{ confirmationModalText }}
             </p>

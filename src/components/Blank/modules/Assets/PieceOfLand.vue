@@ -27,7 +27,7 @@ const sell = (price) => emit('sell', props.id, props.quantity * price)
 </script>
 
 <template>
-    <li class="relative pr-12 grid grid-cols-12 items-center gap-2">
+    <li class="relative grid grid-cols-12 items-center gap-2 pr-12">
         <div class="col-span-6 flex items-center justify-center">
             <ActionSell
                 :value="addingSpaces(price)"
@@ -36,7 +36,7 @@ const sell = (price) => emit('sell', props.id, props.quantity * price)
                 @sell="sell"
             >
                 <span
-                    class="col-span-5 text-slate-400 text-center whitespace-nowrap"
+                    class="col-span-5 whitespace-nowrap text-center text-slate-400"
                 >
                     {{
                         addingSpaces(
@@ -49,11 +49,11 @@ const sell = (price) => emit('sell', props.id, props.quantity * price)
             </ActionSell>
         </div>
 
-        <span class="col-span-3 text-slate-400 text-center whitespace-nowrap">
+        <span class="col-span-3 whitespace-nowrap text-center text-slate-400">
             {{ addingSpaces(quantity) }}
         </span>
 
-        <span class="col-span-3 text-slate-400 text-center whitespace-nowrap">
+        <span class="col-span-3 whitespace-nowrap text-center text-slate-400">
             {{ addingSpaces(cost) }}
         </span>
     </li>

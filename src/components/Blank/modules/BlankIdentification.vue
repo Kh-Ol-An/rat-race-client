@@ -85,7 +85,10 @@ const profession = ref('')
                     "
                 />
             </label>
-            <ActionAdd :first-value="gender" @add="$emit('add:gender', gender)" />
+            <ActionAdd
+                :first-value="gender"
+                @add="$emit('add:gender', gender)"
+            />
         </div>
         <div
             v-if="blank.gender.length > 0"

@@ -18,7 +18,7 @@ const changeMarriage = (checked) => emit('change:marriage', checked)
 </script>
 
 <template>
-    <h2 class="px-4 text-xl font-bold text-opposite text-center">
+    <h2 class="px-4 text-center text-xl font-bold text-opposite">
         Сімейний стан
     </h2>
     <MarriageStatus

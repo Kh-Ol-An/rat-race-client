@@ -30,7 +30,7 @@ const sellAll = (subType, price) => emit('sell:all', subType, price)
 </script>
 
 <template>
-    <h2 class="px-4 text-xl font-bold text-primary text-center">Акції</h2>
+    <h2 class="px-4 text-center text-xl font-bold text-primary">Акції</h2>
 
     <!-- GC -->
     <InputField
@@ -145,10 +145,10 @@ const sellAll = (subType, price) => emit('sell:all', subType, price)
     </ul>
 
     <Modal :show="showModal" cancel="Зрозумів" @cancel="showModal = false">
-        <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
+        <h4 class="mx-auto text-center text-2xl font-bold text-opposite">
             Це не можливо!
         </h4>
-        <p class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center">
+        <p class="mx-auto mt-4 text-center text-lg font-normal text-slate-400">
             Куди ти сунешся жебрак? Акції він зібрався купляти... Іди гроші
             заробляй!
         </p>

@@ -90,7 +90,7 @@ const add = () => {
             />
             <div
                 v-if="thirdPlaceholder.length"
-                class="w-full flex items-center gap-3"
+                class="flex w-full items-center gap-3"
             >
                 <Input
                     :id="`${subType}-${type}-deputies`"

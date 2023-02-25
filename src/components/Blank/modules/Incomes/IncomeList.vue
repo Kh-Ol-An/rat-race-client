@@ -66,7 +66,7 @@ const oneTimeIncome = (id, price, income, subType, deputies) => {
 </script>
 
 <template>
-    <h2 class="px-4 text-xl font-bold text-primary text-center">Прибутки</h2>
+    <h2 class="px-4 text-center text-xl font-bold text-primary">Прибутки</h2>
 
     <!-- Зарплата -->
     <div
@@ -103,7 +103,7 @@ const oneTimeIncome = (id, price, income, subType, deputies) => {
         </span>
 
         <button
-            class="ml-4 px-2 rounded shadow bg-gradient-to-b from-oppositeLight to-opposite text-sm text-slate-300 font-bold outline-0"
+            class="ml-4 rounded bg-gradient-to-b from-oppositeLight to-opposite px-2 text-sm font-bold text-slate-300 shadow outline-0"
             type="button"
             title="Звільнили"
             @click="fired"
@@ -112,7 +112,7 @@ const oneTimeIncome = (id, price, income, subType, deputies) => {
         </button>
 
         <button
-            class="ml-4 px-2 rounded shadow bg-gradient-to-b from-secondaryLight to-secondary text-sm text-slate-300 font-bold outline-0"
+            class="ml-4 rounded bg-gradient-to-b from-secondaryLight to-secondary px-2 text-sm font-bold text-slate-300 shadow outline-0"
             type="button"
             title="Звільнитись"
             @click="quit"
@@ -294,10 +294,10 @@ const oneTimeIncome = (id, price, income, subType, deputies) => {
     />
 
     <Modal :show="showModal" cancel="Зрозумів" @cancel="showModal = false">
-        <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
+        <h4 class="mx-auto text-center text-2xl font-bold text-opposite">
             Це не можливо!
         </h4>
-        <p class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center">
+        <p class="mx-auto mt-4 text-center text-lg font-normal text-slate-400">
             Куди ти сунешся жебрак? Бізнес він зібрався купляти... Іди гроші
             заробляй!
         </p>

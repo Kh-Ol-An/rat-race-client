@@ -53,13 +53,13 @@ const showModal = ref(false)
 </script>
 
 <template>
-    <li class="relative pr-12 grid grid-cols-5 items-center gap-2">
-        <span class="col-span-2 text-slate-400 text-center whitespace-nowrap">
+    <li class="relative grid grid-cols-5 items-center gap-2 pr-12">
+        <span class="col-span-2 whitespace-nowrap text-center text-slate-400">
             {{ addingSpaces(firstValue) }}
         </span>
 
         <div class="col-span-3 mx-auto flex items-center gap-3">
-            <span class="text-slate-400 text-center whitespace-nowrap">
+            <span class="whitespace-nowrap text-center text-slate-400">
                 {{ addingSpaces(secondValue) }}
             </span>
             <div v-if="showIncome" class="relative">
@@ -83,9 +83,9 @@ const showModal = ref(false)
                 <button
                     v-if="!showIncome"
                     :class="[
-                        'font-bold text-2xl outline-0',
+                        'text-2xl font-bold outline-0',
                         disabledEdit
-                            ? 'text-slate-700 cursor-not-allowed'
+                            ? 'cursor-not-allowed text-slate-700'
                             : 'text-primary',
                     ]"
                     type="button"
@@ -120,7 +120,7 @@ const showModal = ref(false)
 
         <button
             v-if="lastBusiness[lastBusiness.length - 1] === id"
-            class="absolute top-1/2 right-0 -translate-y-1/2 rotate-45 px-2 text-3xl text-opposite font-bold leading-none outline-0"
+            class="absolute top-1/2 right-0 -translate-y-1/2 rotate-45 px-2 text-3xl font-bold leading-none text-opposite outline-0"
             type="button"
             title="Банкротство"
             @click="showModal = true"
@@ -133,11 +133,11 @@ const showModal = ref(false)
             @confirm="$emit('delete')"
             @cancel="showModal = false"
         >
-            <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
+            <h4 class="mx-auto text-center text-2xl font-bold text-opposite">
                 Увага!!!
             </h4>
             <p
-                class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center"
+                class="mx-auto mt-4 text-center text-lg font-normal text-slate-400"
             >
                 Ти впевнений що хочешь видалити останній відкритий бізнес?
             </p>

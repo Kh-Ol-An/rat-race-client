@@ -52,10 +52,10 @@ const sellAcres = (price) => emit('sell:acres', price)
     </ul>
 
     <Modal :show="showModal" cancel="Зрозумів" @cancel="showModal = false">
-        <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
+        <h4 class="mx-auto text-center text-2xl font-bold text-opposite">
             Це не можливо!
         </h4>
-        <p class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center">
+        <p class="mx-auto mt-4 text-center text-lg font-normal text-slate-400">
             Куди ти сунешся жебрак? Землю він зібрався купляти... Іди гроші
             заробляй!
         </p>

@@ -56,12 +56,12 @@ const sellHouses = (price) => emit('sell:houses', price)
                 @cancel="showModal = false"
             >
                 <h4
-                    class="mx-auto text-2xl font-bold text-opposite text-center"
+                    class="mx-auto text-center text-2xl font-bold text-opposite"
                 >
                     Це не можливо!
                 </h4>
                 <p
-                    class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center"
+                    class="mx-auto mt-4 text-center text-lg font-normal text-slate-400"
                 >
                     Куди ти сунешся жебрак? Будинки він зібрався купляти... Іди
                     гроші заробляй!
@@ -81,16 +81,20 @@ const sellHouses = (price) => emit('sell:houses', price)
 
         <li
             v-if="blank.assets.houses.length > 1"
-            class="relative py-2 flex items-center gap-3 border-t-2 border-slate-700"
+            class="relative flex items-center gap-3 border-t-2 border-slate-700 py-2"
         >
             <span
-                class="flex items-center gap-1 text-primary whitespace-nowrap"
+                class="flex items-center gap-1 whitespace-nowrap text-primary"
             >
                 <span class="text-slate-400">{{
                     blank.assets.houses.length
                 }}</span>
                 {{ blank.assets.houses.length > 4 ? 'будинків' : 'будинки' }}
-                <ActionSell input-id="sell-price-houses" second-bg @sell="sellHouses">
+                <ActionSell
+                    input-id="sell-price-houses"
+                    second-bg
+                    @sell="sellHouses"
+                >
                     на суму
                     <span class="text-slate-400">
                         {{

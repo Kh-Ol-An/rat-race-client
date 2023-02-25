@@ -37,7 +37,7 @@ const sellCorruptAcres = (price) => emit('sell:corrupt-acres', price)
 </script>
 
 <template>
-    <h2 class="px-4 text-xl font-bold text-primary text-center">Активи</h2>
+    <h2 class="px-4 text-center text-xl font-bold text-primary">Активи</h2>
 
     <!-- Будинки -->
     <HouseList

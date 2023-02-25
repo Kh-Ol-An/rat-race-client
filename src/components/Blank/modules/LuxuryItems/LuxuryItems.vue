@@ -209,11 +209,11 @@ const sellPlane = (id) => emit('sell:plane', id)
 </script>
 
 <template>
-    <h2 class="px-4 text-xl font-bold text-opposite text-center">Багатство</h2>
+    <h2 class="px-4 text-center text-xl font-bold text-opposite">Багатство</h2>
 
     <div class="flex flex-col">
         <!-- Квартири -->
-        <div class="pb-2 flex flex-col gap-1">
+        <div class="flex flex-col gap-1 pb-2">
             <span class="text-slate-500"> Квартири </span>
             <div class="flex items-center gap-3">
                 <Input
@@ -282,7 +282,7 @@ const sellPlane = (id) => emit('sell:plane', id)
 
         <!-- Автівки -->
         <div
-            class="pt-1 pb-2 flex flex-col gap-1 border-t border-dotted border-slate-700"
+            class="flex flex-col gap-1 border-t border-dotted border-slate-700 pt-1 pb-2"
         >
             <span class="text-slate-500"> Автівки </span>
             <div class="flex items-center gap-3">
@@ -345,7 +345,7 @@ const sellPlane = (id) => emit('sell:plane', id)
         </div>
 
         <!-- Котеджі -->
-        <div class="pt-1 pb-2 border-t border-dotted border-slate-700">
+        <div class="border-t border-dotted border-slate-700 pt-1 pb-2">
             <div>
                 <span class="text-slate-500"> Котеджі </span>
                 <div class="mt-2 flex items-center gap-3">
@@ -392,7 +392,7 @@ const sellPlane = (id) => emit('sell:plane', id)
         </div>
 
         <!-- Яхти -->
-        <div class="pt-1 pb-2 border-t border-dotted border-slate-700">
+        <div class="border-t border-dotted border-slate-700 pt-1 pb-2">
             <div>
                 <span class="text-slate-500"> Яхти </span>
                 <div class="mt-2 flex items-center gap-3">
@@ -439,7 +439,7 @@ const sellPlane = (id) => emit('sell:plane', id)
         </div>
 
         <!-- Літаки -->
-        <div class="pt-1 border-t border-dotted border-slate-700">
+        <div class="border-t border-dotted border-slate-700 pt-1">
             <div>
                 <span class="text-slate-500"> Літаки </span>
                 <div class="mt-2 flex items-center gap-3">
@@ -487,10 +487,10 @@ const sellPlane = (id) => emit('sell:plane', id)
     </div>
 
     <Modal :show="showModal" cancel="Зрозумів" @cancel="showModal = false">
-        <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
+        <h4 class="mx-auto text-center text-2xl font-bold text-opposite">
             Це не можливо!
         </h4>
-        <p class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center">
+        <p class="mx-auto mt-4 text-center text-lg font-normal text-slate-400">
             Куди ти сунешся жебрак? {{ purchase }} він зібрався купляти... Іди
             гроші заробляй!
         </p>
@@ -501,10 +501,10 @@ const sellPlane = (id) => emit('sell:plane', id)
         cancel="Зрозумів"
         @cancel="showModalCredit = false"
     >
-        <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
+        <h4 class="mx-auto text-center text-2xl font-bold text-opposite">
             Це не можливо!
         </h4>
-        <p class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center">
+        <p class="mx-auto mt-4 text-center text-lg font-normal text-slate-400">
             На жаль кредит не схвалений службою безпеки банку. Нас не цікавить
             хто Ви і що робите. Нас хвилює як Ви будете віддавати наші гроші.
         </p>

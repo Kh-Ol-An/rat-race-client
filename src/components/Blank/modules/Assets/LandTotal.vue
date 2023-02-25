@@ -33,7 +33,7 @@ const sell = (price) => emit('sell', quantity.value * price)
 <template>
     <li
         v-if="blankLand.length > 1"
-        class="relative py-2 pr-12 grid grid-cols-12 items-center gap-2 border-t-2 border-slate-700 font-bold text-center"
+        class="relative grid grid-cols-12 items-center gap-2 border-t-2 border-slate-700 py-2 pr-12 text-center font-bold"
     >
         <div class="col-span-6 flex items-center justify-center">
             <ActionSell

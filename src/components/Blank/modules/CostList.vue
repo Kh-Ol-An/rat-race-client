@@ -27,7 +27,7 @@ const phone = ref('')
 </script>
 
 <template>
-    <h2 class="text-xl font-bold text-opposite text-center">Витрати</h2>
+    <h2 class="text-center text-xl font-bold text-opposite">Витрати</h2>
 
     <div
         v-if="blank.rent === 0 && blank.apartments.length === 0"

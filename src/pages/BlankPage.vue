@@ -530,19 +530,19 @@ const showModalWin = computed(
     <NavMenu />
 
     <div
-        class="pt-4 pb-8 px-8 md:py-2 md:px-0 md:w-screen max-w-full flex flex-col items-center justify-center"
+        class="flex max-w-full flex-col items-center justify-center px-8 pt-4 pb-8 md:w-screen md:py-2 md:px-0"
     >
         <h1
-            class="p-4 md:p-2 text-4xl md:text-xl font-bold text-slate-300 text-center"
+            class="p-4 text-center text-4xl font-bold text-slate-300 md:p-2 md:text-xl"
         >
             Бланк 'Щурячі перегони Ⅱ'
         </h1>
 
         <div
-            class="relative md:mt-2 w-full max-w-5xl flex flex-col gap-4 shadow-lg md:shadow-none rounded-md bg-slate-800"
+            class="relative flex w-full max-w-5xl flex-col gap-4 rounded-md bg-slate-800 shadow-lg md:mt-2 md:shadow-none"
         >
             <div
-                class="pt-6 px-8 md:pt-2 md:px-2 grid grid-cols-2 md:grid-cols-1 gap-4 md:gap-2"
+                class="grid grid-cols-2 gap-4 px-8 pt-6 md:grid-cols-1 md:gap-2 md:px-2 md:pt-2"
             >
                 <BlankIdentification
                     :blankProp="blank"
@@ -551,7 +551,7 @@ const showModalWin = computed(
                 />
             </div>
 
-            <div class="px-8 md:px-2 flex items-center gap-4 md:gap-2">
+            <div class="flex items-center gap-4 px-8 md:gap-2 md:px-2">
                 <TransactionAction
                     :rich="blank.rich"
                     @decrement="decrement"
@@ -587,7 +587,7 @@ const showModalWin = computed(
                 <div class="flex flex-col md:order-last">
                     <!-- Витрати -->
                     <div
-                        class="py-4 pr-4 pl-8 md:px-2 flex flex-col gap-2 md:bg-slate-900"
+                        class="flex flex-col gap-2 py-4 pr-4 pl-8 md:bg-slate-900 md:px-2"
                     >
                         <CostList
                             :blankProp="blank"
@@ -600,7 +600,7 @@ const showModalWin = computed(
                     </div>
 
                     <!-- Багатство -->
-                    <div class="py-4 pr-4 pl-8 md:px-2 flex flex-col gap-2">
+                    <div class="flex flex-col gap-2 py-4 pr-4 pl-8 md:px-2">
                         <LuxuryItems
                             :blankProp="blank"
                             :cashFlow="cashFlow"
@@ -622,7 +622,7 @@ const showModalWin = computed(
                     <!-- Капризи та примхи -->
                     <div
                         v-if="blank.rich"
-                        class="py-4 pr-4 pl-8 md:px-2 flex flex-col gap-2 md:bg-slate-900"
+                        class="flex flex-col gap-2 py-4 pr-4 pl-8 md:bg-slate-900 md:px-2"
                     >
                         <WhimsAndFancies
                             :blankProp="blank"
@@ -634,7 +634,7 @@ const showModalWin = computed(
                     <div
                         v-if="!blank.rich"
                         :class="[
-                            'pt-4 pr-4 pl-8 md:px-2 flex flex-col gap-2',
+                            'flex flex-col gap-2 pt-4 pr-4 pl-8 md:px-2',
                             blank.credits.length === 0 ? 'pb-8' : 'pb-4',
                         ]"
                     >
@@ -648,7 +648,7 @@ const showModalWin = computed(
                     <!-- Виплати за кредитами -->
                     <div
                         v-if="blank.credits.length > 0"
-                        class="pt-4 pr-4 pb-8 pl-8 md:px-2 flex flex-col gap-2 md:bg-slate-900"
+                        class="flex flex-col gap-2 pt-4 pr-4 pb-8 pl-8 md:bg-slate-900 md:px-2"
                     >
                         <CreditList :credits="blank.credits" />
                     </div>
@@ -657,7 +657,7 @@ const showModalWin = computed(
                 <div class="flex flex-col">
                     <!-- Загальні прибутки -->
                     <div
-                        class="py-4 pr-8 pl-4 md:pt-0 md:pb-4 md:px-2 flex flex-col gap-2"
+                        class="flex flex-col gap-2 py-4 pr-8 pl-4 md:px-2 md:pt-0 md:pb-4"
                     >
                         <IncomeInfo
                             :blank="blank"
@@ -669,7 +669,7 @@ const showModalWin = computed(
 
                     <!-- Борги та витрати -->
                     <div
-                        class="pb-4 pr-8 pl-4 md:px-2 md:py-4 flex flex-col gap-2"
+                        class="flex flex-col gap-2 pb-4 pr-8 pl-4 md:px-2 md:py-4"
                     >
                         <ExpenseInfo
                             :debt="blank.debt"
@@ -682,12 +682,12 @@ const showModalWin = computed(
                             @cancel="showModalRepay = false"
                         >
                             <h4
-                                class="mx-auto text-2xl font-bold text-opposite text-center"
+                                class="mx-auto text-center text-2xl font-bold text-opposite"
                             >
                                 {{ modalRepayTitle }}
                             </h4>
                             <p
-                                class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center"
+                                class="mx-auto mt-4 text-center text-lg font-normal text-slate-400"
                             >
                                 {{ modalRepayText }}
                             </p>
@@ -699,12 +699,12 @@ const showModalWin = computed(
                             @cancel="restart"
                         >
                             <h4
-                                class="mx-auto text-2xl font-bold text-opposite text-center"
+                                class="mx-auto text-center text-2xl font-bold text-opposite"
                             >
                                 Дуже прикро...
                             </h4>
                             <p
-                                class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center"
+                                class="mx-auto mt-4 text-center text-lg font-normal text-slate-400"
                             >
                                 Ти програв. Але не вмер. Не засмучуйся. Бери
                                 нову професію і починай спочатку :)
@@ -714,7 +714,7 @@ const showModalWin = computed(
 
                     <!-- Прибутки -->
                     <div
-                        class="py-4 pr-8 pl-4 md:px-2 flex flex-col gap-2 md:bg-slate-900"
+                        class="flex flex-col gap-2 py-4 pr-8 pl-4 md:bg-slate-900 md:px-2"
                     >
                         <IncomeList
                             :blankProp="blank"
@@ -731,7 +731,7 @@ const showModalWin = computed(
                     </div>
 
                     <!-- Акції -->
-                    <div class="py-4 pr-8 pl-4 md:px-2 flex flex-col gap-2">
+                    <div class="flex flex-col gap-2 py-4 pr-8 pl-4 md:px-2">
                         <SharesList
                             :blankProp="blank"
                             @buy="buyShares"
@@ -742,7 +742,7 @@ const showModalWin = computed(
 
                     <!-- Активи -->
                     <div
-                        class="py-4 pr-8 pl-4 md:px-2 flex flex-col gap-2 md:bg-slate-900"
+                        class="flex flex-col gap-2 py-4 pr-8 pl-4 md:bg-slate-900 md:px-2"
                     >
                         <AssetList
                             :blankProp="blank"
@@ -761,7 +761,7 @@ const showModalWin = computed(
                     <!-- Депутати -->
                     <div
                         v-if="blank.rich"
-                        class="pt-4 pr-8 pl-4 pb-8 md:px-2 flex flex-col gap-2"
+                        class="flex flex-col gap-2 pt-4 pr-8 pl-4 pb-8 md:px-2"
                     >
                         <DeputyList
                             :blankProp="blank"
@@ -772,7 +772,7 @@ const showModalWin = computed(
                 </div>
             </div>
 
-            <div class="md:px-2 md:space-y-2">
+            <div class="md:space-y-2 md:px-2">
                 <BlankActions
                     :historyBlank="historyBlank"
                     :historyPeriod="historyPeriod"
@@ -788,11 +788,11 @@ const showModalWin = computed(
             cancel="Зрозумів"
             @cancel="blank.rich = true"
         >
-            <h4 class="mx-auto text-2xl font-bold text-primary text-center">
+            <h4 class="mx-auto text-center text-2xl font-bold text-primary">
                 Вітаємо!!!
             </h4>
             <p
-                class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center"
+                class="mx-auto mt-4 text-center text-lg font-normal text-slate-400"
             >
                 Видихай) Ти багатий! Переходь на зовнішнє коло.
             </p>
@@ -803,11 +803,11 @@ const showModalWin = computed(
             cancel="Зрозумів"
             @cancel="blank.win = true"
         >
-            <h4 class="mx-auto text-2xl font-bold text-primary text-center">
+            <h4 class="mx-auto text-center text-2xl font-bold text-primary">
                 Вітаємо!!!
             </h4>
             <p
-                class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center"
+                class="mx-auto mt-4 text-center text-lg font-normal text-slate-400"
             >
                 Ти переміг! Але можешь продовжувати гру.
             </p>

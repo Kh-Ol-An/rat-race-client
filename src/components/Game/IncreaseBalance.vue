@@ -32,7 +32,7 @@ defineEmits(['choice:gender'])
     >
         <button
             v-if="user.gender.length === 0"
-            class="w-full h-full flex items-center justify-end"
+            class="flex h-full w-full items-center justify-end"
             type="button"
             @click="$emit('choice:gender')"
         >

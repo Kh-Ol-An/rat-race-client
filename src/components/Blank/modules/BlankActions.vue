@@ -26,7 +26,7 @@ const showModal = ref(false)
             <Transition>
                 <button
                     v-if="historyPeriod !== 0"
-                    class="fixed md:static left-10 bottom-10 p-4 flex items-center justify-center md:w-full shadow hover:shadow-lg rounded-full md:rounded-md bg-gradient-to-b from-secondaryLight to-secondary outline-0 transition-all duration-300"
+                    class="fixed left-10 bottom-10 flex items-center justify-center rounded-full bg-gradient-to-b from-secondaryLight to-secondary p-4 shadow outline-0 transition-all duration-300 hover:shadow-lg md:static md:w-full md:rounded-md"
                     type="button"
                     title="Хід назад"
                     @click="$emit('back')"
@@ -41,7 +41,7 @@ const showModal = ref(false)
             <Transition>
                 <button
                     v-if="historyPeriod !== historyBlank.length - 1"
-                    class="fixed md:static left-28 bottom-10 -scale-x-100 p-4 flex items-center justify-center md:w-full shadow hover:shadow-lg rounded-full md:rounded-md bg-gradient-to-b from-secondaryLight to-secondary outline-0 transition-all duration-300"
+                    class="fixed left-28 bottom-10 flex -scale-x-100 items-center justify-center rounded-full bg-gradient-to-b from-secondaryLight to-secondary p-4 shadow outline-0 transition-all duration-300 hover:shadow-lg md:static md:w-full md:rounded-md"
                     type="button"
                     title="Хід вперед"
                     @click="$emit('forward')"
@@ -57,7 +57,7 @@ const showModal = ref(false)
     </Transition>
 
     <button
-        class="fixed md:static right-10 bottom-10 p-4 flex items-center justify-center md:w-full shadow hover:shadow-lg rounded-full md:rounded-md bg-gradient-to-b from-oppositeLight to-opposite outline-0 transition-all duration-300"
+        class="fixed right-10 bottom-10 flex items-center justify-center rounded-full bg-gradient-to-b from-oppositeLight to-opposite p-4 shadow outline-0 transition-all duration-300 hover:shadow-lg md:static md:w-full md:rounded-md"
         type="button"
         title="Почати спочатку"
         @click="showModal = true"
@@ -70,10 +70,10 @@ const showModal = ref(false)
         @confirm="$emit('restart')"
         @cancel="showModal = false"
     >
-        <h4 class="mx-auto text-2xl font-bold text-opposite text-center">
+        <h4 class="mx-auto text-center text-2xl font-bold text-opposite">
             Увага!!!
         </h4>
-        <p class="mx-auto mt-4 text-lg font-normal text-slate-400 text-center">
+        <p class="mx-auto mt-4 text-center text-lg font-normal text-slate-400">
             Якщо ти тицьнеш 'Видалити', тебе вже нічого не врятує... Усі ті
             циферки які ти так довго вводив, зникнуть. І навіть найголовніший
             розробник не зможе їх повернути.

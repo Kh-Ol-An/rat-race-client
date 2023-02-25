@@ -140,28 +140,28 @@ const isCancel = computed(
     >
         <h4
             v-if="eventCard.name"
-            class="text-2xl text-slate-400 font-bold text-center"
+            class="text-center text-2xl font-bold text-slate-400"
         >
             {{ eventCard.name }}
         </h4>
-        <p v-if="eventCard.description" class="text-slate-400 text-center">
+        <p v-if="eventCard.description" class="text-center text-slate-400">
             {{ eventCard.description }}
         </p>
         <span
             v-if="eventCard.profit"
-            class="text-xl text-slate-400 font-bold text-center"
+            class="text-center text-xl font-bold text-slate-400"
         >
             {{ eventCard.profit }}
         </span>
         <span
             v-if="eventCard.price"
-            class="text-xl text-slate-400 font-bold text-center"
+            class="text-center text-xl font-bold text-slate-400"
         >
             {{ eventCard.price }}
         </span>
         <div :class="['grid', isCancel && 'grid-cols-2 gap-3']">
             <button
-                class="px-4 py-3 rounded shadow-[0_5px_15px_rgba(0,0,0,0.35)] bg-gradient-to-b from-oppositeLight to-opposite text-xl text-slate-200 font-bold outline-0"
+                class="rounded bg-gradient-to-b from-oppositeLight to-opposite px-4 py-3 text-xl font-bold text-slate-200 shadow-[0_5px_15px_rgba(0,0,0,0.35)] outline-0"
                 type="button"
                 @click="confirm"
             >
@@ -169,7 +169,7 @@ const isCancel = computed(
             </button>
             <button
                 v-if="isCancel"
-                class="px-4 py-3 rounded shadow-[0_5px_15px_rgba(0,0,0,0.35)] bg-gradient-to-b from-primaryLight to-primary text-xl text-slate-200 font-bold outline-0"
+                class="rounded bg-gradient-to-b from-primaryLight to-primary px-4 py-3 text-xl font-bold text-slate-200 shadow-[0_5px_15px_rgba(0,0,0,0.35)] outline-0"
                 type="button"
                 @click="$emit('cancel')"
             >

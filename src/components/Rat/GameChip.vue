@@ -25,7 +25,7 @@ defineProps({
         class="absolute z-10 bg-transparent"
     >
         <span
-            class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-red-600"
+            class="absolute top-1/2 left-1/2 h-6 w-6 -translate-y-1/2 -translate-x-1/2 rounded-full bg-red-600"
         ></span>
     </div>
 </template>

@@ -24,7 +24,7 @@ const sell = () => emit('sell', props.id)
 </script>
 
 <template>
-    <li class="relative pr-12 flex items-center gap-2">
+    <li class="relative flex items-center gap-2 pr-12">
         <InfoField
             wrap-classes="gap-2"
             label-classes="text-primary"

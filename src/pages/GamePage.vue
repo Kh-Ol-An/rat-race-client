@@ -147,7 +147,7 @@ setTimeout(() => (development.value = false), 3000)
     <Transition>
         <div
             v-if="development"
-            class="fixed top-0 right-0 bottom-0 left-0 z-40 w-full h-screen flex items-center justify-center"
+            class="fixed top-0 right-0 bottom-0 left-0 z-40 flex h-screen w-full items-center justify-center"
         >
             <p class="text-2xl text-slate-300">
                 Цей функціонал у процесі розробки
@@ -158,15 +158,15 @@ setTimeout(() => (development.value = false), 3000)
     <Transition>
         <div
             v-if="!development"
-            class="pt-4 pb-6 px-6 w-full h-screen flex flex-col items-center gap-4"
+            class="flex h-screen w-full flex-col items-center gap-4 px-6 pt-4 pb-6"
         >
-            <h1 class="md:hidden text-4xl font-bold text-white text-center">
+            <h1 class="text-center text-4xl font-bold text-white md:hidden">
                 ГРА 'Гроші є'
             </h1>
 
             <div
                 ref="container"
-                class="relative w-full h-full flex items-center justify-center"
+                class="relative flex h-full w-full items-center justify-center"
             >
                 <!-- Rich -->
                 <GameCircle
