@@ -37,10 +37,8 @@ import {
     RICH_CASH_FLOW,
 } from '../database/variables.js'
 
-const { uploadBlank, downloadBlank } = mapActions()
+const { uploadBlank } = mapActions()
 const { getBlank } = mapGetters()
-
-await downloadBlank()
 
 const blank = reactive(getBlank.value)
 

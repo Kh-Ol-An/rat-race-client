@@ -236,8 +236,8 @@ const sellPlane = (id) => emit('sell:plane', id)
             <ul v-if="blank.apartments.length > 0" class="flex flex-col gap-1">
                 <LuxuryItemPurchased
                     v-for="{ id, name, price } in blank.apartments"
-                    :key="id"
                     :id="id"
+                    :key="id"
                     :price="price"
                     :label="name.length > 0 ? `${name}:` : 'Квартира:'"
                     @sell="sellApartment"
@@ -304,8 +304,8 @@ const sellPlane = (id) => emit('sell:plane', id)
             <ul v-if="blank.cars.length > 0" class="flex flex-col gap-1">
                 <LuxuryItemPurchased
                     v-for="{ id, name, price } in blank.cars"
-                    :key="id"
                     :id="id"
+                    :key="id"
                     :price="price"
                     :label="name.length > 0 ? `${name}:` : 'Автівка:'"
                     @sell="sellCar"
@@ -367,8 +367,8 @@ const sellPlane = (id) => emit('sell:plane', id)
             <ul v-if="blank.cottages.length > 0" class="flex flex-col gap-2">
                 <LuxuryItemPurchased
                     v-for="{ id, name, price } in blank.cottages"
-                    :key="id"
                     :id="id"
+                    :key="id"
                     :price="price"
                     :label="name.length > 0 ? `${name}:` : 'Котедж:'"
                     @sell="sellCottage"
@@ -414,8 +414,8 @@ const sellPlane = (id) => emit('sell:plane', id)
             <ul v-if="blank.yachts.length > 0" class="flex flex-col gap-2">
                 <LuxuryItemPurchased
                     v-for="{ id, name, price } in blank.yachts"
-                    :key="id"
                     :id="id"
+                    :key="id"
                     :price="price"
                     :label="name.length > 0 ? `${name}:` : 'Яхта:'"
                     @sell="sellYacht"
@@ -461,8 +461,8 @@ const sellPlane = (id) => emit('sell:plane', id)
             <ul v-if="blank.planes.length > 0" class="flex flex-col gap-2">
                 <LuxuryItemPurchased
                     v-for="{ id, name, price } in blank.planes"
-                    :key="id"
                     :id="id"
+                    :key="id"
                     :price="price"
                     :label="name.length > 0 ? `${name}:` : 'Літак:'"
                     @sell="sellPlane"

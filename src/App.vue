@@ -3,7 +3,7 @@ import { onMounted, ref, onErrorCaptured } from 'vue'
 import { mapActions } from './store/helpers.js'
 import router from './router/index.js'
 
-const { checkAuth } = mapActions()
+const { checkAuth, downloadBlank } = mapActions()
 
 const error = ref(null)
 
@@ -15,6 +15,8 @@ onMounted(() => {
     if (localStorage.getItem('token')) {
         checkAuth()
     }
+
+    downloadBlank()
 })
 
 router.beforeEach((to, from, next) => {
@@ -38,19 +40,14 @@ router.beforeEach((to, from, next) => {
 
 <template>
     <notifications />
+
     <div v-if="error" class="flex h-screen w-full items-center justify-center">
-        <span class="text-center text-2xl font-bold text-opposite">{{
-            error
-        }}</span>
+        <span class="text-center text-2xl font-bold text-opposite">
+            {{ error }}
+        </span>
     </div>
-    <Suspense>
-        <template #default>
-            <router-view></router-view>
-        </template>
-        <template #fallback>
-            <h1>Loading...</h1>
-        </template>
-    </Suspense>
+
+    <router-view></router-view>
 </template>
 
 <style>

@@ -21,24 +21,24 @@ const blank = toRef(props, 'blankProp')
 const emit = defineEmits(['buy'])
 
 const showModal = ref(false)
-const name = ref('')
-const price = ref('')
+const whimsAndFanciesName = ref('')
+const whimsAndFanciesPrice = ref('')
 const buy = () => {
-    if (blank.value.cash < Number(removingSpaces(price.value))) {
+    if (blank.value.cash < Number(removingSpaces(whimsAndFanciesPrice.value))) {
         showModal.value = true
-        name.value = ''
-        price.value = ''
+        whimsAndFanciesName.value = ''
+        whimsAndFanciesPrice.value = ''
         return
     }
 
     emit(
         'buy',
         new Date().valueOf(),
-        name.value,
-        Number(removingSpaces(price.value))
+        whimsAndFanciesName.value,
+        Number(removingSpaces(whimsAndFanciesPrice.value))
     )
-    name.value = ''
-    price.value = ''
+    whimsAndFanciesName.value = ''
+    whimsAndFanciesPrice.value = ''
 }
 </script>
 
@@ -50,7 +50,7 @@ const buy = () => {
     <div class="mt-2 flex items-center gap-3">
         <Input
             id="whim-and-fancies-name"
-            v-model:value="name"
+            v-model:value="whimsAndFanciesName"
             type="text"
             :max-length="15"
             placeholder="Назва"
@@ -58,11 +58,11 @@ const buy = () => {
         />
         <Input
             id="whim-and-fancies-price"
-            v-model:value="price"
+            v-model:value="whimsAndFanciesPrice"
             placeholder="Ціна"
             second-bg
         />
-        <ActionAdd :first-value="price" @add="buy" />
+        <ActionAdd :first-value="whimsAndFanciesPrice" @add="buy" />
     </div>
     <ul v-if="blank.whimsAndFancies.length > 0" class="flex flex-col gap-2">
         <li v-for="{ id, name, price } in blank.whimsAndFancies" :key="id">

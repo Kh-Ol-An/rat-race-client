@@ -23,15 +23,15 @@ const emit = defineEmits(['buy:house', 'sell:house', 'sell:houses'])
 
 const showModal = ref(false)
 
-const price = ref('')
+const housePrice = ref('')
 const buyHouse = () => {
-    if (blank.value.cash < Number(removingSpaces(price.value))) {
+    if (blank.value.cash < Number(removingSpaces(housePrice.value))) {
         showModal.value = true
-        return (price.value = '')
+        return (housePrice.value = '')
     }
 
-    emit('buy:house', new Date().valueOf(), Number(removingSpaces(price.value)))
-    price.value = ''
+    emit('buy:house', new Date().valueOf(), Number(removingSpaces(housePrice.value)))
+    housePrice.value = ''
 }
 const sellHouse = (price, id) => emit('sell:house', price, id)
 const sellHouses = (price) => emit('sell:houses', price)
@@ -44,11 +44,11 @@ const sellHouses = (price) => emit('sell:houses', price)
         <div class="mt-2 flex items-center gap-3">
             <Input
                 id="assets-houses"
-                v-model:value="price"
+                v-model:value="housePrice"
                 placeholder="Ціна будинка"
                 second-bg
             />
-            <ActionAdd :first-value="price" @add="buyHouse" />
+            <ActionAdd :first-value="housePrice" @add="buyHouse" />
 
             <Modal
                 :show="showModal"
@@ -73,8 +73,8 @@ const sellHouses = (price) => emit('sell:houses', price)
     <ul v-if="blank.assets.houses.length > 0" class="flex flex-col gap-2">
         <HouseItem
             v-for="{ id, price } in blank.assets.houses"
-            :key="id"
             :id="id"
+            :key="id"
             :price="price"
             @sell="sellHouse"
         />
@@ -86,9 +86,9 @@ const sellHouses = (price) => emit('sell:houses', price)
             <span
                 class="flex items-center gap-1 whitespace-nowrap text-primary"
             >
-                <span class="text-slate-400">{{
-                    blank.assets.houses.length
-                }}</span>
+                <span class="text-slate-400">
+                    {{ blank.assets.houses.length }}
+                </span>
                 {{ blank.assets.houses.length > 4 ? 'будинків' : 'будинки' }}
                 <ActionSell
                     input-id="sell-price-houses"
