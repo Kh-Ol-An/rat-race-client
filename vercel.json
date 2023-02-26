@@ -1,7 +1,0 @@
-{
-    "build": {
-        "env": {
-            "ESLINT_NO_ASYNC": "true"
-        }
-    }
-}
