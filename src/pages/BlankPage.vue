@@ -37,8 +37,11 @@ import {
     RICH_CASH_FLOW,
 } from '../database/variables.js'
 
-const { uploadBlank } = mapActions()
+const { downloadBlank, uploadBlank } = mapActions()
 const { getBlank } = mapGetters()
+
+// eslint-disable-next-line no-await-in-non-async-fn
+await downloadBlank()
 
 const blank = reactive(getBlank.value)
 

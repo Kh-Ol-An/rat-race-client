@@ -3,7 +3,7 @@ import { onMounted, ref, onErrorCaptured } from 'vue'
 import { mapActions } from './store/helpers.js'
 import router from './router/index.js'
 
-const { checkAuth, downloadBlank } = mapActions()
+const { checkAuth } = mapActions()
 
 const error = ref(null)
 
@@ -15,8 +15,6 @@ onMounted(() => {
     if (localStorage.getItem('token')) {
         checkAuth()
     }
-
-    downloadBlank()
 })
 
 router.beforeEach((to, from, next) => {
@@ -47,7 +45,14 @@ router.beforeEach((to, from, next) => {
         </span>
     </div>
 
-    <router-view></router-view>
+    <Suspense>
+        <template #default>
+            <router-view></router-view>
+        </template>
+        <template #fallback>
+            <h1>Loading...</h1>
+        </template>
+    </Suspense>
 </template>
 
 <style>

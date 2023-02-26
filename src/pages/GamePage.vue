@@ -99,6 +99,9 @@ const user = reactive({
     utilities: 0,
 })
 const rollingDice = (numberOnDice) => {
+    // for (let i = 1; i <= numberOnDice; i++) {
+    //     setTimeout(() => user.position += 1, 2000)
+    // }
     user.position += numberOnDice
     user.position > FIELDS_COUNT &&
         (user.position = user.position - FIELDS_COUNT)
