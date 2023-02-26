@@ -17,6 +17,7 @@ import {
     BLANK_Y_GAP,
     BLANK_FACTOR,
 } from '../database/variables.js'
+import sleep from "../helpers/sleep.js";
 
 const container = ref(null)
 const containerWidth = ref(null)
@@ -98,13 +99,12 @@ const user = reactive({
     fare: 0,
     utilities: 0,
 })
-const rollingDice = (numberOnDice) => {
-    // for (let i = 1; i <= numberOnDice; i++) {
-    //     setTimeout(() => user.position += 1, 2000)
-    // }
-    user.position += numberOnDice
-    user.position > FIELDS_COUNT &&
-        (user.position = user.position - FIELDS_COUNT)
+const rollingDice = async (numberOnDice) => {
+    for (let i = 1; i <= numberOnDice; i++) {
+        await sleep(500)
+        user.position += 1
+        user.position > FIELDS_COUNT && (user.position = 1)
+    }
     setTimeout(() => (showEventCard.value = true), 700)
 }
 const userPositionOnFields = computed(() =>

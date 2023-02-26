@@ -24,9 +24,9 @@ const eventCard = ref(props.userPositionOnFields)
 
 watchEffect(() => {
     const rand = randomInteger(1, 3)
-    console.log('rand: ', rand)
-    console.log("props.userPositionOnFields.type: ", props.userPositionOnFields.type)
-    console.log("eventCards[props.userPositionOnFields.type]: ", eventCards[props.userPositionOnFields.type])
+    // console.log('rand: ', rand)
+    // console.log("props.userPositionOnFields.type: ", props.userPositionOnFields.type)
+    // console.log("eventCards[props.userPositionOnFields.type]: ", eventCards[props.userPositionOnFields.type])
     if (
         props.userPositionOnFields.type === 'business' ||
         props.userPositionOnFields.type === 'investments' ||
@@ -39,8 +39,8 @@ watchEffect(() => {
         )
     }
 
-    console.log('eventCard: ', eventCard.value)
-    console.log('****************')
+    // console.log('eventCard: ', eventCard.value)
+    // console.log('****************')
 })
 
 const confirm = () => emit('confirm', props.userPositionOnFields)
