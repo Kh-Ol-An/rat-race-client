@@ -3,8 +3,8 @@ import { onMounted, onUnmounted, ref, reactive, computed } from 'vue'
 import NavMenu from '../components/plugins/NavMenu.vue'
 import GameCircle from '../components/Game/GameCircle.vue'
 import GameDice from '../components/Game/GameDice.vue'
-import poorCircle from '../database/poor-circle.json'
-import richCircle from '../database/rich-circle.json'
+import poorCircleFields from '../database/poor-circle-fields.json'
+import richCircleFields from '../database/rich-circle-fields.json'
 import professions from '../database/professions.json'
 import {
     POOR_CIRCLE_FACTOR,
@@ -104,10 +104,10 @@ const rollingDice = (numberOnDice) => {
         (user.position = user.position - FIELDS_COUNT)
     setTimeout(() => (showEventCard.value = true), 700)
 }
-const userPosition = computed(() =>
+const userPositionOnFields = computed(() =>
     user.rich
-        ? richCircle.find((field) => field.position === user.position)
-        : poorCircle.find((field) => field.position === user.position)
+        ? richCircleFields.find((field) => field.position === user.position)
+        : poorCircleFields.find((field) => field.position === user.position)
 )
 const choiceGender = (gender) => {
     const randomId = Math.floor(1 + Math.random() * 4)
@@ -132,18 +132,21 @@ const expenses = computed(() => {
 })
 
 const confirmEvent = (eventCard) => {
-    console.log(eventCard)
+    false && console.log(eventCard)
     showEventCard.value = false
 }
 
+// ********* Delete after the end of development *********
 const development = ref(false)
-setTimeout(() => (development.value = false), 3000)
-// setTimeout(() => development.value = true, 3000);
+// setTimeout(() => (development.value = false), 3000)
+setTimeout(() => development.value = true, 3000);
+// ********* Delete after the end of development *********
 </script>
 
 <template>
     <NavMenu />
 
+    <!-- ********* Delete after the end of development ********* -->
     <Transition>
         <div
             v-if="development"
@@ -154,6 +157,7 @@ setTimeout(() => (development.value = false), 3000)
             </p>
         </div>
     </Transition>
+    <!-- ********* Delete after the end of development ********* -->
 
     <Transition>
         <div
@@ -173,10 +177,10 @@ setTimeout(() => (development.value = false), 3000)
                     :width="richCircleWidth"
                     :height="richCircleHeight"
                     classes="relative"
-                    :circle="richCircle"
+                    :circle-fields="richCircleFields"
                     :cell-width="cellSizeInRichCircle && cellSizeInRichCircle"
                     :cell-height="cellSizeInRichCircle && cellSizeInRichCircle"
-                    :user-position="userPosition"
+                    :user-position-on-fields="userPositionOnFields"
                     :game-chip-here="user.rich"
                     :user="user"
                 />
@@ -186,12 +190,12 @@ setTimeout(() => (development.value = false), 3000)
                     :width="poorCircleWidth && poorCircleWidth"
                     :height="poorCircleHeight && poorCircleHeight"
                     classes="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2"
-                    :circle="poorCircle"
+                    :circle-fields="poorCircleFields"
                     :cell-width="cellWidthInPoorCircle && cellWidthInPoorCircle"
                     :cell-height="
                         cellHeightInPoorCircle && cellHeightInPoorCircle
                     "
-                    :user-position="userPosition"
+                    :user-position-on-fields="userPositionOnFields"
                     :game-chip-here="!user.rich"
                     :blank-position="blankPosition && blankPosition"
                     :blank-width="blankWidth && blankWidth"
@@ -213,6 +217,7 @@ setTimeout(() => (development.value = false), 3000)
     </Transition>
 </template>
 
+<!-- ********* Delete after the end of development ********* -->
 <style scoped>
 .v-enter-active,
 .v-leave-active {
@@ -224,3 +229,4 @@ setTimeout(() => (development.value = false), 3000)
     opacity: 0;
 }
 </style>
+<!-- ********* Delete after the end of development ********* -->

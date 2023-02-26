@@ -6,6 +6,8 @@ import randomInteger from '../../helpers/random-integer.js'
 const emit = defineEmits(['rolling'])
 
 const numberOnDice = ref(6)
+
+const animated = ref(false)
 const animationDice = async () => {
     numberOnDice.value = randomInteger()
     await sleep(50)
@@ -27,7 +29,7 @@ const animationDice = async () => {
     await sleep(470)
 }
 const rollingDice = async () => {
-    await animationDice()
+    animated.value && await animationDice()
     numberOnDice.value = randomInteger()
     return emit('rolling', numberOnDice.value)
 }

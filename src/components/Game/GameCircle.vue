@@ -29,7 +29,7 @@ defineProps({
         type: String,
         required: true,
     },
-    circle: {
+    circleFields: {
         type: Array,
         required: true,
     },
@@ -41,7 +41,7 @@ defineProps({
         type: Number,
         required: true,
     },
-    userPosition: {
+    userPositionOnFields: {
         type: Object,
         required: true,
     },
@@ -50,16 +50,16 @@ defineProps({
         required: true,
     },
     blankPosition: {
-        type: String,
-        required: true,
+        type: Number,
+        default: null,
     },
     blankWidth: {
-        type: String,
-        required: true,
+        type: Number,
+        default: null,
     },
     blankHeight: {
-        type: String,
-        required: true,
+        type: Number,
+        default: null,
     },
     user: {
         type: Object,
@@ -67,54 +67,15 @@ defineProps({
     },
     showEventCard: {
         type: Boolean,
-        required: true,
+        default: false,
     },
     expenses: {
         type: Number,
-        required: true,
+        default: null,
     },
 })
 
 const emit = defineEmits(['confirm:event', 'choice:gender', 'cancel:event'])
-
-const bgColor = (type) => {
-    if (type === 'profit') {
-        return 'bg-primary'
-    }
-    if (type === 'business') {
-        return 'bg-secondary'
-    }
-    if (type === 'investments') {
-        return 'bg-sky-600'
-    }
-    if (type === 'expenses') {
-        return 'bg-red-600'
-    }
-    if (type === 'layoff') {
-        return 'bg-gray-700'
-    }
-    if (type === 'opportunities') {
-        return 'bg-orange-600'
-    }
-    if (type === 'buys') {
-        return 'bg-sky-400'
-    }
-    if (type === 'wedding') {
-        return 'bg-fuchsia-600'
-    }
-    if (type === 'baby') {
-        return 'bg-yellow-400'
-    }
-    if (type === 'divorce') {
-        return 'bg-gray-600'
-    }
-    if (type === 'vacation') {
-        return 'bg-teal-600'
-    }
-    if (type === 'bankruptcy') {
-        return 'bg-gray-900'
-    }
-}
 
 const confirmEvent = (eventCard) => emit('confirm:event', eventCard)
 </script>
@@ -122,7 +83,7 @@ const confirmEvent = (eventCard) => emit('confirm:event', eventCard)
 <template>
     <div :style="{ width, height }" :class="classes">
         <div
-            v-for="{ position, styles, type, name } in circle"
+            v-for="{ position, styles, type, name } in circleFields"
             :key="position"
             :style="{
                 top: styles.top && `${cellHeight * styles.top}px`,
@@ -135,7 +96,7 @@ const confirmEvent = (eventCard) => emit('confirm:event', eventCard)
             :class="[
                 'absolute',
                 'flex items-center justify-center',
-                bgColor(type),
+                styles.bg,
             ]"
             :title="name"
         >
@@ -175,7 +136,7 @@ const confirmEvent = (eventCard) => emit('confirm:event', eventCard)
 
         <GameChip
             v-if="gameChipHere"
-            :user-styles="userPosition.styles"
+            :user-styles="userPositionOnFields.styles"
             :cell-width="cellWidth"
             :cell-height="cellHeight"
             game-chip-color="fill-red-600"
@@ -204,7 +165,7 @@ const confirmEvent = (eventCard) => emit('confirm:event', eventCard)
             v-if="blankWidth && blankHeight && showEventCard"
             :width="`${blankWidth}px`"
             :height="`${blankHeight}px`"
-            :user-position="userPosition"
+            :user-position-on-fields="userPositionOnFields"
             @confirm="confirmEvent"
             @cancel="$emit('cancel:event')"
         />

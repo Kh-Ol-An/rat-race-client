@@ -40,4 +40,18 @@ module.exports = {
         },
     },
     plugins: [],
+    safelist: [
+        'bg-primary',
+        'bg-secondary',
+        'bg-sky-600',
+        'bg-red-600',
+        'bg-gray-700',
+        'bg-orange-600',
+        'bg-sky-400',
+        'bg-fuchsia-600',
+        'bg-yellow-400',
+        'bg-gray-600',
+        'bg-teal-600',
+        'bg-gray-900',
+    ],
 }
