@@ -1,4 +1,49 @@
 // Blank
+export const INITIAL_BLANK = {
+    gender: '',
+    profession: '',
+    debt: 0,
+    rent: 0,
+    food: 0,
+    clothes: 0,
+    fare: 0,
+    phone: 0,
+    apartments: [],
+    cars: [],
+    cottages: [],
+    yachts: [],
+    planes: [],
+    whimsAndFancies: [],
+    marriage: false,
+    children: {
+        count: 0,
+        expense: 0,
+    },
+    credits: [],
+    cash: 0,
+    salary: 0,
+    business: {
+        small: [],
+        middle: [],
+        big: [],
+        corrupt: [],
+        last: [],
+    },
+    shares: {
+        gc: [],
+        schp: [],
+        to: [],
+        cst: [],
+    },
+    assets: {
+        houses: [],
+        land: [],
+        corruptLand: [],
+    },
+    deputies: 0,
+    rich: false,
+    win: false,
+}
 export const TAX = 0.1
 export const APARTMENT_EXPENSES = 200
 export const CAR_EXPENSES = 600
@@ -13,19 +58,6 @@ export const DEPUTY_PRICE = 100000
 export const MAX_HISTORY = 10
 export const RICH_CASH = 3000000
 export const RICH_CASH_FLOW = 50000
-
-// Rat
-export const RAT_OUTER_CIRCLE_FACTOR = 0.693333333
-export const RAT_INNER_CIRCLE_FACTOR = 0.636363636
-export const FIELDS_COUNT_BY_WIDTH_IN_OUTER_CIRCLE = 25
-export const FIELDS_COUNT_BY_WIDTH_IN_INNER_CIRCLE = 26.4
-export const FIELDS_COUNT_BY_HEIGHT_IN_OUTER_CIRCLE = 17.3333333
-export const FIELDS_COUNT_BY_HEIGHT_IN_INNER_CIRCLE = 16.8
-export const ASPECT_RATIO_FIELD_OUTER_CIRCLE = 0.6
-export const ASPECT_RATIO_FIELD_INNER_CIRCLE = 0.714285714
-export const ASPECT_RATIO_HUGE_FIELD_INNER = 0.625
-export const FIELDS_COUNT_OF_OUTER_CIRCLE = 74
-export const FIELDS_COUNT_OF_INNER_CIRCLE = 78
 
 // Game
 export const POOR_CIRCLE_FACTOR = 0.467

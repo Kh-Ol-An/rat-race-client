@@ -22,6 +22,7 @@ import Modal from '../components/Blank/plugins/Modal.vue'
 import MoneyIcon from '../assets/images/icons/MoneyIcon.vue'
 import { addingSpaces } from '../helpers/formating-values.js'
 import {
+    INITIAL_BLANK,
     TAX,
     APARTMENT_EXPENSES,
     CAR_EXPENSES,
@@ -424,52 +425,7 @@ const addDeputies = (quantity) => {
 }
 
 const restart = async () => {
-    const initialBlank = {
-        gender: '',
-        profession: '',
-        debt: 0,
-        rent: 0,
-        food: 0,
-        clothes: 0,
-        fare: 0,
-        phone: 0,
-        apartments: [],
-        cars: [],
-        cottages: [],
-        yachts: [],
-        planes: [],
-        whimsAndFancies: [],
-        marriage: false,
-        children: {
-            count: 0,
-            expense: 0,
-        },
-        credits: [],
-        cash: 0,
-        salary: 0,
-        business: {
-            small: [],
-            middle: [],
-            big: [],
-            corrupt: [],
-            last: [],
-        },
-        shares: {
-            gc: [],
-            schp: [],
-            to: [],
-            cst: [],
-        },
-        assets: {
-            houses: [],
-            land: [],
-            corruptLand: [],
-        },
-        deputies: 0,
-        rich: false,
-        win: false,
-    }
-    const uploaded = await uploadBlank(initialBlank)
+    const uploaded = await uploadBlank(INITIAL_BLANK)
     uploaded
         ? location.reload()
         : notify({
