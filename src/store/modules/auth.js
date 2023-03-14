@@ -27,7 +27,7 @@ export default {
                 )
                 localStorage.setItem('token', response.data.accessToken)
                 commit('setUser', response.data.user)
-                await router.push('/blank')
+                await router.push('/')
             } catch (err) {
                 notify({
                     type: 'error',
@@ -41,7 +41,7 @@ export default {
                 const response = await AuthService.login(email, password)
                 localStorage.setItem('token', response.data.accessToken)
                 commit('setUser', response.data.user)
-                await router.push('/blank')
+                await router.push('/')
             } catch (err) {
                 notify({
                     type: 'error',

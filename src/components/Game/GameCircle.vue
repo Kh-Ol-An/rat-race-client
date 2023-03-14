@@ -45,10 +45,6 @@ defineProps({
         type: Object,
         required: true,
     },
-    gameChipHere: {
-        type: Boolean,
-        required: true,
-    },
     blankPosition: {
         type: Number,
         default: null,
@@ -135,7 +131,6 @@ const confirmEvent = (eventCard) => emit('confirm:event', eventCard)
         </div>
 
         <GameChip
-            v-if="gameChipHere"
             :user-styles="userPositionOnFields.styles"
             :cell-width="cellWidth"
             :cell-height="cellHeight"

@@ -1,18 +1,14 @@
 <script setup>
 import { onMounted, onUnmounted, ref, reactive, computed } from 'vue'
-import NavMenu from '../components/plugins/NavMenu.vue'
 import GameCircle from '../components/Game/GameCircle.vue'
 import GameDice from '../components/Game/GameDice.vue'
-import poorCircleFields from '../database/poor-circle-fields.json'
-import richCircleFields from '../database/rich-circle-fields.json'
+import circleFields from '../database/circle-fields.json'
 import professions from '../database/professions.json'
 import {
-    POOR_CIRCLE_FACTOR,
-    RICH_CIRCLE_FACTOR,
+    CIRCLE_FACTOR,
     CELLS_COUNT_BY_WIDTH,
     CELLS_COUNT_BY_HEIGHT,
     FIELDS_COUNT,
-    FIELDS_GAP,
     BLANK_X_GAP,
     BLANK_Y_GAP,
     BLANK_FACTOR,
@@ -22,13 +18,9 @@ import sleep from "../helpers/sleep.js";
 const container = ref(null)
 const containerWidth = ref(null)
 const containerHeight = ref(null)
-const richCircleWidth = ref('100%')
-const richCircleHeight = ref('100%')
-const cellSizeInRichCircle = ref(null)
-const poorCircleWidth = ref(null)
-const poorCircleHeight = ref(null)
-const cellWidthInPoorCircle = ref(null)
-const cellHeightInPoorCircle = ref(null)
+const circleWidth = ref('100%')
+const circleHeight = ref('100%')
+const cellSize = ref(null)
 const blankPosition = ref(null)
 const blankWidth = ref(null)
 const blankHeight = ref(null)
@@ -36,48 +28,28 @@ const resizeObserver = new ResizeObserver((entries) => {
     for (const entry of entries) {
         containerWidth.value = entry.target.clientWidth
         containerHeight.value = entry.target.clientHeight
-        if (containerHeight.value / containerWidth.value > RICH_CIRCLE_FACTOR) {
-            // Rich
-            const richHeight = containerWidth.value * RICH_CIRCLE_FACTOR
-            richCircleHeight.value = `${richHeight}px`
-            richCircleWidth.value = '100%'
-            cellSizeInRichCircle.value = richHeight / CELLS_COUNT_BY_HEIGHT
-
-            // Poor
-            const poorHeight =
-                richHeight - cellSizeInRichCircle.value * 2 - FIELDS_GAP
-            const poorWidth = poorHeight / POOR_CIRCLE_FACTOR
-            poorCircleHeight.value = `${poorHeight}px`
-            poorCircleWidth.value = `${poorWidth}px`
-            cellHeightInPoorCircle.value = poorHeight / CELLS_COUNT_BY_HEIGHT
-            cellWidthInPoorCircle.value = poorWidth / CELLS_COUNT_BY_WIDTH
+        if (containerHeight.value / containerWidth.value > CIRCLE_FACTOR) {
+            // Circle
+            const richHeight = containerWidth.value * CIRCLE_FACTOR
+            circleHeight.value = `${richHeight}px`
+            circleWidth.value = '100%'
+            cellSize.value = richHeight / CELLS_COUNT_BY_HEIGHT
 
             // Blank
-            blankPosition.value = cellWidthInPoorCircle.value + BLANK_X_GAP
-            blankHeight.value =
-                poorHeight - cellHeightInPoorCircle.value * 2 - BLANK_Y_GAP
+            blankPosition.value = cellSize.value + BLANK_X_GAP
+            blankHeight.value = richHeight - cellSize.value * 2 - BLANK_Y_GAP
             blankWidth.value = blankHeight.value * BLANK_FACTOR
         } else {
-            // Rich
-            const richWidth = containerHeight.value / RICH_CIRCLE_FACTOR
-            richCircleWidth.value = `${richWidth}px`
-            richCircleHeight.value = '100%'
-            cellSizeInRichCircle.value = richWidth / CELLS_COUNT_BY_WIDTH
-
-            // Poor
-            const poorWidth =
-                richWidth - cellSizeInRichCircle.value * 2 - FIELDS_GAP
-            const poorHeight = poorWidth * POOR_CIRCLE_FACTOR
-            poorCircleWidth.value = `${poorWidth}px`
-            poorCircleHeight.value = `${poorHeight}px`
-            cellWidthInPoorCircle.value = poorWidth / CELLS_COUNT_BY_WIDTH
-            cellHeightInPoorCircle.value = poorHeight / CELLS_COUNT_BY_HEIGHT
+            // Circle
+            const richWidth = containerHeight.value / CIRCLE_FACTOR
+            circleWidth.value = `${richWidth}px`
+            circleHeight.value = '100%'
+            cellSize.value = richWidth / CELLS_COUNT_BY_WIDTH
 
             // Blank
-            blankPosition.value = cellWidthInPoorCircle.value + BLANK_X_GAP
-            blankHeight.value =
-                poorHeight - cellHeightInPoorCircle.value * 2 - BLANK_Y_GAP
-            blankWidth.value = blankHeight.value * BLANK_FACTOR
+            blankPosition.value = cellSize.value + BLANK_X_GAP
+            blankWidth.value = (richWidth - cellSize.value * 2) / 3 - BLANK_X_GAP
+            blankHeight.value = blankWidth.value / BLANK_FACTOR
         }
     }
 })
@@ -107,11 +79,7 @@ const rollingDice = async (numberOnDice) => {
     }
     setTimeout(() => (showEventCard.value = true), 700)
 }
-const userPositionOnFields = computed(() =>
-    user.rich
-        ? richCircleFields.find((field) => field.position === user.position)
-        : poorCircleFields.find((field) => field.position === user.position)
-)
+const userPositionOnFields = computed(() => circleFields.find((field) => field.position === user.position))
 const choiceGender = (gender) => {
     const randomId = Math.floor(1 + Math.random() * 4)
     const genderCard = professions[gender].find(
@@ -141,14 +109,11 @@ const confirmEvent = (eventCard) => {
 
 // ********* Delete after the end of development *********
 const development = ref(false)
-// setTimeout(() => (development.value = false), 3000)
-setTimeout(() => development.value = true, 3000);
+// setTimeout(() => development.value = true, 3000);
 // ********* Delete after the end of development *********
 </script>
 
 <template>
-    <NavMenu />
-
     <!-- ********* Delete after the end of development ********* -->
     <Transition>
         <div
@@ -177,34 +142,18 @@ setTimeout(() => development.value = true, 3000);
             >
                 <!-- Rich -->
                 <GameCircle
-                    :width="richCircleWidth"
-                    :height="richCircleHeight"
+                    :width="circleWidth"
+                    :height="circleHeight"
                     classes="relative"
-                    :circle-fields="richCircleFields"
-                    :cell-width="cellSizeInRichCircle && cellSizeInRichCircle"
-                    :cell-height="cellSizeInRichCircle && cellSizeInRichCircle"
+                    :circle-fields="circleFields"
+                    :cell-width="cellSize && cellSize"
+                    :cell-height="cellSize && cellSize"
                     :user-position-on-fields="userPositionOnFields"
-                    :game-chip-here="user.rich"
-                    :user="user"
-                />
-
-                <!-- Poor -->
-                <GameCircle
-                    :width="poorCircleWidth && poorCircleWidth"
-                    :height="poorCircleHeight && poorCircleHeight"
-                    classes="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2"
-                    :circle-fields="poorCircleFields"
-                    :cell-width="cellWidthInPoorCircle && cellWidthInPoorCircle"
-                    :cell-height="
-                        cellHeightInPoorCircle && cellHeightInPoorCircle
-                    "
-                    :user-position-on-fields="userPositionOnFields"
-                    :game-chip-here="!user.rich"
+                    :show-event-card="showEventCard"
                     :blank-position="blankPosition && blankPosition"
                     :blank-width="blankWidth && blankWidth"
                     :blank-height="blankHeight && blankHeight"
                     :user="user"
-                    :show-event-card="showEventCard"
                     :expenses="expenses"
                     @choice:gender="choiceGender"
                     @confirm:event="confirmEvent"
