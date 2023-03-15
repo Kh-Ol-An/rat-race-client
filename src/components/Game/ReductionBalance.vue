@@ -73,6 +73,7 @@ defineEmits(['choice:gender'])
                     {{ user.utilities }}
                 </span>
             </InfoField>
+            <div class="my-2 w-full h-px bg-slate-400"></div>
             <InfoField label-classes="text-opposite" label="Загальні витрати:">
                 <span class="ml-2 text-slate-400">
                     {{ expenses }}

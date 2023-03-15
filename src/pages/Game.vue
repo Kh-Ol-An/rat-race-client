@@ -30,25 +30,25 @@ const resizeObserver = new ResizeObserver((entries) => {
         containerHeight.value = entry.target.clientHeight
         if (containerHeight.value / containerWidth.value > CIRCLE_FACTOR) {
             // Circle
-            const richHeight = containerWidth.value * CIRCLE_FACTOR
-            circleHeight.value = `${richHeight}px`
+            const height = containerWidth.value * CIRCLE_FACTOR
+            circleHeight.value = `${height}px`
             circleWidth.value = '100%'
-            cellSize.value = richHeight / CELLS_COUNT_BY_HEIGHT
+            cellSize.value = height / CELLS_COUNT_BY_HEIGHT
 
             // Blank
             blankPosition.value = cellSize.value + BLANK_X_GAP
-            blankHeight.value = richHeight - cellSize.value * 2 - BLANK_Y_GAP
+            blankHeight.value = height - cellSize.value * 2 - BLANK_Y_GAP
             blankWidth.value = blankHeight.value * BLANK_FACTOR
         } else {
             // Circle
-            const richWidth = containerHeight.value / CIRCLE_FACTOR
-            circleWidth.value = `${richWidth}px`
+            const width = containerHeight.value / CIRCLE_FACTOR
+            circleWidth.value = `${width}px`
             circleHeight.value = '100%'
-            cellSize.value = richWidth / CELLS_COUNT_BY_WIDTH
+            cellSize.value = width / CELLS_COUNT_BY_WIDTH
 
             // Blank
             blankPosition.value = cellSize.value + BLANK_X_GAP
-            blankWidth.value = (richWidth - cellSize.value * 2) / 3 - BLANK_X_GAP
+            blankWidth.value = (width - cellSize.value * 2) / 3 - BLANK_X_GAP
             blankHeight.value = blankWidth.value / BLANK_FACTOR
         }
     }
@@ -61,7 +61,6 @@ const showEventCard = ref(false)
 const user = reactive({
     id: 1,
     position: 1,
-    rich: false,
     gender: '',
     profession: '',
     salary: 0,
@@ -70,6 +69,7 @@ const user = reactive({
     clothes: 0,
     fare: 0,
     utilities: 0,
+    business: []
 })
 const rollingDice = async (numberOnDice) => {
     for (let i = 1; i <= numberOnDice; i++) {
@@ -92,6 +92,11 @@ const choiceGender = (gender) => {
     user.gender = gender
 }
 
+const passiveIncome = computed(() => {
+    let sum = 0
+    return sum
+})
+
 const expenses = computed(() => {
     let sum = 0
     sum += user.rent
@@ -102,8 +107,10 @@ const expenses = computed(() => {
     return sum
 })
 
+const cashFlow = computed(() => user.salary + passiveIncome.value - expenses.value)
+
 const confirmEvent = (eventCard) => {
-    false && console.log(eventCard)
+    console.log(eventCard)
     showEventCard.value = false
 }
 
@@ -140,7 +147,6 @@ const development = ref(false)
                 ref="container"
                 class="relative flex h-full w-full items-center justify-center"
             >
-                <!-- Rich -->
                 <GameCircle
                     :width="circleWidth"
                     :height="circleHeight"
@@ -154,6 +160,8 @@ const development = ref(false)
                     :blank-width="blankWidth && blankWidth"
                     :blank-height="blankHeight && blankHeight"
                     :user="user"
+                    :passive-income="passiveIncome"
+                    :cash-flow="cashFlow"
                     :expenses="expenses"
                     @choice:gender="choiceGender"
                     @confirm:event="confirmEvent"

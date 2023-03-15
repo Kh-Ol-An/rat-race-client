@@ -29,20 +29,34 @@
         {
             "id": 1,
             "type": "cryptocurrency",
+            "price": 1.5,
+            "max-quantity": 500000,
             "name": "Minima",
             "description": "Прогуглить разные виды инвестиций"
         },
         {
             "id": 2,
             "type": "shares",
+            "price": 76,
+            "max-quantity": 1000,
             "name": "Apple",
             "description": "А так же акций"
         },
         {
             "id": 3,
             "type": "deposit",
+            "price": 10,
+            "max-quantity": 100000,
             "name": "Mono",
             "description": "Добавить класификацию по сложности управления"
+        },
+        {
+            "id": 4,
+            "type": "MIF",
+            "price": 500,
+            "max-quantity": 500,
+            "name": "Пайовий інвестиційний фонд акцій 'Клепай гроші з нами'",
+            "description": "У Вас є можливість купити частку в нашому найпотужнішому та найприбутковишому ПІФу"
         }
     ],
     "expenses": [

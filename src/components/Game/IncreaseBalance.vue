@@ -2,6 +2,7 @@
 import InfoField from '../plugins/InfoField.vue'
 import MaleIcon from '../../assets/images/icons/MaleIcon.vue'
 import FemaleIcon from '../../assets/images/icons/FemaleIcon.vue'
+import { addingSpaces } from '../../helpers/formating-values.js'
 
 defineProps({
     left: {
@@ -19,6 +20,14 @@ defineProps({
     user: {
         type: Object,
         required: true,
+    },
+    passiveIncome: {
+        type: Number,
+        default: null,
+    },
+    cashFlow: {
+        type: Number,
+        default: null,
     },
 })
 
@@ -63,9 +72,20 @@ defineEmits(['choice:gender'])
                     {{ user.profession }}
                 </span>
             </InfoField>
-            <InfoField label-classes="text-primary" label="Зарплата:">
+            <InfoField label-classes="text-primary" label="Активний дохід:">
                 <span class="ml-2 text-slate-400">
-                    {{ user.salary }}
+                    {{ addingSpaces(user.salary) }}
+                </span>
+            </InfoField>
+            <InfoField v-if="passiveIncome > 0" label-classes="text-primary" label="Пасивний дохід:">
+                <span class="ml-2 text-slate-400">
+                    {{ addingSpaces(passiveIncome) }}
+                </span>
+            </InfoField>
+            <div class="my-2 w-full h-px bg-slate-400"></div>
+            <InfoField label-classes="text-primary" label="Грошовий потік:">
+                <span class="ml-2 text-slate-400">
+                    {{ addingSpaces(cashFlow) }}
                 </span>
             </InfoField>
         </div>

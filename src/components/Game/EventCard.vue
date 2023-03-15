@@ -43,7 +43,7 @@ watchEffect(() => {
     // console.log('****************')
 })
 
-const confirm = () => emit('confirm', props.userPositionOnFields)
+const confirm = () => emit('confirm', eventCard.value)
 
 const isCancel = computed(
     () =>

@@ -65,6 +65,14 @@ defineProps({
         type: Boolean,
         default: false,
     },
+    passiveIncome: {
+        type: Number,
+        default: null,
+    },
+    cashFlow: {
+        type: Number,
+        default: null,
+    },
     expenses: {
         type: Number,
         default: null,
@@ -143,6 +151,8 @@ const confirmEvent = (eventCard) => emit('confirm:event', eventCard)
             :width="`${blankWidth}px`"
             :height="`${blankHeight}px`"
             :user="user"
+            :passive-income="passiveIncome"
+            :cash-flow="cashFlow"
             @choice:gender="$emit('choice:gender', 'male')"
         />
 
