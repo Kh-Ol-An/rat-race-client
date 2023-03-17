@@ -1,30 +1,52 @@
 {
-    "business": [
-        {
-            "id": 1,
-            "type": "small",
-            "profit": 200,
-            "price": 500,
-            "name": "Start",
-            "description": "Прогуглить разные виды бизнесов"
-        },
-        {
-            "id": 2,
-            "type": "middle",
-            "profit": 5000,
-            "price": 50000,
-            "name": "Different",
-            "description": "От мелких до крупнейших"
-        },
-        {
-            "id": 3,
-            "type": "big",
-            "profit": 50000,
-            "price": 500000,
-            "name": "Rules",
-            "description": "Добавить класификацию по сложности управления"
-        }
-    ],
+    "business": {
+        "small": [
+            {
+                "id": 1,
+                "profit": 500,
+                "price": 3000,
+                "name": "Вендинговий бізнес",
+                "description": "Coffee way"
+            },
+            {
+                "id": 2,
+                "profit": 200,
+                "price": 500,
+                "name": "Виготовлення тортів",
+                "description": "Смачненькі тортики від Тетяни"
+            },
+            {
+                "id": 3,
+                "profit": 200,
+                "price": 500,
+                "name": "Призові атракціони",
+                "description": "Самий найкращий атракціон в світі"
+            }
+        ],
+        "big": [
+            {
+                "id": 1,
+                "profit": 12000,
+                "price": 100000,
+                "name": "Расходи",
+                "description": "Змінюєшь розходи змінюється вдача"
+            },
+            {
+                "id": 2,
+                "profit": 50000,
+                "price": 500000,
+                "name": "Rules",
+                "description": "Добавить класификацию по сложности управления"
+            },
+            {
+                "id": 3,
+                "profit": 500000,
+                "price": 1000000,
+                "name": "Автосалон",
+                "description": "Продаж новеньких Ауді"
+            }
+        ]
+    },
     "investments": [
         {
             "id": 1,
