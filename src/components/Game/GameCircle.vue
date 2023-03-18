@@ -3,7 +3,7 @@ import GameChip from '../../components/Game/GameChip.vue'
 import ReductionBalance from '../../components/Game/ReductionBalance.vue'
 import IncreaseBalance from '../../components/Game/IncreaseBalance.vue'
 import EventCard from '../../components/Game/EventCard.vue'
-import MoneyIcon from '../../assets/images/icons/MoneyIcon.vue'
+// import MoneyIcon from '../../assets/images/icons/MoneyIcon.vue'
 import BusinessIcon from '../../assets/images/icons/BusinessIcon.vue'
 import InvestmentsIcon from '../../assets/images/icons/InvestmentsIcon.vue'
 import ExpenseIcon from '../../assets/images/icons/ExpenseIcon.vue'
@@ -104,7 +104,7 @@ const confirmEvent = (eventCard) => emit('confirm:event', eventCard)
             ]"
             :title="name"
         >
-            <MoneyIcon v-if="type === 'profit'" />
+<!--            <MoneyIcon v-if="type === 'profit'" />-->
             <BusinessIcon v-if="type === 'business'" />
             <InvestmentsIcon
                 v-if="type === 'investments'"
