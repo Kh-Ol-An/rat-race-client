@@ -2,236 +2,200 @@
     {
         "position": 1,
         "styles": {
-            "top": 9,
+            "top": 8,
             "right": 0,
             "bottom": 0,
-            "left": 18,
-            "bg": "bg-primary"
-        },
-        "type": "profit",
-        "action": "Отримати"
-    },
-    {
-        "position": 2,
-        "styles": {
-            "top": 9,
-            "right": 1,
-            "bottom": 0,
-            "left": 17,
+            "left": 15,
             "bg": "bg-secondary"
         },
         "type": "business",
         "action": "Відкрити"
     },
     {
-        "position": 3,
+        "position": 2,
         "styles": {
-            "top": 9,
-            "right": 2,
+            "top": 8,
+            "right": 1,
             "bottom": 0,
-            "left": 16,
+            "left": 14,
             "bg": "bg-sky-600"
         },
         "type": "investments",
         "action": "Вкласти"
     },
     {
-        "position": 4,
+        "position": 3,
         "styles": {
-            "top": 9,
-            "right": 3,
+            "top": 8,
+            "right": 2,
             "bottom": 0,
-            "left": 15,
+            "left": 13,
             "bg": "bg-red-600"
         },
         "type": "expenses",
         "action": "Заплатити"
     },
     {
-        "position": 5,
+        "position": 4,
         "styles": {
-            "top": 9,
-            "right": 4,
+            "top": 8,
+            "right": 3,
             "bottom": 0,
-            "left": 14,
+            "left": 12,
             "bg": "bg-secondary"
         },
         "type": "business",
         "action": "Відкрити"
     },
     {
-        "position": 6,
+        "position": 5,
         "styles": {
-            "top": 9,
-            "right": 5,
+            "top": 8,
+            "right": 4,
             "bottom": 0,
-            "left": 13,
+            "left": 11,
             "bg": "bg-gray-700"
         },
         "type": "layoff",
         "action": "Звільнитись"
     },
     {
-        "position": 7,
+        "position": 6,
         "styles": {
-            "top": 9,
-            "right": 6,
+            "top": 8,
+            "right": 5,
             "bottom": 0,
-            "left": 12,
+            "left": 10,
             "bg": "bg-orange-600"
         },
         "type": "opportunities",
         "action": "Погодитись"
     },
     {
-        "position": 8,
+        "position": 7,
         "styles": {
-            "top": 9,
-            "right": 7,
+            "top": 8,
+            "right": 6,
             "bottom": 0,
-            "left": 11,
+            "left": 9,
             "bg": "bg-sky-400"
         },
         "type": "buys",
         "action": "Купити"
     },
     {
-        "position": 9,
+        "position": 8,
         "styles": {
-            "top": 9,
-            "right": 8,
+            "top": 8,
+            "right": 7,
             "bottom": 0,
-            "left": 10,
+            "left": 8,
             "bg": "bg-red-600"
         },
         "type": "expenses",
         "action": "Заплатити"
     },
     {
-        "position": 10,
+        "position": 9,
         "styles": {
-            "top": 9,
-            "right": 9,
+            "top": 8,
+            "right": 8,
             "bottom": 0,
-            "left": 9,
-            "bg": "bg-primary"
-        },
-        "type": "profit",
-        "action": "Отримати"
-    },
-    {
-        "position": 11,
-        "styles": {
-            "top": 9,
-            "right": 10,
-            "bottom": 0,
-            "left": 8,
+            "left": 7,
             "bg": "bg-secondary"
         },
         "type": "business",
         "action": "Відкрити"
     },
     {
-        "position": 12,
+        "position": 10,
         "styles": {
-            "top": 9,
-            "right": 11,
+            "top": 8,
+            "right": 9,
             "bottom": 0,
-            "left": 7,
+            "left": 6,
             "bg": "bg-red-600"
         },
         "type": "expenses",
         "action": "Заплатити"
     },
     {
-        "position": 13,
+        "position": 11,
         "styles": {
-            "top": 9,
-            "right": 12,
+            "top": 8,
+            "right": 10,
             "bottom": 0,
-            "left": 6,
+            "left": 5,
             "bg": "bg-sky-600"
         },
         "type": "investments",
         "action": "Вкласти"
     },
     {
-        "position": 14,
+        "position": 12,
         "styles": {
-            "top": 9,
-            "right": 13,
+            "top": 8,
+            "right": 11,
             "bottom": 0,
-            "left": 5,
+            "left": 4,
             "bg": "bg-orange-600"
         },
         "type": "opportunities",
         "action": "Погодитись"
     },
     {
-        "position": 15,
+        "position": 13,
         "styles": {
-            "top": 9,
-            "right": 14,
+            "top": 8,
+            "right": 12,
             "bottom": 0,
-            "left": 4,
+            "left": 3,
             "bg": "bg-fuchsia-600"
         },
         "type": "wedding",
         "action": "Одружитись"
     },
     {
-        "position": 16,
+        "position": 14,
         "styles": {
-            "top": 9,
-            "right": 15,
+            "top": 8,
+            "right": 13,
             "bottom": 0,
-            "left": 3,
+            "left": 2,
             "bg": "bg-red-600"
         },
         "type": "expenses",
         "action": "Заплатити"
     },
     {
-        "position": 17,
+        "position": 15,
         "styles": {
-            "top": 9,
-            "right": 16,
+            "top": 8,
+            "right": 14,
             "bottom": 0,
-            "left": 2,
+            "left": 1,
             "bg": "bg-secondary"
         },
         "type": "business",
         "action": "Відкрити"
     },
     {
-        "position": 18,
+        "position": 16,
         "styles": {
-            "top": 9,
-            "right": 17,
+            "top": 8,
+            "right": 15,
             "bottom": 0,
-            "left": 1,
+            "left": 0,
             "bg": "bg-sky-400"
         },
         "type": "buys",
         "action": "Купити"
     },
     {
-        "position": 19,
+        "position": 17,
         "styles": {
-            "top": 9,
-            "right": 18,
-            "bottom": 0,
-            "left": 0,
-            "bg": "bg-primary"
-        },
-        "type": "profit",
-        "action": "Отримати"
-    },
-    {
-        "position": 20,
-        "styles": {
-            "top": 8,
-            "right": 18,
+            "top": 7,
+            "right": 15,
             "bottom": 1,
             "left": 0,
             "bg": "bg-sky-600"
@@ -240,10 +204,10 @@
         "action": "Вкласти"
     },
     {
-        "position": 21,
+        "position": 18,
         "styles": {
-            "top": 7,
-            "right": 18,
+            "top": 6,
+            "right": 15,
             "bottom": 2,
             "left": 0,
             "bg": "bg-red-600"
@@ -252,10 +216,10 @@
         "action": "Заплатити"
     },
     {
-        "position": 22,
+        "position": 19,
         "styles": {
-            "top": 6,
-            "right": 18,
+            "top": 5,
+            "right": 15,
             "bottom": 3,
             "left": 0,
             "bg": "bg-secondary"
@@ -264,10 +228,10 @@
         "action": "Відкрити"
     },
     {
-        "position": 23,
+        "position": 20,
         "styles": {
-            "top": 5,
-            "right": 18,
+            "top": 4,
+            "right": 15,
             "bottom": 4,
             "left": 0,
             "bg": "bg-yellow-400"
@@ -276,10 +240,10 @@
         "action": "Завести дитину"
     },
     {
-        "position": 24,
+        "position": 21,
         "styles": {
-            "top": 4,
-            "right": 18,
+            "top": 3,
+            "right": 15,
             "bottom": 5,
             "left": 0,
             "bg": "bg-orange-600"
@@ -288,10 +252,10 @@
         "action": "Погодитись"
     },
     {
-        "position": 25,
+        "position": 22,
         "styles": {
-            "top": 3,
-            "right": 18,
+            "top": 2,
+            "right": 15,
             "bottom": 6,
             "left": 0,
             "bg": "bg-red-600"
@@ -300,10 +264,10 @@
         "action": "Заплатити"
     },
     {
-        "position": 26,
+        "position": 23,
         "styles": {
-            "top": 2,
-            "right": 18,
+            "top": 1,
+            "right": 15,
             "bottom": 7,
             "left": 0,
             "bg": "bg-secondary"
@@ -312,10 +276,10 @@
         "action": "Відкрити"
     },
     {
-        "position": 27,
+        "position": 24,
         "styles": {
-            "top": 1,
-            "right": 18,
+            "top": 0,
+            "right": 15,
             "bottom": 8,
             "left": 0,
             "bg": "bg-sky-400"
@@ -324,23 +288,11 @@
         "action": "Купити"
     },
     {
-        "position": 28,
+        "position": 25,
         "styles": {
             "top": 0,
-            "right": 18,
-            "bottom": 9,
-            "left": 0,
-            "bg": "bg-primary"
-        },
-        "type": "profit",
-        "action": "Отримати"
-    },
-    {
-        "position": 29,
-        "styles": {
-            "top": 0,
-            "right": 17,
-            "bottom": 9,
+            "right": 14,
+            "bottom": 8,
             "left": 1,
             "bg": "bg-orange-600"
         },
@@ -348,12 +300,60 @@
         "action": "Погодитись"
     },
     {
+        "position": 26,
+        "styles": {
+            "top": 0,
+            "right": 13,
+            "bottom": 8,
+            "left": 2,
+            "bg": "bg-red-600"
+        },
+        "type": "expenses",
+        "action": "Заплатити"
+    },
+    {
+        "position": 27,
+        "styles": {
+            "top": 0,
+            "right": 12,
+            "bottom": 8,
+            "left": 3,
+            "bg": "bg-secondary"
+        },
+        "type": "business",
+        "action": "Відкрити"
+    },
+    {
+        "position": 28,
+        "styles": {
+            "top": 0,
+            "right": 11,
+            "bottom": 8,
+            "left": 4,
+            "bg": "bg-sky-600"
+        },
+        "type": "investments",
+        "action": "Вкласти"
+    },
+    {
+        "position": 29,
+        "styles": {
+            "top": 0,
+            "right": 10,
+            "bottom": 8,
+            "left": 5,
+            "bg": "bg-sky-400"
+        },
+        "type": "buys",
+        "action": "Купити"
+    },
+    {
         "position": 30,
         "styles": {
             "top": 0,
-            "right": 16,
-            "bottom": 9,
-            "left": 2,
+            "right": 9,
+            "bottom": 8,
+            "left": 6,
             "bg": "bg-red-600"
         },
         "type": "expenses",
@@ -363,9 +363,9 @@
         "position": 31,
         "styles": {
             "top": 0,
-            "right": 15,
-            "bottom": 9,
-            "left": 3,
+            "right": 8,
+            "bottom": 8,
+            "left": 7,
             "bg": "bg-secondary"
         },
         "type": "business",
@@ -375,33 +375,33 @@
         "position": 32,
         "styles": {
             "top": 0,
-            "right": 14,
-            "bottom": 9,
-            "left": 4,
+            "right": 7,
+            "bottom": 8,
+            "left": 8,
+            "bg": "bg-gray-600"
+        },
+        "type": "divorce",
+        "action": "Розлучитись"
+    },
+    {
+        "position": 33,
+        "styles": {
+            "top": 0,
+            "right": 8,
+            "bottom": 8,
+            "left": 9,
             "bg": "bg-sky-600"
         },
         "type": "investments",
         "action": "Вкласти"
     },
     {
-        "position": 33,
-        "styles": {
-            "top": 0,
-            "right": 13,
-            "bottom": 9,
-            "left": 5,
-            "bg": "bg-sky-400"
-        },
-        "type": "buys",
-        "action": "Купити"
-    },
-    {
         "position": 34,
         "styles": {
             "top": 0,
-            "right": 12,
-            "bottom": 9,
-            "left": 6,
+            "right": 7,
+            "bottom": 8,
+            "left": 10,
             "bg": "bg-red-600"
         },
         "type": "expenses",
@@ -411,57 +411,57 @@
         "position": 35,
         "styles": {
             "top": 0,
-            "right": 11,
-            "bottom": 9,
-            "left": 7,
+            "right": 6,
+            "bottom": 8,
+            "left": 11,
+            "bg": "bg-orange-600"
+        },
+        "type": "opportunities",
+        "action": "Погодитись"
+    },
+    {
+        "position": 36,
+        "styles": {
+            "top": 0,
+            "right": 5,
+            "bottom": 8,
+            "left": 12,
             "bg": "bg-secondary"
         },
         "type": "business",
         "action": "Відкрити"
     },
     {
-        "position": 36,
-        "styles": {
-            "top": 0,
-            "right": 10,
-            "bottom": 9,
-            "left": 8,
-            "bg": "bg-gray-600"
-        },
-        "type": "divorce",
-        "action": "Розлучитись"
-    },
-    {
         "position": 37,
         "styles": {
             "top": 0,
-            "right": 9,
-            "bottom": 9,
-            "left": 9,
-            "bg": "bg-primary"
+            "right": 4,
+            "bottom": 8,
+            "left": 13,
+            "bg": "bg-teal-600"
         },
-        "type": "profit",
-        "action": "Отримати"
+        "type": "vacation",
+        "action": "Відпочити"
     },
     {
         "position": 38,
         "styles": {
             "top": 0,
-            "right": 8,
-            "bottom": 9,
-            "left": 10,
-            "bg": "bg-sky-600"
+            "right": 3,
+            "bottom": 8,
+            "left": 14,
+            "bg": "bg-sky-400"
         },
-        "type": "investments",
-        "action": "Вкласти"
+        "type": "buys",
+        "action": "Купити"
     },
     {
         "position": 39,
         "styles": {
             "top": 0,
-            "right": 7,
-            "bottom": 9,
-            "left": 11,
+            "right": 2,
+            "bottom": 8,
+            "left": 15,
             "bg": "bg-red-600"
         },
         "type": "expenses",
@@ -471,56 +471,32 @@
         "position": 40,
         "styles": {
             "top": 0,
-            "right": 6,
-            "bottom": 9,
-            "left": 12,
-            "bg": "bg-orange-600"
-        },
-        "type": "opportunities",
-        "action": "Погодитись"
-    },
-    {
-        "position": 41,
-        "styles": {
-            "top": 0,
-            "right": 5,
-            "bottom": 9,
-            "left": 13,
+            "right": 1,
+            "bottom": 8,
+            "left": 16,
             "bg": "bg-secondary"
         },
         "type": "business",
         "action": "Відкрити"
     },
     {
+        "position": 41,
+        "styles": {
+            "top": 1,
+            "right": 0,
+            "bottom": 8,
+            "left": 16,
+            "bg": "bg-orange-600"
+        },
+        "type": "opportunities",
+        "action": "Погодитись"
+    },
+    {
         "position": 42,
         "styles": {
-            "top": 0,
-            "right": 4,
-            "bottom": 9,
-            "left": 14,
-            "bg": "bg-teal-600"
-        },
-        "type": "vacation",
-        "action": "Відпочити"
-    },
-    {
-        "position": 43,
-        "styles": {
-            "top": 0,
-            "right": 3,
-            "bottom": 9,
-            "left": 15,
-            "bg": "bg-sky-400"
-        },
-        "type": "buys",
-        "action": "Купити"
-    },
-    {
-        "position": 44,
-        "styles": {
-            "top": 0,
-            "right": 2,
-            "bottom": 9,
+            "top": 2,
+            "right": 0,
+            "bottom": 7,
             "left": 16,
             "bg": "bg-red-600"
         },
@@ -528,120 +504,72 @@
         "action": "Заплатити"
     },
     {
-        "position": 45,
-        "styles": {
-            "top": 0,
-            "right": 1,
-            "bottom": 9,
-            "left": 17,
-            "bg": "bg-secondary"
-        },
-        "type": "business",
-        "action": "Відкрити"
-    },
-    {
-        "position": 46,
-        "styles": {
-            "top": 0,
-            "right": 0,
-            "bottom": 9,
-            "left": 18,
-            "bg": "bg-primary"
-        },
-        "type": "profit",
-        "action": "Отримати"
-    },
-    {
-        "position": 47,
-        "styles": {
-            "top": 1,
-            "right": 0,
-            "bottom": 8,
-            "left": 18,
-            "bg": "bg-orange-600"
-        },
-        "type": "opportunities",
-        "action": "Погодитись"
-    },
-    {
-        "position": 48,
-        "styles": {
-            "top": 2,
-            "right": 0,
-            "bottom": 7,
-            "left": 18,
-            "bg": "bg-red-600"
-        },
-        "type": "expenses",
-        "action": "Заплатити"
-    },
-    {
-        "position": 49,
+        "position": 43,
         "styles": {
             "top": 3,
             "right": 0,
             "bottom": 6,
-            "left": 18,
+            "left": 16,
             "bg": "bg-sky-600"
         },
         "type": "investments",
         "action": "Вкласти"
     },
     {
-        "position": 50,
+        "position": 44,
         "styles": {
             "top": 4,
             "right": 0,
             "bottom": 5,
-            "left": 18,
+            "left": 16,
             "bg": "bg-secondary"
         },
         "type": "business",
         "action": "Відкрити"
     },
     {
-        "position": 51,
+        "position": 45,
         "styles": {
             "top": 5,
             "right": 0,
             "bottom": 4,
-            "left": 18,
+            "left": 16,
             "bg": "bg-red-600"
         },
         "type": "expenses",
         "action": "Заплатити"
     },
     {
-        "position": 52,
+        "position": 46,
         "styles": {
             "top": 6,
             "right": 0,
             "bottom": 3,
-            "left": 18,
+            "left": 16,
             "bg": "bg-gray-900"
         },
         "type": "bankruptcy",
         "action": "Втратити"
     },
     {
-        "position": 53,
+        "position": 47,
         "styles": {
             "top": 7,
             "right": 0,
             "bottom": 2,
-            "left": 18,
+            "left": 16,
             "bg": "bg-secondary"
         },
         "type": "business",
         "action": "Відкрити"
     },
     {
-        "position": 54,
+        "position": 48,
         "styles": {
             "top": 8,
             "right": 0,
             "bottom": 1,
-            "left": 18,
+            "left": 16,
             "bg": "bg-sky-400"
         },
         "type": "buys",
