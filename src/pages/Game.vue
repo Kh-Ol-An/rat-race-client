@@ -63,6 +63,7 @@ const user = reactive({
     position: 1,
     gender: '',
     profession: '',
+    cash: 0,
     salary: 0,
     rent: 0,
     food: 0,
@@ -71,26 +72,6 @@ const user = reactive({
     utilities: 0,
     business: []
 })
-const rollingDice = async (numberOnDice) => {
-    for (let i = 1; i <= numberOnDice; i++) {
-        await sleep(500)
-        user.position += 1
-        user.position > FIELDS_COUNT && (user.position = 1)
-    }
-    setTimeout(() => (showEventCard.value = true), 700)
-}
-const userPositionOnFields = computed(() => circleFields.find((field) => field.position === user.position))
-const choiceGender = (gender) => {
-    const randomId = Math.floor(1 + Math.random() * 4)
-    const genderCard = professions[gender].find(
-        (profession) => profession.id === randomId
-    )
-    delete genderCard.id
-    for (const [key] of Object.entries(genderCard)) {
-        user[key] = genderCard[key]
-    }
-    user.gender = gender
-}
 
 const passiveIncome = computed(() => {
     let sum = 0
@@ -109,8 +90,40 @@ const expenses = computed(() => {
 
 const cashFlow = computed(() => user.salary + passiveIncome.value - expenses.value)
 
+const rollingDice = async (numberOnDice) => {
+    for (let i = 1; i <= numberOnDice; i++) {
+        await sleep(500)
+        user.position += 1
+        user.position > FIELDS_COUNT && (user.position = 1)
+        if (
+            user.position === 1 ||
+            user.position === 9 ||
+            user.position === 17 ||
+            user.position === 25 ||
+            user.position === 33 ||
+            user.position === 41
+        ) {
+            await sleep(500)
+            user.cash += cashFlow.value
+        }
+    }
+    setTimeout(() => (showEventCard.value = true), 700)
+}
+const userPositionOnFields = computed(() => circleFields.find((field) => field.position === user.position))
+const choiceGender = (gender) => {
+    const randomId = Math.floor(1 + Math.random() * 4)
+    const genderCard = professions[gender].find(
+        (profession) => profession.id === randomId
+    )
+    delete genderCard.id
+    for (const [key] of Object.entries(genderCard)) {
+        user[key] = genderCard[key]
+    }
+    user.gender = gender
+}
+
 const confirmEvent = (eventCard) => {
-    console.log(eventCard)
+    console.log('eventCard: ', eventCard)
     showEventCard.value = false
 }
 
@@ -169,7 +182,7 @@ const development = ref(false)
                 />
 
                 <GameDice
-                    v-if="user.gender.length && !showEventCard"
+                    v-if="user.gender.length"
                     @rolling="rollingDice"
                 />
             </div>

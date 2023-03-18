@@ -114,10 +114,10 @@
             "right": 9,
             "bottom": 0,
             "left": 6,
-            "bg": "bg-red-600"
+            "bg": "bg-orange-600"
         },
-        "type": "expenses",
-        "action": "Заплатити"
+        "type": "opportunities",
+        "action": "Погодитись"
     },
     {
         "position": 11,
@@ -126,10 +126,10 @@
             "right": 10,
             "bottom": 0,
             "left": 5,
-            "bg": "bg-sky-600"
+            "bg": "bg-red-600"
         },
-        "type": "investments",
-        "action": "Вкласти"
+        "type": "expenses",
+        "action": "Заплатити"
     },
     {
         "position": 12,
@@ -138,10 +138,10 @@
             "right": 11,
             "bottom": 0,
             "left": 4,
-            "bg": "bg-orange-600"
+            "bg": "bg-sky-600"
         },
-        "type": "opportunities",
-        "action": "Погодитись"
+        "type": "investments",
+        "action": "Вкласти"
     },
     {
         "position": 13,
@@ -270,10 +270,10 @@
             "right": 15,
             "bottom": 7,
             "left": 0,
-            "bg": "bg-secondary"
+            "bg": "bg-sky-400"
         },
-        "type": "business",
-        "action": "Відкрити"
+        "type": "buys",
+        "action": "Купити"
     },
     {
         "position": 24,
@@ -282,10 +282,10 @@
             "right": 15,
             "bottom": 8,
             "left": 0,
-            "bg": "bg-sky-400"
+            "bg": "bg-secondary"
         },
-        "type": "buys",
-        "action": "Купити"
+        "type": "business",
+        "action": "Відкрити"
     },
     {
         "position": 25,
@@ -534,10 +534,10 @@
             "right": 0,
             "bottom": 4,
             "left": 16,
-            "bg": "bg-red-600"
+            "bg": "bg-sky-400"
         },
-        "type": "expenses",
-        "action": "Заплатити"
+        "type": "buys",
+        "action": "Купити"
     },
     {
         "position": 46,
@@ -570,9 +570,9 @@
             "right": 0,
             "bottom": 1,
             "left": 16,
-            "bg": "bg-sky-400"
+            "bg": "bg-red-600"
         },
-        "type": "buys",
-        "action": "Купити"
+        "type": "expenses",
+        "action": "Заплатити"
     }
 ]

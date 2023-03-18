@@ -72,6 +72,11 @@ defineEmits(['choice:gender'])
                     {{ user.profession }}
                 </span>
             </InfoField>
+            <InfoField label-classes="text-lg font-bold text-primary" label="Готівка:">
+                <span class="ml-2 text-lg font-bold text-slate-400">
+                    {{ addingSpaces(user.cash) }}
+                </span>
+            </InfoField>
             <InfoField label-classes="text-primary" label="Активний дохід:">
                 <span class="ml-2 text-slate-400">
                     {{ addingSpaces(user.salary) }}

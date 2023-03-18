@@ -3,7 +3,7 @@ import GameChip from '../../components/Game/GameChip.vue'
 import ReductionBalance from '../../components/Game/ReductionBalance.vue'
 import IncreaseBalance from '../../components/Game/IncreaseBalance.vue'
 import EventCard from '../../components/Game/EventCard.vue'
-// import MoneyIcon from '../../assets/images/icons/MoneyIcon.vue'
+import MoneyIcon from '../../assets/images/icons/MoneyIcon.vue'
 import BusinessIcon from '../../assets/images/icons/BusinessIcon.vue'
 import InvestmentsIcon from '../../assets/images/icons/InvestmentsIcon.vue'
 import ExpenseIcon from '../../assets/images/icons/ExpenseIcon.vue'
@@ -104,7 +104,39 @@ const confirmEvent = (eventCard) => emit('confirm:event', eventCard)
             ]"
             :title="name"
         >
-<!--            <MoneyIcon v-if="type === 'profit'" />-->
+            <div
+                v-if="
+                    position === 1 ||
+                    position === 9 ||
+                    position === 17 ||
+                    position === 25 ||
+                    position === 33 ||
+                    position === 41
+                "
+                :class="[
+                    'absolute z-10 bg-primary',
+                    position === 1 && `w-2 h-[130%] right-0 bottom-0 translate-x-1/2`,
+                    position === 9 && `w-2 h-[130%] right-0 bottom-0 translate-x-1/2`,
+                    position === 17 && `w-[130%] h-2 bottom-0 left-0 translate-y-1/2`,
+                    position === 25 && `w-2 h-[130%] top-0 left-0 -translate-x-1/2`,
+                    position === 33 && `w-2 h-[130%] top-0 left-0 -translate-x-1/2`,
+                    position === 41 && `w-[130%] h-2 top-0 right-0 -translate-y-1/2`,
+                ]"
+            >
+                <div
+                    :class="[
+                        'absolute w-10 h-10 flex items-center justify-center rounded-full bg-primary',
+                        position === 1 && 'top-0 right-0 -translate-y-1/2',
+                        position === 9 && 'top-0 left-1/2 -translate-x-1/2 -translate-y-1/2',
+                        position === 17 && 'right-0 bottom-0 translate-x-1/2',
+                        position === 25 && 'bottom-0 left-0 translate-y-1/2',
+                        position === 33 && 'bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2',
+                        position === 41 && 'top-0 left-0 -translate-x-1/2',
+                    ]"
+                >
+                    <MoneyIcon />
+                </div>
+            </div>
             <BusinessIcon v-if="type === 'business'" />
             <InvestmentsIcon
                 v-if="type === 'investments'"
