@@ -70,7 +70,8 @@ const user = reactive({
     clothes: 0,
     fare: 0,
     utilities: 0,
-    business: []
+    businesses: [],
+    investments: [],
 })
 
 const passiveIncome = computed(() => {
@@ -122,8 +123,16 @@ const choiceGender = (gender) => {
     user.gender = gender
 }
 
-const confirmEvent = (eventCard) => {
-    console.log('eventCard: ', eventCard)
+const confirmEvent = (event, card) => {
+    console.log('event: ', event)
+    console.log('card: ', card)
+    if (event === 'expenses') {
+        user.cash -= card.price
+    }
+    if (card.price && event !== 'expenses') {
+        user.cash -= card.price
+        user[event].push(card)
+    }
     showEventCard.value = false
 }
 

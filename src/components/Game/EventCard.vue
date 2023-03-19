@@ -16,6 +16,10 @@ const props = defineProps({
         type: Object,
         required: true,
     },
+    user: {
+        type: Object,
+        required: true,
+    },
 })
 
 const emit = defineEmits(['confirm', 'cancel'])
@@ -43,7 +47,7 @@ const eventCard = computed(() => {
 })
 
 const confirm = () => {
-    emit('confirm', eventCard.value)
+    emit('confirm', props.userPositionOnFields.type, eventCard.value)
     chosenBusinessType.value = ''
 }
 
@@ -113,8 +117,12 @@ const isCancel = computed(
 
             <div :class="['grid', isCancel && 'grid-cols-2 gap-3']">
                 <button
-                    class="rounded bg-gradient-to-b from-oppositeLight to-opposite px-4 py-3 text-xl font-bold text-slate-200 shadow-[0_5px_15px_rgba(0,0,0,0.35)] outline-0"
+                    :class="[
+                        'rounded bg-gradient-to-b px-4 py-3 text-xl font-bold text-slate-200 shadow-[0_5px_15px_rgba(0,0,0,0.35)] outline-0',
+                        user.cash < eventCard.price ? 'cursor-not-allowed from-slate-300 to-slate-600' : 'from-oppositeLight to-opposite',
+                    ]"
                     type="button"
+                    :disabled="user.cash < eventCard.price"
                     @click="confirm"
                 >
                     {{ userPositionOnFields.action }}

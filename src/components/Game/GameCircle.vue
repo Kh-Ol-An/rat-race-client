@@ -81,7 +81,7 @@ defineProps({
 
 const emit = defineEmits(['confirm:event', 'choice:gender', 'cancel:event'])
 
-const confirmEvent = (eventCard) => emit('confirm:event', eventCard)
+const confirmEvent = (event, card) => emit('confirm:event', event, card)
 </script>
 
 <template>
@@ -203,6 +203,7 @@ const confirmEvent = (eventCard) => emit('confirm:event', eventCard)
             :width="`${blankWidth}px`"
             :height="`${blankHeight}px`"
             :user-position-on-fields="userPositionOnFields"
+            :user="user"
             @confirm="confirmEvent"
             @cancel="$emit('cancel:event')"
         />
